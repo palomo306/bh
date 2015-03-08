@@ -1,0 +1,218 @@
+﻿html, body, form, #bg, #bg table {
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    margin:0px;
+    padding:0px;
+}
+
+#bg div {
+    height:200%;
+    left:-50%;
+    position:absolute;
+    top:-50%;
+    width:200%;    
+}
+
+#bg td {
+    text-align:center;
+    vertical-align:middle;
+}
+
+#bg img {
+    margin:0 auto;
+    min-height:50%;
+    min-width:50%;
+}
+
+.Content
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    margin:0px;
+    z-index:999;
+    border-collapse:collapse ;
+    border-spacing: 0px; 
+    width:100%;
+}
+
+
+.BackGroudPopUp
+{
+    position:fixed;
+    background-color:Black;    
+    top:0px;
+    left:0px;
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.ContentDiv
+{
+    border:1px solid black;     
+}
+
+.NormalText
+{
+    font-family:Arial;
+    font-size: 12px;
+}
+
+.HeaderText
+{
+    font-size: 13px;
+    font-weight:bold;
+}
+
+.PopNewUser
+{
+    position:fixed;
+    top:50%;
+    margin-top: -140px;
+    left:50%;
+    margin-left: -160px;
+}
+
+.PopUpDelete
+{
+    position:fixed;
+    top:50%;
+    margin-top: -50px;
+    left:50%;
+    margin-left: -160px;
+}
+
+.PopUpDetail
+{
+    position:fixed;
+    top:50%;
+    margin-top: -125px;
+    left:50%;
+    margin-left: -300px;
+}
+
+.Title
+{
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #666666;
+    color: #efefef;
+    padding: 4px;
+}
+
+.BotonGde
+{
+    background-color:transparent;
+    cursor:pointer;
+    border:0px;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:11px;
+    background-image: url('Images/FondoBotonGde.png');
+    width:125px;
+    height:20px;
+}
+
+.Boton
+{
+    background-color:transparent;
+    cursor:pointer;
+    border:0px;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:11px;
+    background-image: url('Images/FondoBoton.png');
+    width:100px;
+    height:20px;
+}
+
+.BotonMediano
+{
+    background-color:transparent;
+    cursor:pointer;
+    border:0px;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:11px;
+    background-image: url('Images/FondoBotonMed.png');
+    width:74px;
+    height:20px;
+}
+
+.BotonChico
+{
+    background-color:transparent;
+    cursor:pointer;
+    border:0px;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:11px;
+    background-image: url('Images/FondoBotonChico.png');
+    width:40px;
+    height:20px;
+}
+
+.Pointer
+{
+     cursor:pointer;    
+}
+
+.CellCenter {
+    font-family:Arial;
+    font-size: 12px;
+    text-align:center; 
+    display:inline;
+    vertical-align:middle;
+    margin-left:auto;
+    display:table-cell;
+}
+
+.CellLeft {
+    font-family:Arial;
+    font-size: 12px;
+    text-align:left; 
+    display:inline;
+    margin-left:auto;
+    display:table-cell;
+}
+
+.CellRight {
+    font-family:Arial;
+    font-size: 12px;
+    text-align:right; 
+    display:inline;
+    margin-left:auto;
+    display:table-cell;
+}
+
+.Grid {
+    font-family:Arial;
+    font-size: 11px;
+    text-align:left; 
+    display:inline;
+    margin-left:auto;
+    display:table-cell;
+}
+
+.CellCenterTitlePage {
+    text-align:center; 
+    display:table-cell;
+    vertical-align:middle;
+    font-family: Arial;
+    font-weight: bold;
+    font-size:18px;
+}
+
+.PaddingCell {
+    padding:3px 3px 3px 3px;
+}
+
+.Separator {
+    font-size:2px;
+}
+
+.TabContent {
+    padding:1px;
+}

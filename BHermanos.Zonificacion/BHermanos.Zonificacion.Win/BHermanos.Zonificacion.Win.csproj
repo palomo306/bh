@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BHermanos.Zonificacion.Win</RootNamespace>
+    <AssemblyName>BHermanos.Zonificacion.Win</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiproSoftware.Shared.Net20, Version=1.0.102.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="ActiproSoftware.WinUICore.Net20, Version=1.0.102.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
+    <Reference Include="CollapsibleSplitter, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CollapsibleSplitter.dll</HintPath>
+    </Reference>
+    <Reference Include="EGIS.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EGIS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="EGIS.ShapeFileLib, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EGIS.ShapeFileLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Context.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Clases\MunicipioCustomRenderSettings.cs" />
+    <Compile Include="Clases\ColoniaCustomRenderSettings.cs" />
+    <Compile Include="Clases\ZonaSubzonasCustomRenderSettings.cs" />
+    <Compile Include="Clases\ZonaCustomRenderSettings.cs" />
+    <Compile Include="Login\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\ResetPassword.Designer.cs">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\StartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\StartForm.Designer.cs">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Generic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Generic.Designer.cs">
+      <DependentUpon>Generic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Zone\Modal\CreateZone.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Zone\Modal\CreateZone.Designer.cs">
+      <DependentUpon>CreateZone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Zone\Modal\DetailView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Zone\Modal\DetailView.Designer.cs">
+      <DependentUpon>DetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Zone\ZoneAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Zone\ZoneAdmin.Designer.cs">
+      <DependentUpon>ZoneAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ResetPassword.resx">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\StartForm.resx">
+      <DependentUpon>StartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Generic.resx">
+      <DependentUpon>Generic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Zone\Modal\CreateZone.resx">
+      <DependentUpon>CreateZone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Zone\Modal\DetailView.resx">
+      <DependentUpon>DetailView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Zone\ZoneAdmin.resx">
+      <DependentUpon>ZoneAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Modules\Zone\Maps\Estados\30\Calles.dbf" />
+    <None Include="Modules\Zone\Maps\Estados\30\Calles.prj" />
+    <None Include="Modules\Zone\Maps\Estados\30\Calles.shp" />
+    <None Include="Modules\Zone\Maps\Estados\30\Calles.shx" />
+    <None Include="Modules\Zone\Maps\Estados\30\Carreteras.dbf" />
+    <None Include="Modules\Zone\Maps\Estados\30\Carreteras.prj" />
+    <None Include="Modules\Zone\Maps\Estados\30\Carreteras.shp" />
+    <None Include="Modules\Zone\Maps\Estados\30\Carreteras.shx" />
+    <None Include="Modules\Zone\Maps\Estados\30\Colonias.dbf" />
+    <None Include="Modules\Zone\Maps\Estados\30\Colonias.prj" />
+    <None Include="Modules\Zone\Maps\Estados\30\Colonias.shp" />
+    <None Include="Modules\Zone\Maps\Estados\30\Colonias.shx" />
+    <None Include="Modules\Zone\Maps\Estados\30\Estado.dbf" />
+    <None Include="Modules\Zone\Maps\Estados\30\Estado.prj" />
+    <None Include="Modules\Zone\Maps\Estados\30\Estado.shp" />
+    <None Include="Modules\Zone\Maps\Estados\30\Estado.shx" />
+    <None Include="Modules\Zone\Maps\Estados\30\Municipios.dbf" />
+    <None Include="Modules\Zone\Maps\Estados\30\Municipios.prj" />
+    <None Include="Modules\Zone\Maps\Estados\30\Municipios.shp" />
+    <None Include="Modules\Zone\Maps\Estados\30\Municipios.shx" />
+    <None Include="Modules\Zone\Maps\Nacional\national_estatal.dbf" />
+    <None Include="Modules\Zone\Maps\Nacional\national_estatal.prj" />
+    <None Include="Modules\Zone\Maps\Nacional\national_estatal.shp" />
+    <None Include="Modules\Zone\Maps\Nacional\national_estatal.shx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TurnOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginBig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BHermanos.Zonificacion.BusinessEntities\BHermanos.Zonificacion.BusinessEntities.csproj">
+      <Project>{a69dc953-23ea-4ba0-9ccc-8b246de69d70}</Project>
+      <Name>BHermanos.Zonificacion.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BHermanos.Zonificacion.WebService\BHermanos.Zonificacion.WebService.csproj">
+      <Project>{5dd4a0bd-2e29-4c72-a28b-3fb090b1372b}</Project>
+      <Name>BHermanos.Zonificacion.WebService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasswordReset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\CollapsibleSplitter.dll" />
+    <Content Include="DLL\EGIS.Controls.dll" />
+    <Content Include="DLL\EGIS.ShapeFileLib.dll" />
+    <Content Include="DLL\geomutil_lib.dll" />
+    <Content Include="DLL\geomutil_libx64.dll" />
+    <Content Include="DLL\itextsharp.dll" />
+    <Content Include="DLL\ZonColonias.sql" />
+    <None Include="Resources\ZoomOut.png" />
+    <None Include="Resources\Select.png" />
+    <None Include="Resources\ZoomIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

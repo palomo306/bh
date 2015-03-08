@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BHermanos" Class="DataAccessDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=FELIPELACUNZAPC\SQLEXPRESS;Initial Catalog=BHermanos;Persist Security Info=True;User ID=usrZonificacion" SettingsObjectName="BHermanos.Zonificacion.Data.Properties.Settings" SettingsPropertyName="BHermanosConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ZonAplicaciones" Member="ZonAplicaciones">
+    <Type Name="ZonAplicacione">
+      <Column Name="fiAplicacionId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ZonAplicacione_ZonMenus" Member="ZonMenus" ThisKey="fiAplicacionId" OtherKey="fiAplicacionId" Type="ZonMenus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonMenus" Member="ZonMenus">
+    <Type Name="ZonMenus">
+      <Column Name="fiMenuId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiDependeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcAplicacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="fiAplicacionId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ZonMenus_ZonPermiso" Member="ZonPermisos" ThisKey="fiMenuId" OtherKey="fiMenuId" Type="ZonPermiso" />
+      <Association Name="ZonAplicacione_ZonMenus" Member="ZonAplicacione" ThisKey="fiAplicacionId" OtherKey="fiAplicacionId" Type="ZonAplicacione" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPerfiles" Member="ZonPerfiles">
+    <Type Name="ZonPerfile">
+      <Column Name="fcUsuario" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRolId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ZonRole_ZonPerfile" Member="ZonRole" ThisKey="fiRolId" OtherKey="fiRolId" Type="ZonRole" IsForeignKey="true" />
+      <Association Name="ZonUsuario_ZonPerfile" Member="ZonUsuario" ThisKey="fcUsuario" OtherKey="fcUsuario" Type="ZonUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPermisos" Member="ZonPermisos">
+    <Type Name="ZonPermiso">
+      <Column Name="fiMenuId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRoldId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ZonMenus_ZonPermiso" Member="ZonMenus" ThisKey="fiMenuId" OtherKey="fiMenuId" Type="ZonMenus" IsForeignKey="true" />
+      <Association Name="ZonRole_ZonPermiso" Member="ZonRole" ThisKey="fiRoldId" OtherKey="fiRolId" Type="ZonRole" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonRoles" Member="ZonRoles">
+    <Type Name="ZonRole">
+      <Column Name="fiRolId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="ZonRole_ZonPerfile" Member="ZonPerfiles" ThisKey="fiRolId" OtherKey="fiRolId" Type="ZonPerfile" />
+      <Association Name="ZonRole_ZonPermiso" Member="ZonPermisos" ThisKey="fiRolId" OtherKey="fiRoldId" Type="ZonPermiso" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonUsuarios" Member="ZonUsuarios">
+    <Type Name="ZonUsuario">
+      <Column Name="fcUsuario" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fvPassword" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcMail" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ZonUsuario_ZonPerfile" Member="ZonPerfiles" ThisKey="fcUsuario" OtherKey="fcUsuario" Type="ZonPerfile" />
+    </Type>
+  </Table>
+</Database>
