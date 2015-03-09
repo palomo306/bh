@@ -199,6 +199,10 @@ namespace BHermanos.Zonificacion.Web.Clases
             get { return false; }
         }
 
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            return defaultSettings.PenWidthScale;
+        }
         #endregion
     }
 }

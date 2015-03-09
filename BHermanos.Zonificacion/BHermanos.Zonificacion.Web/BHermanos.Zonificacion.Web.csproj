@@ -46,11 +46,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="EGIS.ShapeFileLib, Version=4.3.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
+    <Reference Include="EGIS.ShapeFileLib, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\EGIS.ShapeFileLib.dll</HintPath>
     </Reference>
-    <Reference Include="EGIS.Web.Controls, Version=4.3.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=x86">
+    <Reference Include="EGIS.Web.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\EGIS.Web.Controls.dll</HintPath>
     </Reference>

@@ -126,6 +126,11 @@ namespace RegionDemo.Clases
             get { return false; }
         }
 
+
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            return defaultSettings.PenWidthScale;
+        }
         #endregion
     }
 }

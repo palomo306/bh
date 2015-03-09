@@ -11,6 +11,7 @@ namespace BHermanos.Zonificacion.Web.Clases
     public class MunicipioCustomRenderSettings : ICustomRenderSettings
     {
         #region Propiedades
+        private List<int> indexBorderShapes;
         private List<System.Drawing.Color> colorList;
         RenderSettings defaultSettings;        
         #endregion
@@ -24,6 +25,7 @@ namespace BHermanos.Zonificacion.Web.Clases
         private void BuildColorList(RenderSettings defaultSettings, int municipioId)
         {
             colorList = new List<System.Drawing.Color>();
+            indexBorderShapes = new List<int>();
             int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
             for (int n = 0; n < numRecords; ++n)
             {
@@ -31,6 +33,7 @@ namespace BHermanos.Zonificacion.Web.Clases
                 if (municipioId == municipio)
                 {
                     colorList.Add(Color.DarkRed);
+                    indexBorderShapes.Add(n);
                 }
                 else
                     colorList.Add(defaultSettings.FillColor);
@@ -89,6 +92,13 @@ namespace BHermanos.Zonificacion.Web.Clases
         public Color GetRecordSelectColor(int recordNumber)
         {
             return defaultSettings.SelectFillColor;
+        }
+
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            if (indexBorderShapes.Where(r => r == recordNumber).Any())
+                return 2;
+            return defaultSettings.PenWidthScale;
         }
         #endregion
     }
