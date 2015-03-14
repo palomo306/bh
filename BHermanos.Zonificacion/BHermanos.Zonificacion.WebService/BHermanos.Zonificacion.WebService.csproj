@@ -82,6 +82,7 @@
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\GrupoRubrosController.cs" />
     <Compile Include="Controllers\MunicipioController.cs" />
+    <Compile Include="Controllers\PlazaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\TabController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Models\EstadoModel.cs" />
     <Compile Include="Models\GrupoRubrosModel.cs" />
     <Compile Include="Models\MunicipioModel.cs" />
+    <Compile Include="Models\PlazaModel.cs" />
     <Compile Include="Models\RolModel.cs" />
     <Compile Include="Models\TabModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />

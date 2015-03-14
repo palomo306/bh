@@ -48,9 +48,6 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void InsertZonRole(ZonRole instance);
     partial void UpdateZonRole(ZonRole instance);
     partial void DeleteZonRole(ZonRole instance);
-    partial void InsertZonRubro(ZonRubro instance);
-    partial void UpdateZonRubro(ZonRubro instance);
-    partial void DeleteZonRubro(ZonRubro instance);
     partial void InsertZonUsuario(ZonUsuario instance);
     partial void UpdateZonUsuario(ZonUsuario instance);
     partial void DeleteZonUsuario(ZonUsuario instance);
@@ -63,6 +60,9 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void InsertZonUmbralesXPartida(ZonUmbralesXPartida instance);
     partial void UpdateZonUmbralesXPartida(ZonUmbralesXPartida instance);
     partial void DeleteZonUmbralesXPartida(ZonUmbralesXPartida instance);
+    partial void InsertZonRubro(ZonRubro instance);
+    partial void UpdateZonRubro(ZonRubro instance);
+    partial void DeleteZonRubro(ZonRubro instance);
     #endregion
 		
 		public DataAccessDataContext() : 
@@ -143,14 +143,6 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
-		public System.Data.Linq.Table<ZonRubro> ZonRubros
-		{
-			get
-			{
-				return this.GetTable<ZonRubro>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ZonUsuario> ZonUsuarios
 		{
 			get
@@ -183,6 +175,14 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
+		public System.Data.Linq.Table<ZonRubro> ZonRubros
+		{
+			get
+			{
+				return this.GetTable<ZonRubro>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConEstados")]
 		public ISingleResult<spConEstadosResult> spConEstados()
 		{
@@ -202,13 +202,6 @@ namespace BHermanos.Zonificacion.DataAccess
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId);
 			return ((ISingleResult<spConMunicipiosResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConRubrosXGrupo")]
-		public ISingleResult<spConRubrosXGrupoResult> spConRubrosXGrupo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piGrupoId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piGrupoId);
-			return ((ISingleResult<spConRubrosXGrupoResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConZonas")]
@@ -279,6 +272,41 @@ namespace BHermanos.Zonificacion.DataAccess
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVistaId, piEstadoId, piMunicipio, piColoniaId);
 			return ((ISingleResult<spConColoniasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConRubrosXGrupo")]
+		public ISingleResult<spConRubrosXGrupoResult> spConRubrosXGrupo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piGrupoId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piGrupoId);
+			return ((ISingleResult<spConRubrosXGrupoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spUpdPlaza")]
+		public int spUpdPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, pcNombre, pcColor, pcColonias);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsPlaza")]
+		public int spInsPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pcNombre, pcColor, pcColonias);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelPlaza")]
+		public int spDelPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConPlazas")]
+		public ISingleResult<spConPlazasResult> spConPlazas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piPlazaId);
+			return ((ISingleResult<spConPlazasResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1311,277 +1339,6 @@ namespace BHermanos.Zonificacion.DataAccess
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonRubros")]
-	public partial class ZonRubro : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiGrupoId;
-		
-		private int _fiRubroId;
-		
-		private string _fcDescripcion;
-		
-		private bool _flMain;
-		
-		private string _fcExpresion;
-		
-		private string _fcSignoAcumulado;
-		
-		private int _fiOrden;
-		
-		private bool _flEstatus;
-		
-		private EntityRef<ZonGrupoRubro> _ZonGrupoRubro;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiGrupoIdChanging(int value);
-    partial void OnfiGrupoIdChanged();
-    partial void OnfiRubroIdChanging(int value);
-    partial void OnfiRubroIdChanged();
-    partial void OnfcDescripcionChanging(string value);
-    partial void OnfcDescripcionChanged();
-    partial void OnflMainChanging(bool value);
-    partial void OnflMainChanged();
-    partial void OnfcExpresionChanging(string value);
-    partial void OnfcExpresionChanged();
-    partial void OnfcSignoAcumuladoChanging(string value);
-    partial void OnfcSignoAcumuladoChanged();
-    partial void OnfiOrdenChanging(int value);
-    partial void OnfiOrdenChanged();
-    partial void OnflEstatusChanging(bool value);
-    partial void OnflEstatusChanged();
-    #endregion
-		
-		public ZonRubro()
-		{
-			this._ZonGrupoRubro = default(EntityRef<ZonGrupoRubro>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiGrupoId
-		{
-			get
-			{
-				return this._fiGrupoId;
-			}
-			set
-			{
-				if ((this._fiGrupoId != value))
-				{
-					if (this._ZonGrupoRubro.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiGrupoIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiGrupoId = value;
-					this.SendPropertyChanged("fiGrupoId");
-					this.OnfiGrupoIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiRubroId
-		{
-			get
-			{
-				return this._fiRubroId;
-			}
-			set
-			{
-				if ((this._fiRubroId != value))
-				{
-					this.OnfiRubroIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiRubroId = value;
-					this.SendPropertyChanged("fiRubroId");
-					this.OnfiRubroIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this.OnfcDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._fcDescripcion = value;
-					this.SendPropertyChanged("fcDescripcion");
-					this.OnfcDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
-		public bool flMain
-		{
-			get
-			{
-				return this._flMain;
-			}
-			set
-			{
-				if ((this._flMain != value))
-				{
-					this.OnflMainChanging(value);
-					this.SendPropertyChanging();
-					this._flMain = value;
-					this.SendPropertyChanged("flMain");
-					this.OnflMainChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcExpresion
-		{
-			get
-			{
-				return this._fcExpresion;
-			}
-			set
-			{
-				if ((this._fcExpresion != value))
-				{
-					this.OnfcExpresionChanging(value);
-					this.SendPropertyChanging();
-					this._fcExpresion = value;
-					this.SendPropertyChanged("fcExpresion");
-					this.OnfcExpresionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string fcSignoAcumulado
-		{
-			get
-			{
-				return this._fcSignoAcumulado;
-			}
-			set
-			{
-				if ((this._fcSignoAcumulado != value))
-				{
-					this.OnfcSignoAcumuladoChanging(value);
-					this.SendPropertyChanging();
-					this._fcSignoAcumulado = value;
-					this.SendPropertyChanged("fcSignoAcumulado");
-					this.OnfcSignoAcumuladoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
-		public int fiOrden
-		{
-			get
-			{
-				return this._fiOrden;
-			}
-			set
-			{
-				if ((this._fiOrden != value))
-				{
-					this.OnfiOrdenChanging(value);
-					this.SendPropertyChanging();
-					this._fiOrden = value;
-					this.SendPropertyChanged("fiOrden");
-					this.OnfiOrdenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
-		public bool flEstatus
-		{
-			get
-			{
-				return this._flEstatus;
-			}
-			set
-			{
-				if ((this._flEstatus != value))
-				{
-					this.OnflEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._flEstatus = value;
-					this.SendPropertyChanged("flEstatus");
-					this.OnflEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonGrupoRubro_ZonRubro", Storage="_ZonGrupoRubro", ThisKey="fiGrupoId", OtherKey="fiGrupoId", IsForeignKey=true)]
-		public ZonGrupoRubro ZonGrupoRubro
-		{
-			get
-			{
-				return this._ZonGrupoRubro.Entity;
-			}
-			set
-			{
-				ZonGrupoRubro previousValue = this._ZonGrupoRubro.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonGrupoRubro.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonGrupoRubro.Entity = null;
-						previousValue.ZonRubros.Remove(this);
-					}
-					this._ZonGrupoRubro.Entity = value;
-					if ((value != null))
-					{
-						value.ZonRubros.Add(this);
-						this._fiGrupoId = value.fiGrupoId;
-					}
-					else
-					{
-						this._fiGrupoId = default(int);
-					}
-					this.SendPropertyChanged("ZonGrupoRubro");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonUsuarios")]
 	public partial class ZonUsuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2554,6 +2311,301 @@ namespace BHermanos.Zonificacion.DataAccess
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonRubros")]
+	public partial class ZonRubro : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiGrupoId;
+		
+		private int _fiRubroId;
+		
+		private string _fcDescripcion;
+		
+		private bool _flMain;
+		
+		private string _fcExpresion;
+		
+		private string _fcSignoAcumulado;
+		
+		private int _fiOrden;
+		
+		private bool _flEstatus;
+		
+		private string _fcFormato;
+		
+		private EntityRef<ZonGrupoRubro> _ZonGrupoRubro;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiGrupoIdChanging(int value);
+    partial void OnfiGrupoIdChanged();
+    partial void OnfiRubroIdChanging(int value);
+    partial void OnfiRubroIdChanged();
+    partial void OnfcDescripcionChanging(string value);
+    partial void OnfcDescripcionChanged();
+    partial void OnflMainChanging(bool value);
+    partial void OnflMainChanged();
+    partial void OnfcExpresionChanging(string value);
+    partial void OnfcExpresionChanged();
+    partial void OnfcSignoAcumuladoChanging(string value);
+    partial void OnfcSignoAcumuladoChanged();
+    partial void OnfiOrdenChanging(int value);
+    partial void OnfiOrdenChanged();
+    partial void OnflEstatusChanging(bool value);
+    partial void OnflEstatusChanged();
+    partial void OnfcFormatoChanging(string value);
+    partial void OnfcFormatoChanged();
+    #endregion
+		
+		public ZonRubro()
+		{
+			this._ZonGrupoRubro = default(EntityRef<ZonGrupoRubro>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiGrupoId
+		{
+			get
+			{
+				return this._fiGrupoId;
+			}
+			set
+			{
+				if ((this._fiGrupoId != value))
+				{
+					if (this._ZonGrupoRubro.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiGrupoIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiGrupoId = value;
+					this.SendPropertyChanged("fiGrupoId");
+					this.OnfiGrupoIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiRubroId
+		{
+			get
+			{
+				return this._fiRubroId;
+			}
+			set
+			{
+				if ((this._fiRubroId != value))
+				{
+					this.OnfiRubroIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiRubroId = value;
+					this.SendPropertyChanged("fiRubroId");
+					this.OnfiRubroIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this.OnfcDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fcDescripcion = value;
+					this.SendPropertyChanged("fcDescripcion");
+					this.OnfcDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
+		public bool flMain
+		{
+			get
+			{
+				return this._flMain;
+			}
+			set
+			{
+				if ((this._flMain != value))
+				{
+					this.OnflMainChanging(value);
+					this.SendPropertyChanging();
+					this._flMain = value;
+					this.SendPropertyChanged("flMain");
+					this.OnflMainChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcExpresion
+		{
+			get
+			{
+				return this._fcExpresion;
+			}
+			set
+			{
+				if ((this._fcExpresion != value))
+				{
+					this.OnfcExpresionChanging(value);
+					this.SendPropertyChanging();
+					this._fcExpresion = value;
+					this.SendPropertyChanged("fcExpresion");
+					this.OnfcExpresionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string fcSignoAcumulado
+		{
+			get
+			{
+				return this._fcSignoAcumulado;
+			}
+			set
+			{
+				if ((this._fcSignoAcumulado != value))
+				{
+					this.OnfcSignoAcumuladoChanging(value);
+					this.SendPropertyChanging();
+					this._fcSignoAcumulado = value;
+					this.SendPropertyChanged("fcSignoAcumulado");
+					this.OnfcSignoAcumuladoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
+		public int fiOrden
+		{
+			get
+			{
+				return this._fiOrden;
+			}
+			set
+			{
+				if ((this._fiOrden != value))
+				{
+					this.OnfiOrdenChanging(value);
+					this.SendPropertyChanging();
+					this._fiOrden = value;
+					this.SendPropertyChanged("fiOrden");
+					this.OnfiOrdenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
+		public bool flEstatus
+		{
+			get
+			{
+				return this._flEstatus;
+			}
+			set
+			{
+				if ((this._flEstatus != value))
+				{
+					this.OnflEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._flEstatus = value;
+					this.SendPropertyChanged("flEstatus");
+					this.OnflEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcFormato", DbType="VarChar(50)")]
+		public string fcFormato
+		{
+			get
+			{
+				return this._fcFormato;
+			}
+			set
+			{
+				if ((this._fcFormato != value))
+				{
+					this.OnfcFormatoChanging(value);
+					this.SendPropertyChanging();
+					this._fcFormato = value;
+					this.SendPropertyChanged("fcFormato");
+					this.OnfcFormatoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonGrupoRubro_ZonRubro", Storage="_ZonGrupoRubro", ThisKey="fiGrupoId", OtherKey="fiGrupoId", IsForeignKey=true)]
+		public ZonGrupoRubro ZonGrupoRubro
+		{
+			get
+			{
+				return this._ZonGrupoRubro.Entity;
+			}
+			set
+			{
+				ZonGrupoRubro previousValue = this._ZonGrupoRubro.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonGrupoRubro.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonGrupoRubro.Entity = null;
+						previousValue.ZonRubros.Remove(this);
+					}
+					this._ZonGrupoRubro.Entity = value;
+					if ((value != null))
+					{
+						value.ZonRubros.Add(this);
+						this._fiGrupoId = value.fiGrupoId;
+					}
+					else
+					{
+						this._fiGrupoId = default(int);
+					}
+					this.SendPropertyChanged("ZonGrupoRubro");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	public partial class spConEstadosResult
 	{
 		
@@ -2699,122 +2751,6 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._fcNombre != value))
 				{
 					this._fcNombre = value;
-				}
-			}
-		}
-	}
-	
-	public partial class spConRubrosXGrupoResult
-	{
-		
-		private int _fiRubroId;
-		
-		private string _fcDescripcion;
-		
-		private bool _flMain;
-		
-		private string _fcExpresion;
-		
-		private string _fcSignoAcumulado;
-		
-		private int _fiOrden;
-		
-		public spConRubrosXGrupoResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL")]
-		public int fiRubroId
-		{
-			get
-			{
-				return this._fiRubroId;
-			}
-			set
-			{
-				if ((this._fiRubroId != value))
-				{
-					this._fiRubroId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this._fcDescripcion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
-		public bool flMain
-		{
-			get
-			{
-				return this._flMain;
-			}
-			set
-			{
-				if ((this._flMain != value))
-				{
-					this._flMain = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcExpresion
-		{
-			get
-			{
-				return this._fcExpresion;
-			}
-			set
-			{
-				if ((this._fcExpresion != value))
-				{
-					this._fcExpresion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string fcSignoAcumulado
-		{
-			get
-			{
-				return this._fcSignoAcumulado;
-			}
-			set
-			{
-				if ((this._fcSignoAcumulado != value))
-				{
-					this._fcSignoAcumulado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
-		public int fiOrden
-		{
-			get
-			{
-				return this._fiOrden;
-			}
-			set
-			{
-				if ((this._fiOrden != value))
-				{
-					this._fiOrden = value;
 				}
 			}
 		}
@@ -6673,6 +6609,274 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._vtas_tot != value))
 				{
 					this._vtas_tot = value;
+				}
+			}
+		}
+	}
+	
+	public partial class spConRubrosXGrupoResult
+	{
+		
+		private int _fiRubroId;
+		
+		private string _fcDescripcion;
+		
+		private bool _flMain;
+		
+		private string _fcExpresion;
+		
+		private string _fcSignoAcumulado;
+		
+		private string _fcFormato;
+		
+		private int _fiOrden;
+		
+		public spConRubrosXGrupoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL")]
+		public int fiRubroId
+		{
+			get
+			{
+				return this._fiRubroId;
+			}
+			set
+			{
+				if ((this._fiRubroId != value))
+				{
+					this._fiRubroId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this._fcDescripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
+		public bool flMain
+		{
+			get
+			{
+				return this._flMain;
+			}
+			set
+			{
+				if ((this._flMain != value))
+				{
+					this._flMain = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcExpresion
+		{
+			get
+			{
+				return this._fcExpresion;
+			}
+			set
+			{
+				if ((this._fcExpresion != value))
+				{
+					this._fcExpresion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string fcSignoAcumulado
+		{
+			get
+			{
+				return this._fcSignoAcumulado;
+			}
+			set
+			{
+				if ((this._fcSignoAcumulado != value))
+				{
+					this._fcSignoAcumulado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcFormato", DbType="VarChar(50)")]
+		public string fcFormato
+		{
+			get
+			{
+				return this._fcFormato;
+			}
+			set
+			{
+				if ((this._fcFormato != value))
+				{
+					this._fcFormato = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
+		public int fiOrden
+		{
+			get
+			{
+				return this._fiOrden;
+			}
+			set
+			{
+				if ((this._fiOrden != value))
+				{
+					this._fiOrden = value;
+				}
+			}
+		}
+	}
+	
+	public partial class spConPlazasResult
+	{
+		
+		private int _fiPlazaId;
+		
+		private string _fcColor;
+		
+		private string _fcNombre;
+		
+		private int _fiEstadoId;
+		
+		private int _fiMunicipioId;
+		
+		private double _fiColoniaId;
+		
+		private byte _fiTipo;
+		
+		public spConPlazasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPlazaId", DbType="Int NOT NULL")]
+		public int fiPlazaId
+		{
+			get
+			{
+				return this._fiPlazaId;
+			}
+			set
+			{
+				if ((this._fiPlazaId != value))
+				{
+					this._fiPlazaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcColor", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string fcColor
+		{
+			get
+			{
+				return this._fcColor;
+			}
+			set
+			{
+				if ((this._fcColor != value))
+				{
+					this._fcColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this._fcNombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
+		public int fiEstadoId
+		{
+			get
+			{
+				return this._fiEstadoId;
+			}
+			set
+			{
+				if ((this._fiEstadoId != value))
+				{
+					this._fiEstadoId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMunicipioId", DbType="Int NOT NULL")]
+		public int fiMunicipioId
+		{
+			get
+			{
+				return this._fiMunicipioId;
+			}
+			set
+			{
+				if ((this._fiMunicipioId != value))
+				{
+					this._fiMunicipioId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiColoniaId", DbType="Float NOT NULL")]
+		public double fiColoniaId
+		{
+			get
+			{
+				return this._fiColoniaId;
+			}
+			set
+			{
+				if ((this._fiColoniaId != value))
+				{
+					this._fiColoniaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTipo", DbType="TinyInt NOT NULL")]
+		public byte fiTipo
+		{
+			get
+			{
+				return this._fiTipo;
+			}
+			set
+			{
+				if ((this._fiTipo != value))
+				{
+					this._fiTipo = value;
 				}
 			}
 		}

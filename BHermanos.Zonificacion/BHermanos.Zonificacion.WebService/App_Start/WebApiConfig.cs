@@ -114,7 +114,14 @@ namespace BHermanos.Zonificacion.WebService
             config.Routes.MapHttpRoute(
                name: "GetTab",
                routeTemplate: "WebService/{controller}/GetTab/{tabId}/{estadoId}/{municipioId}",
-               defaults: new { id = RouteParameter.Optional, estadoId = RouteParameter.Optional, municipioId = RouteParameter.Optional }
+               defaults: new { tabId = RouteParameter.Optional, estadoId = RouteParameter.Optional, municipioId = RouteParameter.Optional }
+            );
+
+            //Mapeo de Grupo de Plazas
+            config.Routes.MapHttpRoute(
+               name: "GetPlaza",
+               routeTemplate: "WebService/{controller}/GetPlaza/{vistaId}/{plazaId}",
+               defaults: new { vistaId = RouteParameter.Optional, plazaId = RouteParameter.Optional }
             );
             
             //Formato del response

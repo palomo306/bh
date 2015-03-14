@@ -48,6 +48,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         rubro.SignoAcumulado = reg2.fcSignoAcumulado;
                         rubro.Estatus = reg2.flEstatus;
                         rubro.Expresion = reg2.fcExpresion;
+                        rubro.Formato = reg2.fcFormato;
                         grupo.ListaRubros.Add(rubro);
                     }
                     listaGrupos.Add(grupo);
@@ -81,6 +82,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         rubro.SignoAcumulado = reg2.fcSignoAcumulado;
                         rubro.Estatus = reg2.flEstatus;
                         rubro.Expresion = reg2.fcExpresion;
+                        rubro.Formato = reg2.fcFormato;
                         grupo.ListaRubros.Add(rubro);
                     }
                     listaGrupos.Add(grupo);
@@ -112,6 +114,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         zonRubro.fcSignoAcumulado = reg1.SignoAcumulado;
                         zonRubro.flEstatus = reg1.Estatus;
                         zonRubro.fcExpresion = reg1.Expresion;
+                        zonRubro.fcFormato = reg1.Formato;
                         zonRubro.fiGrupoId = grupo.Id;
                         zonRubro.fiOrden = id;
                         zonGrupoRubro.ZonRubros.Add(zonRubro);

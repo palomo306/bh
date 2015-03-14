@@ -9,6 +9,6 @@ namespace BHermanos.Zonificacion.BusinessEntities
     [Serializable]
     public class Estado : Base
     {
-        List<Municipio> ListaMunicipios { get; set; }
+        public List<Municipio> ListaMunicipios { get; set; }
     }
 }

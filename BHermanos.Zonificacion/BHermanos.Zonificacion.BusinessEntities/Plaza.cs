@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace BHermanos.Zonificacion.BusinessEntities
 {
     [Serializable]
-    public class Municipio : Base
+    public class Plaza : Base
     {
-        public List<Colonia> ListaColonias { get; set; }
+        public string Color { get; set; }
+        public List<Estado> ListaEstados{ get; set; }
     }
 }

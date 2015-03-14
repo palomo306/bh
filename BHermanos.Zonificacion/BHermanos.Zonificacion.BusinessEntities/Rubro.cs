@@ -14,6 +14,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
         public string Expresion { get; set; }
         public double Valor { get; set; }
         public string SignoAcumulado { get; set; }
+        public string Formato { get; set; }
         public bool Estatus { get; set; }
 
         #region Métodos
@@ -41,7 +42,9 @@ namespace BHermanos.Zonificacion.BusinessEntities
             cloneRubro.Expresion = this.Expresion;
             cloneRubro.Valor = this.Valor;
             cloneRubro.SignoAcumulado = this.SignoAcumulado;
-            cloneRubro.Estatus = this.Estatus;
+            cloneRubro.Formato = this.Formato;
+            cloneRubro.Estatus = this.Estatus;            
+
             return cloneRubro;
         }
     }

@@ -141,6 +141,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     rubro.Main = reg.flMain;
                     rubro.Estatus = true;
                     rubro.SignoAcumulado = reg.fcSignoAcumulado;
+                    rubro.Formato = reg.fcFormato;
                     rubro.Valor = this.AsignaValor(rubro.Expresion, coloniasResult);
                     listaRubros.Add(rubro);
                 }

@@ -53,19 +53,6 @@
       <Association Name="ZonRole_ZonPermiso" Member="ZonPermisos" ThisKey="fiRolId" OtherKey="fiRoldId" Type="ZonPermiso" />
     </Type>
   </Table>
-  <Table Name="dbo.ZonRubros" Member="ZonRubros">
-    <Type Name="ZonRubro">
-      <Column Name="fiGrupoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="ZonGrupoRubro_ZonRubro" Member="ZonGrupoRubro" ThisKey="fiGrupoId" OtherKey="fiGrupoId" Type="ZonGrupoRubro" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ZonUsuarios" Member="ZonUsuarios">
     <Type Name="ZonUsuario">
       <Column Name="fcUsuario" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -114,6 +101,20 @@
       <Association Name="ZonPartidasXTab_ZonUmbralesXPartida" Member="ZonPartidasXTab" ThisKey="fiTabId,fiPartidaId" OtherKey="fiTabId,fiPartidaId" Type="ZonPartidasXTab" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.ZonRubros" Member="ZonRubros">
+    <Type Name="ZonRubro">
+      <Column Name="fiGrupoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcFormato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="ZonGrupoRubro_ZonRubro" Member="ZonGrupoRubro" ThisKey="fiGrupoId" OtherKey="fiGrupoId" Type="ZonGrupoRubro" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.spConEstados" Method="spConEstados">
     <ElementType Name="spConEstadosResult">
       <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -132,17 +133,6 @@
       <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="fcNombre" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.spConRubrosXGrupo" Method="spConRubrosXGrupo">
-    <Parameter Name="piGrupoId" Type="System.Int32" DbType="Int" />
-    <ElementType Name="spConRubrosXGrupoResult">
-      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.spConZonas" Method="spConZonas">
@@ -435,6 +425,48 @@
       <Column Name="dist_tot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="dist_psibls" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="vtas_tot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConRubrosXGrupo" Method="spConRubrosXGrupo">
+    <Parameter Name="piGrupoId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConRubrosXGrupoResult">
+      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="fcFormato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spUpdPlaza" Method="spUpdPlaza">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsPlaza" Method="spInsPlaza">
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDelPlaza" Method="spDelPlaza">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spConPlazas" Method="spConPlazas">
+    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConPlazasResult">
+      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcColor" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
