@@ -121,7 +121,24 @@ namespace BHermanos.Zonificacion.WebService
             config.Routes.MapHttpRoute(
                name: "GetPlaza",
                routeTemplate: "WebService/{controller}/GetPlaza/{vistaId}/{plazaId}",
-               defaults: new { vistaId = RouteParameter.Optional, plazaId = RouteParameter.Optional }
+               defaults: null
+            );
+
+            config.Routes.MapHttpRoute(
+              name: "PostPlaza",
+              routeTemplate: "WebService/{controller}/PostPlaza",
+              defaults: null
+           );
+
+            config.Routes.MapHttpRoute(
+               name: "PutPlaza",
+               routeTemplate: "WebService/{controller}/PutPlaza",
+               defaults: null
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DeletePlaza",
+                routeTemplate: "WebService/{controller}/DeletePlaza/{plazaId}"
             );
             
             //Formato del response

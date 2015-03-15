@@ -10,6 +10,9 @@ namespace BHermanos.Zonificacion.BusinessEntities
     public class Plaza : Base
     {
         public string Color { get; set; }
+
+        public string Colonias { get; set; }
+        
         public List<Estado> ListaEstados{ get; set; }
     }
 }

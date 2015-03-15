@@ -194,7 +194,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                         {
                             if (!manejadorZonas.EliminarZona(estadoId, municipioId, zonaId))
                             {
-                                zonaModel.Mensaje = "No fue posible realizar eliminar de la zona";
+                                zonaModel.Mensaje = "No fue posible eliminar de la zona";
                             }
                             else
                             {
@@ -206,7 +206,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                         {
                             if (!manejadorZonas.EliminarSubZona(estadoId, municipioId, zonaId))
                             {
-                                zonaModel.Mensaje = "No fue posible realizar eliminar de la subzona";
+                                zonaModel.Mensaje = "No fue posible eliminar de la subzona";
                             }
                             else
                             {
