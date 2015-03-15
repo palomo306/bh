@@ -92,7 +92,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone.Modal
             }
             else
             {
-                MessageBox.Show("Por favor seleccione un colo y escriba un nombre para la nueva zona", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor seleccione un color y escriba un nombre para la nueva zona", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNombre.Focus();
             }
         }

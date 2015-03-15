@@ -8,24 +8,22 @@ using System.Drawing;
 
 namespace RegionDemo.Clases
 {
-    public class ZonaCustomRenderSettings : ICustomRenderSettings
+    public class PlazaCustomRenderSettings  : ICustomRenderSettings
     {
         #region Propiedades
-        private List<System.Drawing.Color> colorList;
-        private List<System.Drawing.Color> colorBorderList;
+        private List<System.Drawing.Color> colorList;        
         RenderSettings defaultSettings;
         #endregion
 
-        public ZonaCustomRenderSettings(RenderSettings defaultSettings, List<BE.Zona> ListZonas)
+        public PlazaCustomRenderSettings(RenderSettings defaultSettings, List<BE.Plaza> ListPlazas)
         {
             this.defaultSettings = defaultSettings;
-            BuildColorList(defaultSettings, ListZonas);
+            BuildColorList(defaultSettings, ListPlazas);
         }
 
-        private void BuildColorList(RenderSettings defaultSettings, List<BE.Zona> ListZonas)
+        private void BuildColorList(RenderSettings defaultSettings, List<BE.Plaza> ListPlazas)
         {
             colorList = new List<System.Drawing.Color>();
-            colorBorderList = new List<Color>();
 
             int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
             for (int n = 0; n < numRecords; ++n)
@@ -43,31 +41,33 @@ namespace RegionDemo.Clases
                 }
                 double colonia = Convert.ToDouble(colString);
 
-                List<BE.Zona> lstZona = ListZonas.Where(z => z.EstadoId == estado && z.MunicipioId == municipio).ToList();
-                if (lstZona.Count > 0)
+                //Se busca la colonia en alguna plaza
+                bool existColony = false;
+                List<BE.Plaza> plEstado = ListPlazas.Where(p => p.ListaEstados.Where(es => es.Id == estado).Any()).ToList();
+                BE.Plaza plazaWithColony = null;
+                foreach (BE.Plaza pl in plEstado)
                 {
-                    bool existColony = false;
-                    BE.Zona colonyInZona = null;
-                    foreach (BE.Zona zon in lstZona)
+                    List<BE.Estado> plEstados = pl.ListaEstados.Where(es => es.ListaMunicipios.Where(mun => mun.Id == municipio).Any()).ToList();
+                    foreach (BE.Estado es in plEstados)
                     {
-                        if (zon.ListaColonias != null && zon.ListaColonias.Count > 0)
-                        {
-                            BE.Colonia col = zon.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                            if (col != null)
-                            {
-                                colonyInZona = zon;
-                                existColony = true;
-                                break;
-                            }
-                        }
+                        existColony = es.ListaMunicipios.Where(mun => mun.ListaColonias.Where(col => col.Id == colonia).Any()).Any();
+                        if (existColony)
+                            break;
                     }
                     if (existColony)
-                        colorList.Add(colonyInZona.RealColor);
-                    else
-                        colorList.Add(defaultSettings.FillColor);
+                    {
+                        plazaWithColony = pl;
+                        break;
+                    }
+                }
+                if (plazaWithColony != null)
+                {
+                    colorList.Add(plazaWithColony.RealColor);
                 }
                 else
+                {
                     colorList.Add(defaultSettings.FillColor);
+                }
             }
         }
 

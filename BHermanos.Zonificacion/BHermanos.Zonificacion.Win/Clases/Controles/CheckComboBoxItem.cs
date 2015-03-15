@@ -39,7 +39,7 @@ namespace BHermanos.Zonificacion.Win.Clases.Controles
 
         public override string ToString()
         {
-            return "--Seleccione un estado--";
+            return "--Seleccione los estados--";
         }
     }
 }

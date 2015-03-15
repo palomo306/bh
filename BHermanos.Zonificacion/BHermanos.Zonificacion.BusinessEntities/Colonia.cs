@@ -55,7 +55,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
         {
             try
             {
-                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @",""<ListaGrupoRubros>k__BackingField"":" + GetListaGrupoRubrosToJson() + @"}";
+                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<ListaGrupoRubros>k__BackingField"":" + GetListaGrupoRubrosToJson() + @"}";
                 return jSon;
             }
             catch (Exception ex)

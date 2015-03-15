@@ -32,7 +32,7 @@
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlHeadFields = new System.Windows.Forms.Panel();
             this.ccbEstados = new BHermanos.Zonificacion.Win.Clases.Controles.CheckComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCurrentPlaza = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCurrentSubzona = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,6 +45,10 @@
             this.btnCanelZone = new System.Windows.Forms.Button();
             this.btnSaveZone = new System.Windows.Forms.Button();
             this.dgPlazas = new System.Windows.Forms.DataGridView();
+            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMap = new System.Windows.Forms.Panel();
             this.panelCtrlMap = new System.Windows.Forms.Panel();
             this.pbbZoomMax = new System.Windows.Forms.PictureBox();
@@ -52,9 +56,6 @@
             this.pbbZoomMin = new System.Windows.Forms.PictureBox();
             this.trbZoom = new System.Windows.Forms.TrackBar();
             this.sfmMainMap = new EGIS.Controls.SFMap();
-            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlHead.SuspendLayout();
             this.pnlHeadFields.SuspendLayout();
             this.pnlInfo.SuspendLayout();
@@ -81,7 +82,7 @@
             // pnlHeadFields
             // 
             this.pnlHeadFields.Controls.Add(this.ccbEstados);
-            this.pnlHeadFields.Controls.Add(this.textBox1);
+            this.pnlHeadFields.Controls.Add(this.txtCurrentPlaza);
             this.pnlHeadFields.Controls.Add(this.label2);
             this.pnlHeadFields.Controls.Add(this.txtCurrentSubzona);
             this.pnlHeadFields.Controls.Add(this.label4);
@@ -89,9 +90,9 @@
             this.pnlHeadFields.Controls.Add(this.label3);
             this.pnlHeadFields.Controls.Add(this.label1);
             this.pnlHeadFields.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlHeadFields.Location = new System.Drawing.Point(390, 0);
+            this.pnlHeadFields.Location = new System.Drawing.Point(428, 0);
             this.pnlHeadFields.Name = "pnlHeadFields";
-            this.pnlHeadFields.Size = new System.Drawing.Size(420, 48);
+            this.pnlHeadFields.Size = new System.Drawing.Size(382, 48);
             this.pnlHeadFields.TabIndex = 4;
             // 
             // ccbEstados
@@ -104,12 +105,13 @@
             this.ccbEstados.TabIndex = 10;
             this.ccbEstados.CheckStateChanged += new System.EventHandler(this.ccbEstados_CheckStateChanged);
             // 
-            // textBox1
+            // txtCurrentPlaza
             // 
-            this.textBox1.Location = new System.Drawing.Point(223, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(190, 20);
-            this.textBox1.TabIndex = 9;
+            this.txtCurrentPlaza.Location = new System.Drawing.Point(223, 22);
+            this.txtCurrentPlaza.Name = "txtCurrentPlaza";
+            this.txtCurrentPlaza.ReadOnly = true;
+            this.txtCurrentPlaza.Size = new System.Drawing.Size(150, 20);
+            this.txtCurrentPlaza.TabIndex = 9;
             // 
             // label2
             // 
@@ -207,6 +209,7 @@
             this.btnCanelZone.TabIndex = 5;
             this.btnCanelZone.Text = "Cancelar";
             this.btnCanelZone.UseVisualStyleBackColor = true;
+            this.btnCanelZone.Click += new System.EventHandler(this.btnCanelZone_Click);
             // 
             // btnSaveZone
             // 
@@ -216,6 +219,7 @@
             this.btnSaveZone.TabIndex = 4;
             this.btnSaveZone.Text = "Aceptar";
             this.btnSaveZone.UseVisualStyleBackColor = true;
+            this.btnSaveZone.Click += new System.EventHandler(this.btnSaveZone_Click);
             // 
             // dgPlazas
             // 
@@ -223,7 +227,8 @@
             this.dgPlazas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Plaza,
             this.Editar,
-            this.Delete});
+            this.Delete,
+            this.Id});
             this.dgPlazas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgPlazas.Location = new System.Drawing.Point(5, 5);
             this.dgPlazas.Margin = new System.Windows.Forms.Padding(10);
@@ -231,6 +236,37 @@
             this.dgPlazas.RowHeadersVisible = false;
             this.dgPlazas.Size = new System.Drawing.Size(300, 513);
             this.dgPlazas.TabIndex = 1;
+            this.dgPlazas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlazas_CellClick);
+            this.dgPlazas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPlazas_DataBindingComplete);
+            // 
+            // Plaza
+            // 
+            this.Plaza.DataPropertyName = "Nombre";
+            this.Plaza.Frozen = true;
+            this.Plaza.HeaderText = "Plaza";
+            this.Plaza.Name = "Plaza";
+            this.Plaza.ReadOnly = true;
+            // 
+            // Editar
+            // 
+            this.Editar.HeaderText = "";
+            this.Editar.Name = "Editar";
+            this.Editar.ReadOnly = true;
+            this.Editar.Text = "Editar";
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Eliminar";
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // pnlMap
             // 
@@ -266,6 +302,9 @@
             this.pbbZoomMax.Size = new System.Drawing.Size(32, 32);
             this.pbbZoomMax.TabIndex = 2;
             this.pbbZoomMax.TabStop = false;
+            this.pbbZoomMax.Click += new System.EventHandler(this.pbbZoomMax_Click);
+            this.pbbZoomMax.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbbZoomMin_MouseDown);
+            this.pbbZoomMax.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbbZoomMin_MouseUp);
             // 
             // pbbZoomSelect
             // 
@@ -277,6 +316,7 @@
             this.pbbZoomSelect.Size = new System.Drawing.Size(32, 32);
             this.pbbZoomSelect.TabIndex = 1;
             this.pbbZoomSelect.TabStop = false;
+            this.pbbZoomSelect.Click += new System.EventHandler(this.pbbZoomSelect_Click);
             // 
             // pbbZoomMin
             // 
@@ -287,6 +327,9 @@
             this.pbbZoomMin.Size = new System.Drawing.Size(32, 32);
             this.pbbZoomMin.TabIndex = 0;
             this.pbbZoomMin.TabStop = false;
+            this.pbbZoomMin.Click += new System.EventHandler(this.pbbZoomMin_Click);
+            this.pbbZoomMin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbbZoomMin_MouseDown);
+            this.pbbZoomMin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbbZoomMin_MouseUp);
             // 
             // trbZoom
             // 
@@ -301,11 +344,14 @@
             this.trbZoom.TabIndex = 3;
             this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trbZoom.Value = 15;
+            this.trbZoom.Scroll += new System.EventHandler(this.trbZoom_Scroll);
+            this.trbZoom.ValueChanged += new System.EventHandler(this.trbZoom_ValueChanged);
             // 
             // sfmMainMap
             // 
             this.sfmMainMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sfmMainMap.CentrePoint2D = ((EGIS.ShapeFileLib.PointD)(resources.GetObject("sfmMainMap.CentrePoint2D")));
+            this.sfmMainMap.CtrlDown = false;
             this.sfmMainMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sfmMainMap.Location = new System.Drawing.Point(0, 0);
             this.sfmMainMap.MapBackColor = System.Drawing.SystemColors.Control;
@@ -316,28 +362,8 @@
             this.sfmMainMap.TabIndex = 0;
             this.sfmMainMap.UseMercatorProjection = false;
             this.sfmMainMap.ZoomLevel = 1D;
-            // 
-            // Plaza
-            // 
-            this.Plaza.DataPropertyName = "Nombre";
-            this.Plaza.Frozen = true;
-            this.Plaza.HeaderText = "Plaza";
-            this.Plaza.Name = "Plaza";
-            this.Plaza.ReadOnly = true;
-            // 
-            // Editar
-            // 
-            this.Editar.HeaderText = "";
-            this.Editar.Name = "Editar";
-            this.Editar.ReadOnly = true;
-            this.Editar.Text = "Editar";
-            // 
-            // Delete
-            // 
-            this.Delete.HeaderText = "";
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Text = "Eliminar";
+            this.sfmMainMap.SelectedRecordsChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_SelectedRecordsChanged);
+            this.sfmMainMap.OnControlKeyChange += new System.EventHandler(this.sfmMainMap_OnControlKeyChange);
             // 
             // PlazaAdmin
             // 
@@ -389,12 +415,13 @@
         private System.Windows.Forms.PictureBox pbbZoomMin;
         private System.Windows.Forms.TrackBar trbZoom;
         private EGIS.Controls.SFMap sfmMainMap;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCurrentPlaza;
         private System.Windows.Forms.Label label2;
         private Clases.Controles.CheckComboBox ccbEstados;
         private System.Windows.Forms.DataGridViewTextBoxColumn Plaza;
         private System.Windows.Forms.DataGridViewButtonColumn Editar;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 
     }
 }
