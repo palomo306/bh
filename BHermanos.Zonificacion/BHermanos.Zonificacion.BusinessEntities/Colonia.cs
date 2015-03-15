@@ -27,6 +27,10 @@ namespace BHermanos.Zonificacion.BusinessEntities
 
         public List<Partida> ListaPartidas { get; set; }
 
+
+        /* Para el manejo de estado / municipio */
+        public int EstadoId { get; set; }
+        public int MunicipioId { get; set; }
         #endregion
 
         #region Métodos de Conversion
