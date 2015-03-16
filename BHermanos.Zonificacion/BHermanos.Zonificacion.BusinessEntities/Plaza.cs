@@ -18,7 +18,6 @@ namespace BHermanos.Zonificacion.BusinessEntities
         public List<Estado> ListaEstados{ get; set; }
         #endregion
 
-
         #region Propiedades Dinámicas
         public Color RealColor
         {
@@ -35,8 +34,23 @@ namespace BHermanos.Zonificacion.BusinessEntities
 
             }
         }
-        #endregion
 
+        public string Editar
+        {
+            get
+            {
+                return "Editar";
+            }
+        }
+
+        public string Eliminar
+        {
+            get
+            {
+                return "Eliminar";
+            }
+        }
+        #endregion
 
         #region Métodos de Conversion
         private string GetListaEstadosToJson()
@@ -85,6 +99,13 @@ namespace BHermanos.Zonificacion.BusinessEntities
             {
                 throw ex;
             }
+        }
+        #endregion
+
+        #region Constructor
+        public Plaza()
+        {
+            this.ListaEstados = new List<Estado>();
         }
         #endregion
     }

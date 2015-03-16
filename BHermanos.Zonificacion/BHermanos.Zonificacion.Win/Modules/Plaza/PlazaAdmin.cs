@@ -71,7 +71,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-                url += "Plaza/GetPlaza/2/0?type=json";
+                url += "Plaza/GetPlaza/1/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Timeout = 20000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -80,7 +80,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 if (objResponse.Succes)
                 {
                     ListPlazas = objResponse.ListaPlazas.ToList();
+                    dgPlazas.AutoGenerateColumns = false;
                     dgPlazas.DataSource = ListPlazas;
+                    LoadPlazaRenderSetting();
                 }
                 else
                 {
@@ -245,6 +247,73 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
         }
 
+        private void ClearSelections()
+        {
+            int shapeCount = sfmMainMap.ShapeFileCount;
+            if (shapeCount > 1)
+            {
+                //Se recorren los datos
+                int layerIndex = 2;
+                while (layerIndex < shapeCount)
+                {
+                    EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
+                    sf.ClearSelectedRecords();
+                    layerIndex += 5;                
+                }
+                sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
+            }
+        }
+
+        private void SelectItemsByPlaza(List<BE.Estado> estados)
+        {
+            int shapeCount = sfmMainMap.ShapeFileCount;
+            if (shapeCount > 1)
+            {
+                //Se recorren los datos
+                int layerIndex = 2;
+                while (layerIndex < shapeCount)
+                {
+                    EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
+                    string[] rEdos = sf.GetRecords(1);
+                    string[] rMun = sf.GetRecords(2);
+                    string[] rCols = sf.GetRecords(7);
+                    string[] rLocs = sf.GetRecords(3);
+                    string[] rTipo = sf.GetRecords(4);
+                    string[] rLocs2 = sf.GetRecords(8);
+                    for (int i = 0; i < sf.RecordCount; i++)
+                    {
+                        //Se saca el Id de la colonia
+                        string colString = rCols[i].Replace("|", "").Trim();
+                        if (colString == "NA")
+                        {
+                            colString = rTipo[i].Trim() + rEdos[i].Trim().PadLeft(2, '0') + rMun[i].Trim().PadLeft(3, '0') + rLocs[i].Trim().PadLeft(4, '0') + rLocs2[i].Trim().PadLeft(5, '0');
+                        }
+                        else
+                        {
+                            colString = rTipo[i].Trim() + colString;
+                        }
+                        //Se revisa si la colonia existe en la plaza
+                        BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
+                        if (currEstado != null)
+                        {
+                            BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
+                            if (currMuni != null)
+                            {
+                                BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                                if (currCol != null)
+                                {
+                                    sf.SelectRecord(i, true);
+                                }
+                            }
+                        }
+                    }
+                    layerIndex += 5;
+                }
+                sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
+            }
+        }
+
+
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
             LoadMap(selEdo.Id.ToString(), "Estado.shp", selEdo.Nombre, "NombreEsta", false, false, 0);
@@ -358,7 +427,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         }
         #endregion
 
-        #region Limpieza de Datos
+        #region Limpieza y Seleccion de Datos
         private void ClearForm()
         {
             IsUpdate = false;
@@ -370,6 +439,20 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             this.CurrentPlaza = new BE.Plaza();
             txtCurrentPlaza.Text = "Nueva plaza";
             txtCurrentPlaza.BackColor = Color.White;
+            ClearSelections();
+        }
+
+        private void SelectEdoItem(BE.Estado selEdo)
+        {
+            foreach (CheckComboBoxItem item in ccbEstados.Items)
+            {
+                BE.Estado edo = (BE.Estado)item.Tag;
+                if (selEdo.Id == edo.Id)
+                {
+                    item.CheckState = true;
+                    ccbEstados_CheckStateChanged(item, new EventArgs());
+                }
+            }
         }
         #endregion
 
@@ -447,6 +530,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
+                ClearForm();
                 int idPlaza = Convert.ToInt32(dgPlazas.Rows[e.RowIndex].Cells[3].Value);
                 BE.Plaza clickPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (clickPlaza != null)
@@ -454,6 +538,14 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     this.CurrentPlaza = clickPlaza;
                     if (e.ColumnIndex == 1)
                     {
+                        //Se seleccionan los estados
+                        foreach (BE.Estado edo in clickPlaza.ListaEstados)
+                        {
+                            SelectEdoItem(edo);
+                        }
+                        //Se seleccionan las colonias de la plaza
+                        SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
+                        //Se cambia el formato visual
                         txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
                         txtCurrentPlaza.BackColor = this.CurrentPlaza.RealColor;
                         btnSaveZone.Text = "Act. plaza";
