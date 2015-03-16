@@ -54,6 +54,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     }
                     ccbEstados.SelectedItem = null;
                     ccbEstados.Text = "--Seleccione los estados--";
+                    //Se limpia la seleccion
+                    foreach (CheckComboBoxItem item in ccbEstados.Items)
+                    {
+                        item.CheckState = false;
+                    }
                 }
                 else
                 {
@@ -478,7 +483,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 SelectEdoItem(edo);
             }
-            sfmMainMap.ZoomLevel = 1750;
+            if (allEdos.Count > 0)
+                sfmMainMap.ZoomLevel = 1750;
         }
         #endregion
 
@@ -491,10 +497,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ClearForm();
             LoadEstados();
             LoadPlazas();
-            LoadMainMap();
-            IsFirsTime = false;
+            LoadMainMap();            
             LoadEstadosMaps();
             LoadPlazaRenderSetting();
+            IsFirsTime = false;
         }
         #endregion
 
