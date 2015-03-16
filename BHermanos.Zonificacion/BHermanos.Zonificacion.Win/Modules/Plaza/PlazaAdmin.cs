@@ -670,35 +670,42 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Actualización de la Información
         private void btnSaveZone_Click(object sender, EventArgs e)
         {
-            if (!IsUpdate)
+            if (this.CurrentPlaza.ListaEstados > 0)
             {
-                CreatePlaza oWindowZoneName = new CreatePlaza();
-                oWindowZoneName.ListPlazas = this.ListPlazas;
-                oWindowZoneName.ZoneEditId = -1;
-                oWindowZoneName.ShowDialog();
-                if (oWindowZoneName.DialogResult == DialogResult.OK)
+                if (!IsUpdate)
                 {
-                    this.CurrentPlaza.Nombre = oWindowZoneName.Nombre;
-                    this.CurrentPlaza.Color = oWindowZoneName.Color;
-                    SavePlaza();
+                    CreatePlaza oWindowZoneName = new CreatePlaza();
+                    oWindowZoneName.ListPlazas = this.ListPlazas;
+                    oWindowZoneName.ZoneEditId = -1;
+                    oWindowZoneName.ShowDialog();
+                    if (oWindowZoneName.DialogResult == DialogResult.OK)
+                    {
+                        this.CurrentPlaza.Nombre = oWindowZoneName.Nombre;
+                        this.CurrentPlaza.Color = oWindowZoneName.Color;
+                        SavePlaza();
+                    }
                 }
+                else
+                {
+                    CreatePlaza oWindowZoneName = new CreatePlaza();
+                    oWindowZoneName.ListPlazas = this.ListPlazas;
+                    oWindowZoneName.ZoneEditId = this.CurrentPlaza.Id;
+                    oWindowZoneName.Color = this.CurrentPlaza.Color;
+                    oWindowZoneName.Nombre = this.CurrentPlaza.Nombre;
+                    oWindowZoneName.ShowDialog();
+                    if (oWindowZoneName.DialogResult == DialogResult.OK)
+                    {
+                        this.CurrentPlaza.Nombre = oWindowZoneName.Nombre;
+                        this.CurrentPlaza.Color = oWindowZoneName.Color;
+                        UpdatePlaza();
+                    }
+                }
+                sfmMainMap.CtrlDown = false;
             }
             else
             {
-                CreatePlaza oWindowZoneName = new CreatePlaza();
-                oWindowZoneName.ListPlazas = this.ListPlazas;
-                oWindowZoneName.ZoneEditId = this.CurrentPlaza.Id;
-                oWindowZoneName.Color = this.CurrentPlaza.Color;
-                oWindowZoneName.Nombre = this.CurrentPlaza.Nombre;
-                oWindowZoneName.ShowDialog();
-                if (oWindowZoneName.DialogResult == DialogResult.OK)
-                {
-                    this.CurrentPlaza.Nombre = oWindowZoneName.Nombre;
-                    this.CurrentPlaza.Color = oWindowZoneName.Color;
-                    UpdatePlaza();
-                }
+                MessageBox.Show("Por favor seleccione al menos una colonia para la Plaza", "Validación de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            sfmMainMap.CtrlDown = false;
         }        
 
         private void btnCanelZone_Click(object sender, EventArgs e)
