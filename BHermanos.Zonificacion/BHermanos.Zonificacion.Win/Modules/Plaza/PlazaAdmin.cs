@@ -670,7 +670,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Actualización de la Información
         private void btnSaveZone_Click(object sender, EventArgs e)
         {
-            if (this.CurrentPlaza.ListaEstados > 0)
+            if (this.CurrentPlaza.ListaEstados.Count > 0)
             {
                 if (!IsUpdate)
                 {
