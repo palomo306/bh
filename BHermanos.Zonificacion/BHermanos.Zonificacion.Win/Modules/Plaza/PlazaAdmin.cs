@@ -483,8 +483,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 SelectEdoItem(edo);
             }
-            if (allEdos.Count > 0)
-                sfmMainMap.ZoomLevel = 1750;
+            //if (allEdos.Count > 0)
+            //    sfmMainMap.ZoomLevel = 1750;
         }
         #endregion
 
