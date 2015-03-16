@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using EGIS.ShapeFileLib;
 using BHermanos.Zonificacion.Win.Modules.Plaza.Modal;
 using RegionDemo.Clases;
+using System.Collections.ObjectModel;
 
 namespace BHermanos.Zonificacion.Win.Modules.Plaza
 {
@@ -269,6 +270,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             int shapeCount = sfmMainMap.ShapeFileCount;
             if (shapeCount > 1)
             {
+                bool isFirstShape = true;
                 //Se recorren los datos
                 int layerIndex = 2;
                 while (layerIndex < shapeCount)
@@ -302,6 +304,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                                 BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
                                 if (currCol != null)
                                 {
+                                    if (isFirstShape)
+                                    {
+                                        ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                                        sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                                        isFirstShape = false;
+                                    }
                                     sf.SelectRecord(i, true);
                                 }
                             }
@@ -454,6 +462,24 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 }
             }
         }
+
+        private void LoadEstadosMaps()
+        {
+            List<BE.Estado> allEdos = new List<BE.Estado>();
+            foreach (BE.Plaza plaza in this.ListPlazas)
+            {
+                foreach (BE.Estado edo in plaza.ListaEstados)
+                {
+                    if (!allEdos.Where(e => e.Id == edo.Id).Any())
+                        allEdos.Add(edo);
+                }
+            }
+            foreach (BE.Estado edo in allEdos)
+            {
+                SelectEdoItem(edo);
+            }
+            sfmMainMap.ZoomLevel = 1750;
+        }
         #endregion
 
         #region Constructor
@@ -461,12 +487,14 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             InitializeComponent();
             IsFirsTime = true;
-            LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);            
+            LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ClearForm();
             LoadEstados();
             LoadPlazas();
             LoadMainMap();
-            ClearForm();
             IsFirsTime = false;
+            LoadEstadosMaps();
+            LoadPlazaRenderSetting();
         }
         #endregion
 
@@ -529,15 +557,15 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private void dgPlazas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {
-                ClearForm();
+            {                
                 int idPlaza = Convert.ToInt32(dgPlazas.Rows[e.RowIndex].Cells[3].Value);
                 BE.Plaza clickPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (clickPlaza != null)
                 {
+                    ClearForm();
                     this.CurrentPlaza = clickPlaza;
                     if (e.ColumnIndex == 1)
-                    {
+                    {                        
                         //Se seleccionan los estados
                         foreach (BE.Estado edo in clickPlaza.ListaEstados)
                         {

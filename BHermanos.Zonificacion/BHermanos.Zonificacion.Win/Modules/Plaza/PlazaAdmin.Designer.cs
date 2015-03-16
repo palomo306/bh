@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlazaAdmin));
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlHeadFields = new System.Windows.Forms.Panel();
+            this.ccbEstados = new BHermanos.Zonificacion.Win.Clases.Controles.CheckComboBox();
             this.txtCurrentPlaza = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCurrentSubzona = new System.Windows.Forms.TextBox();
@@ -44,6 +45,10 @@
             this.btnCanelZone = new System.Windows.Forms.Button();
             this.btnSaveZone = new System.Windows.Forms.Button();
             this.dgPlazas = new System.Windows.Forms.DataGridView();
+            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMap = new System.Windows.Forms.Panel();
             this.panelCtrlMap = new System.Windows.Forms.Panel();
             this.pbbZoomMax = new System.Windows.Forms.PictureBox();
@@ -51,11 +56,6 @@
             this.pbbZoomMin = new System.Windows.Forms.PictureBox();
             this.trbZoom = new System.Windows.Forms.TrackBar();
             this.sfmMainMap = new EGIS.Controls.SFMap();
-            this.ccbEstados = new BHermanos.Zonificacion.Win.Clases.Controles.CheckComboBox();
-            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHead.SuspendLayout();
             this.pnlHeadFields.SuspendLayout();
             this.pnlInfo.SuspendLayout();
@@ -94,6 +94,16 @@
             this.pnlHeadFields.Name = "pnlHeadFields";
             this.pnlHeadFields.Size = new System.Drawing.Size(382, 48);
             this.pnlHeadFields.TabIndex = 4;
+            // 
+            // ccbEstados
+            // 
+            this.ccbEstados.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ccbEstados.FormattingEnabled = true;
+            this.ccbEstados.Location = new System.Drawing.Point(11, 22);
+            this.ccbEstados.Name = "ccbEstados";
+            this.ccbEstados.Size = new System.Drawing.Size(200, 21);
+            this.ccbEstados.TabIndex = 10;
+            this.ccbEstados.CheckStateChanged += new System.EventHandler(this.ccbEstados_CheckStateChanged);
             // 
             // txtCurrentPlaza
             // 
@@ -229,6 +239,38 @@
             this.dgPlazas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlazas_CellClick);
             this.dgPlazas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPlazas_DataBindingComplete);
             // 
+            // Plaza
+            // 
+            this.Plaza.DataPropertyName = "Nombre";
+            this.Plaza.Frozen = true;
+            this.Plaza.HeaderText = "Plaza";
+            this.Plaza.Name = "Plaza";
+            this.Plaza.ReadOnly = true;
+            // 
+            // Editar
+            // 
+            this.Editar.DataPropertyName = "Editar";
+            this.Editar.HeaderText = "";
+            this.Editar.Name = "Editar";
+            this.Editar.ReadOnly = true;
+            this.Editar.Text = "Editar";
+            // 
+            // Delete
+            // 
+            this.Delete.DataPropertyName = "Eliminar";
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Eliminar";
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
             // pnlMap
             // 
             this.pnlMap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -325,48 +367,6 @@
             this.sfmMainMap.ZoomLevel = 1D;
             this.sfmMainMap.SelectedRecordsChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_SelectedRecordsChanged);
             this.sfmMainMap.OnControlKeyChange += new System.EventHandler(this.sfmMainMap_OnControlKeyChange);
-            // 
-            // ccbEstados
-            // 
-            this.ccbEstados.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ccbEstados.FormattingEnabled = true;
-            this.ccbEstados.Location = new System.Drawing.Point(11, 22);
-            this.ccbEstados.Name = "ccbEstados";
-            this.ccbEstados.Size = new System.Drawing.Size(200, 21);
-            this.ccbEstados.TabIndex = 10;
-            this.ccbEstados.CheckStateChanged += new System.EventHandler(this.ccbEstados_CheckStateChanged);
-            // 
-            // Plaza
-            // 
-            this.Plaza.DataPropertyName = "Nombre";
-            this.Plaza.Frozen = true;
-            this.Plaza.HeaderText = "Plaza";
-            this.Plaza.Name = "Plaza";
-            this.Plaza.ReadOnly = true;
-            // 
-            // Editar
-            // 
-            this.Editar.DataPropertyName = "Editar";
-            this.Editar.HeaderText = "";
-            this.Editar.Name = "Editar";
-            this.Editar.ReadOnly = true;
-            this.Editar.Text = "Editar";
-            // 
-            // Delete
-            // 
-            this.Delete.DataPropertyName = "Eliminar";
-            this.Delete.HeaderText = "";
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Text = "Eliminar";
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
             // 
             // PlazaAdmin
             // 
