@@ -506,6 +506,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             // 
             this.sfmMainMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sfmMainMap.CentrePoint2D = ((EGIS.ShapeFileLib.PointD)(resources.GetObject("sfmMainMap.CentrePoint2D")));
+            this.sfmMainMap.CtrlDown = false;
             this.sfmMainMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sfmMainMap.Location = new System.Drawing.Point(0, 0);
             this.sfmMainMap.MapBackColor = System.Drawing.SystemColors.Control;

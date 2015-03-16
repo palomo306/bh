@@ -70,8 +70,13 @@
     <Compile Include="Clases\Context.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Clases\Controles\CheckComboBox .cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Clases\Controles\CheckComboBoxItem.cs" />
     <Compile Include="Clases\MunicipioCustomRenderSettings.cs" />
     <Compile Include="Clases\ColoniaCustomRenderSettings.cs" />
+    <Compile Include="Clases\PlazaCustomRenderSettings .cs" />
     <Compile Include="Clases\ZonaSubzonasCustomRenderSettings.cs" />
     <Compile Include="Clases\ZonaCustomRenderSettings.cs" />
     <Compile Include="Login\Login.cs">
@@ -103,6 +108,18 @@
     </Compile>
     <Compile Include="Modules\Generic.Designer.cs">
       <DependentUpon>Generic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Plaza\Modal\CreatePlaza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Plaza\Modal\CreatePlaza.Designer.cs">
+      <DependentUpon>CreatePlaza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Plaza\PlazaAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Plaza\PlazaAdmin.Designer.cs">
+      <DependentUpon>PlazaAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Zone\Modal\CreateZone.cs">
       <SubType>Form</SubType>
@@ -139,6 +156,12 @@
     <EmbeddedResource Include="Modules\Generic.resx">
       <DependentUpon>Generic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Plaza\Modal\CreatePlaza.resx">
+      <DependentUpon>CreatePlaza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Plaza\PlazaAdmin.resx">
+      <DependentUpon>PlazaAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Zone\Modal\CreateZone.resx">
       <DependentUpon>CreateZone.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +181,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Modules\Maps\Estados\30\Calles.dbf" />
+    <None Include="Modules\Maps\Estados\30\Calles.prj" />
+    <None Include="Modules\Maps\Estados\30\Calles.shp" />
+    <None Include="Modules\Maps\Estados\30\Calles.shx" />
+    <None Include="Modules\Maps\Estados\30\Carreteras.dbf" />
+    <None Include="Modules\Maps\Estados\30\Carreteras.prj" />
+    <None Include="Modules\Maps\Estados\30\Carreteras.shp" />
+    <None Include="Modules\Maps\Estados\30\Carreteras.shx" />
+    <None Include="Modules\Maps\Estados\30\Estado.dbf" />
+    <None Include="Modules\Maps\Estados\30\Estado.prj" />
+    <None Include="Modules\Maps\Estados\30\Estado.shp" />
+    <None Include="Modules\Maps\Estados\30\Estado.shx" />
+    <None Include="Modules\Maps\Estados\30\Municipios.dbf" />
+    <None Include="Modules\Maps\Estados\30\Municipios.prj" />
+    <None Include="Modules\Maps\Estados\30\Municipios.shp" />
+    <None Include="Modules\Maps\Estados\30\Municipios.shx" />
+    <None Include="Modules\Maps\Nacional\national_estatal.dbf" />
+    <None Include="Modules\Maps\Nacional\national_estatal.prj" />
+    <None Include="Modules\Maps\Nacional\national_estatal.shp" />
+    <None Include="Modules\Maps\Nacional\national_estatal.shx" />
     <None Include="Modules\Zone\Maps\Estados\30\Calles.dbf" />
     <None Include="Modules\Zone\Maps\Estados\30\Calles.prj" />
     <None Include="Modules\Zone\Maps\Estados\30\Calles.shp" />

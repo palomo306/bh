@@ -27,6 +27,10 @@ namespace BHermanos.Zonificacion.BusinessEntities
 
         public List<Partida> ListaPartidas { get; set; }
 
+
+        /* Para el manejo de estado / municipio */
+        public int EstadoId { get; set; }
+        public int MunicipioId { get; set; }
         #endregion
 
         #region Métodos de Conversion
@@ -51,7 +55,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
         {
             try
             {
-                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @",""<ListaGrupoRubros>k__BackingField"":" + GetListaGrupoRubrosToJson() + @"}";
+                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<ListaGrupoRubros>k__BackingField"":" + GetListaGrupoRubrosToJson() + @"}";
                 return jSon;
             }
             catch (Exception ex)

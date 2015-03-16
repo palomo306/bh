@@ -12,6 +12,7 @@ namespace RegionDemo.Clases
     {
         #region Propiedades
         private List<System.Drawing.Color> colorList;
+        private List<int> recordsPen;
         RenderSettings defaultSettings;        
         #endregion
 
@@ -24,6 +25,7 @@ namespace RegionDemo.Clases
         private void BuildColorList(RenderSettings defaultSettings, int municipioId)
         {
             colorList = new List<System.Drawing.Color>();
+            recordsPen = new List<int>();
             int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
             for (int n = 0; n < numRecords; ++n)
             {
@@ -31,6 +33,7 @@ namespace RegionDemo.Clases
                 if (municipioId == municipio)
                 {
                     colorList.Add(Color.DarkRed);
+                    recordsPen.Add(n);
                 }
                 else
                     colorList.Add(defaultSettings.FillColor);
@@ -89,6 +92,13 @@ namespace RegionDemo.Clases
         public Color GetRecordSelectColor(int recordNumber)
         {
             return defaultSettings.SelectFillColor;
+        }
+
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            if (recordsPen.Where(r => r == recordNumber).Any())
+                return 2;
+            return defaultSettings.PenWidthScale;
         }
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using BE = BHermanos.Zonificacion.BusinessEntities;
+﻿
+using BE = BHermanos.Zonificacion.BusinessEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,9 +68,10 @@ namespace RegionDemo.Clases
             get { return false; }
         }
 
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            return defaultSettings.PenWidthScale;
+        }
         #endregion
-
-
-     
     }
 }
