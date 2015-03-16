@@ -41,6 +41,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     Colonia colonia = new Colonia();
                     colonia.Id = (double)registro.IdColonia;
                     colonia.Nombre = registro.Nombre;
+                    colonia.Tipo = (byte)registro.IdTipo;
                     colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(registro);
                     colonia.ListaPartidas = new List<Partida>();
                     listacolonias.Add(colonia);
@@ -83,6 +84,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     Colonia colonia = new Colonia();
                     colonia.Id = (double)registro.IdColonia;
                     colonia.Nombre = registro.Nombre;
+                    colonia.Tipo = (byte)registro.IdTipo;
                     colonia.ListaGrupoRubros = new List<GrupoRubros>();
                     colonia.ListaPartidas = this.ObtenerListaDePartidasDeColonia(3,estadoId, municipioId, zonaId, coloniaId, registro, zonTab);
                     listacolonias.Add(colonia);
