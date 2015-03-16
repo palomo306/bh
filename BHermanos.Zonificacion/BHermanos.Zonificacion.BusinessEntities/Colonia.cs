@@ -21,7 +21,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
         public double Id { get; set; }
         public string Nombre { get; set; }
 
-        public short Tipo { get; set; }
+        public byte Tipo { get; set; }
 
         public List<GrupoRubros> ListaGrupoRubros { get; set; }
 
