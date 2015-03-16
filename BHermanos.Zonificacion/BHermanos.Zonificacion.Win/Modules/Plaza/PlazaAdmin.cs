@@ -327,6 +327,62 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         }
 
 
+        private void ZoomToPlaza(List<BE.Estado> estados)
+        {
+            int shapeCount = sfmMainMap.ShapeFileCount;
+            if (shapeCount > 1)
+            {
+                bool isFirstShape = true;
+                //Se recorren los datos
+                int layerIndex = 2;
+                while (layerIndex < shapeCount)
+                {
+                    EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
+                    string[] rEdos = sf.GetRecords(1);
+                    string[] rMun = sf.GetRecords(2);
+                    string[] rCols = sf.GetRecords(7);
+                    string[] rLocs = sf.GetRecords(3);
+                    string[] rTipo = sf.GetRecords(4);
+                    string[] rLocs2 = sf.GetRecords(8);
+                    for (int i = 0; i < sf.RecordCount; i++)
+                    {
+                        //Se saca el Id de la colonia
+                        string colString = rCols[i].Replace("|", "").Trim();
+                        if (colString == "NA")
+                        {
+                            colString = rTipo[i].Trim() + rEdos[i].Trim().PadLeft(2, '0') + rMun[i].Trim().PadLeft(3, '0') + rLocs[i].Trim().PadLeft(4, '0') + rLocs2[i].Trim().PadLeft(5, '0');
+                        }
+                        else
+                        {
+                            colString = rTipo[i].Trim() + colString;
+                        }
+                        //Se revisa si la colonia existe en la plaza
+                        BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
+                        if (currEstado != null)
+                        {
+                            BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
+                            if (currMuni != null)
+                            {
+                                BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                                if (currCol != null)
+                                {
+
+                                    ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                                    sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                                    isFirstShape = false;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    layerIndex += 5;
+                }
+                sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
+            }
+        }
+
+
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
             LoadMap(selEdo.Id.ToString(), "Estado.shp", selEdo.Nombre, "NombreEsta", false, false, 0);
@@ -443,11 +499,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Limpieza y Seleccion de Datos
         private void ClearForm()
         {
-            IsUpdate = false;
-            foreach (CheckComboBoxItem item in ccbEstados.Items)
-            {
-                item.CheckState = false;
-            }
+            IsUpdate = false;            
             btnSaveZone.Text = "Guardar plaza";
             this.CurrentPlaza = new BE.Plaza();
             txtCurrentPlaza.Text = "Nueva plaza";
@@ -455,7 +507,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ClearSelections();
         }
 
-        private void SelectEdoItem(BE.Estado selEdo)
+        private void SelectEdoItem(BE.Estado selEdo,bool updateMap)
         {
             foreach (CheckComboBoxItem item in ccbEstados.Items)
             {
@@ -463,7 +515,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 if (selEdo.Id == edo.Id)
                 {
                     item.CheckState = true;
-                    ccbEstados_CheckStateChanged(item, new EventArgs());
+                    if (updateMap)
+                        ccbEstados_CheckStateChanged(item, new EventArgs());
                 }
             }
         }
@@ -481,7 +534,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
             foreach (BE.Estado edo in allEdos)
             {
-                SelectEdoItem(edo);
+                SelectEdoItem(edo,true);
             }
             //if (allEdos.Count > 0)
             //    sfmMainMap.ZoomLevel = 1750;
@@ -564,7 +617,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {                
-                int idPlaza = Convert.ToInt32(dgPlazas.Rows[e.RowIndex].Cells[3].Value);
+                int idPlaza = Convert.ToInt32(dgPlazas.Rows[e.RowIndex].Cells[4].Value);
                 BE.Plaza clickPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (clickPlaza != null)
                 {
@@ -575,7 +628,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                         //Se seleccionan los estados
                         foreach (BE.Estado edo in clickPlaza.ListaEstados)
                         {
-                            SelectEdoItem(edo);
+                            SelectEdoItem(edo,true);
                         }
                         //Se seleccionan las colonias de la plaza
                         SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
@@ -592,6 +645,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                             DeletePlaza();
                         }
                     }
+                    else if (e.ColumnIndex == 3)
+                    {
+                        ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                    }
                 }
             }
         }
@@ -600,7 +657,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             foreach (DataGridViewRow fila in dgPlazas.Rows)
             {
-                int idPlaza = Convert.ToInt32(fila.Cells[3].Value);
+                int idPlaza = Convert.ToInt32(fila.Cells[4].Value);
                 BE.Plaza rowPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (rowPlaza != null)
                 {

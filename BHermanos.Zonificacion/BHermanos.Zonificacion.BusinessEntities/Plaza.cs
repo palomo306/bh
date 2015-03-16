@@ -50,6 +50,14 @@ namespace BHermanos.Zonificacion.BusinessEntities
                 return "Eliminar";
             }
         }
+
+        public string Ver
+        {
+            get
+            {
+                return "Ver";
+            }
+        }
         #endregion
 
         #region Métodos de Conversion
