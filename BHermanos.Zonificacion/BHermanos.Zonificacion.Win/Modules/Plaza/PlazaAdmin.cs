@@ -497,10 +497,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ClearForm();
             LoadEstados();
             LoadPlazas();
-            LoadMainMap();            
-            LoadEstadosMaps();
-            LoadPlazaRenderSetting();
+            LoadMainMap();
             IsFirsTime = false;
+            LoadEstadosMaps();
+            LoadPlazaRenderSetting();            
         }
         #endregion
 
@@ -641,11 +641,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     UpdatePlaza();
                 }
             }
+            sfmMainMap.CtrlDown = false;
         }        
 
         private void btnCanelZone_Click(object sender, EventArgs e)
         {
             ClearForm();
+            sfmMainMap.CtrlDown = false;
         }
         #endregion
 
