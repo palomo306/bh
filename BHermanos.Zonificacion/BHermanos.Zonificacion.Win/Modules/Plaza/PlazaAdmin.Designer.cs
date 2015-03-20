@@ -31,13 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlazaAdmin));
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlHeadFields = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbMunicipio = new System.Windows.Forms.ComboBox();
             this.ccbEstados = new BHermanos.Zonificacion.Win.Clases.Controles.CheckComboBox();
             this.txtCurrentPlaza = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtCurrentSubzona = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCurrentZona = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.splitterTreeView = new NJFLib.Controls.CollapsibleSplitter();
             this.pnlInfo = new System.Windows.Forms.Panel();
@@ -82,19 +80,35 @@
             // 
             // pnlHeadFields
             // 
+            this.pnlHeadFields.Controls.Add(this.label3);
+            this.pnlHeadFields.Controls.Add(this.cmbMunicipio);
             this.pnlHeadFields.Controls.Add(this.ccbEstados);
             this.pnlHeadFields.Controls.Add(this.txtCurrentPlaza);
             this.pnlHeadFields.Controls.Add(this.label2);
-            this.pnlHeadFields.Controls.Add(this.txtCurrentSubzona);
-            this.pnlHeadFields.Controls.Add(this.label4);
-            this.pnlHeadFields.Controls.Add(this.txtCurrentZona);
-            this.pnlHeadFields.Controls.Add(this.label3);
             this.pnlHeadFields.Controls.Add(this.label1);
             this.pnlHeadFields.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlHeadFields.Location = new System.Drawing.Point(428, 0);
+            this.pnlHeadFields.Location = new System.Drawing.Point(86, 0);
             this.pnlHeadFields.Name = "pnlHeadFields";
-            this.pnlHeadFields.Size = new System.Drawing.Size(382, 48);
+            this.pnlHeadFields.Size = new System.Drawing.Size(724, 48);
             this.pnlHeadFields.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(214, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Municipio:";
+            // 
+            // cmbMunicipio
+            // 
+            this.cmbMunicipio.FormattingEnabled = true;
+            this.cmbMunicipio.Location = new System.Drawing.Point(217, 22);
+            this.cmbMunicipio.Name = "cmbMunicipio";
+            this.cmbMunicipio.Size = new System.Drawing.Size(345, 21);
+            this.cmbMunicipio.TabIndex = 11;
+            this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             // 
             // ccbEstados
             // 
@@ -108,7 +122,7 @@
             // 
             // txtCurrentPlaza
             // 
-            this.txtCurrentPlaza.Location = new System.Drawing.Point(223, 22);
+            this.txtCurrentPlaza.Location = new System.Drawing.Point(568, 22);
             this.txtCurrentPlaza.Name = "txtCurrentPlaza";
             this.txtCurrentPlaza.ReadOnly = true;
             this.txtCurrentPlaza.Size = new System.Drawing.Size(150, 20);
@@ -117,45 +131,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(220, 6);
+            this.label2.Location = new System.Drawing.Point(565, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Plaza:";
-            // 
-            // txtCurrentSubzona
-            // 
-            this.txtCurrentSubzona.Location = new System.Drawing.Point(583, 22);
-            this.txtCurrentSubzona.Name = "txtCurrentSubzona";
-            this.txtCurrentSubzona.ReadOnly = true;
-            this.txtCurrentSubzona.Size = new System.Drawing.Size(150, 20);
-            this.txtCurrentSubzona.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(580, 6);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Subzona:";
-            // 
-            // txtCurrentZona
-            // 
-            this.txtCurrentZona.Location = new System.Drawing.Point(427, 22);
-            this.txtCurrentZona.Name = "txtCurrentZona";
-            this.txtCurrentZona.ReadOnly = true;
-            this.txtCurrentZona.Size = new System.Drawing.Size(150, 20);
-            this.txtCurrentZona.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(424, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Zona:";
             // 
             // label1
             // 
@@ -376,6 +356,7 @@
             this.sfmMainMap.TabIndex = 0;
             this.sfmMainMap.UseMercatorProjection = false;
             this.sfmMainMap.ZoomLevel = 1D;
+            this.sfmMainMap.ZoomLevelChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_ZoomLevelChanged);
             this.sfmMainMap.SelectedRecordsChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_SelectedRecordsChanged);
             this.sfmMainMap.OnControlKeyChange += new System.EventHandler(this.sfmMainMap_OnControlKeyChange);
             // 
@@ -411,10 +392,6 @@
 
         private System.Windows.Forms.Panel pnlHead;
         private System.Windows.Forms.Panel pnlHeadFields;
-        private System.Windows.Forms.TextBox txtCurrentSubzona;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCurrentZona;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private NJFLib.Controls.CollapsibleSplitter splitterTreeView;
         private System.Windows.Forms.Panel pnlInfo;
@@ -437,6 +414,8 @@
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.DataGridViewButtonColumn Ver;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbMunicipio;
 
     }
 }

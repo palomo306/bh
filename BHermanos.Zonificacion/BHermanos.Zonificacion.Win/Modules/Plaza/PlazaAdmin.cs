@@ -28,6 +28,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private string LocalPath { get; set; }
         private List<BE.Plaza> ListPlazas { get; set; }
         private BE.Plaza CurrentPlaza { get; set; }
+        private List<BE.Municipio> ListMunicipios { get; set; }
         private bool IsUpdate;
         private bool IsFirsTime;
         private bool updateZoomLevel;
@@ -92,12 +93,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 }
                 else
                 {
-                    MessageBox.Show("Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ha ocurrido un error al extraer las plazas [" + objResponse.Mensaje + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al extraer las zonas [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ha ocurrido un error al extraer las plazas [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -209,6 +210,55 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             catch (Exception ex)
             {
                 MessageBox.Show("Ha ocurrido un error al guardar la plaza [" + ex.Message + "].", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadMunicipios(BE.Estado estdo)
+        {
+            try
+            {
+                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                url += "Municipio/GetMunicipio/" + estdo.Id.ToString() + "?type=json";
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Timeout = 20000;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                MunicipioModel objResponse = JsonSerializer.Parse<MunicipioModel>(streamReader.ReadToEnd());
+                if (objResponse.Succes)
+                {
+                    List<BE.Municipio> munEdo = objResponse.ListaMunicipios.ToList();
+                    munEdo.ForEach(mun => mun.ParentEstado = estdo);
+                    this.ListMunicipios = this.ListMunicipios.Concat(munEdo).ToList();
+                    this.cmbMunicipio.DataSource = this.ListMunicipios;
+                    this.cmbMunicipio.DisplayMember = "NombreWithEstado";
+                    this.cmbMunicipio.SelectedItem = null;
+                    this.cmbMunicipio.Text = "--Seleccione un municipio--";
+                }
+                else
+                {
+                    MessageBox.Show("Ha ocurrido un error al extraer los datos de los municipios [" + objResponse.Mensaje + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al extraer los datos de los municipios [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RemoveMunicipios(BE.Estado estdo)
+        {
+            try
+            {
+                this.ListMunicipios.RemoveAll(mun => mun.ParentEstado == estdo);
+                this.cmbMunicipio.DataSource = this.ListMunicipios;
+                this.cmbMunicipio.DisplayMember = "NombreWithEstado";
+                this.cmbMunicipio.SelectedItem = null;
+                this.cmbMunicipio.Text = "--Seleccione un municipio--";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al extraer los datos de los municipios [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -326,7 +376,6 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
         }
 
-
         private void ZoomToPlaza(List<BE.Estado> estados)
         {
             int shapeCount = sfmMainMap.ShapeFileCount;
@@ -382,6 +431,33 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
         }
 
+        private void ZoomToMunicipio(BE.Municipio municipio)
+        {
+            int shapeCount = sfmMainMap.ShapeFileCount;
+            if (shapeCount > 1)
+            {
+                //Se recorren los datos
+                int layerIndex = 5;
+                while (layerIndex < shapeCount)
+                {
+                    EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
+                    string[] rEdos = sf.GetRecords(1);
+                    string[] rMun = sf.GetRecords(2);
+
+                    for (int i = 0; i < sf.RecordCount; i++)
+                    {
+                        if (municipio.ParentEstado.Id == Convert.ToInt32(rEdos[i]) && municipio.Id == Convert.ToInt32(rMun[i]))
+                        {
+                            ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                            sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                            break;
+                        }
+                    }
+                    layerIndex += 5;
+                }
+                sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
+            }
+        }
 
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
@@ -547,6 +623,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             InitializeComponent();
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ListMunicipios = new List<BE.Municipio>();
             ClearForm();
             LoadEstados();
             LoadPlazas();
@@ -568,10 +645,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     BE.Estado selEdo = (BE.Estado)item.Tag;
                     if (item.CheckState)
                     {
+                        LoadMunicipios(selEdo);
                         LoadMapsByEdo(selEdo);
                     }
                     else
                     {
+                        RemoveMunicipios(selEdo);
                         RemoveMapsByEdo(selEdo);
                     }
                 }
@@ -670,7 +749,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Actualización de la Información
         private void btnSaveZone_Click(object sender, EventArgs e)
         {
-            if (this.CurrentPlaza.ListaEstados > 0)
+            if (this.CurrentPlaza.ListaEstados.Count > 0)
             {
                 if (!IsUpdate)
                 {
@@ -795,5 +874,16 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
         }
         #endregion        
+
+        #region Seleccion del Municipio
+        private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbMunicipio.SelectedItem != null)
+            {
+                BE.Municipio selMunicipio = (BE.Municipio)cmbMunicipio.SelectedItem;
+                ZoomToMunicipio(selMunicipio);
+            }
+        }
+        #endregion
     }
 }

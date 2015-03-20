@@ -11,6 +11,20 @@ namespace BHermanos.Zonificacion.BusinessEntities
     {
         #region Propiedades
         public List<Colonia> ListaColonias { get; set; }
+        public Estado ParentEstado { get; set; }
+        #endregion
+
+        #region Propiedades Dinamicas
+        public string NombreWithEstado
+        {
+            get
+            {
+                string result=this.Nombre;
+                if (ParentEstado != null)
+                    result = ParentEstado.Nombre + " - " + result;
+                return result;
+            }
+        }
         #endregion
 
         #region Constructor
