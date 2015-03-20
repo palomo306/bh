@@ -87,9 +87,9 @@
             this.pnlHeadFields.Controls.Add(this.label2);
             this.pnlHeadFields.Controls.Add(this.label1);
             this.pnlHeadFields.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlHeadFields.Location = new System.Drawing.Point(86, 0);
+            this.pnlHeadFields.Location = new System.Drawing.Point(99, 0);
             this.pnlHeadFields.Name = "pnlHeadFields";
-            this.pnlHeadFields.Size = new System.Drawing.Size(724, 48);
+            this.pnlHeadFields.Size = new System.Drawing.Size(711, 48);
             this.pnlHeadFields.TabIndex = 4;
             // 
             // label3
@@ -106,7 +106,7 @@
             this.cmbMunicipio.FormattingEnabled = true;
             this.cmbMunicipio.Location = new System.Drawing.Point(217, 22);
             this.cmbMunicipio.Name = "cmbMunicipio";
-            this.cmbMunicipio.Size = new System.Drawing.Size(345, 21);
+            this.cmbMunicipio.Size = new System.Drawing.Size(330, 21);
             this.cmbMunicipio.TabIndex = 11;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             // 
@@ -122,7 +122,7 @@
             // 
             // txtCurrentPlaza
             // 
-            this.txtCurrentPlaza.Location = new System.Drawing.Point(568, 22);
+            this.txtCurrentPlaza.Location = new System.Drawing.Point(553, 22);
             this.txtCurrentPlaza.Name = "txtCurrentPlaza";
             this.txtCurrentPlaza.ReadOnly = true;
             this.txtCurrentPlaza.Size = new System.Drawing.Size(150, 20);
@@ -131,7 +131,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(565, 6);
+            this.label2.Location = new System.Drawing.Point(550, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 8;
