@@ -443,12 +443,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
                     string[] rEdos = sf.GetRecords(1);
                     string[] rMun = sf.GetRecords(2);
-
-                    for (int i = 0; i < sf.RecordCount; i++)
+                    for (int j = 0; j < sf.RecordCount; j++)
                     {
-                        if (municipio.ParentEstado.Id == Convert.ToInt32(rEdos[i]) && municipio.Id == Convert.ToInt32(rMun[i]))
+                        if (municipio.ParentEstado.Id == Convert.ToInt32(rEdos[j]) && municipio.Id == Convert.ToInt32(rMun[j]))
                         {
-                            ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                            ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(j);
                             sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
                             break;
                         }
