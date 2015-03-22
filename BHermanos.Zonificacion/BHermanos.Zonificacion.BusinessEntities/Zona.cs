@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 namespace BHermanos.Zonificacion.BusinessEntities
 {
     [Serializable]
-    public class Zona : Base,ICloneable
+    public class Zona : Base, ICloneable
     {
 
-         #region Constructores
+        #region Constructores
         public Zona()
         {
-            
+
         }
         #endregion
 
         #region Propiedades
-        public int EstadoId { set; get; }
-        public int MunicipioId { set; get; }
+        public int PlazaId { get; set; }
         public string Color { set; get; }
         public string Colonias { get; set; }
         public List<Zona> ListaSubzonas { set; get; }
@@ -84,7 +83,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
                                         {
                                             rb.Valor += rbInZona.Valor;
                                         }
-                                    }                                    
+                                    }
                                 }
                             }
                         }
@@ -237,9 +236,9 @@ namespace BHermanos.Zonificacion.BusinessEntities
             {
                 string jSon;
                 if (includeCol)
-                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<EstadoId>k__BackingField"":" + EstadoId.ToString() + @",""<MunicipioId>k__BackingField"":" + MunicipioId.ToString() + @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":" + ListaColoniasToJSon() + @",""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
+                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() +  @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":" + ListaColoniasToJSon() + @",""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
                 else
-                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<EstadoId>k__BackingField"":" + EstadoId.ToString() + @",""<MunicipioId>k__BackingField"":" + MunicipioId.ToString() + @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":[],""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
+                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() +  @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":[],""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
                 return jSon;
             }
             catch (Exception ex)

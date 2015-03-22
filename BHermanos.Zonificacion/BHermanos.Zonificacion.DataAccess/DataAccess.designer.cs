@@ -30,27 +30,6 @@ namespace BHermanos.Zonificacion.DataAccess
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertZonAplicacione(ZonAplicacione instance);
-    partial void UpdateZonAplicacione(ZonAplicacione instance);
-    partial void DeleteZonAplicacione(ZonAplicacione instance);
-    partial void InsertZonGrupoRubro(ZonGrupoRubro instance);
-    partial void UpdateZonGrupoRubro(ZonGrupoRubro instance);
-    partial void DeleteZonGrupoRubro(ZonGrupoRubro instance);
-    partial void InsertZonMenus(ZonMenus instance);
-    partial void UpdateZonMenus(ZonMenus instance);
-    partial void DeleteZonMenus(ZonMenus instance);
-    partial void InsertZonPerfile(ZonPerfile instance);
-    partial void UpdateZonPerfile(ZonPerfile instance);
-    partial void DeleteZonPerfile(ZonPerfile instance);
-    partial void InsertZonPermiso(ZonPermiso instance);
-    partial void UpdateZonPermiso(ZonPermiso instance);
-    partial void DeleteZonPermiso(ZonPermiso instance);
-    partial void InsertZonRole(ZonRole instance);
-    partial void UpdateZonRole(ZonRole instance);
-    partial void DeleteZonRole(ZonRole instance);
-    partial void InsertZonUsuario(ZonUsuario instance);
-    partial void UpdateZonUsuario(ZonUsuario instance);
-    partial void DeleteZonUsuario(ZonUsuario instance);
     partial void InsertZonTab(ZonTab instance);
     partial void UpdateZonTab(ZonTab instance);
     partial void DeleteZonTab(ZonTab instance);
@@ -63,6 +42,27 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void InsertZonRubro(ZonRubro instance);
     partial void UpdateZonRubro(ZonRubro instance);
     partial void DeleteZonRubro(ZonRubro instance);
+    partial void InsertZonGrupoRubro(ZonGrupoRubro instance);
+    partial void UpdateZonGrupoRubro(ZonGrupoRubro instance);
+    partial void DeleteZonGrupoRubro(ZonGrupoRubro instance);
+    partial void InsertZonUsuario(ZonUsuario instance);
+    partial void UpdateZonUsuario(ZonUsuario instance);
+    partial void DeleteZonUsuario(ZonUsuario instance);
+    partial void InsertZonRole(ZonRole instance);
+    partial void UpdateZonRole(ZonRole instance);
+    partial void DeleteZonRole(ZonRole instance);
+    partial void InsertZonPermiso(ZonPermiso instance);
+    partial void UpdateZonPermiso(ZonPermiso instance);
+    partial void DeleteZonPermiso(ZonPermiso instance);
+    partial void InsertZonPerfile(ZonPerfile instance);
+    partial void UpdateZonPerfile(ZonPerfile instance);
+    partial void DeleteZonPerfile(ZonPerfile instance);
+    partial void InsertZonAplicacione(ZonAplicacione instance);
+    partial void UpdateZonAplicacione(ZonAplicacione instance);
+    partial void DeleteZonAplicacione(ZonAplicacione instance);
+    partial void InsertZonMenus(ZonMenus instance);
+    partial void UpdateZonMenus(ZonMenus instance);
+    partial void DeleteZonMenus(ZonMenus instance);
     #endregion
 		
 		public DataAccessDataContext() : 
@@ -93,62 +93,6 @@ namespace BHermanos.Zonificacion.DataAccess
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<ZonAplicacione> ZonAplicaciones
-		{
-			get
-			{
-				return this.GetTable<ZonAplicacione>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonGrupoRubro> ZonGrupoRubros
-		{
-			get
-			{
-				return this.GetTable<ZonGrupoRubro>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonMenus> ZonMenus
-		{
-			get
-			{
-				return this.GetTable<ZonMenus>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonPerfile> ZonPerfiles
-		{
-			get
-			{
-				return this.GetTable<ZonPerfile>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonPermiso> ZonPermisos
-		{
-			get
-			{
-				return this.GetTable<ZonPermiso>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonRole> ZonRoles
-		{
-			get
-			{
-				return this.GetTable<ZonRole>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonUsuario> ZonUsuarios
-		{
-			get
-			{
-				return this.GetTable<ZonUsuario>();
-			}
 		}
 		
 		public System.Data.Linq.Table<ZonTab> ZonTabs
@@ -183,108 +127,94 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConEstados")]
-		public ISingleResult<spConEstadosResult> spConEstados()
+		public System.Data.Linq.Table<ZonGrupoRubro> ZonGrupoRubros
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<spConEstadosResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonGrupoRubro>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConGrupoRubros")]
-		public ISingleResult<spConGrupoRubrosResult> spConGrupoRubros()
+		public System.Data.Linq.Table<ZonUsuario> ZonUsuarios
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<spConGrupoRubrosResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonUsuario>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConMunicipios")]
-		public ISingleResult<spConMunicipiosResult> spConMunicipios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId)
+		public System.Data.Linq.Table<ZonRole> ZonRoles
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId);
-			return ((ISingleResult<spConMunicipiosResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonRole>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConZonas")]
-		public ISingleResult<spConZonasResult> spConZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		public System.Data.Linq.Table<ZonPermiso> ZonPermisos
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piEstadoId, piMunicipioId, piZonaId);
-			return ((ISingleResult<spConZonasResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonPermiso>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelSubZonas")]
-		public int spDelSubZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		public System.Data.Linq.Table<ZonPerfile> ZonPerfiles
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, piZonaId);
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonPerfile>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelZonas")]
-		public int spDelZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		public System.Data.Linq.Table<ZonAplicacione> ZonAplicaciones
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, piZonaId);
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonAplicacione>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsColoniasXZona")]
-		public int spInsColoniasXZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piOrden)
+		public System.Data.Linq.Table<ZonMenus> ZonMenus
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piColoniaId, piZonaId, piMunicipioId, piEstadoId, piOrden);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsSubZonas")]
-		public int spInsSubZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, pcNombre, pcColor, pcColonias, piZonaId);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsZonas")]
-		public int spInsZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, pcNombre, pcColor, pcColonias);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spUpdSubZonas")]
-		public int spUpdSubZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, pcNombre, pcColor, pcColonias, piZonaId);
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<ZonMenus>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spUpdZona")]
-		public int spUpdZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		public int spUpdZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId, piMunicipioId, pcNombre, pcColor, pcColonias, piZonaId);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId, pcNombre, pcColor, pcColonias);
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColoniasXZona")]
-		public ISingleResult<spConColoniasXZonaResult> spConColoniasXZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipioId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spUpdSubZona")]
+		public int spUpdSubZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piEstadoId, piMunicipioId, piZonaId);
-			return ((ISingleResult<spConColoniasXZonaResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColonias")]
-		public ISingleResult<spConColoniasResult> spConColonias([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVistaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piMunicipio, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVistaId, piEstadoId, piMunicipio, piColoniaId);
-			return ((ISingleResult<spConColoniasResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConRubrosXGrupo")]
-		public ISingleResult<spConRubrosXGrupoResult> spConRubrosXGrupo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piGrupoId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piGrupoId);
-			return ((ISingleResult<spConRubrosXGrupoResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId, pcNombre, pcColor, pcColonias);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spUpdPlaza")]
 		public int spUpdPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, pcNombre, pcColor, pcColonias);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsZona")]
+		public int spInsZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, pcNombre, pcColor, pcColonias);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsSubZona")]
+		public int spInsSubZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string pcNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(10)")] string pcColor, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pcColonias)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId, pcNombre, pcColor, pcColonias);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -295,6 +225,34 @@ namespace BHermanos.Zonificacion.DataAccess
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsColoniasXZona")]
+		public int spInsColoniasXZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piOrden)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId, piColoniaId, piOrden);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spInsColoniasXPlaza")]
+		public int spInsColoniasXPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piTipo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piOrden)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piColoniaId, piTipo, piOrden);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelZona")]
+		public int spDelZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelSubZona")]
+		public int spDelSubZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piPlazaId, piZonaId);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spDelPlaza")]
 		public int spDelPlaza([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId)
 		{
@@ -302,1226 +260,60 @@ namespace BHermanos.Zonificacion.DataAccess
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConZonas")]
+		public ISingleResult<spConZonasResult> spConZonas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piPlazaId, piZonaId);
+			return ((ISingleResult<spConZonasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConRubrosXGrupo")]
+		public ISingleResult<spConRubrosXGrupoResult> spConRubrosXGrupo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piGrupoId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piGrupoId);
+			return ((ISingleResult<spConRubrosXGrupoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConMunicipios")]
+		public ISingleResult<spConMunicipiosResult> spConMunicipios([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piEstadoId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piEstadoId);
+			return ((ISingleResult<spConMunicipiosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConGrupoRubros")]
+		public ISingleResult<spConGrupoRubrosResult> spConGrupoRubros()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<spConGrupoRubrosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConEstados")]
+		public ISingleResult<spConEstadosResult> spConEstados()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<spConEstadosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColoniasXZona")]
+		public ISingleResult<spConColoniasXZonaResult> spConColoniasXZona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piZonaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piPlazaId, piZonaId);
+			return ((ISingleResult<spConColoniasXZonaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColonias")]
+		public ISingleResult<spConColoniasResult> spConColonias([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVistaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVistaId, piPlazaId, piColoniaId);
+			return ((ISingleResult<spConColoniasResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConPlazas")]
 		public ISingleResult<spConPlazasResult> spConPlazas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piPlazaId);
 			return ((ISingleResult<spConPlazasResult>)(result.ReturnValue));
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonAplicaciones")]
-	public partial class ZonAplicacione : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private byte _fiAplicacionId;
-		
-		private string _fcDescripcion;
-		
-		private EntitySet<ZonMenus> _ZonMenus;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiAplicacionIdChanging(byte value);
-    partial void OnfiAplicacionIdChanged();
-    partial void OnfcDescripcionChanging(string value);
-    partial void OnfcDescripcionChanged();
-    #endregion
-		
-		public ZonAplicacione()
-		{
-			this._ZonMenus = new EntitySet<ZonMenus>(new Action<ZonMenus>(this.attach_ZonMenus), new Action<ZonMenus>(this.detach_ZonMenus));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiAplicacionId", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
-		public byte fiAplicacionId
-		{
-			get
-			{
-				return this._fiAplicacionId;
-			}
-			set
-			{
-				if ((this._fiAplicacionId != value))
-				{
-					this.OnfiAplicacionIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiAplicacionId = value;
-					this.SendPropertyChanged("fiAplicacionId");
-					this.OnfiAplicacionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this.OnfcDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._fcDescripcion = value;
-					this.SendPropertyChanged("fcDescripcion");
-					this.OnfcDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonAplicacione_ZonMenus", Storage="_ZonMenus", ThisKey="fiAplicacionId", OtherKey="fiAplicacionId")]
-		public EntitySet<ZonMenus> ZonMenus
-		{
-			get
-			{
-				return this._ZonMenus;
-			}
-			set
-			{
-				this._ZonMenus.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonMenus(ZonMenus entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonAplicacione = this;
-		}
-		
-		private void detach_ZonMenus(ZonMenus entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonAplicacione = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonGrupoRubros")]
-	public partial class ZonGrupoRubro : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiGrupoId;
-		
-		private string _fcNombre;
-		
-		private bool _flEstatus;
-		
-		private EntitySet<ZonRubro> _ZonRubros;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiGrupoIdChanging(int value);
-    partial void OnfiGrupoIdChanged();
-    partial void OnfcNombreChanging(string value);
-    partial void OnfcNombreChanged();
-    partial void OnflEstatusChanging(bool value);
-    partial void OnflEstatusChanged();
-    #endregion
-		
-		public ZonGrupoRubro()
-		{
-			this._ZonRubros = new EntitySet<ZonRubro>(new Action<ZonRubro>(this.attach_ZonRubros), new Action<ZonRubro>(this.detach_ZonRubros));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiGrupoId
-		{
-			get
-			{
-				return this._fiGrupoId;
-			}
-			set
-			{
-				if ((this._fiGrupoId != value))
-				{
-					this.OnfiGrupoIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiGrupoId = value;
-					this.SendPropertyChanged("fiGrupoId");
-					this.OnfiGrupoIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcNombre
-		{
-			get
-			{
-				return this._fcNombre;
-			}
-			set
-			{
-				if ((this._fcNombre != value))
-				{
-					this.OnfcNombreChanging(value);
-					this.SendPropertyChanging();
-					this._fcNombre = value;
-					this.SendPropertyChanged("fcNombre");
-					this.OnfcNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
-		public bool flEstatus
-		{
-			get
-			{
-				return this._flEstatus;
-			}
-			set
-			{
-				if ((this._flEstatus != value))
-				{
-					this.OnflEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._flEstatus = value;
-					this.SendPropertyChanged("flEstatus");
-					this.OnflEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonGrupoRubro_ZonRubro", Storage="_ZonRubros", ThisKey="fiGrupoId", OtherKey="fiGrupoId")]
-		public EntitySet<ZonRubro> ZonRubros
-		{
-			get
-			{
-				return this._ZonRubros;
-			}
-			set
-			{
-				this._ZonRubros.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonRubros(ZonRubro entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonGrupoRubro = this;
-		}
-		
-		private void detach_ZonRubros(ZonRubro entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonGrupoRubro = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonMenus")]
-	public partial class ZonMenus : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiMenuId;
-		
-		private int _fiDependeId;
-		
-		private string _fcDescripcion;
-		
-		private string _fcAplicacion;
-		
-		private byte _fiAplicacionId;
-		
-		private bool _flEstatus;
-		
-		private byte _fiOrden;
-		
-		private EntitySet<ZonPermiso> _ZonPermisos;
-		
-		private EntityRef<ZonAplicacione> _ZonAplicacione;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiMenuIdChanging(int value);
-    partial void OnfiMenuIdChanged();
-    partial void OnfiDependeIdChanging(int value);
-    partial void OnfiDependeIdChanged();
-    partial void OnfcDescripcionChanging(string value);
-    partial void OnfcDescripcionChanged();
-    partial void OnfcAplicacionChanging(string value);
-    partial void OnfcAplicacionChanged();
-    partial void OnfiAplicacionIdChanging(byte value);
-    partial void OnfiAplicacionIdChanged();
-    partial void OnflEstatusChanging(bool value);
-    partial void OnflEstatusChanged();
-    partial void OnfiOrdenChanging(byte value);
-    partial void OnfiOrdenChanged();
-    #endregion
-		
-		public ZonMenus()
-		{
-			this._ZonPermisos = new EntitySet<ZonPermiso>(new Action<ZonPermiso>(this.attach_ZonPermisos), new Action<ZonPermiso>(this.detach_ZonPermisos));
-			this._ZonAplicacione = default(EntityRef<ZonAplicacione>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMenuId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiMenuId
-		{
-			get
-			{
-				return this._fiMenuId;
-			}
-			set
-			{
-				if ((this._fiMenuId != value))
-				{
-					this.OnfiMenuIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiMenuId = value;
-					this.SendPropertyChanged("fiMenuId");
-					this.OnfiMenuIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiDependeId", DbType="Int NOT NULL")]
-		public int fiDependeId
-		{
-			get
-			{
-				return this._fiDependeId;
-			}
-			set
-			{
-				if ((this._fiDependeId != value))
-				{
-					this.OnfiDependeIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiDependeId = value;
-					this.SendPropertyChanged("fiDependeId");
-					this.OnfiDependeIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this.OnfcDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._fcDescripcion = value;
-					this.SendPropertyChanged("fcDescripcion");
-					this.OnfcDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcAplicacion", DbType="VarChar(100)")]
-		public string fcAplicacion
-		{
-			get
-			{
-				return this._fcAplicacion;
-			}
-			set
-			{
-				if ((this._fcAplicacion != value))
-				{
-					this.OnfcAplicacionChanging(value);
-					this.SendPropertyChanging();
-					this._fcAplicacion = value;
-					this.SendPropertyChanged("fcAplicacion");
-					this.OnfcAplicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiAplicacionId", DbType="TinyInt NOT NULL")]
-		public byte fiAplicacionId
-		{
-			get
-			{
-				return this._fiAplicacionId;
-			}
-			set
-			{
-				if ((this._fiAplicacionId != value))
-				{
-					if (this._ZonAplicacione.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiAplicacionIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiAplicacionId = value;
-					this.SendPropertyChanged("fiAplicacionId");
-					this.OnfiAplicacionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
-		public bool flEstatus
-		{
-			get
-			{
-				return this._flEstatus;
-			}
-			set
-			{
-				if ((this._flEstatus != value))
-				{
-					this.OnflEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._flEstatus = value;
-					this.SendPropertyChanged("flEstatus");
-					this.OnflEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="TinyInt NOT NULL")]
-		public byte fiOrden
-		{
-			get
-			{
-				return this._fiOrden;
-			}
-			set
-			{
-				if ((this._fiOrden != value))
-				{
-					this.OnfiOrdenChanging(value);
-					this.SendPropertyChanging();
-					this._fiOrden = value;
-					this.SendPropertyChanged("fiOrden");
-					this.OnfiOrdenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonMenus_ZonPermiso", Storage="_ZonPermisos", ThisKey="fiMenuId", OtherKey="fiMenuId")]
-		public EntitySet<ZonPermiso> ZonPermisos
-		{
-			get
-			{
-				return this._ZonPermisos;
-			}
-			set
-			{
-				this._ZonPermisos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonAplicacione_ZonMenus", Storage="_ZonAplicacione", ThisKey="fiAplicacionId", OtherKey="fiAplicacionId", IsForeignKey=true)]
-		public ZonAplicacione ZonAplicacione
-		{
-			get
-			{
-				return this._ZonAplicacione.Entity;
-			}
-			set
-			{
-				ZonAplicacione previousValue = this._ZonAplicacione.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonAplicacione.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonAplicacione.Entity = null;
-						previousValue.ZonMenus.Remove(this);
-					}
-					this._ZonAplicacione.Entity = value;
-					if ((value != null))
-					{
-						value.ZonMenus.Add(this);
-						this._fiAplicacionId = value.fiAplicacionId;
-					}
-					else
-					{
-						this._fiAplicacionId = default(byte);
-					}
-					this.SendPropertyChanged("ZonAplicacione");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonPermisos(ZonPermiso entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonMenus = this;
-		}
-		
-		private void detach_ZonPermisos(ZonPermiso entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonMenus = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPerfiles")]
-	public partial class ZonPerfile : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _fcUsuario;
-		
-		private int _fiRolId;
-		
-		private EntityRef<ZonRole> _ZonRole;
-		
-		private EntityRef<ZonUsuario> _ZonUsuario;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfcUsuarioChanging(string value);
-    partial void OnfcUsuarioChanged();
-    partial void OnfiRolIdChanging(int value);
-    partial void OnfiRolIdChanged();
-    #endregion
-		
-		public ZonPerfile()
-		{
-			this._ZonRole = default(EntityRef<ZonRole>);
-			this._ZonUsuario = default(EntityRef<ZonUsuario>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcUsuario", DbType="VarChar(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string fcUsuario
-		{
-			get
-			{
-				return this._fcUsuario;
-			}
-			set
-			{
-				if ((this._fcUsuario != value))
-				{
-					if (this._ZonUsuario.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfcUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._fcUsuario = value;
-					this.SendPropertyChanged("fcUsuario");
-					this.OnfcUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRolId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiRolId
-		{
-			get
-			{
-				return this._fiRolId;
-			}
-			set
-			{
-				if ((this._fiRolId != value))
-				{
-					if (this._ZonRole.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiRolIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiRolId = value;
-					this.SendPropertyChanged("fiRolId");
-					this.OnfiRolIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPerfile", Storage="_ZonRole", ThisKey="fiRolId", OtherKey="fiRolId", IsForeignKey=true)]
-		public ZonRole ZonRole
-		{
-			get
-			{
-				return this._ZonRole.Entity;
-			}
-			set
-			{
-				ZonRole previousValue = this._ZonRole.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonRole.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonRole.Entity = null;
-						previousValue.ZonPerfiles.Remove(this);
-					}
-					this._ZonRole.Entity = value;
-					if ((value != null))
-					{
-						value.ZonPerfiles.Add(this);
-						this._fiRolId = value.fiRolId;
-					}
-					else
-					{
-						this._fiRolId = default(int);
-					}
-					this.SendPropertyChanged("ZonRole");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonUsuario_ZonPerfile", Storage="_ZonUsuario", ThisKey="fcUsuario", OtherKey="fcUsuario", IsForeignKey=true)]
-		public ZonUsuario ZonUsuario
-		{
-			get
-			{
-				return this._ZonUsuario.Entity;
-			}
-			set
-			{
-				ZonUsuario previousValue = this._ZonUsuario.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonUsuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonUsuario.Entity = null;
-						previousValue.ZonPerfiles.Remove(this);
-					}
-					this._ZonUsuario.Entity = value;
-					if ((value != null))
-					{
-						value.ZonPerfiles.Add(this);
-						this._fcUsuario = value.fcUsuario;
-					}
-					else
-					{
-						this._fcUsuario = default(string);
-					}
-					this.SendPropertyChanged("ZonUsuario");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPermisos")]
-	public partial class ZonPermiso : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiMenuId;
-		
-		private int _fiRoldId;
-		
-		private EntityRef<ZonMenus> _ZonMenus;
-		
-		private EntityRef<ZonRole> _ZonRole;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiMenuIdChanging(int value);
-    partial void OnfiMenuIdChanged();
-    partial void OnfiRoldIdChanging(int value);
-    partial void OnfiRoldIdChanged();
-    #endregion
-		
-		public ZonPermiso()
-		{
-			this._ZonMenus = default(EntityRef<ZonMenus>);
-			this._ZonRole = default(EntityRef<ZonRole>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMenuId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiMenuId
-		{
-			get
-			{
-				return this._fiMenuId;
-			}
-			set
-			{
-				if ((this._fiMenuId != value))
-				{
-					if (this._ZonMenus.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiMenuIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiMenuId = value;
-					this.SendPropertyChanged("fiMenuId");
-					this.OnfiMenuIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRoldId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiRoldId
-		{
-			get
-			{
-				return this._fiRoldId;
-			}
-			set
-			{
-				if ((this._fiRoldId != value))
-				{
-					if (this._ZonRole.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiRoldIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiRoldId = value;
-					this.SendPropertyChanged("fiRoldId");
-					this.OnfiRoldIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonMenus_ZonPermiso", Storage="_ZonMenus", ThisKey="fiMenuId", OtherKey="fiMenuId", IsForeignKey=true)]
-		public ZonMenus ZonMenus
-		{
-			get
-			{
-				return this._ZonMenus.Entity;
-			}
-			set
-			{
-				ZonMenus previousValue = this._ZonMenus.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonMenus.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonMenus.Entity = null;
-						previousValue.ZonPermisos.Remove(this);
-					}
-					this._ZonMenus.Entity = value;
-					if ((value != null))
-					{
-						value.ZonPermisos.Add(this);
-						this._fiMenuId = value.fiMenuId;
-					}
-					else
-					{
-						this._fiMenuId = default(int);
-					}
-					this.SendPropertyChanged("ZonMenus");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPermiso", Storage="_ZonRole", ThisKey="fiRoldId", OtherKey="fiRolId", IsForeignKey=true)]
-		public ZonRole ZonRole
-		{
-			get
-			{
-				return this._ZonRole.Entity;
-			}
-			set
-			{
-				ZonRole previousValue = this._ZonRole.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonRole.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonRole.Entity = null;
-						previousValue.ZonPermisos.Remove(this);
-					}
-					this._ZonRole.Entity = value;
-					if ((value != null))
-					{
-						value.ZonPermisos.Add(this);
-						this._fiRoldId = value.fiRolId;
-					}
-					else
-					{
-						this._fiRoldId = default(int);
-					}
-					this.SendPropertyChanged("ZonRole");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonRoles")]
-	public partial class ZonRole : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiRolId;
-		
-		private string _fcNombre;
-		
-		private bool _flEstatus;
-		
-		private EntitySet<ZonPerfile> _ZonPerfiles;
-		
-		private EntitySet<ZonPermiso> _ZonPermisos;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiRolIdChanging(int value);
-    partial void OnfiRolIdChanged();
-    partial void OnfcNombreChanging(string value);
-    partial void OnfcNombreChanged();
-    partial void OnflEstatusChanging(bool value);
-    partial void OnflEstatusChanged();
-    #endregion
-		
-		public ZonRole()
-		{
-			this._ZonPerfiles = new EntitySet<ZonPerfile>(new Action<ZonPerfile>(this.attach_ZonPerfiles), new Action<ZonPerfile>(this.detach_ZonPerfiles));
-			this._ZonPermisos = new EntitySet<ZonPermiso>(new Action<ZonPermiso>(this.attach_ZonPermisos), new Action<ZonPermiso>(this.detach_ZonPermisos));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRolId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiRolId
-		{
-			get
-			{
-				return this._fiRolId;
-			}
-			set
-			{
-				if ((this._fiRolId != value))
-				{
-					this.OnfiRolIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiRolId = value;
-					this.SendPropertyChanged("fiRolId");
-					this.OnfiRolIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string fcNombre
-		{
-			get
-			{
-				return this._fcNombre;
-			}
-			set
-			{
-				if ((this._fcNombre != value))
-				{
-					this.OnfcNombreChanging(value);
-					this.SendPropertyChanging();
-					this._fcNombre = value;
-					this.SendPropertyChanged("fcNombre");
-					this.OnfcNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
-		public bool flEstatus
-		{
-			get
-			{
-				return this._flEstatus;
-			}
-			set
-			{
-				if ((this._flEstatus != value))
-				{
-					this.OnflEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._flEstatus = value;
-					this.SendPropertyChanged("flEstatus");
-					this.OnflEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPerfile", Storage="_ZonPerfiles", ThisKey="fiRolId", OtherKey="fiRolId")]
-		public EntitySet<ZonPerfile> ZonPerfiles
-		{
-			get
-			{
-				return this._ZonPerfiles;
-			}
-			set
-			{
-				this._ZonPerfiles.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPermiso", Storage="_ZonPermisos", ThisKey="fiRolId", OtherKey="fiRoldId")]
-		public EntitySet<ZonPermiso> ZonPermisos
-		{
-			get
-			{
-				return this._ZonPermisos;
-			}
-			set
-			{
-				this._ZonPermisos.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonPerfiles(ZonPerfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonRole = this;
-		}
-		
-		private void detach_ZonPerfiles(ZonPerfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonRole = null;
-		}
-		
-		private void attach_ZonPermisos(ZonPermiso entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonRole = this;
-		}
-		
-		private void detach_ZonPermisos(ZonPermiso entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonRole = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonUsuarios")]
-	public partial class ZonUsuario : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _fcUsuario;
-		
-		private System.Data.Linq.Binary _fvPassword;
-		
-		private string _fcNombre;
-		
-		private string _fcMail;
-		
-		private byte _fiEstatus;
-		
-		private EntitySet<ZonPerfile> _ZonPerfiles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfcUsuarioChanging(string value);
-    partial void OnfcUsuarioChanged();
-    partial void OnfvPasswordChanging(System.Data.Linq.Binary value);
-    partial void OnfvPasswordChanged();
-    partial void OnfcNombreChanging(string value);
-    partial void OnfcNombreChanged();
-    partial void OnfcMailChanging(string value);
-    partial void OnfcMailChanged();
-    partial void OnfiEstatusChanging(byte value);
-    partial void OnfiEstatusChanged();
-    #endregion
-		
-		public ZonUsuario()
-		{
-			this._ZonPerfiles = new EntitySet<ZonPerfile>(new Action<ZonPerfile>(this.attach_ZonPerfiles), new Action<ZonPerfile>(this.detach_ZonPerfiles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcUsuario", DbType="VarChar(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string fcUsuario
-		{
-			get
-			{
-				return this._fcUsuario;
-			}
-			set
-			{
-				if ((this._fcUsuario != value))
-				{
-					this.OnfcUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._fcUsuario = value;
-					this.SendPropertyChanged("fcUsuario");
-					this.OnfcUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fvPassword", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary fvPassword
-		{
-			get
-			{
-				return this._fvPassword;
-			}
-			set
-			{
-				if ((this._fvPassword != value))
-				{
-					this.OnfvPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._fvPassword = value;
-					this.SendPropertyChanged("fvPassword");
-					this.OnfvPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcNombre
-		{
-			get
-			{
-				return this._fcNombre;
-			}
-			set
-			{
-				if ((this._fcNombre != value))
-				{
-					this.OnfcNombreChanging(value);
-					this.SendPropertyChanging();
-					this._fcNombre = value;
-					this.SendPropertyChanged("fcNombre");
-					this.OnfcNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcMail", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcMail
-		{
-			get
-			{
-				return this._fcMail;
-			}
-			set
-			{
-				if ((this._fcMail != value))
-				{
-					this.OnfcMailChanging(value);
-					this.SendPropertyChanging();
-					this._fcMail = value;
-					this.SendPropertyChanged("fcMail");
-					this.OnfcMailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstatus", DbType="TinyInt NOT NULL")]
-		public byte fiEstatus
-		{
-			get
-			{
-				return this._fiEstatus;
-			}
-			set
-			{
-				if ((this._fiEstatus != value))
-				{
-					this.OnfiEstatusChanging(value);
-					this.SendPropertyChanging();
-					this._fiEstatus = value;
-					this.SendPropertyChanged("fiEstatus");
-					this.OnfiEstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonUsuario_ZonPerfile", Storage="_ZonPerfiles", ThisKey="fcUsuario", OtherKey="fcUsuario")]
-		public EntitySet<ZonPerfile> ZonPerfiles
-		{
-			get
-			{
-				return this._ZonPerfiles;
-			}
-			set
-			{
-				this._ZonPerfiles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonPerfiles(ZonPerfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonUsuario = this;
-		}
-		
-		private void detach_ZonPerfiles(ZonPerfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.ZonUsuario = null;
 		}
 	}
 	
@@ -1948,17 +740,15 @@ namespace BHermanos.Zonificacion.DataAccess
 		
 		private int _fiPartidaId;
 		
-		private int _fiConsecutivo;
-		
-		private int _fiEstadoId;
-		
-		private int _fiMunicipioId;
+		private int _fiPlazaId;
 		
 		private int _fiZonaId;
 		
 		private int _fiColoniaId;
 		
 		private int _fiNivel;
+		
+		private int _fiConsecutivo;
 		
 		private string _fcColor;
 		
@@ -1978,18 +768,16 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void OnfiTabIdChanged();
     partial void OnfiPartidaIdChanging(int value);
     partial void OnfiPartidaIdChanged();
-    partial void OnfiConsecutivoChanging(int value);
-    partial void OnfiConsecutivoChanged();
-    partial void OnfiEstadoIdChanging(int value);
-    partial void OnfiEstadoIdChanged();
-    partial void OnfiMunicipioIdChanging(int value);
-    partial void OnfiMunicipioIdChanged();
+    partial void OnfiPlazaIdChanging(int value);
+    partial void OnfiPlazaIdChanged();
     partial void OnfiZonaIdChanging(int value);
     partial void OnfiZonaIdChanged();
     partial void OnfiColoniaIdChanging(int value);
     partial void OnfiColoniaIdChanged();
     partial void OnfiNivelChanging(int value);
     partial void OnfiNivelChanged();
+    partial void OnfiConsecutivoChanging(int value);
+    partial void OnfiConsecutivoChanged();
     partial void OnfcColorChanging(string value);
     partial void OnfcColorChanged();
     partial void OnfcOperadorChanging(string value);
@@ -2054,62 +842,22 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiConsecutivo", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiConsecutivo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPlazaId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiPlazaId
 		{
 			get
 			{
-				return this._fiConsecutivo;
+				return this._fiPlazaId;
 			}
 			set
 			{
-				if ((this._fiConsecutivo != value))
+				if ((this._fiPlazaId != value))
 				{
-					this.OnfiConsecutivoChanging(value);
+					this.OnfiPlazaIdChanging(value);
 					this.SendPropertyChanging();
-					this._fiConsecutivo = value;
-					this.SendPropertyChanged("fiConsecutivo");
-					this.OnfiConsecutivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiEstadoId
-		{
-			get
-			{
-				return this._fiEstadoId;
-			}
-			set
-			{
-				if ((this._fiEstadoId != value))
-				{
-					this.OnfiEstadoIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiEstadoId = value;
-					this.SendPropertyChanged("fiEstadoId");
-					this.OnfiEstadoIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMunicipioId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiMunicipioId
-		{
-			get
-			{
-				return this._fiMunicipioId;
-			}
-			set
-			{
-				if ((this._fiMunicipioId != value))
-				{
-					this.OnfiMunicipioIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiMunicipioId = value;
-					this.SendPropertyChanged("fiMunicipioId");
-					this.OnfiMunicipioIdChanged();
+					this._fiPlazaId = value;
+					this.SendPropertyChanged("fiPlazaId");
+					this.OnfiPlazaIdChanged();
 				}
 			}
 		}
@@ -2170,6 +918,26 @@ namespace BHermanos.Zonificacion.DataAccess
 					this._fiNivel = value;
 					this.SendPropertyChanged("fiNivel");
 					this.OnfiNivelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiConsecutivo", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiConsecutivo
+		{
+			get
+			{
+				return this._fiConsecutivo;
+			}
+			set
+			{
+				if ((this._fiConsecutivo != value))
+				{
+					this.OnfiConsecutivoChanging(value);
+					this.SendPropertyChanging();
+					this._fiConsecutivo = value;
+					this.SendPropertyChanged("fiConsecutivo");
+					this.OnfiConsecutivoChanged();
 				}
 			}
 		}
@@ -2451,7 +1219,7 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string fcExpresion
 		{
 			get
@@ -2606,62 +1374,39 @@ namespace BHermanos.Zonificacion.DataAccess
 		}
 	}
 	
-	public partial class spConEstadosResult
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonGrupoRubros")]
+	public partial class ZonGrupoRubro : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private int _fiEstadoId;
-		
-		private string _fcNombre;
-		
-		public spConEstadosResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
-		public int fiEstadoId
-		{
-			get
-			{
-				return this._fiEstadoId;
-			}
-			set
-			{
-				if ((this._fiEstadoId != value))
-				{
-					this._fiEstadoId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string fcNombre
-		{
-			get
-			{
-				return this._fcNombre;
-			}
-			set
-			{
-				if ((this._fcNombre != value))
-				{
-					this._fcNombre = value;
-				}
-			}
-		}
-	}
-	
-	public partial class spConGrupoRubrosResult
-	{
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _fiGrupoId;
 		
 		private string _fcNombre;
 		
-		public spConGrupoRubrosResult()
+		private bool _flEstatus;
+		
+		private EntitySet<ZonRubro> _ZonRubros;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiGrupoIdChanging(int value);
+    partial void OnfiGrupoIdChanged();
+    partial void OnfcNombreChanging(string value);
+    partial void OnfcNombreChanged();
+    partial void OnflEstatusChanging(bool value);
+    partial void OnflEstatusChanged();
+    #endregion
+		
+		public ZonGrupoRubro()
 		{
+			this._ZonRubros = new EntitySet<ZonRubro>(new Action<ZonRubro>(this.attach_ZonRubros), new Action<ZonRubro>(this.detach_ZonRubros));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int fiGrupoId
 		{
 			get
@@ -2672,7 +1417,1221 @@ namespace BHermanos.Zonificacion.DataAccess
 			{
 				if ((this._fiGrupoId != value))
 				{
+					this.OnfiGrupoIdChanging(value);
+					this.SendPropertyChanging();
 					this._fiGrupoId = value;
+					this.SendPropertyChanged("fiGrupoId");
+					this.OnfiGrupoIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this.OnfcNombreChanging(value);
+					this.SendPropertyChanging();
+					this._fcNombre = value;
+					this.SendPropertyChanged("fcNombre");
+					this.OnfcNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
+		public bool flEstatus
+		{
+			get
+			{
+				return this._flEstatus;
+			}
+			set
+			{
+				if ((this._flEstatus != value))
+				{
+					this.OnflEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._flEstatus = value;
+					this.SendPropertyChanged("flEstatus");
+					this.OnflEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonGrupoRubro_ZonRubro", Storage="_ZonRubros", ThisKey="fiGrupoId", OtherKey="fiGrupoId")]
+		public EntitySet<ZonRubro> ZonRubros
+		{
+			get
+			{
+				return this._ZonRubros;
+			}
+			set
+			{
+				this._ZonRubros.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonRubros(ZonRubro entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonGrupoRubro = this;
+		}
+		
+		private void detach_ZonRubros(ZonRubro entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonGrupoRubro = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonUsuarios")]
+	public partial class ZonUsuario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _fcUsuario;
+		
+		private System.Data.Linq.Binary _fvPassword;
+		
+		private string _fcNombre;
+		
+		private string _fcMail;
+		
+		private byte _fiEstatus;
+		
+		private EntitySet<ZonPerfile> _ZonPerfiles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfcUsuarioChanging(string value);
+    partial void OnfcUsuarioChanged();
+    partial void OnfvPasswordChanging(System.Data.Linq.Binary value);
+    partial void OnfvPasswordChanged();
+    partial void OnfcNombreChanging(string value);
+    partial void OnfcNombreChanged();
+    partial void OnfcMailChanging(string value);
+    partial void OnfcMailChanged();
+    partial void OnfiEstatusChanging(byte value);
+    partial void OnfiEstatusChanged();
+    #endregion
+		
+		public ZonUsuario()
+		{
+			this._ZonPerfiles = new EntitySet<ZonPerfile>(new Action<ZonPerfile>(this.attach_ZonPerfiles), new Action<ZonPerfile>(this.detach_ZonPerfiles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcUsuario", DbType="VarChar(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string fcUsuario
+		{
+			get
+			{
+				return this._fcUsuario;
+			}
+			set
+			{
+				if ((this._fcUsuario != value))
+				{
+					this.OnfcUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._fcUsuario = value;
+					this.SendPropertyChanged("fcUsuario");
+					this.OnfcUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fvPassword", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary fvPassword
+		{
+			get
+			{
+				return this._fvPassword;
+			}
+			set
+			{
+				if ((this._fvPassword != value))
+				{
+					this.OnfvPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._fvPassword = value;
+					this.SendPropertyChanged("fvPassword");
+					this.OnfvPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this.OnfcNombreChanging(value);
+					this.SendPropertyChanging();
+					this._fcNombre = value;
+					this.SendPropertyChanged("fcNombre");
+					this.OnfcNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcMail", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcMail
+		{
+			get
+			{
+				return this._fcMail;
+			}
+			set
+			{
+				if ((this._fcMail != value))
+				{
+					this.OnfcMailChanging(value);
+					this.SendPropertyChanging();
+					this._fcMail = value;
+					this.SendPropertyChanged("fcMail");
+					this.OnfcMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstatus", DbType="TinyInt NOT NULL")]
+		public byte fiEstatus
+		{
+			get
+			{
+				return this._fiEstatus;
+			}
+			set
+			{
+				if ((this._fiEstatus != value))
+				{
+					this.OnfiEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._fiEstatus = value;
+					this.SendPropertyChanged("fiEstatus");
+					this.OnfiEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonUsuario_ZonPerfile", Storage="_ZonPerfiles", ThisKey="fcUsuario", OtherKey="fcUsuario")]
+		public EntitySet<ZonPerfile> ZonPerfiles
+		{
+			get
+			{
+				return this._ZonPerfiles;
+			}
+			set
+			{
+				this._ZonPerfiles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonPerfiles(ZonPerfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonUsuario = this;
+		}
+		
+		private void detach_ZonPerfiles(ZonPerfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonUsuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonRoles")]
+	public partial class ZonRole : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiRolId;
+		
+		private string _fcNombre;
+		
+		private bool _flEstatus;
+		
+		private EntitySet<ZonPermiso> _ZonPermisos;
+		
+		private EntitySet<ZonPerfile> _ZonPerfiles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiRolIdChanging(int value);
+    partial void OnfiRolIdChanged();
+    partial void OnfcNombreChanging(string value);
+    partial void OnfcNombreChanged();
+    partial void OnflEstatusChanging(bool value);
+    partial void OnflEstatusChanged();
+    #endregion
+		
+		public ZonRole()
+		{
+			this._ZonPermisos = new EntitySet<ZonPermiso>(new Action<ZonPermiso>(this.attach_ZonPermisos), new Action<ZonPermiso>(this.detach_ZonPermisos));
+			this._ZonPerfiles = new EntitySet<ZonPerfile>(new Action<ZonPerfile>(this.attach_ZonPerfiles), new Action<ZonPerfile>(this.detach_ZonPerfiles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRolId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiRolId
+		{
+			get
+			{
+				return this._fiRolId;
+			}
+			set
+			{
+				if ((this._fiRolId != value))
+				{
+					this.OnfiRolIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiRolId = value;
+					this.SendPropertyChanged("fiRolId");
+					this.OnfiRolIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this.OnfcNombreChanging(value);
+					this.SendPropertyChanging();
+					this._fcNombre = value;
+					this.SendPropertyChanged("fcNombre");
+					this.OnfcNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
+		public bool flEstatus
+		{
+			get
+			{
+				return this._flEstatus;
+			}
+			set
+			{
+				if ((this._flEstatus != value))
+				{
+					this.OnflEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._flEstatus = value;
+					this.SendPropertyChanged("flEstatus");
+					this.OnflEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPermiso", Storage="_ZonPermisos", ThisKey="fiRolId", OtherKey="fiRoldId")]
+		public EntitySet<ZonPermiso> ZonPermisos
+		{
+			get
+			{
+				return this._ZonPermisos;
+			}
+			set
+			{
+				this._ZonPermisos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPerfile", Storage="_ZonPerfiles", ThisKey="fiRolId", OtherKey="fiRolId")]
+		public EntitySet<ZonPerfile> ZonPerfiles
+		{
+			get
+			{
+				return this._ZonPerfiles;
+			}
+			set
+			{
+				this._ZonPerfiles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonPermisos(ZonPermiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonRole = this;
+		}
+		
+		private void detach_ZonPermisos(ZonPermiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonRole = null;
+		}
+		
+		private void attach_ZonPerfiles(ZonPerfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonRole = this;
+		}
+		
+		private void detach_ZonPerfiles(ZonPerfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonRole = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPermisos")]
+	public partial class ZonPermiso : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiMenuId;
+		
+		private int _fiRoldId;
+		
+		private EntityRef<ZonRole> _ZonRole;
+		
+		private EntityRef<ZonMenus> _ZonMenus;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiMenuIdChanging(int value);
+    partial void OnfiMenuIdChanged();
+    partial void OnfiRoldIdChanging(int value);
+    partial void OnfiRoldIdChanged();
+    #endregion
+		
+		public ZonPermiso()
+		{
+			this._ZonRole = default(EntityRef<ZonRole>);
+			this._ZonMenus = default(EntityRef<ZonMenus>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMenuId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiMenuId
+		{
+			get
+			{
+				return this._fiMenuId;
+			}
+			set
+			{
+				if ((this._fiMenuId != value))
+				{
+					if (this._ZonMenus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiMenuIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiMenuId = value;
+					this.SendPropertyChanged("fiMenuId");
+					this.OnfiMenuIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRoldId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiRoldId
+		{
+			get
+			{
+				return this._fiRoldId;
+			}
+			set
+			{
+				if ((this._fiRoldId != value))
+				{
+					if (this._ZonRole.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiRoldIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiRoldId = value;
+					this.SendPropertyChanged("fiRoldId");
+					this.OnfiRoldIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPermiso", Storage="_ZonRole", ThisKey="fiRoldId", OtherKey="fiRolId", IsForeignKey=true)]
+		public ZonRole ZonRole
+		{
+			get
+			{
+				return this._ZonRole.Entity;
+			}
+			set
+			{
+				ZonRole previousValue = this._ZonRole.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonRole.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonRole.Entity = null;
+						previousValue.ZonPermisos.Remove(this);
+					}
+					this._ZonRole.Entity = value;
+					if ((value != null))
+					{
+						value.ZonPermisos.Add(this);
+						this._fiRoldId = value.fiRolId;
+					}
+					else
+					{
+						this._fiRoldId = default(int);
+					}
+					this.SendPropertyChanged("ZonRole");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonMenus_ZonPermiso", Storage="_ZonMenus", ThisKey="fiMenuId", OtherKey="fiMenuId", IsForeignKey=true)]
+		public ZonMenus ZonMenus
+		{
+			get
+			{
+				return this._ZonMenus.Entity;
+			}
+			set
+			{
+				ZonMenus previousValue = this._ZonMenus.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonMenus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonMenus.Entity = null;
+						previousValue.ZonPermisos.Remove(this);
+					}
+					this._ZonMenus.Entity = value;
+					if ((value != null))
+					{
+						value.ZonPermisos.Add(this);
+						this._fiMenuId = value.fiMenuId;
+					}
+					else
+					{
+						this._fiMenuId = default(int);
+					}
+					this.SendPropertyChanged("ZonMenus");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPerfiles")]
+	public partial class ZonPerfile : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _fcUsuario;
+		
+		private int _fiRolId;
+		
+		private EntityRef<ZonRole> _ZonRole;
+		
+		private EntityRef<ZonUsuario> _ZonUsuario;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfcUsuarioChanging(string value);
+    partial void OnfcUsuarioChanged();
+    partial void OnfiRolIdChanging(int value);
+    partial void OnfiRolIdChanged();
+    #endregion
+		
+		public ZonPerfile()
+		{
+			this._ZonRole = default(EntityRef<ZonRole>);
+			this._ZonUsuario = default(EntityRef<ZonUsuario>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcUsuario", DbType="VarChar(8) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string fcUsuario
+		{
+			get
+			{
+				return this._fcUsuario;
+			}
+			set
+			{
+				if ((this._fcUsuario != value))
+				{
+					if (this._ZonUsuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfcUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._fcUsuario = value;
+					this.SendPropertyChanged("fcUsuario");
+					this.OnfcUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRolId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiRolId
+		{
+			get
+			{
+				return this._fiRolId;
+			}
+			set
+			{
+				if ((this._fiRolId != value))
+				{
+					if (this._ZonRole.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiRolIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiRolId = value;
+					this.SendPropertyChanged("fiRolId");
+					this.OnfiRolIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonRole_ZonPerfile", Storage="_ZonRole", ThisKey="fiRolId", OtherKey="fiRolId", IsForeignKey=true)]
+		public ZonRole ZonRole
+		{
+			get
+			{
+				return this._ZonRole.Entity;
+			}
+			set
+			{
+				ZonRole previousValue = this._ZonRole.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonRole.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonRole.Entity = null;
+						previousValue.ZonPerfiles.Remove(this);
+					}
+					this._ZonRole.Entity = value;
+					if ((value != null))
+					{
+						value.ZonPerfiles.Add(this);
+						this._fiRolId = value.fiRolId;
+					}
+					else
+					{
+						this._fiRolId = default(int);
+					}
+					this.SendPropertyChanged("ZonRole");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonUsuario_ZonPerfile", Storage="_ZonUsuario", ThisKey="fcUsuario", OtherKey="fcUsuario", IsForeignKey=true)]
+		public ZonUsuario ZonUsuario
+		{
+			get
+			{
+				return this._ZonUsuario.Entity;
+			}
+			set
+			{
+				ZonUsuario previousValue = this._ZonUsuario.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonUsuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonUsuario.Entity = null;
+						previousValue.ZonPerfiles.Remove(this);
+					}
+					this._ZonUsuario.Entity = value;
+					if ((value != null))
+					{
+						value.ZonPerfiles.Add(this);
+						this._fcUsuario = value.fcUsuario;
+					}
+					else
+					{
+						this._fcUsuario = default(string);
+					}
+					this.SendPropertyChanged("ZonUsuario");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonAplicaciones")]
+	public partial class ZonAplicacione : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _fiAplicacionId;
+		
+		private string _fcDescripcion;
+		
+		private EntitySet<ZonMenus> _ZonMenus;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiAplicacionIdChanging(byte value);
+    partial void OnfiAplicacionIdChanged();
+    partial void OnfcDescripcionChanging(string value);
+    partial void OnfcDescripcionChanged();
+    #endregion
+		
+		public ZonAplicacione()
+		{
+			this._ZonMenus = new EntitySet<ZonMenus>(new Action<ZonMenus>(this.attach_ZonMenus), new Action<ZonMenus>(this.detach_ZonMenus));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiAplicacionId", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
+		public byte fiAplicacionId
+		{
+			get
+			{
+				return this._fiAplicacionId;
+			}
+			set
+			{
+				if ((this._fiAplicacionId != value))
+				{
+					this.OnfiAplicacionIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiAplicacionId = value;
+					this.SendPropertyChanged("fiAplicacionId");
+					this.OnfiAplicacionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this.OnfcDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fcDescripcion = value;
+					this.SendPropertyChanged("fcDescripcion");
+					this.OnfcDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonAplicacione_ZonMenus", Storage="_ZonMenus", ThisKey="fiAplicacionId", OtherKey="fiAplicacionId")]
+		public EntitySet<ZonMenus> ZonMenus
+		{
+			get
+			{
+				return this._ZonMenus;
+			}
+			set
+			{
+				this._ZonMenus.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonMenus(ZonMenus entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonAplicacione = this;
+		}
+		
+		private void detach_ZonMenus(ZonMenus entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonAplicacione = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonMenus")]
+	public partial class ZonMenus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiMenuId;
+		
+		private int _fiDependeId;
+		
+		private string _fcDescripcion;
+		
+		private string _fcAplicacion;
+		
+		private byte _fiAplicacionId;
+		
+		private bool _flEstatus;
+		
+		private byte _fiOrden;
+		
+		private EntitySet<ZonPermiso> _ZonPermisos;
+		
+		private EntityRef<ZonAplicacione> _ZonAplicacione;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiMenuIdChanging(int value);
+    partial void OnfiMenuIdChanged();
+    partial void OnfiDependeIdChanging(int value);
+    partial void OnfiDependeIdChanged();
+    partial void OnfcDescripcionChanging(string value);
+    partial void OnfcDescripcionChanged();
+    partial void OnfcAplicacionChanging(string value);
+    partial void OnfcAplicacionChanged();
+    partial void OnfiAplicacionIdChanging(byte value);
+    partial void OnfiAplicacionIdChanged();
+    partial void OnflEstatusChanging(bool value);
+    partial void OnflEstatusChanged();
+    partial void OnfiOrdenChanging(byte value);
+    partial void OnfiOrdenChanged();
+    #endregion
+		
+		public ZonMenus()
+		{
+			this._ZonPermisos = new EntitySet<ZonPermiso>(new Action<ZonPermiso>(this.attach_ZonPermisos), new Action<ZonPermiso>(this.detach_ZonPermisos));
+			this._ZonAplicacione = default(EntityRef<ZonAplicacione>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMenuId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiMenuId
+		{
+			get
+			{
+				return this._fiMenuId;
+			}
+			set
+			{
+				if ((this._fiMenuId != value))
+				{
+					this.OnfiMenuIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiMenuId = value;
+					this.SendPropertyChanged("fiMenuId");
+					this.OnfiMenuIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiDependeId", DbType="Int NOT NULL")]
+		public int fiDependeId
+		{
+			get
+			{
+				return this._fiDependeId;
+			}
+			set
+			{
+				if ((this._fiDependeId != value))
+				{
+					this.OnfiDependeIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiDependeId = value;
+					this.SendPropertyChanged("fiDependeId");
+					this.OnfiDependeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this.OnfcDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fcDescripcion = value;
+					this.SendPropertyChanged("fcDescripcion");
+					this.OnfcDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcAplicacion", DbType="VarChar(100)")]
+		public string fcAplicacion
+		{
+			get
+			{
+				return this._fcAplicacion;
+			}
+			set
+			{
+				if ((this._fcAplicacion != value))
+				{
+					this.OnfcAplicacionChanging(value);
+					this.SendPropertyChanging();
+					this._fcAplicacion = value;
+					this.SendPropertyChanged("fcAplicacion");
+					this.OnfcAplicacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiAplicacionId", DbType="TinyInt NOT NULL")]
+		public byte fiAplicacionId
+		{
+			get
+			{
+				return this._fiAplicacionId;
+			}
+			set
+			{
+				if ((this._fiAplicacionId != value))
+				{
+					if (this._ZonAplicacione.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiAplicacionIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiAplicacionId = value;
+					this.SendPropertyChanged("fiAplicacionId");
+					this.OnfiAplicacionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
+		public bool flEstatus
+		{
+			get
+			{
+				return this._flEstatus;
+			}
+			set
+			{
+				if ((this._flEstatus != value))
+				{
+					this.OnflEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._flEstatus = value;
+					this.SendPropertyChanged("flEstatus");
+					this.OnflEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="TinyInt NOT NULL")]
+		public byte fiOrden
+		{
+			get
+			{
+				return this._fiOrden;
+			}
+			set
+			{
+				if ((this._fiOrden != value))
+				{
+					this.OnfiOrdenChanging(value);
+					this.SendPropertyChanging();
+					this._fiOrden = value;
+					this.SendPropertyChanged("fiOrden");
+					this.OnfiOrdenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonMenus_ZonPermiso", Storage="_ZonPermisos", ThisKey="fiMenuId", OtherKey="fiMenuId")]
+		public EntitySet<ZonPermiso> ZonPermisos
+		{
+			get
+			{
+				return this._ZonPermisos;
+			}
+			set
+			{
+				this._ZonPermisos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonAplicacione_ZonMenus", Storage="_ZonAplicacione", ThisKey="fiAplicacionId", OtherKey="fiAplicacionId", IsForeignKey=true)]
+		public ZonAplicacione ZonAplicacione
+		{
+			get
+			{
+				return this._ZonAplicacione.Entity;
+			}
+			set
+			{
+				ZonAplicacione previousValue = this._ZonAplicacione.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonAplicacione.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonAplicacione.Entity = null;
+						previousValue.ZonMenus.Remove(this);
+					}
+					this._ZonAplicacione.Entity = value;
+					if ((value != null))
+					{
+						value.ZonMenus.Add(this);
+						this._fiAplicacionId = value.fiAplicacionId;
+					}
+					else
+					{
+						this._fiAplicacionId = default(byte);
+					}
+					this.SendPropertyChanged("ZonAplicacione");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonPermisos(ZonPermiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonMenus = this;
+		}
+		
+		private void detach_ZonPermisos(ZonPermiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonMenus = null;
+		}
+	}
+	
+	public partial class spConZonasResult
+	{
+		
+		private int _fiPlazaId;
+		
+		private int _fiZonaId;
+		
+		private string _fcNombre;
+		
+		private string _fcColor;
+		
+		public spConZonasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPlazaId", DbType="Int NOT NULL")]
+		public int fiPlazaId
+		{
+			get
+			{
+				return this._fiPlazaId;
+			}
+			set
+			{
+				if ((this._fiPlazaId != value))
+				{
+					this._fiPlazaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiZonaId", DbType="Int NOT NULL")]
+		public int fiZonaId
+		{
+			get
+			{
+				return this._fiZonaId;
+			}
+			set
+			{
+				if ((this._fiZonaId != value))
+				{
+					this._fiZonaId = value;
 				}
 			}
 		}
@@ -2689,6 +2648,156 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._fcNombre != value))
 				{
 					this._fcNombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcColor", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string fcColor
+		{
+			get
+			{
+				return this._fcColor;
+			}
+			set
+			{
+				if ((this._fcColor != value))
+				{
+					this._fcColor = value;
+				}
+			}
+		}
+	}
+	
+	public partial class spConRubrosXGrupoResult
+	{
+		
+		private int _fiRubroId;
+		
+		private string _fcDescripcion;
+		
+		private bool _flMain;
+		
+		private string _fcExpresion;
+		
+		private string _fcSignoAcumulado;
+		
+		private string _fcFormato;
+		
+		private int _fiOrden;
+		
+		public spConRubrosXGrupoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL")]
+		public int fiRubroId
+		{
+			get
+			{
+				return this._fiRubroId;
+			}
+			set
+			{
+				if ((this._fiRubroId != value))
+				{
+					this._fiRubroId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this._fcDescripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
+		public bool flMain
+		{
+			get
+			{
+				return this._flMain;
+			}
+			set
+			{
+				if ((this._flMain != value))
+				{
+					this._flMain = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string fcExpresion
+		{
+			get
+			{
+				return this._fcExpresion;
+			}
+			set
+			{
+				if ((this._fcExpresion != value))
+				{
+					this._fcExpresion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string fcSignoAcumulado
+		{
+			get
+			{
+				return this._fcSignoAcumulado;
+			}
+			set
+			{
+				if ((this._fcSignoAcumulado != value))
+				{
+					this._fcSignoAcumulado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcFormato", DbType="VarChar(50)")]
+		public string fcFormato
+		{
+			get
+			{
+				return this._fcFormato;
+			}
+			set
+			{
+				if ((this._fcFormato != value))
+				{
+					this._fcFormato = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
+		public int fiOrden
+		{
+			get
+			{
+				return this._fiOrden;
+			}
+			set
+			{
+				if ((this._fiOrden != value))
+				{
+					this._fiOrden = value;
 				}
 			}
 		}
@@ -2756,67 +2865,29 @@ namespace BHermanos.Zonificacion.DataAccess
 		}
 	}
 	
-	public partial class spConZonasResult
+	public partial class spConGrupoRubrosResult
 	{
 		
-		private int _fiZonaId;
-		
-		private int _fiMunicipioId;
-		
-		private int _fiEstadoId;
+		private int _fiGrupoId;
 		
 		private string _fcNombre;
 		
-		private string _fcColor;
-		
-		public spConZonasResult()
+		public spConGrupoRubrosResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiZonaId", DbType="Int NOT NULL")]
-		public int fiZonaId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiGrupoId", DbType="Int NOT NULL")]
+		public int fiGrupoId
 		{
 			get
 			{
-				return this._fiZonaId;
+				return this._fiGrupoId;
 			}
 			set
 			{
-				if ((this._fiZonaId != value))
+				if ((this._fiGrupoId != value))
 				{
-					this._fiZonaId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMunicipioId", DbType="Int NOT NULL")]
-		public int fiMunicipioId
-		{
-			get
-			{
-				return this._fiMunicipioId;
-			}
-			set
-			{
-				if ((this._fiMunicipioId != value))
-				{
-					this._fiMunicipioId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
-		public int fiEstadoId
-		{
-			get
-			{
-				return this._fiEstadoId;
-			}
-			set
-			{
-				if ((this._fiEstadoId != value))
-				{
-					this._fiEstadoId = value;
+					this._fiGrupoId = value;
 				}
 			}
 		}
@@ -2836,19 +2907,47 @@ namespace BHermanos.Zonificacion.DataAccess
 				}
 			}
 		}
+	}
+	
+	public partial class spConEstadosResult
+	{
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcColor", DbType="VarChar(10)")]
-		public string fcColor
+		private int _fiEstadoId;
+		
+		private string _fcNombre;
+		
+		public spConEstadosResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
+		public int fiEstadoId
 		{
 			get
 			{
-				return this._fcColor;
+				return this._fiEstadoId;
 			}
 			set
 			{
-				if ((this._fcColor != value))
+				if ((this._fiEstadoId != value))
 				{
-					this._fcColor = value;
+					this._fiEstadoId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this._fcNombre = value;
 				}
 			}
 		}
@@ -6609,140 +6708,6 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._vtas_tot != value))
 				{
 					this._vtas_tot = value;
-				}
-			}
-		}
-	}
-	
-	public partial class spConRubrosXGrupoResult
-	{
-		
-		private int _fiRubroId;
-		
-		private string _fcDescripcion;
-		
-		private bool _flMain;
-		
-		private string _fcExpresion;
-		
-		private string _fcSignoAcumulado;
-		
-		private string _fcFormato;
-		
-		private int _fiOrden;
-		
-		public spConRubrosXGrupoResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiRubroId", DbType="Int NOT NULL")]
-		public int fiRubroId
-		{
-			get
-			{
-				return this._fiRubroId;
-			}
-			set
-			{
-				if ((this._fiRubroId != value))
-				{
-					this._fiRubroId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this._fcDescripcion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flMain", DbType="Bit NOT NULL")]
-		public bool flMain
-		{
-			get
-			{
-				return this._flMain;
-			}
-			set
-			{
-				if ((this._flMain != value))
-				{
-					this._flMain = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcExpresion
-		{
-			get
-			{
-				return this._fcExpresion;
-			}
-			set
-			{
-				if ((this._fcExpresion != value))
-				{
-					this._fcExpresion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcSignoAcumulado", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string fcSignoAcumulado
-		{
-			get
-			{
-				return this._fcSignoAcumulado;
-			}
-			set
-			{
-				if ((this._fcSignoAcumulado != value))
-				{
-					this._fcSignoAcumulado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcFormato", DbType="VarChar(50)")]
-		public string fcFormato
-		{
-			get
-			{
-				return this._fcFormato;
-			}
-			set
-			{
-				if ((this._fcFormato != value))
-				{
-					this._fcFormato = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
-		public int fiOrden
-		{
-			get
-			{
-				return this._fiOrden;
-			}
-			set
-			{
-				if ((this._fiOrden != value))
-				{
-					this._fiOrden = value;
 				}
 			}
 		}

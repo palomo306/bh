@@ -47,7 +47,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return vistas;
         }
 
-        public IList<Tab> ObtenerTab(int tabId, int estadoId, int municipioId)
+        public IList<Tab> ObtenerTab(int tabId, int plazaId)
         {
             List<Tab> vistas = new List<Tab>();
             try
@@ -60,7 +60,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         Tab tab = new Tab();
                         tab.Id = zonTab.fiTabId;
                         tab.Nombre = zonTab.fcDescripcion;
-                        tab.ListaZonas = this.ObtenerZonas(estadoId, municipioId, zonTab);
+                        tab.ListaZonas = this.ObtenerZonas(plazaId, zonTab);
                         vistas.Add(tab);
                     }
                 }
@@ -80,7 +80,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region Metodos privados
 
-        private List<Partida> ObtieneListaPartidas(int nivel, int estadoId, int municipioId, int zonaId, DataAccess.ZonTab zonTab, List<Colonia> listaColonias)
+        private List<Partida> ObtieneListaPartidas(int nivel, int plazaId, int zonaId, DataAccess.ZonTab zonTab, List<Colonia> listaColonias)
         {
             List<Partida> listaPartidas = new List<Partida>();
 
@@ -103,7 +103,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         }
 
                     }
-                    partida.ListaHumbrales = base.ObtieneHumbrales(nivel, estadoId, municipioId, zonaId, 0, partida.Valor, zonPartidaXTab);
+                    partida.ListaHumbrales = base.ObtieneHumbrales(nivel, plazaId,zonaId, 0, partida.Valor, zonPartidaXTab);
                     partida.Color = base.ObtieneColor(partida.Valor, partida.ListaHumbrales);
                     listaPartidas.Add(partida);
                 }
@@ -116,24 +116,23 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaPartidas;
         }
 
-        private List<Zona> ObtenerZonas(int estadoId, int municipioId, DataAccess.ZonTab zonTab)
+        private List<Zona> ObtenerZonas(int plazaId, DataAccess.ZonTab zonTab)
         {
             List<Zona> listaZonas = new List<Zona>();
             try
             {
-                var spConZonas = base.oDataAccess.spConZonas(1, estadoId, municipioId, 0);
+                var spConZonas = base.oDataAccess.spConZonas(1, plazaId, 0);
                 foreach (var spConZona in spConZonas)
                 {
                     Zona zona = new Zona();
                     zona.Id = spConZona.fiZonaId;
-                    zona.EstadoId = spConZona.fiEstadoId;
-                    zona.MunicipioId = spConZona.fiMunicipioId;
+                    zona.PlazaId = spConZona.fiPlazaId;                    
                     zona.Nombre = spConZona.fcNombre;
                     zona.Colonias = string.Empty;
                     zona.Color = spConZona.fcColor;
-                    zona.ListaSubzonas = this.ObtenerSubZonas(spConZona.fiEstadoId, spConZona.fiMunicipioId, spConZona.fiZonaId, zonTab);
-                    zona.ListaColonias = this.ObtenerColoniasXZona(1,spConZona.fiEstadoId, spConZona.fiMunicipioId, spConZona.fiZonaId, zonTab);                   
-                    zona.ListaPartidas = this.ObtieneListaPartidas(1,spConZona.fiEstadoId, spConZona.fiMunicipioId, spConZona.fiZonaId, zonTab, zona.ListaColonias);                   
+                    zona.ListaSubzonas = this.ObtenerSubZonas(spConZona.fiPlazaId, spConZona.fiZonaId, zonTab);
+                    zona.ListaColonias = this.ObtenerColoniasXZona(1,spConZona.fiPlazaId, spConZona.fiZonaId, zonTab);                   
+                    zona.ListaPartidas = this.ObtieneListaPartidas(1,spConZona.fiPlazaId, spConZona.fiZonaId, zonTab, zona.ListaColonias);                   
                     listaZonas.Add(zona);
                 }
             }
@@ -144,38 +143,36 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaZonas;
         }
 
-        private List<Zona> ObtenerSubZonas(int estadoId, int municipioId, int zonaId, DataAccess.ZonTab zonTab)
+        private List<Zona> ObtenerSubZonas(int plazaId, int zonaId, DataAccess.ZonTab zonTab)
         {
             List<Zona> listaSubZonas = new List<Zona>();
             try
             {
-                var spConZonas = base.oDataAccess.spConZonas(1, estadoId, municipioId, zonaId);
+                var spConZonas = base.oDataAccess.spConZonas(1, plazaId, zonaId);
                 foreach (var spConZona in spConZonas)
                 {
                     Zona zona = new Zona();
                     zona.Id = spConZona.fiZonaId;
-                    zona.EstadoId = spConZona.fiEstadoId;
-                    zona.MunicipioId = spConZona.fiMunicipioId;
+                    zona.PlazaId = spConZona.fiPlazaId;                    
                     zona.Nombre = spConZona.fcNombre;
                     zona.Color = spConZona.fcColor;
                     zona.Colonias = string.Empty;
                     zona.ListaSubzonas = new List<Zona>();
-                    zona.ListaColonias = this.ObtenerColoniasXZona(1,spConZona.fiEstadoId, spConZona.fiMunicipioId, spConZona.fiZonaId, zonTab);
-                    zona.ListaPartidas = this.ObtieneListaPartidas(2, spConZona.fiEstadoId, spConZona.fiMunicipioId, spConZona.fiZonaId, zonTab, zona.ListaColonias);
+                    zona.ListaColonias = this.ObtenerColoniasXZona(1,spConZona.fiPlazaId,  spConZona.fiZonaId, zonTab);
+                    zona.ListaPartidas = this.ObtieneListaPartidas(2, spConZona.fiPlazaId, spConZona.fiZonaId, zonTab, zona.ListaColonias);
                     listaSubZonas.Add(zona);
                 }
                 if (listaSubZonas.Count > 0 )
                 {
                     Zona zona = new Zona();
                     zona.Id = zonaId;
-                    zona.EstadoId = estadoId;
-                    zona.MunicipioId = municipioId;
+                    zona.PlazaId = plazaId;                    
                     zona.Nombre = "Sin-Clasificar";
                     zona.Color = "#FFFFFF";
                     zona.Colonias = string.Empty;
                     zona.ListaSubzonas = new List<Zona>();
-                    zona.ListaColonias = this.ObtenerColoniasXZona(2,estadoId, municipioId, zonaId, zonTab);
-                    zona.ListaPartidas = this.ObtieneListaPartidas(2, estadoId, municipioId, zonaId, zonTab, zona.ListaColonias);
+                    zona.ListaColonias = this.ObtenerColoniasXZona(2,plazaId, zonaId, zonTab);
+                    zona.ListaPartidas = this.ObtieneListaPartidas(2, plazaId, zonaId, zonTab, zona.ListaColonias);
                     listaSubZonas.Add(zona);
                 }
             }
@@ -187,17 +184,17 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaSubZonas;
         }
 
-        private List<Colonia> ObtenerColoniasXZona(byte vista, int estadoId, int municipioId, int zonaId, DataAccess.ZonTab zonTab)
+        private List<Colonia> ObtenerColoniasXZona(byte vista, int plazaId, int zonaId, DataAccess.ZonTab zonTab)
         {
             List<Colonia> listaColonias = new List<Colonia>();
             try
             {
-                var spConColoniasXZona = base.oDataAccess.spConColoniasXZona(vista, estadoId, municipioId, zonaId);
+                var spConColoniasXZona = base.oDataAccess.spConColoniasXZona(vista, plazaId, zonaId);
                 using (ManejadorColonias manejadorColonias = new ManejadorColonias())
                 {
                     foreach (var spConColoniaXZona in spConColoniasXZona)
                     {
-                        List<Colonia> col = manejadorColonias.ObtenerColoniasXPartida(2, estadoId, municipioId, zonaId, spConColoniaXZona.fiColoniaId, zonTab);
+                        List<Colonia> col = manejadorColonias.ObtenerColoniasXPartida(2, plazaId, zonaId, spConColoniaXZona.fiColoniaId, zonTab);
                         if (col != null && col.Count > 0)
                         {
                             listaColonias.Add(col[0]);

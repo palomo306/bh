@@ -14,7 +14,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
     {
         #region Metodos
 
-        public IHttpActionResult GetZona([FromUri]byte vistaId, [FromUri]int estadoId, [FromUri]int municipioId, [FromUri] int zonaId)
+        public IHttpActionResult GetZona([FromUri]byte vistaId, [FromUri]int plazaId, [FromUri] int zonaId)
         {
             ZonaModel zonaModel = new ZonaModel()
             {
@@ -27,7 +27,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             {
                 using (ManejadorZonas manejadorZonas = new ManejadorZonas())
                 {
-                    zonaModel.ListaZonas = manejadorZonas.ObtenerZonas(vistaId, estadoId, municipioId, zonaId);
+                    zonaModel.ListaZonas = manejadorZonas.ObtenerZonas(vistaId, plazaId, zonaId);
                     zonaModel.Succes = true;
                 }
             }
@@ -175,7 +175,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             return Ok(zonaModel);
         }
 
-        public IHttpActionResult DeleteZona([FromUri] byte vistaId, [FromUri]int estadoId, [FromUri]int municipioId, [FromUri]int zonaId)
+        public IHttpActionResult DeleteZona([FromUri] byte vistaId, [FromUri]int plazaId,  [FromUri]int zonaId)
         {
             ZonaModel zonaModel = new ZonaModel()
             {
@@ -192,7 +192,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                     {
                         if (vistaId == 1)
                         {
-                            if (!manejadorZonas.EliminarZona(estadoId, municipioId, zonaId))
+                            if (!manejadorZonas.EliminarZona(plazaId, zonaId))
                             {
                                 zonaModel.Mensaje = "No fue posible eliminar de la zona";
                             }
@@ -204,7 +204,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                         }
                         else if (vistaId == 2)
                         {
-                            if (!manejadorZonas.EliminarSubZona(estadoId, municipioId, zonaId))
+                            if (!manejadorZonas.EliminarSubZona(plazaId, zonaId))
                             {
                                 zonaModel.Mensaje = "No fue posible eliminar de la subzona";
                             }

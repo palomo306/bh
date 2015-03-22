@@ -57,7 +57,6 @@
     <None Include="app.config" />
     <None Include="DataAccess.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataAccess.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">

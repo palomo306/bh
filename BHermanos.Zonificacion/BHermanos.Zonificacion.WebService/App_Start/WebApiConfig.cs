@@ -72,7 +72,7 @@ namespace BHermanos.Zonificacion.WebService
             //Mapeo de Zonas
             config.Routes.MapHttpRoute(
                name: "GetZona",
-               routeTemplate: "WebService/{controller}/GetZona/{vistaId}/{estadoId}/{municipioId}/{zonaId}"
+               routeTemplate: "WebService/{controller}/GetZona/{vistaId}/{plazaId}/{zonaId}"
             );
 
             config.Routes.MapHttpRoute(
@@ -84,12 +84,12 @@ namespace BHermanos.Zonificacion.WebService
             config.Routes.MapHttpRoute(
                name: "PutZona",
                routeTemplate: "WebService/{controller}/PutZona/{vistaId}",
-               defaults: new { vistaId = RouteParameter.Optional }
+               defaults: null
             );
 
             config.Routes.MapHttpRoute(
                 name: "DeleteZona",
-                routeTemplate: "WebService/{controller}/DeleteZona/{vistaId}/{estadoId}/{municipioId}/{zonaId}"
+                routeTemplate: "WebService/{controller}/DeleteZona/{vistaId}/{plazaId}/{zonaId}"
             );
 
             //Mapeo de Colonias

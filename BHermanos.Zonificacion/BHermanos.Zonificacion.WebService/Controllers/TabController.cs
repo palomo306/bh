@@ -37,7 +37,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             return Ok(tabModel);
         }
 
-        public IHttpActionResult GetTab([FromUri]int tabId, [FromUri]int estadoId, [FromUri]int municipioId)
+        public IHttpActionResult GetTab([FromUri]int tabId, [FromUri]int plazaId)
         {
             TabModel tabModel = new TabModel()
             {
@@ -50,7 +50,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             {
                 using (ManejadorTabs manejoTabs = new ManejadorTabs())
                 {
-                    tabModel.ListaTabs = manejoTabs.ObtenerTab(tabId, estadoId, municipioId);
+                    tabModel.ListaTabs = manejoTabs.ObtenerTab(tabId, plazaId);
                     tabModel.Succes = true;
                 }
             }

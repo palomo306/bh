@@ -25,7 +25,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region Metodos publicos
 
-        public List<Zona> ObtenerZonas(byte vistaId, int estadoId, int municipioId, int zonaId)
+        public List<Zona> ObtenerZonas(byte vistaId, int plazaId, int zonaId)
         {
             List<Zona> listaZonas = new List<Zona>();
             try
@@ -35,8 +35,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     case 0: //zona vacia
                         Zona zona1 = new Zona();
                         zona1.Id = 0;
-                        zona1.EstadoId = estadoId;
-                        zona1.MunicipioId = municipioId;
+                        zona1.PlazaId = plazaId;                        
                         zona1.Nombre = "";
                         zona1.Color = "";
                         zona1.ListaSubzonas = new List<Zona>();
@@ -45,18 +44,17 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         listaZonas.Add(zona1);
                         break;
                     case 1: //obtener zona
-                        var spConZonas1 = base.oDataAccess.spConZonas(2, estadoId, municipioId, zonaId);
+                        var spConZonas1 = base.oDataAccess.spConZonas(2, plazaId, zonaId);
                         foreach (var reg in spConZonas1)
                         {
                             Zona zona2 = new Zona();
                             zona2.Id = reg.fiZonaId;
-                            zona2.EstadoId = reg.fiEstadoId;
-                            zona2.MunicipioId = reg.fiMunicipioId;
+                            zona2.PlazaId = reg.fiPlazaId;                            
                             zona2.Nombre = reg.fcNombre;
                             zona2.Color = reg.fcColor;
                             //Se agregan las colonias base
-                            zona2.ListaSubzonas = this.ObtenerSubZonas(reg.fiEstadoId, reg.fiMunicipioId, reg.fiZonaId);
-                            zona2.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiEstadoId, reg.fiMunicipioId, reg.fiZonaId);
+                            zona2.ListaSubzonas = this.ObtenerSubZonas(reg.fiPlazaId, reg.fiZonaId);
+                            zona2.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiPlazaId, reg.fiZonaId);
                             zona2.ListaPartidas = new List<Partida>();
                             //Se agrega la colonia vacía
                             List<Colonia> latAuxColonias = this.ObtenerColoniasVacia();
@@ -65,17 +63,16 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         }
                         break;
                     default:
-                        var spConZonas2 = base.oDataAccess.spConZonas(1, estadoId, municipioId, zonaId);
+                        var spConZonas2 = base.oDataAccess.spConZonas(1, plazaId, zonaId);
                         foreach (var reg in spConZonas2)
                         {
                             Zona zona2 = new Zona();
                             zona2.Id = reg.fiZonaId;
-                            zona2.EstadoId = reg.fiEstadoId;
-                            zona2.MunicipioId = reg.fiMunicipioId;
+                            zona2.PlazaId = reg.fiPlazaId;                            
                             zona2.Nombre = reg.fcNombre;
                             zona2.Color = reg.fcColor;
-                            zona2.ListaSubzonas = this.ObtenerSubZonas(reg.fiEstadoId,reg.fiMunicipioId,reg.fiZonaId);
-                            zona2.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiEstadoId,reg.fiMunicipioId,reg.fiZonaId);
+                            zona2.ListaSubzonas = this.ObtenerSubZonas(reg.fiPlazaId,reg.fiZonaId);
+                            zona2.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiPlazaId,reg.fiZonaId);
                             zona2.ListaPartidas = new List<Partida>();
                             //Se agrega la colonia vacía
                             List<Colonia> latAuxColonias = this.ObtenerColoniasVacia();
@@ -97,7 +94,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             string colonias = string.Empty;
             try
             {                
-                base.oDataAccess.spInsZonas(zona.EstadoId, zona.MunicipioId, zona.Nombre, zona.Color, zona.Colonias);
+                base.oDataAccess.spInsZona(zona.PlazaId, zona.Nombre, zona.Color, zona.Colonias);
                 return true;
             }
             catch (Exception ex)
@@ -111,7 +108,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             string colonias = string.Empty;
             try
             {
-                base.oDataAccess.spInsSubZonas(zona.EstadoId, zona.MunicipioId, zona.Nombre, zona.Color, zona.Colonias, zonaId);
+                base.oDataAccess.spInsSubZona(zona.PlazaId, zonaId, zona.Nombre, zona.Color, zona.Colonias);
                 return true;
             }
             catch (Exception ex)
@@ -125,7 +122,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             string colonias = string.Empty;
             try
             {
-                base.oDataAccess.spUpdZona(zona.EstadoId,zona.MunicipioId,zona.Nombre, zona.Color, zona.Colonias, zona.Id);
+                base.oDataAccess.spUpdZona(zona.PlazaId,zona.Id,zona.Nombre, zona.Color, zona.Colonias);
                 return true;
             }
             catch (Exception ex)
@@ -139,7 +136,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             string colonias = string.Empty;
             try
             {
-                base.oDataAccess.spUpdSubZonas(zona.EstadoId, zona.MunicipioId, zona.Nombre, zona.Color, zona.Colonias, zona.Id);
+                base.oDataAccess.spUpdSubZona(zona.PlazaId, zona.Id, zona.Nombre, zona.Color, zona.Colonias);
                 return true;
             }
             catch (Exception ex)
@@ -148,12 +145,12 @@ namespace BHermanos.Zonificacion.BusinessMaps
             }
         }
 
-        public bool EliminarZona(int estadoId, int municipioId, int zonaId)
+        public bool EliminarZona(int plazaId, int zonaId)
         {
             string colonias = string.Empty;
             try
             {
-                base.oDataAccess.spDelZonas(estadoId, municipioId, zonaId);
+                base.oDataAccess.spDelZona(plazaId, zonaId);
                 return true;
             }
             catch (Exception ex)
@@ -162,11 +159,11 @@ namespace BHermanos.Zonificacion.BusinessMaps
             }
         }
 
-        public bool EliminarSubZona(int estadoId, int municipioId, int subZonaId)
+        public bool EliminarSubZona(int plazaId, int subZonaId)
         {            
             try
             {
-                base.oDataAccess.spDelSubZonas(estadoId, municipioId, subZonaId);
+                base.oDataAccess.spDelSubZona(plazaId, subZonaId);
                 return true;
             }
             catch (Exception ex)
@@ -179,22 +176,21 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region "Metodos privados"
 
-        private List<Zona> ObtenerSubZonas(int estadoId, int municipioId, int zonaId) 
+        private List<Zona> ObtenerSubZonas(int plazaId, int zonaId) 
         {
             List<Zona> listaSubZonas = new List<Zona>();
             try
             {
-                var spConZonas = base.oDataAccess.spConZonas(1, estadoId, municipioId, zonaId);
+                var spConZonas = base.oDataAccess.spConZonas(1, plazaId, zonaId);
                 foreach (var reg in spConZonas)
                 {
                     Zona zona = new Zona();
                     zona.Id = reg.fiZonaId;
-                    zona.EstadoId = reg.fiEstadoId;
-                    zona.MunicipioId = reg.fiMunicipioId;
+                    zona.PlazaId = reg.fiPlazaId;                    
                     zona.Nombre = reg.fcNombre;
                     zona.Color = reg.fcColor;
                     zona.ListaSubzonas = new List<Zona>();                    
-                    zona.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiEstadoId,reg.fiMunicipioId,reg.fiZonaId);
+                    zona.ListaColonias = this.ObtenerColoniasXZona(1,reg.fiPlazaId,reg.fiZonaId);
                     //Se agrega la colonia vacía
                     List<Colonia> latAuxColonias = this.ObtenerColoniasVacia();
                     zona.ListaColonias.Insert(0, latAuxColonias[0]);
@@ -209,17 +205,17 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaSubZonas;
         }
 
-        private List<Colonia> ObtenerColoniasXZona(byte vista, int estadoId, int municipioId, int zonaId)
+        private List<Colonia> ObtenerColoniasXZona(byte vista, int plazaId, int zonaId)
         {
             List<Colonia> listaColonias = new List<Colonia>();
             try
             {
-                var spConColoniasXZona = base.oDataAccess.spConColoniasXZona(vista, estadoId, municipioId, zonaId);
+                var spConColoniasXZona = base.oDataAccess.spConColoniasXZona(vista, plazaId, zonaId);
                 using (ManejadorColonias manejadorColonias = new ManejadorColonias())
                 {
                     foreach (var reg in spConColoniasXZona)
                     {
-                        List<Colonia> col = manejadorColonias.ObtenerColonias(2, estadoId, municipioId, reg.fiColoniaId);
+                        List<Colonia> col = manejadorColonias.ObtenerColonias(2, plazaId, reg.fiColoniaId);
                         if (col != null && col.Count > 0)
 
                             listaColonias.Add(col[0]);

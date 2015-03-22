@@ -13,7 +13,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
     {
         #region Metodos
 
-        public IHttpActionResult GetColonia([FromUri]byte vistaId, [FromUri]int estadoId, [FromUri]int municipioId, [FromUri]double coloniaId)
+        public IHttpActionResult GetColonia([FromUri]byte vistaId, [FromUri]int plazaId, [FromUri]double coloniaId)
         {
             ColoniaModel coloniaModel = new ColoniaModel()
             {
@@ -26,7 +26,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             {
                 using (ManejadorColonias manejadorColonias = new ManejadorColonias())
                 {
-                    coloniaModel.ListaColonias = manejadorColonias.ObtenerColonias(vistaId, estadoId, municipioId, coloniaId);
+                    coloniaModel.ListaColonias = manejadorColonias.ObtenerColonias(vistaId, plazaId,coloniaId);
                     coloniaModel.Succes = true;
                 }
             }

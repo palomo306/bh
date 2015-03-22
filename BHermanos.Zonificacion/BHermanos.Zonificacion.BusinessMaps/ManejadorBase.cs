@@ -100,22 +100,22 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return valor;
         }
 
-        protected virtual List<Humbral> ObtieneHumbrales(int nivel, int estadoId, int municipioId, int zonaId, double coloniaId, double valor, DataAccess.ZonPartidasXTab zonPartidaXTab)
+        protected virtual List<Humbral> ObtieneHumbrales(int nivel, int plazaId, int zonaId, double coloniaId, double valor, DataAccess.ZonPartidasXTab zonPartidaXTab)
         {
             List<Humbral> listaHumbrales = new List<Humbral>();
             List<DataAccess.ZonUmbralesXPartida> listaZonUmbralesXPartida = null;
             try
             {
-                listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiEstadoId == estadoId && h.fiMunicipioId == municipioId && h.fiZonaId == zonaId && h.fiColoniaId == coloniaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
+                listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiPlazaId == plazaId && h.fiZonaId == zonaId && h.fiColoniaId == coloniaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
                 if (listaZonUmbralesXPartida == null || listaZonUmbralesXPartida.Count() == 0)
                 {
-                    listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiEstadoId == estadoId && h.fiMunicipioId == municipioId && h.fiZonaId == zonaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
+                    listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiPlazaId == plazaId && h.fiZonaId == zonaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
                     if (listaZonUmbralesXPartida == null || listaZonUmbralesXPartida.Count() == 0)
                     {
-                        listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiEstadoId == estadoId && h.fiMunicipioId == municipioId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
+                        listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiPlazaId == plazaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
                         if (listaZonUmbralesXPartida == null || listaZonUmbralesXPartida.Count() == 0)
                         {
-                            listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiEstadoId == estadoId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
+                            listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel && h.fiPlazaId == plazaId).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();
                             if (listaZonUmbralesXPartida == null || listaZonUmbralesXPartida.Count() == 0)
                             {
                                 listaZonUmbralesXPartida = zonPartidaXTab.ZonUmbralesXPartidas.Where(h => h.fiNivel == nivel).OrderBy(hh => hh.fiConsecutivo).ToList<DataAccess.ZonUmbralesXPartida>();

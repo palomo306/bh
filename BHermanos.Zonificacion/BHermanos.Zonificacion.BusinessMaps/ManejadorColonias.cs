@@ -30,12 +30,12 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region Metodos publicos
 
-        public List<Colonia> ObtenerColonias(byte vistaId, int estadoId, int municipioId, double coloniaId)
+        public List<Colonia> ObtenerColonias(byte vistaId, int plazaId, double coloniaId)
         {
             List<Colonia> listacolonias = new List<Colonia>();
             try
             {
-                var spConColonias = base.oDataAccess.spConColonias(vistaId, estadoId, municipioId, coloniaId);
+                var spConColonias = base.oDataAccess.spConColonias(vistaId, plazaId, coloniaId);
                 foreach (var registro in spConColonias)
                 {
                     Colonia colonia = new Colonia();
@@ -73,12 +73,12 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listacolonias;
         }
 
-        public List<Colonia> ObtenerColoniasXPartida(byte vistaId, int estadoId, int municipioId, int zonaId, double coloniaId, DataAccess.ZonTab zonTab)
+        public List<Colonia> ObtenerColoniasXPartida(byte vistaId, int plazaId, int zonaId, double coloniaId, DataAccess.ZonTab zonTab)
         {
             List<Colonia> listacolonias = new List<Colonia>();
             try
             {
-                var spConColonias = base.oDataAccess.spConColonias(vistaId, estadoId, municipioId, coloniaId);
+                var spConColonias = base.oDataAccess.spConColonias(vistaId, plazaId, coloniaId);
                 foreach (var registro in spConColonias)
                 {
                     Colonia colonia = new Colonia();
@@ -86,7 +86,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     colonia.Nombre = registro.Nombre;
                     colonia.Tipo = (byte)registro.IdTipo;
                     colonia.ListaGrupoRubros = new List<GrupoRubros>();
-                    colonia.ListaPartidas = this.ObtenerListaDePartidasDeColonia(3,estadoId, municipioId, zonaId, coloniaId, registro, zonTab);
+                    colonia.ListaPartidas = this.ObtenerListaDePartidasDeColonia(3,plazaId, zonaId, coloniaId, registro, zonTab);
                     listacolonias.Add(colonia);
                 }
             }
@@ -157,7 +157,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaRubros;
         }
 
-        private List<Partida> ObtenerListaDePartidasDeColonia(int nivel, int estadoId, int municipioId, int zonaId, double coloniaId, DataAccess.spConColoniasResult coloniasResult, DataAccess.ZonTab zonTab)
+        private List<Partida> ObtenerListaDePartidasDeColonia(int nivel, int plazaId, int zonaId, double coloniaId, DataAccess.spConColoniasResult coloniasResult, DataAccess.ZonTab zonTab)
         {
             List<Partida> listaPartidas = new List<Partida>();
 
@@ -171,7 +171,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     partida.TieneHumbral = zonPartidaXTab.flTieneUmbral;
                     partida.Orden = zonPartidaXTab.fiOrden;
                     partida.Valor = (double)this.AsignaValor(zonPartidaXTab.fcExpresion, coloniasResult);
-                    partida.ListaHumbrales = this.ObtieneHumbrales(nivel, estadoId, municipioId, zonaId, coloniaId, partida.Valor, zonPartidaXTab);
+                    partida.ListaHumbrales = this.ObtieneHumbrales(nivel, plazaId, zonaId, coloniaId, partida.Valor, zonPartidaXTab);
                     partida.Color = this.ObtieneColor(partida.Valor,partida.ListaHumbrales);                    
                     listaPartidas.Add(partida);                    
                 }
