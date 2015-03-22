@@ -11,20 +11,21 @@ namespace RegionDemo.Clases
     public class SinglePlazaCustomRenderSettings  : ICustomRenderSettings
     {
         #region Propiedades
-        private List<System.Drawing.Color> colorList;        
+        private List<ColorRecord> colorList;
+        private List<ColorRecord> zoneColorList;                
         RenderSettings defaultSettings;
         #endregion
 
-        public SinglePlazaCustomRenderSettings(RenderSettings defaultSettings, BE.Plaza plaza)
+        public SinglePlazaCustomRenderSettings(RenderSettings defaultSettings, BE.Plaza plaza, List<BE.Zona> lstZonas)
         {
             this.defaultSettings = defaultSettings;
-            BuildColorList(defaultSettings, plaza);
+            BuildColorList(defaultSettings, plaza,lstZonas);
         }
 
-        private void BuildColorList(RenderSettings defaultSettings, BE.Plaza plaza)
+        private void BuildColorList(RenderSettings defaultSettings, BE.Plaza plaza, List<BE.Zona> lstZonas)
         {
-            colorList = new List<System.Drawing.Color>();
-
+            colorList = new List<ColorRecord>();
+            zoneColorList = new List<ColorRecord>();
             int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
             for (int n = 0; n < numRecords; ++n)
             {
@@ -40,31 +41,13 @@ namespace RegionDemo.Clases
                     colString = defaultSettings.DbfReader.GetField(n, 4).Trim() + colString;
                 }
                 double colonia = Convert.ToDouble(colString);
-
                 //Se busca la colonia en alguna plaza
-                bool existColony = false;
-                BE.Plaza plazaWithColony = null;
-                List<BE.Estado> plEstados = plaza.ListaEstados.Where(es => es.ListaMunicipios.Where(mun => mun.Id == municipio).Any()).ToList();
-                foreach (BE.Estado es in plEstados)
-                {
-                    existColony = es.ListaMunicipios.Where(mun => mun.ListaColonias.Where(col => col.Id == colonia).Any()).Any();
-                    if (existColony)
-                        break;
-                }
-                if (existColony)
-                {
-                    plazaWithColony = plaza;
-                    break;
-                }
-
-                if (plazaWithColony != null)
-                {
-                    colorList.Add(plazaWithColony.RealColor);
-                }
-                else
-                {
-                    colorList.Add(defaultSettings.FillColor);
-                }
+                if (plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                    colorList.Add(new ColorRecord() { Color = plaza.RealColor, Record = n });
+                //Se busca si la colonia existe en alguna zona
+                BE.Zona zone = lstZonas.Where(lz => lz.ListaColonias.Where(c => c.Id == colonia).Any()).FirstOrDefault();
+                if (zone != null)
+                    zoneColorList.Add(new ColorRecord() { Color = zone.RealColor, Record = n });
             }
         }
 
@@ -72,6 +55,11 @@ namespace RegionDemo.Clases
 
         public System.Drawing.Color GetRecordFillColor(int recordNumber)
         {
+            ColorRecord cRecord = zoneColorList.Where(cr => cr.Record == recordNumber).FirstOrDefault();
+            if (cRecord != null)
+            {
+                return cRecord.Color;
+            }
             return defaultSettings.FillColor;
         }
 
@@ -87,15 +75,21 @@ namespace RegionDemo.Clases
 
         public System.Drawing.Color GetRecordOutlineColor(int recordNumber)
         {
-            if (colorList != null)
+            ColorRecord cRecord = colorList.Where(cr => cr.Record == recordNumber).FirstOrDefault();
+            if (cRecord != null)
             {
-                return colorList[recordNumber];
+                return cRecord.Color;
             }
             return Color.Gray;
         }
 
         public Color GetRecordSelectColor(int recordNumber)
-        {            
+        {
+            ColorRecord cRecord = zoneColorList.Where(cr => cr.Record == recordNumber).FirstOrDefault();
+            if (cRecord != null)
+            {
+                return cRecord.Color;
+            }
             return defaultSettings.SelectFillColor;
         }
 
@@ -121,10 +115,10 @@ namespace RegionDemo.Clases
 
         public float GetRecordOutlineWidth(int recordNumber)
         {
-            if (colorList != null)
+            ColorRecord cRecord = colorList.Where(cr => cr.Record == recordNumber).FirstOrDefault();
+            if (cRecord != null)
             {
-                if (colorList[recordNumber] != defaultSettings.FillColor)
-                    return 2;
+                return 2;
             }
             return defaultSettings.PenWidthScale;
         }

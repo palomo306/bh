@@ -79,7 +79,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-                url += "Zona/GetZona/0/0/0/0?type=json";
+                url += "Zona/GetZona/0/0/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Timeout = 20000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -152,7 +152,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-                url += "Zona/GetZona/2/" + "" + "/" + "" + "/0?type=json";
+                url += "Zona/GetZona/2/" + this.CurrentPlaza.Id.ToString() + "/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Timeout = 20000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -557,7 +557,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
-                    SinglePlazaCustomRenderSettings crsPl = new SinglePlazaCustomRenderSettings(sf.RenderSettings, this.CurrentPlaza);
+                    SinglePlazaCustomRenderSettings crsPl = new SinglePlazaCustomRenderSettings(sf.RenderSettings, this.CurrentPlaza, this.ListZonas);
                     sf.RenderSettings.CustomRenderSettings = crsPl;
                     layerIndex += 5;
                 }
@@ -617,8 +617,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 foreach (BE.Estado edo in this.CurrentPlaza.ListaEstados)
                 {
                     LoadMapsByEdo(edo);
-                }
-                LoadCurrentPlazaRenderSetting();
+                }                
             }
         }
 
@@ -694,6 +693,61 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 }
             }
         }
+
+        private void ZoomToPlaza(List<BE.Estado> estados)
+        {
+            int shapeCount = sfmMainMap.ShapeFileCount;
+            if (shapeCount > 1)
+            {
+                bool isFirstShape = true;
+                //Se recorren los datos
+                int layerIndex = 2;
+                while (layerIndex < shapeCount)
+                {
+                    EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
+                    string[] rEdos = sf.GetRecords(1);
+                    string[] rMun = sf.GetRecords(2);
+                    string[] rCols = sf.GetRecords(7);
+                    string[] rLocs = sf.GetRecords(3);
+                    string[] rTipo = sf.GetRecords(4);
+                    string[] rLocs2 = sf.GetRecords(8);
+                    for (int i = 0; i < sf.RecordCount; i++)
+                    {
+                        //Se saca el Id de la colonia
+                        string colString = rCols[i].Replace("|", "").Trim();
+                        if (colString == "NA")
+                        {
+                            colString = rTipo[i].Trim() + rEdos[i].Trim().PadLeft(2, '0') + rMun[i].Trim().PadLeft(3, '0') + rLocs[i].Trim().PadLeft(4, '0') + rLocs2[i].Trim().PadLeft(5, '0');
+                        }
+                        else
+                        {
+                            colString = rTipo[i].Trim() + colString;
+                        }
+                        //Se revisa si la colonia existe en la plaza
+                        BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
+                        if (currEstado != null)
+                        {
+                            BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
+                            if (currMuni != null)
+                            {
+                                BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                                if (currCol != null)
+                                {
+
+                                    ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                                    sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                                    isFirstShape = false;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    layerIndex += 5;
+                }
+                sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
+            }
+        }
         #endregion
 
         #region Constructor
@@ -702,6 +756,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             InitializeComponent();
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            InitializeNewZone();
+            PrintCurrentZona(this.CurrentZone);
             LoadPlazas();
             LoadMainMap();
             IsFirsTime = false;
@@ -774,7 +830,29 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         layerIndex += 5;
                     }
                     //Se actualiza la zona actual
+                    List<double> lstCurrentCols = zoneLevel.ListaColonias.Select(zl => zl.Id).ToList();
+                    //Se eliminan las colonias no necesarias
+                    foreach (double colId in lstCurrentCols)
+                    {
+                        BE.Colonia colForDelete = lstSelColonias.Where(c => c.Id == colId).FirstOrDefault();
+                        if (colForDelete == null)
+                        {
+                            BE.Colonia delCol = zoneLevel.ListaColonias.Where(c => c.Id == colId).FirstOrDefault();
+                            if (delCol != null)
+                                zoneLevel.ListaColonias.Remove(delCol);
+                        }
+                    }
+                    //Se agregan las nuevas colonias seleccionadas
+                    foreach (BE.Colonia newCol in lstSelColonias)
+                    {
+                        if (!lstCurrentCols.Contains(newCol.Id))
+                        {
+                            BE.Colonia newColWithData = GetNewCol(newCol.EstadoId.ToString(), newCol.MunicipioId.ToString(), newCol.Id.ToString());
+                            this.CurrentZone.ListaColonias.Add(newColWithData);
+                        }
+                    }
                     zoneLevel.ListaColonias = lstSelColonias;
+                    PrintCurrentZona(zoneLevel);
                 }
             }
             catch (Exception ex)
@@ -823,7 +901,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                ChangeZonaSelections();
+                ChangeZonaSelections();                
                 sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
             }
             catch (Exception ex)
@@ -851,8 +929,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     //Se cargan los Shapes de la Plaza Actual
                     this.CurrentPlaza = auxPlaza;
                     LoadPlazaShapes();
+                    ZoomToPlaza(this.CurrentPlaza.ListaEstados);
                     //Se cargan las zonas relacionadas con la plaza
                     LoadZonas();
+                    LoadCurrentPlazaRenderSetting();
                     PrintZonas(this.ListZonas);
                     InitializeNewZone();
                     PrintCurrentZona(this.CurrentZone);
@@ -860,17 +940,17 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     sfmMainMap.CtrlDown = false;
                     sfmMainMap.Focus();
                 }
-            }
-            else
-            {
-                ClearSelectedRecords();
-                RemovePlazaShapes();
-                InitializeNewZone();
-                PrintCurrentZona(this.CurrentZone);
-                LoadZonas();
-                PrintZonas(this.ListZonas);
-                SetUpdateLevel(-1);
-            }
+                else
+                {
+                    ClearSelectedRecords();
+                    RemovePlazaShapes();
+                    InitializeNewZone();
+                    PrintCurrentZona(this.CurrentZone);
+                    LoadZonas();
+                    PrintZonas(this.ListZonas);
+                    SetUpdateLevel(-1);
+                }
+            }            
         }
         #endregion
 
@@ -968,7 +1048,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     btnDelete.Visible = false;
                     btnCanelZone.Location = new Point(233, btnCanelZone.Location.Y);
                     btnSaveZone.Location = new Point(128, btnCanelZone.Location.Y);
-                    pnlHeadFields.Width = 425;
+                    pnlHeadFields.Width = 267;
                     break;
                 case 0:
                     txtCurrentZona.Text = "Nueva Zona";
@@ -977,7 +1057,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     btnDelete.Visible = false;
                     btnCanelZone.Location = new Point(233, btnCanelZone.Location.Y);
                     btnSaveZone.Location = new Point(128, btnCanelZone.Location.Y);
-                    pnlHeadFields.Width = 585;
+                    pnlHeadFields.Width = 425;
                     break;
                 case 1:
                     txtCurrentZona.Text = this.CurrentZone.Nombre;
@@ -990,7 +1070,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     btnSaveZone.Location = new Point(22, btnCanelZone.Location.Y);
                     btnNewZubZona.Location = new Point(128, btnCanelZone.Location.Y);
                     SetupZonaSubzonasCustomRenderSettings();
-                    pnlHeadFields.Width = 585;
+                    pnlHeadFields.Width = 425;
                     break;
                 case 2:
                     txtCurrentSubzona.Text = "Nueva Subzona";
@@ -999,7 +1079,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     btnDelete.Visible = false;
                     btnCanelZone.Location = new Point(233, btnCanelZone.Location.Y);
                     btnSaveZone.Location = new Point(128, btnCanelZone.Location.Y);
-                    pnlHeadFields.Width = 740;
+                    pnlHeadFields.Width = 580;
                     SetupZonaSubzonasCustomRenderSettings();
                     break;
                 case 3:
@@ -1011,7 +1091,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     btnDelete.Visible = true;
                     btnCanelZone.Location = new Point(233, btnCanelZone.Location.Y);
                     btnSaveZone.Location = new Point(128, btnCanelZone.Location.Y);
-                    pnlHeadFields.Width = 740;
+                    pnlHeadFields.Width = 580;
                     SetupZonaSubzonasCustomRenderSettings();
                     break;
             }
