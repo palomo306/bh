@@ -42,30 +42,9 @@ namespace RegionDemo.Clases
                     colString = defaultSettings.DbfReader.GetField(n, 4).Trim() + colString;
                 }
                 double colonia = Convert.ToDouble(colString);
-
-                List<BE.Zona> lstZona = ListZonas.Where(z => z.EstadoId == estado && z.MunicipioId == municipio).ToList();
-                if (lstZona.Count > 0)
-                {
-                    bool existColony = false;
-                    BE.Zona colonyInZona = null;
-                    foreach (BE.Zona zon in lstZona)
-                    {
-                        if (zon.ListaColonias != null && zon.ListaColonias.Count > 0)
-                        {
-                            BE.Colonia col = zon.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                            if (col != null)
-                            {
-                                colonyInZona = zon;
-                                existColony = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (existColony)
-                        colorList.Add(colonyInZona.RealColor);
-                    else
-                        colorList.Add(defaultSettings.FillColor);
-                }
+                BE.Zona zona = ListZonas.Where(z => z.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
+                if (zona != null)
+                    colorList.Add(zona.RealColor);
                 else
                     colorList.Add(defaultSettings.FillColor);
             }

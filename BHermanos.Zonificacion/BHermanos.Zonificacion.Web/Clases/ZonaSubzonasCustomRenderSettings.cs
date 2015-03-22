@@ -34,7 +34,7 @@ namespace BHermanos.Zonificacion.Web.Clases
             try
             {
                 List<BE.Zona> ListZonas = Zona.ListaSubzonas;
-                colorList = new List<ColorRecord>();                
+                colorList = new List<ColorRecord>();
 
                 int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
                 for (int n = 0; n < numRecords; ++n)
@@ -55,28 +55,11 @@ namespace BHermanos.Zonificacion.Web.Clases
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisan las subzonas
-                    List<BE.Zona> lstZona = ListZonas.Where(z => z.EstadoId == estado && z.MunicipioId == municipio).ToList();
-                    if (lstZona.Count > 0)
+                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
+                    if (zona != null)
                     {
-                        bool existColony = false;
-                        BE.Zona colonyInSubZona = null;
-                        //BE.Zona colonyInZona = null;
-                        foreach (BE.Zona zon in lstZona)
-                        {
-                            if (zon.ListaColonias != null && zon.ListaColonias.Count > 0)
-                            {
-                                BE.Colonia col = zon.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                                if (col != null)
-                                {
-                                    colonyInSubZona = zon;
-                                    existColony = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (existColony)
-                            colorList.Add(new ColorRecord() { Color = colonyInSubZona.RealColor, Record = n });
-                    }                    
+                        colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
+                    }
                 }
             }
             catch (Exception ex)
@@ -89,7 +72,9 @@ namespace BHermanos.Zonificacion.Web.Clases
         {
             try
             {
-                colorListOutLine = new List<ColorRecord>();
+                List<BE.Zona> ListZonas = Zona.ListaSubzonas;
+                colorList = new List<ColorRecord>();
+
                 int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
                 for (int n = 0; n < numRecords; ++n)
                 {
@@ -108,29 +93,17 @@ namespace BHermanos.Zonificacion.Web.Clases
                     double colonia = Convert.ToDouble(colString);
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
-
-                    //Se revisa la zona
-                    bool existColonyZona = false;
-                    if (Zona.EstadoId == estado && Zona.MunicipioId == municipio)
+                    //Se revisan las subzonas
+                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
+                    if (zona != null)
                     {
-                        if (Zona.ListaColonias != null && Zona.ListaColonias.Count > 0)
-                        {
-
-                            BE.Colonia col = Zona.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                            if (col != null)
-                            {
-                                existColonyZona = true;
-                            }
-                        }
-                        if (existColonyZona)
-                        {
-                            colorListOutLine.Add(new ColorRecord() { Color = Zona.RealColor, Record = n });
-                        }
+                        colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                throw ex;
             }
         }
 
