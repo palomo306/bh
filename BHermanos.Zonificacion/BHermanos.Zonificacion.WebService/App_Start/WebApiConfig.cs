@@ -95,7 +95,7 @@ namespace BHermanos.Zonificacion.WebService
             //Mapeo de Colonias
             config.Routes.MapHttpRoute(
                name: "GetColonia",
-               routeTemplate: "WebService/{controller}/GetColonia/{vistaId}/{estadoId}/{municipioId}/{coloniaId}"
+               routeTemplate: "WebService/{controller}/GetColonia/{vistaId}/{plazaId}/{coloniaId}"
             );
 
             //Mapeo de Grupo de Rubros
