@@ -30,8 +30,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone.Modal
             }
         }
 
-        public string Estado { get; set; }
-        public string Municipio { get; set; }
+        public string Plaza { get; set; }
         #endregion
 
         #region Constructor
@@ -84,22 +83,22 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone.Modal
             cellBlank0.Colspan = 4;
             cellBlank0.HorizontalAlignment = Element.ALIGN_CENTER;
             generalDat.AddCell(cellBlank0);            
-            Phrase pEdoT = new Phrase("Estado:", myfontHead);
+            Phrase pEdoT = new Phrase("Plaza:", myfontHead);
             PdfPCell cellEdoT = new PdfPCell(pEdoT);
             cellEdoT.BackgroundColor = iTextSharp.text.BaseColor.DARK_GRAY;
             cellEdoT.HorizontalAlignment = Element.ALIGN_LEFT;
             generalDat.AddCell(cellEdoT);
-            Phrase pEdo = new Phrase(Estado, myfont);
+            Phrase pEdo = new Phrase(Plaza, myfont);
             PdfPCell cellEdo = new PdfPCell(pEdo);
             cellEdo.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
             cellEdo.HorizontalAlignment = Element.ALIGN_CENTER;
             generalDat.AddCell(cellEdo);
-            Phrase pMunT = new Phrase("Municipio:", myfontHead);
+            Phrase pMunT = new Phrase(" ", myfontHead);
             PdfPCell cellMunT = new PdfPCell(pMunT);
             cellMunT.BackgroundColor = iTextSharp.text.BaseColor.DARK_GRAY;
             cellMunT.HorizontalAlignment = Element.ALIGN_LEFT;
             generalDat.AddCell(cellMunT);
-            Phrase pMun = new Phrase(Municipio, myfont);
+            Phrase pMun = new Phrase(" ", myfont);
             PdfPCell cellMun = new PdfPCell(pMun);
             cellMun.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
             cellMun.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -187,23 +186,23 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone.Modal
             range.Font.Name = "Tahoma";
             range.Font.Bold = true;
             range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
-            range.Value = "Estado:";
+            range.Value = "Plaza:";
             range = xlWorkSheet.Cells[3, 2];
             range.Font.Size = 12;
             range.Font.Name = "Tahoma";
             range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
-            range.Value = Estado;
+            range.Value = Plaza;
             range = xlWorkSheet.Cells[4, 1];
             range.Font.Size = 12;
             range.Font.Name = "Tahoma";
             range.Font.Bold = true;
             range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
-            range.Value = "Municipio:";
+            range.Value = "";
             range = xlWorkSheet.Cells[4, 2];
             range.Font.Size = 12;
             range.Font.Name = "Tahoma";
             range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
-            range.Value = Municipio;
+            range.Value = "";
             for (j = 0; j < Dv.Columns.Count; ++j)
             {
                 range = xlWorkSheet.Cells[i + 6, j + 1];

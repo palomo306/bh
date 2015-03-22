@@ -110,33 +110,14 @@ namespace BHermanos.Zonificacion.Web.Clases
 
                             //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                             //Se revisa si la colonia está en alguna zona (primero por estado / municipio)
-                            List<BE.Zona> lstZona = ListZonas.Where(z => z.EstadoId == estado && z.MunicipioId == municipio).ToList();
-                            if (lstZona.Count > 0)
+                            BE.Zona zona = ListZonas.Where(z => z.ListaColonias.Select(c => c.Id == colonia).Any()).FirstOrDefault();
+                            if (zona != null)
                             {
-                                bool existColony = false;
-                                BE.Zona colonyInZona = null;
-                                //BE.Zona colonyInZona = null;
-                                foreach (BE.Zona zon in lstZona)
-                                {
-                                    if (zon.ListaColonias != null && zon.ListaColonias.Count > 0)
-                                    {
-                                        BE.Colonia col = zon.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                                        if (col != null)
-                                        {
-                                            colonyInZona = zon;
-                                            existColony = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (existColony)
-                                {
-                                    double valor = 0;
-                                    BE.Partida localPartida = colonyInZona.ListaPartidas.Where(p => p.TieneHumbral).FirstOrDefault();
-                                    if (localPartida != null)
-                                        valor = localPartida.Valor;
-                                    colorList.Add(new ColorRecord() { Color = GetColorBasedUmbral(lstUmbrales, valor), Record = n });
-                                }
+                                double valor = 0;
+                                BE.Partida localPartida = zona.ListaPartidas.Where(p => p.TieneHumbral).FirstOrDefault();
+                                if (localPartida != null)
+                                    valor = localPartida.Valor;
+                                colorList.Add(new ColorRecord() { Color = GetColorBasedUmbral(lstUmbrales, valor), Record = n });
                             }
                         }
                     }
@@ -170,31 +151,11 @@ namespace BHermanos.Zonificacion.Web.Clases
                             colString = defaultSettings.DbfReader.GetField(n, 4).Trim() + colString;
                         }
                         double colonia = Convert.ToDouble(colString);
-                        //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                         //Se revisa si la colonia está en alguna zona (primero por estado / municipio)
-                        List<BE.Zona> lstZona = ListZonas.Where(z => z.EstadoId == estado && z.MunicipioId == municipio).ToList();
-                        if (lstZona.Count > 0)
+                        BE.Zona zona = ListZonas.Where(z => z.ListaColonias.Where(col => col.Id == colonia).Any()).FirstOrDefault();
+                        if (zona != null)
                         {
-                            bool existColony = false;
-                            BE.Zona colonyInZona = null;
-                            //BE.Zona colonyInZona = null;
-                            foreach (BE.Zona zon in lstZona)
-                            {
-                                if (zon.ListaColonias != null && zon.ListaColonias.Count > 0)
-                                {
-                                    BE.Colonia col = zon.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                                    if (col != null)
-                                    {
-                                        colonyInZona = zon;
-                                        existColony = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (existColony)
-                            {
-                                colorListOutLine.Add(new ColorRecord() { Color = colonyInZona.RealColor, Record = n });
-                            }
+                            colorListOutLine.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
                         }
                     }
                 }

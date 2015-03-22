@@ -108,11 +108,9 @@ namespace BHermanos.Zonificacion.Web.Clases
                                 colString = defaultSettings.DbfReader.GetField(n, 4).Trim() + colString;
                             }
                             double colonia = Convert.ToDouble(colString);
-
-                            //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                             //Se revisa si la colonia está en alguna zona (primero por estado / municipio)
                             BE.Colonia oColonia = ListColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                            if (CurrentZona.EstadoId == estado && CurrentZona.MunicipioId == municipio && oColonia != null)
+                            if (oColonia != null)
                             {
                                 double valor = 0;
                                 BE.Partida localPartida = oColonia.ListaPartidas.Where(p => p.TieneHumbral).FirstOrDefault();
@@ -150,11 +148,9 @@ namespace BHermanos.Zonificacion.Web.Clases
                         colString = defaultSettings.DbfReader.GetField(n, 4).Trim() + colString;
                     }
                     double colonia = Convert.ToDouble(colString);
-
-                    //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisa si la colonia está en alguna zona (primero por estado / municipio)
-                    BE.Colonia oColonia =  CurrentZona.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
-                    if (CurrentZona.EstadoId == estado && CurrentZona.MunicipioId == municipio && oColonia != null)
+                    BE.Colonia oColonia = CurrentZona.ListaColonias.Where(c => c.Id == colonia).FirstOrDefault();
+                    if (oColonia != null)
                     {
                         colorListOutLine.Add(new ColorRecord() { Color = CurrentZona.RealColor, Record = n });
                     }

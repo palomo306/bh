@@ -294,7 +294,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/DeleteZona/1/" + this.CurrentZone.EstadoId.ToString() + "/" + this.CurrentZone.MunicipioId.ToString() + "/" + this.CurrentZone.Id.ToString() + "?type=json";
+                //url += "Zona/DeleteZona/1/" + this.CurrentZone.EstadoId.ToString() + "/" + this.CurrentZone.MunicipioId.ToString() + "/" + this.CurrentZone.Id.ToString() + "?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "DELETE";
@@ -464,7 +464,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/DeleteZona/2/" + this.CurrentSubzone.EstadoId.ToString() + "/" + this.CurrentSubzone.MunicipioId.ToString() + "/" + this.CurrentSubzone.Id.ToString() + "?type=json";
+                url += "Zona/DeleteZona/2/" + this.CurrentPlaza.Id.ToString() + "/" + this.CurrentSubzone.Id.ToString() + "?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "DELETE";
@@ -669,30 +669,25 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     int i = 0, lastIndex = 0;
                     for (i = 0; i < sf.RecordCount; i++)
                     {
-                        if (Convert.ToInt32(rEdos[i]) == zona.EstadoId && Convert.ToInt32(rMun[i]) == zona.MunicipioId)
+                        List<string> lstColsIds = zona.ListaColonias.Select(c => c.Id.ToString()).ToList();
+                        string colString = rCols[i].Replace("|", "").Trim();
+                        if (colString == "NA")
                         {
-                            List<string> lstColsIds = zona.ListaColonias.Select(c => c.Id.ToString()).ToList();
-
-                            string colString = rCols[i].Replace("|", "").Trim();
-                            if (colString == "NA")
+                            colString = rTipo[i].Trim() + rEdos[i].Trim().PadLeft(2, '0') + rMun[i].Trim().PadLeft(3, '0') + rLocs[i].Trim().PadLeft(4, '0') + rLocs2[i].Trim().PadLeft(5, '0');
+                        }
+                        else
+                        {
+                            colString = rTipo[i].Trim() + colString;
+                        }
+                        if (lstColsIds.Contains(colString))
+                        {
+                            lastIndex = i;
+                            sf.SelectRecord(i, true);
+                            if (isFirstShape)
                             {
-                                colString = rTipo[i].Trim() + rEdos[i].Trim().PadLeft(2, '0') + rMun[i].Trim().PadLeft(3, '0') + rLocs[i].Trim().PadLeft(4, '0') + rLocs2[i].Trim().PadLeft(5, '0');
-                            }
-                            else
-                            {
-                                colString = rTipo[i].Trim() + colString;
-                            }
-
-                            if (lstColsIds.Contains(colString))
-                            {
-                                lastIndex = i;
-                                sf.SelectRecord(i, true);
-                                if (isFirstShape)
-                                {
-                                    ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
-                                    sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
-                                    isFirstShape = false;
-                                }
+                                ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                                sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                                isFirstShape = false;
                             }
                         }
                     }
@@ -1172,8 +1167,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         oWindowZoneName.ShowDialog();
                         if (oWindowZoneName.DialogResult == DialogResult.OK)
                         {
-                            this.CurrentZone.EstadoId = selEdo.Id;
-                            this.CurrentZone.MunicipioId = selMunicipio.Id;
+                            this.CurrentZone.PlazaId = this.CurrentPlaza.Id;
                             this.CurrentZone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentZone.Color = oWindowZoneName.Color;
                             SaveZona();
@@ -1217,8 +1211,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         oWindowZoneName.ShowDialog();
                         if (oWindowZoneName.DialogResult == DialogResult.OK)
                         {
-                            this.CurrentSubzone.EstadoId = selEdo.Id;
-                            this.CurrentSubzone.MunicipioId = selMunicipio.Id;
+                            this.CurrentZone.PlazaId = this.CurrentPlaza.Id;
                             this.CurrentSubzone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentSubzone.Color = oWindowZoneName.Color;
                             SaveSubzona();
@@ -1274,8 +1267,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableAll(CurrentZone, ListZonas);
                         DetailView oWindowDetail = new DetailView();
                         oWindowDetail.Data = dtInformationAll;
-                        oWindowDetail.Estado = ((BE.Estado)cmbEstado.SelectedItem).Nombre;
-                        oWindowDetail.Municipio = ((BE.Municipio)cmbMunicipio.SelectedItem).Nombre;
+                        oWindowDetail.Plaza = ((BE.Plaza)cmbPlazas.SelectedItem).Nombre;
                         oWindowDetail.LoadData();
                         oWindowDetail.Title = "Información General por Zona";
                         oWindowDetail.ShowDialog();
@@ -1307,8 +1299,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableNse(CurrentZone, ListZonas);
                         DetailView oWindowDetail = new DetailView();
                         oWindowDetail.Data = dtInformationAll;
-                        oWindowDetail.Estado = ((BE.Estado)cmbEstado.SelectedItem).Nombre;
-                        oWindowDetail.Municipio = ((BE.Municipio)cmbMunicipio.SelectedItem).Nombre;
+                        oWindowDetail.Plaza = ((BE.Plaza) cmbPlazas.SelectedItem).Nombre;
                         oWindowDetail.LoadData();
                         oWindowDetail.Title = "Información Socioeconómica por Zona";
                         oWindowDetail.ShowDialog();
