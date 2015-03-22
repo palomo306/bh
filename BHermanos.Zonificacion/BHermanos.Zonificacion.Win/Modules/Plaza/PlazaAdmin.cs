@@ -217,27 +217,36 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-                url += "Municipio/GetMunicipio/" + estdo.Id.ToString() + "?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                MunicipioModel objResponse = JsonSerializer.Parse<MunicipioModel>(streamReader.ReadToEnd());
-                if (objResponse.Succes)
+                if (estdo != null)
                 {
-                    List<BE.Municipio> munEdo = objResponse.ListaMunicipios.ToList();
-                    munEdo.ForEach(mun => mun.ParentEstado = estdo);
-                    this.ListMunicipios = this.ListMunicipios.Concat(munEdo).ToList();
-                    this.cmbMunicipio.DataSource = this.ListMunicipios;
-                    this.cmbMunicipio.DisplayMember = "NombreWithEstado";
-                    this.cmbMunicipio.SelectedItem = null;
-                    this.cmbMunicipio.Text = "--Seleccione un municipio--";
+                    string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                    url += "Municipio/GetMunicipio/" + estdo.Id.ToString() + "?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.Timeout = 20000;
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    MunicipioModel objResponse = JsonSerializer.Parse<MunicipioModel>(streamReader.ReadToEnd());
+                    if (objResponse.Succes)
+                    {
+                        List<BE.Municipio> munEdo = objResponse.ListaMunicipios.ToList();
+                        munEdo.ForEach(mun => mun.ParentEstado = estdo);
+                        this.ListMunicipios = this.ListMunicipios.Concat(munEdo).ToList();
+                        this.cmbMunicipio.DataSource = null;
+                        this.cmbMunicipio.DataSource = this.ListMunicipios;
+                        this.cmbMunicipio.DisplayMember = "NombreWithEstado";
+                        this.cmbMunicipio.SelectedItem = null;
+                        this.cmbMunicipio.Text = "--Seleccione un municipio--";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al extraer los datos de los municipios [" + objResponse.Mensaje + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ha ocurrido un error al extraer los datos de los municipios [" + objResponse.Mensaje + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.cmbMunicipio.DataSource = null;                    
+                    this.cmbMunicipio.Text = "--Seleccione un municipio--";
                 }
             }
             catch (Exception ex)
@@ -251,7 +260,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             try
             {
                 this.ListMunicipios.RemoveAll(mun => mun.ParentEstado == estdo);
-                this.cmbMunicipio.DataSource = this.ListMunicipios;
+                this.cmbMunicipio.DataSource = null;
+                this.cmbMunicipio.DataSource = this.ListMunicipios;                
                 this.cmbMunicipio.DisplayMember = "NombreWithEstado";
                 this.cmbMunicipio.SelectedItem = null;
                 this.cmbMunicipio.Text = "--Seleccione un municipio--";
@@ -278,7 +288,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             sf.RenderSettings.IsSelectable = isSelectable;
             sf.RenderSettings.FillInterior = fillInterior;
             sf.RenderSettings.FillColor = Color.FromArgb(transparency, sf.RenderSettings.FillColor);
-            sf.RenderSettings.OutlineColor = Color.FromArgb(transparency, sf.RenderSettings.OutlineColor);
+            sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
             sf.RenderSettings.MinZoomLevel = 15;
             sf.RenderSettings.SelectFillColor = Color.FromArgb(0, 55, 33, 22);            
         }
@@ -625,6 +635,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ListMunicipios = new List<BE.Municipio>();
             ClearForm();
             LoadEstados();
+            LoadMunicipios(null);
             LoadPlazas();
             LoadMainMap();
             IsFirsTime = false;
@@ -694,7 +705,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private void dgPlazas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {                
+            {
                 int idPlaza = Convert.ToInt32(dgPlazas.Rows[e.RowIndex].Cells[4].Value);
                 BE.Plaza clickPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (clickPlaza != null)
@@ -702,11 +713,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     ClearForm();
                     this.CurrentPlaza = clickPlaza;
                     if (e.ColumnIndex == 1)
-                    {                        
+                    {
                         //Se seleccionan los estados
                         foreach (BE.Estado edo in clickPlaza.ListaEstados)
                         {
-                            SelectEdoItem(edo,true);
+                            SelectEdoItem(edo, true);
                         }
                         //Se seleccionan las colonias de la plaza
                         SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);

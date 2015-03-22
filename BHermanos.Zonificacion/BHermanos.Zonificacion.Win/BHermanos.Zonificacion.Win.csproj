@@ -76,6 +76,7 @@
     <Compile Include="Clases\Controles\CheckComboBoxItem.cs" />
     <Compile Include="Clases\MunicipioCustomRenderSettings.cs" />
     <Compile Include="Clases\ColoniaCustomRenderSettings.cs" />
+    <Compile Include="Clases\SinglePlazaCustomRenderSettings .cs" />
     <Compile Include="Clases\PlazaCustomRenderSettings .cs" />
     <Compile Include="Clases\ZonaSubzonasCustomRenderSettings.cs" />
     <Compile Include="Clases\ZonaCustomRenderSettings.cs" />
@@ -133,6 +134,12 @@
     <Compile Include="Modules\Zone\Modal\DetailView.Designer.cs">
       <DependentUpon>DetailView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Zone\NewZoneAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Zone\NewZoneAdmin.Designer.cs">
+      <DependentUpon>NewZoneAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Zone\ZoneAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Zone\Modal\DetailView.resx">
       <DependentUpon>DetailView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Zone\NewZoneAdmin.resx">
+      <DependentUpon>NewZoneAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Zone\ZoneAdmin.resx">
       <DependentUpon>ZoneAdmin.cs</DependentUpon>
@@ -264,13 +274,13 @@
     <None Include="Resources\PasswordReset.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DLL\CollapsibleSplitter.dll" />
-    <Content Include="DLL\EGIS.Controls.dll" />
-    <Content Include="DLL\EGIS.ShapeFileLib.dll" />
-    <Content Include="DLL\geomutil_lib.dll" />
-    <Content Include="DLL\geomutil_libx64.dll" />
-    <Content Include="DLL\itextsharp.dll" />
-    <Content Include="DLL\ZonColonias.sql" />
+    <Content Include="Modules\DLL\CollapsibleSplitter.dll" />
+    <Content Include="Modules\DLL\EGIS.Controls.dll" />
+    <Content Include="Modules\DLL\EGIS.ShapeFileLib.dll" />
+    <Content Include="Modules\DLL\geomutil_lib.dll" />
+    <Content Include="Modules\DLL\geomutil_libx64.dll" />
+    <Content Include="Modules\DLL\itextsharp.dll" />
+    <Content Include="Modules\DLL\ZonColonias.sql" />
     <None Include="Resources\ZoomOut.png" />
     <None Include="Resources\Select.png" />
     <None Include="Resources\ZoomIn.png" />
