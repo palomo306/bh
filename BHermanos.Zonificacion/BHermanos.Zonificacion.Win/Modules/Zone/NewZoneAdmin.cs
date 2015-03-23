@@ -518,7 +518,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
 
         private void LoadMap(string edoId, string mapFileName, string mapName, string fieldName, bool isSelectable, bool fillInterior, int transparency, bool transparencyBorder)
         {
-            string mapPath = LocalPath + @"\Maps\Estados\" + edoId + @"\" + mapFileName + ".shp";
+            string mapPath = LocalPath + @"\Maps\Estados\" + edoId + @"\" + mapFileName; //+ ".shp";
             EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.AddShapeFile(mapPath, mapName, fieldName);
             sf.RenderSettings.IsSelectable = isSelectable;
             sf.RenderSettings.FillInterior = fillInterior;
@@ -540,7 +540,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 //Lista de control
                 List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -558,7 +558,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             int shapeCount = sfmMainMap.ShapeFileCount;
             if (shapeCount > 1)
             {
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -573,11 +573,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
 
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
+
             LoadMap(selEdo.Id.ToString(), "Estado.shp", "edo" + selEdo.Id.ToString(), "NombreEsta", false, false, 0, false);
-            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + "edo" + selEdo.Id.ToString(), "Nombre", true, true, 0, true);
-            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, false);
-            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, false);
             LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + "edo" + selEdo.Id.ToString(), "NombreMuni", false, false, 0, false);
+            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
+            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
+            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + "edo" + selEdo.Id.ToString(), "Nombre", true, true, 0, false);
         }
 
         private void RemoveMapsByEdo(BE.Estado selEdo)
@@ -626,7 +627,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             if (shapeCount > 1)
             {
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -643,7 +644,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             if (shapeCount > 1)
             {
                 bool isFirstShape = true;
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -690,7 +691,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             {
                 bool isFirstShape = true;
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -766,7 +767,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     //Lista de control
                     List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                     //Se recorren los datos
-                    int layerIndex = 2;
+                    int layerIndex = 5;
                     while (layerIndex < shapeCount)
                     {
                         //Se obtiene el layer

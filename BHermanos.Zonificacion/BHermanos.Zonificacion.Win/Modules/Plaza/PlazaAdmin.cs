@@ -245,7 +245,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 }
                 else
                 {
-                    this.cmbMunicipio.DataSource = null;                    
+                    this.cmbMunicipio.DataSource = null;
                     this.cmbMunicipio.Text = "--Seleccione un municipio--";
                 }
             }
@@ -261,7 +261,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 this.ListMunicipios.RemoveAll(mun => mun.ParentEstado == estdo);
                 this.cmbMunicipio.DataSource = null;
-                this.cmbMunicipio.DataSource = this.ListMunicipios;                
+                this.cmbMunicipio.DataSource = this.ListMunicipios;
                 this.cmbMunicipio.DisplayMember = "NombreWithEstado";
                 this.cmbMunicipio.SelectedItem = null;
                 this.cmbMunicipio.Text = "--Seleccione un municipio--";
@@ -281,14 +281,18 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             this.sfmMainMap.ZoomLevel = 15;
         }
 
-        private void LoadMap(string edoId, string mapFileName, string mapName, string fieldName, bool isSelectable, bool fillInterior, int transparency)
+        private void LoadMap(string edoId, string mapFileName, string mapName, string fieldName, bool isSelectable, bool fillInterior, int transparency, bool transparencyBorder)
         {
-            string mapPath = LocalPath + @"\Maps\Estados\" + edoId + @"\" + mapFileName + ".shp";
+            string mapPath = LocalPath + @"\Maps\Estados\" + edoId + @"\" + mapFileName; //+".shp";
             EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.AddShapeFile(mapPath, mapName, fieldName);
             sf.RenderSettings.IsSelectable = isSelectable;
             sf.RenderSettings.FillInterior = fillInterior;
             sf.RenderSettings.FillColor = Color.FromArgb(transparency, sf.RenderSettings.FillColor);
             sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
+            if (!transparencyBorder)
+                sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
+            else
+                sf.RenderSettings.OutlineColor = Color.FromArgb(transparency, sf.RenderSettings.OutlineColor);
             sf.RenderSettings.MinZoomLevel = 15;
             sf.RenderSettings.SelectFillColor = Color.FromArgb(0, 55, 33, 22);
             sf.RenderSettings.SelectOutlineColor = Color.DarkRed;
@@ -302,13 +306,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 //Lista de control
                 List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
                     PlazaCustomRenderSettings crsPl = new PlazaCustomRenderSettings(sf.RenderSettings, this.ListPlazas);
                     sf.RenderSettings.CustomRenderSettings = crsPl;
-                    layerIndex += 5;                
+                    layerIndex += 5;
                 }
                 sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
             }
@@ -320,12 +324,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             if (shapeCount > 1)
             {
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
                     sf.ClearSelectedRecords();
-                    layerIndex += 5;                
+                    layerIndex += 5;
                 }
                 sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
             }
@@ -338,7 +342,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 bool isFirstShape = true;
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -394,7 +398,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 bool isFirstShape = true;
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = 5;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
@@ -471,12 +475,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
 
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
-            LoadMap(selEdo.Id.ToString(), "Estado.shp", selEdo.Nombre, "NombreEsta", false, false, 0);
-            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + selEdo.Nombre, "Nombre", true, true, 0);
-            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + selEdo.Nombre, "Nombre", false, false, 60);
-            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + selEdo.Nombre, "Nombre", false, false, 60);
-            LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + selEdo.Nombre, "NombreMuni", false, false, 0);
-        }
+            LoadMap(selEdo.Id.ToString(), "Estado.shp", selEdo.Nombre, "NombreEsta", false, false, 0,false);
+            LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + selEdo.Nombre, "NombreMuni", false, false, 0,false);            
+            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + selEdo.Nombre, "Nombre", false, false, 60,true);
+            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + selEdo.Nombre, "Nombre", false, false, 60,true);
+            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + selEdo.Nombre, "Nombre", true, true, 0,false);            
+        }     
 
         private void RemoveMapsByEdo(BE.Estado selEdo)
         {
@@ -506,7 +510,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     //Lista de control
                     List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                     //Se recorren los datos
-                    int layerIndex = 2;
+                    int layerIndex = 5;
                     while (layerIndex < shapeCount)
                     {
                         //Se obtiene el layer
@@ -585,7 +589,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Limpieza y Seleccion de Datos
         private void ClearForm()
         {
-            IsUpdate = false;            
+            IsUpdate = false;
             btnSaveZone.Text = "Guardar plaza";
             this.CurrentPlaza = new BE.Plaza();
             txtCurrentPlaza.Text = "Nueva plaza";
@@ -593,7 +597,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ClearSelections();
         }
 
-        private void SelectEdoItem(BE.Estado selEdo,bool updateMap)
+        private void SelectEdoItem(BE.Estado selEdo, bool updateMap)
         {
             foreach (CheckComboBoxItem item in ccbEstados.Items)
             {
@@ -620,7 +624,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             }
             foreach (BE.Estado edo in allEdos)
             {
-                SelectEdoItem(edo,true);
+                SelectEdoItem(edo, true);
             }
             //if (allEdos.Count > 0)
             //    sfmMainMap.ZoomLevel = 1750;
@@ -641,7 +645,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             LoadMainMap();
             IsFirsTime = false;
             LoadEstadosMaps();
-            LoadPlazaRenderSetting();            
+            LoadPlazaRenderSetting();
         }
         #endregion
 
@@ -796,7 +800,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 MessageBox.Show("Por favor seleccione al menos una colonia para la Plaza", "Validación de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }        
+        }
 
         private void btnCanelZone_Click(object sender, EventArgs e)
         {
@@ -809,11 +813,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private void pbbZoomSelect_Click(object sender, EventArgs e)
         {
             if (sfmMainMap.CtrlDown)
-            {                
+            {
                 sfmMainMap.CtrlDown = false;
             }
             else
-            {                
+            {
                 sfmMainMap.CtrlDown = true;
             }
         }
@@ -884,7 +888,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 pbbZoomSelect.BorderStyle = BorderStyle.FixedSingle;
             }
         }
-        #endregion        
+        #endregion
 
         #region Seleccion del Municipio
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
