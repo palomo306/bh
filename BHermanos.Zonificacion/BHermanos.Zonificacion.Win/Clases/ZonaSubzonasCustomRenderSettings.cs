@@ -55,7 +55,7 @@ namespace RegionDemo.Clases
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisan las subzonas
-                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
+                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Where(col => col.Id == colonia).Any()).FirstOrDefault();
                     if (zona != null)
                     {
                         colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
@@ -71,10 +71,8 @@ namespace RegionDemo.Clases
         private void BuildBorderColorList(RenderSettings defaultSettings, BE.Zona Zona)
         {
             try
-            {
-                List<BE.Zona> ListZonas = Zona.ListaSubzonas;
-                colorList = new List<ColorRecord>();
-
+            {                
+                colorListOutLine = new List<ColorRecord>();
                 int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
                 for (int n = 0; n < numRecords; ++n)
                 {
@@ -94,10 +92,10 @@ namespace RegionDemo.Clases
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisan las subzonas
-                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
-                    if (zona != null)
+                    bool existZona = Zona.ListaColonias.Where(col => col.Id == colonia).Any();
+                    if (existZona)
                     {
-                        colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
+                        colorListOutLine.Add(new ColorRecord() { Color = Zona.RealColor, Record = n });
                     }
                 }
             }
