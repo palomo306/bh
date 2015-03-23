@@ -290,7 +290,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             sf.RenderSettings.FillColor = Color.FromArgb(transparency, sf.RenderSettings.FillColor);
             sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
             sf.RenderSettings.MinZoomLevel = 15;
-            sf.RenderSettings.SelectFillColor = Color.FromArgb(0, 55, 33, 22);            
+            sf.RenderSettings.SelectFillColor = Color.FromArgb(0, 55, 33, 22);
+            sf.RenderSettings.SelectOutlineColor = Color.DarkRed;
         }
 
         private void LoadPlazaRenderSetting()
