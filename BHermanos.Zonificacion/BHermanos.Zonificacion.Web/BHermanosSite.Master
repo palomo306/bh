@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BHermanosSite.master.cs" Inherits="BHermanos.Zonificacion.Web.BHermanosSite" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div id="wrapper">
+                    <div id="first">
+                        <header id="header"> 
+                            <div class="social-icons-container">
+                                <div class="social-icons-containerInside">
+                                    <ul class="social-icons">
+						                <li class="Home"><a href="http://www.facebook.com/" target="_blank" title="Home">Home</a></li>
+						                <li class="User"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Usuario</a></li>
+					                </ul>
+                                </div>                                
+                            </div>   
+                            <div class="col-md-6">
+							    <div id="mainMenu" runat="server" class="toogle toogle-accordion">
+								    
+							    </div>
+						    </div>                                                     
+                        </header>                        
+                    </div>
+                    <div id="second">
+                        <asp:ContentPlaceHolder ID="content" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>              
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </form>
+</body>
+</html>

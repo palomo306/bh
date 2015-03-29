@@ -204,7 +204,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             if (this.sfmMainMap.ShapeFileCount == LayerCount)
             {
                 EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[LayerColonias];
-                ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone);
+                ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone, null);
                 sf.RenderSettings.CustomRenderSettings = crsZ;
                 sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
             }

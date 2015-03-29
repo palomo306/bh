@@ -528,7 +528,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             else
                 sf.RenderSettings.OutlineColor = Color.FromArgb(transparency, sf.RenderSettings.OutlineColor);
             sf.RenderSettings.MinZoomLevel = 15;
-            sf.RenderSettings.SelectFillColor = Color.FromArgb(0, 55, 33, 22);
+            sf.RenderSettings.SelectFillColor = Color.FromArgb(150, 200, 200, 200);
             sf.RenderSettings.SelectOutlineColor = Color.DarkRed;
         }
 
@@ -562,7 +562,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap[layerIndex];
-                    ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone);
+                    ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone, this.CurrentPlaza);
                     sf.RenderSettings.CustomRenderSettings = null;
                     sf.RenderSettings.CustomRenderSettings = crsZ;
                     sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
@@ -1257,7 +1257,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentZone.PlazaId = this.CurrentPlaza.Id;
                             this.CurrentZone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentZone.Color = oWindowZoneName.Color;
-                            SaveZona();                            
+                            SaveZona();
+                            sfmMainMap.CtrlDown = false;
                         }
                     }
                     else
@@ -1280,6 +1281,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentZone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentZone.Color = oWindowZoneName.Color;
                             UpdateZona();
+                            sfmMainMap.CtrlDown = false;
                             SetUpdateLevel(0);
                         }
                     }
@@ -1302,6 +1304,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentSubzone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentSubzone.Color = oWindowZoneName.Color;
                             SaveSubzona();
+                            sfmMainMap.CtrlDown = false;
                             SetUpdateLevel(1);
                         }
                     }
@@ -1325,6 +1328,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentSubzone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentSubzone.Color = oWindowZoneName.Color;
                             UpdateSubzona();
+                            sfmMainMap.CtrlDown = false;
                             SetUpdateLevel(1);
                         }
                     }
@@ -1419,6 +1423,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 ClearSelectedRecords();
                 PrintCurrentZona(this.CurrentSubzone);
                 SetUpdateLevel(2);
+                sfmMainMap.CtrlDown = false;
                 sfmMainMap.Focus();
             }
             catch
@@ -1441,6 +1446,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         if (this.CurrentZone != null)
                         {
                             DeleteZona();
+                            sfmMainMap.CtrlDown = false;
                             SetUpdateLevel(0);
                         }
                         else
@@ -1453,6 +1459,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         if (this.CurrentSubzone != null)
                         {
                             DeleteSubzona();
+                            sfmMainMap.CtrlDown = false;
                             SetUpdateLevel(1);
                         }
                         else

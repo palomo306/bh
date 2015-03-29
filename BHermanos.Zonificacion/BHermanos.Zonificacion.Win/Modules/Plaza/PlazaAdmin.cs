@@ -897,6 +897,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 BE.Municipio selMunicipio = (BE.Municipio)cmbMunicipio.SelectedItem;
                 ZoomToMunicipio(selMunicipio);
+                sfmMainMap.Focus();
             }
         }
         #endregion
