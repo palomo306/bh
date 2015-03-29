@@ -1,6 +1,7 @@
 ﻿using BHermanos.Zonificacion.BusinessEntities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,10 @@ namespace BHermanos.Zonificacion.BusinessMaps
     {
 
         #region Atributos
+
+        private DateTime fechaInicio;
+        private DateTime fechaFin;
+        private bool esBusquedaXFecha = false;
 
         #endregion
 
@@ -28,14 +33,24 @@ namespace BHermanos.Zonificacion.BusinessMaps
         public IList<Tab> ObtenerTabs()
         {
             List<Tab> vistas = new List<Tab>();
+            List<DateTime> fechas = new List<DateTime>();
             try
             {
                 var zonTabs = base.oDataAccess.ZonTabs;
-                foreach (var registro in zonTabs)
+                foreach (var zonTab in zonTabs)
                 {
                     Tab tab = new Tab();
-                    tab.Id = registro.fiTabId;
-                    tab.Nombre = registro.fcDescripcion;
+                    tab.Id = zonTab.fiTabId;
+                    tab.Nombre = zonTab.fcDescripcion;
+                    foreach (DataAccess.ZonNegocio negocio in zonTab.ZonNegocios.Where(w => w.flEstatus == true))
+                    {                        
+                        fechas = negocio.ZonDatosXNegocios.OrderByDescending(o => o.fdFecha).Select(d => DateTime.Parse(d.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX")))).Distinct().ToList<DateTime>();
+                    };
+                    if (fechas.Count == 0)
+                    {
+                        fechas.Add(DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy", new CultureInfo("es-MX"))));
+                    }  
+                    tab.Fechas = fechas;     
                     tab.ListaZonas = new List<Zona>();
                     vistas.Add(tab);
                 }
@@ -50,6 +65,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
         public IList<Tab> ObtenerTab(int tabId, int plazaId)
         {
             List<Tab> vistas = new List<Tab>();
+            List<DateTime> fechas = new List<DateTime>();
             try
             {
                 var zonTabs = base.oDataAccess.ZonTabs.Where(t => t.fiTabId == tabId);
@@ -60,6 +76,57 @@ namespace BHermanos.Zonificacion.BusinessMaps
                         Tab tab = new Tab();
                         tab.Id = zonTab.fiTabId;
                         tab.Nombre = zonTab.fcDescripcion;
+                        foreach (DataAccess.ZonNegocio negocio in zonTab.ZonNegocios.Where(w => w.flEstatus == true))
+                        {
+                            fechas = negocio.ZonDatosXNegocios.OrderByDescending(o => o.fdFecha).Select(d => DateTime.Parse(d.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX")))).Distinct().ToList<DateTime>();
+                        };
+                        if (fechas.Count == 0)
+                        {
+                            fechas.Add(DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy", new CultureInfo("es-MX"))));
+                        }
+                        tab.Fechas = fechas;
+                        tab.ListaZonas = this.ObtenerZonas(plazaId, zonTab);
+                        vistas.Add(tab);
+                    }
+                }
+                else
+                {
+                    throw new ApplicationException("El tabId(" + tabId + ") no existe");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return vistas;
+        }
+
+        public IList<Tab> ObtenerTab(int tabId, int plazaId, DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<Tab> vistas = new List<Tab>();
+            List<DateTime> fechas = new List<DateTime>();
+            this.fechaInicio = fechaInicio;
+            this.fechaFin = fechaFin;
+            this.esBusquedaXFecha = true;
+            try
+            {
+                List<DataAccess.ZonTab> zonTabs = base.oDataAccess.ZonTabs.Where(t => t.fiTabId == tabId).ToList<DataAccess.ZonTab>();
+                if (zonTabs != null && zonTabs.Count() > 0)
+                {
+                    foreach (DataAccess.ZonTab zonTab in zonTabs)
+                    {
+                        Tab tab = new Tab();
+                        tab.Id = zonTab.fiTabId;
+                        tab.Nombre = zonTab.fcDescripcion;
+                        foreach (DataAccess.ZonNegocio negocio in zonTab.ZonNegocios.Where(w => w.flEstatus == true))
+                        {
+                            fechas = negocio.ZonDatosXNegocios.Select(d => DateTime.Parse(d.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX")))).Distinct().ToList<DateTime>();
+                        };
+                        if (fechas.Count == 0)
+                        {
+                            fechas.Add(DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy", new CultureInfo("es-MX"))));
+                        }
+                        tab.Fechas = fechas;
                         tab.ListaZonas = this.ObtenerZonas(plazaId, zonTab);
                         vistas.Add(tab);
                     }
@@ -194,7 +261,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 {
                     foreach (var spConColoniaXZona in spConColoniasXZona)
                     {
-                        List<Colonia> col = manejadorColonias.ObtenerColoniasXPartida(2, plazaId, zonaId, spConColoniaXZona.fiColoniaId, zonTab);
+                        List<Colonia> col = manejadorColonias.ObtenerColoniasXPartida(2, plazaId, zonaId, spConColoniaXZona.fiColoniaId, zonTab,this.fechaInicio,this.fechaFin,this.esBusquedaXFecha);
                         if (col != null && col.Count > 0)
                         {
                             listaColonias.Add(col[0]);

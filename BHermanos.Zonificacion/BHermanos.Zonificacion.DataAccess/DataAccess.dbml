@@ -6,19 +6,7 @@
       <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ZonTab_ZonPartidasXTab" Member="ZonPartidasXTabs" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonPartidasXTab" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ZonPartidasXTab" Member="ZonPartidasXTabs">
-    <Type Name="ZonPartidasXTab">
-      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fiPartidaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="flTieneUmbral" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="ZonPartidasXTab_ZonUmbralesXPartida" Member="ZonUmbralesXPartidas" ThisKey="fiTabId,fiPartidaId" OtherKey="fiTabId,fiPartidaId" Type="ZonUmbralesXPartida" />
-      <Association Name="ZonTab_ZonPartidasXTab" Member="ZonTab" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonTab" IsForeignKey="true" />
+      <Association Name="ZonTab_ZonNegocio" Member="ZonNegocios" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonNegocio" />
     </Type>
   </Table>
   <Table Name="dbo.ZonUmbralesXPartida" Member="ZonUmbralesXPartidas">
@@ -112,6 +100,40 @@
       <Column Name="fiOrden" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="ZonMenus_ZonPermiso" Member="ZonPermisos" ThisKey="fiMenuId" OtherKey="fiMenuId" Type="ZonPermiso" />
       <Association Name="ZonAplicacione_ZonMenus" Member="ZonAplicacione" ThisKey="fiAplicacionId" OtherKey="fiAplicacionId" Type="ZonAplicacione" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPartidasXTab" Member="ZonPartidasXTabs">
+    <Type Name="ZonPartidasXTab">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiPartidaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="flTieneUmbral" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonPartidasXTab_ZonUmbralesXPartida" Member="ZonUmbralesXPartidas" ThisKey="fiTabId,fiPartidaId" OtherKey="fiTabId,fiPartidaId" Type="ZonUmbralesXPartida" />
+      <Association Name="ZonTab_ZonPartidasXTab" Member="ZonTab" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonNegocios" Member="ZonNegocios">
+    <Type Name="ZonNegocio">
+      <Column Name="fiNegocioId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonNegocio_ZonDatosXNegocio" Member="ZonDatosXNegocios" ThisKey="fiNegocioId,fiTabId" OtherKey="fiNegocioId,fiTabId" Type="ZonDatosXNegocio" />
+      <Association Name="ZonTab_ZonNegocio" Member="ZonTab" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonDatosXNegocio" Member="ZonDatosXNegocios">
+    <Type Name="ZonDatosXNegocio">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiNegocioId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fdFecha" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiValor" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="ZonNegocio_ZonDatosXNegocio" Member="ZonNegocio" ThisKey="fiNegocioId,fiTabId" OtherKey="fiNegocioId,fiTabId" Type="ZonNegocio" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.spUpdZona" Method="spUpdZona">
@@ -236,6 +258,19 @@
     <ElementType Name="spConColoniasXZonaResult">
       <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="fiOrdenId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConPlazas" Method="spConPlazas">
+    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConPlazasResult">
+      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcColor" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.spConColonias" Method="spConColonias">
@@ -447,21 +482,6 @@
       <Column Name="prom_ocup" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="pro_ocup_c" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="dist_tot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="dist_psibls" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="vtas_tot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.spConPlazas" Method="spConPlazas">
-    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
-    <ElementType Name="spConPlazasResult">
-      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fcColor" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

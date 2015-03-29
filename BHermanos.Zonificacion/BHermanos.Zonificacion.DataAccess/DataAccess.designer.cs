@@ -33,9 +33,6 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void InsertZonTab(ZonTab instance);
     partial void UpdateZonTab(ZonTab instance);
     partial void DeleteZonTab(ZonTab instance);
-    partial void InsertZonPartidasXTab(ZonPartidasXTab instance);
-    partial void UpdateZonPartidasXTab(ZonPartidasXTab instance);
-    partial void DeleteZonPartidasXTab(ZonPartidasXTab instance);
     partial void InsertZonUmbralesXPartida(ZonUmbralesXPartida instance);
     partial void UpdateZonUmbralesXPartida(ZonUmbralesXPartida instance);
     partial void DeleteZonUmbralesXPartida(ZonUmbralesXPartida instance);
@@ -63,6 +60,15 @@ namespace BHermanos.Zonificacion.DataAccess
     partial void InsertZonMenus(ZonMenus instance);
     partial void UpdateZonMenus(ZonMenus instance);
     partial void DeleteZonMenus(ZonMenus instance);
+    partial void InsertZonPartidasXTab(ZonPartidasXTab instance);
+    partial void UpdateZonPartidasXTab(ZonPartidasXTab instance);
+    partial void DeleteZonPartidasXTab(ZonPartidasXTab instance);
+    partial void InsertZonNegocio(ZonNegocio instance);
+    partial void UpdateZonNegocio(ZonNegocio instance);
+    partial void DeleteZonNegocio(ZonNegocio instance);
+    partial void InsertZonDatosXNegocio(ZonDatosXNegocio instance);
+    partial void UpdateZonDatosXNegocio(ZonDatosXNegocio instance);
+    partial void DeleteZonDatosXNegocio(ZonDatosXNegocio instance);
     #endregion
 		
 		public DataAccessDataContext() : 
@@ -100,14 +106,6 @@ namespace BHermanos.Zonificacion.DataAccess
 			get
 			{
 				return this.GetTable<ZonTab>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ZonPartidasXTab> ZonPartidasXTabs
-		{
-			get
-			{
-				return this.GetTable<ZonPartidasXTab>();
 			}
 		}
 		
@@ -180,6 +178,30 @@ namespace BHermanos.Zonificacion.DataAccess
 			get
 			{
 				return this.GetTable<ZonMenus>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ZonPartidasXTab> ZonPartidasXTabs
+		{
+			get
+			{
+				return this.GetTable<ZonPartidasXTab>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ZonNegocio> ZonNegocios
+		{
+			get
+			{
+				return this.GetTable<ZonNegocio>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ZonDatosXNegocio> ZonDatosXNegocios
+		{
+			get
+			{
+				return this.GetTable<ZonDatosXNegocio>();
 			}
 		}
 		
@@ -302,18 +324,18 @@ namespace BHermanos.Zonificacion.DataAccess
 			return ((ISingleResult<spConColoniasXZonaResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColonias")]
-		public ISingleResult<spConColoniasResult> spConColonias([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVistaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVistaId, piPlazaId, piColoniaId);
-			return ((ISingleResult<spConColoniasResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConPlazas")]
 		public ISingleResult<spConPlazasResult> spConPlazas([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVista, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVista, piPlazaId);
 			return ((ISingleResult<spConPlazasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.spConColonias")]
+		public ISingleResult<spConColoniasResult> spConColonias([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="TinyInt")] System.Nullable<byte> piVistaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> piPlazaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> piColoniaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), piVistaId, piPlazaId, piColoniaId);
+			return ((ISingleResult<spConColoniasResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -331,6 +353,8 @@ namespace BHermanos.Zonificacion.DataAccess
 		
 		private EntitySet<ZonPartidasXTab> _ZonPartidasXTabs;
 		
+		private EntitySet<ZonNegocio> _ZonNegocios;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -346,6 +370,7 @@ namespace BHermanos.Zonificacion.DataAccess
 		public ZonTab()
 		{
 			this._ZonPartidasXTabs = new EntitySet<ZonPartidasXTab>(new Action<ZonPartidasXTab>(this.attach_ZonPartidasXTabs), new Action<ZonPartidasXTab>(this.detach_ZonPartidasXTabs));
+			this._ZonNegocios = new EntitySet<ZonNegocio>(new Action<ZonNegocio>(this.attach_ZonNegocios), new Action<ZonNegocio>(this.detach_ZonNegocios));
 			OnCreated();
 		}
 		
@@ -422,6 +447,19 @@ namespace BHermanos.Zonificacion.DataAccess
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonTab_ZonNegocio", Storage="_ZonNegocios", ThisKey="fiTabId", OtherKey="fiTabId")]
+		public EntitySet<ZonNegocio> ZonNegocios
+		{
+			get
+			{
+				return this._ZonNegocios;
+			}
+			set
+			{
+				this._ZonNegocios.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -453,280 +491,17 @@ namespace BHermanos.Zonificacion.DataAccess
 			this.SendPropertyChanging();
 			entity.ZonTab = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPartidasXTab")]
-	public partial class ZonPartidasXTab : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _fiTabId;
-		
-		private int _fiPartidaId;
-		
-		private string _fcDescripcion;
-		
-		private string _fcExpresion;
-		
-		private int _fiOrden;
-		
-		private bool _flTieneUmbral;
-		
-		private bool _flStatus;
-		
-		private EntitySet<ZonUmbralesXPartida> _ZonUmbralesXPartidas;
-		
-		private EntityRef<ZonTab> _ZonTab;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfiTabIdChanging(int value);
-    partial void OnfiTabIdChanged();
-    partial void OnfiPartidaIdChanging(int value);
-    partial void OnfiPartidaIdChanged();
-    partial void OnfcDescripcionChanging(string value);
-    partial void OnfcDescripcionChanged();
-    partial void OnfcExpresionChanging(string value);
-    partial void OnfcExpresionChanged();
-    partial void OnfiOrdenChanging(int value);
-    partial void OnfiOrdenChanged();
-    partial void OnflTieneUmbralChanging(bool value);
-    partial void OnflTieneUmbralChanged();
-    partial void OnflStatusChanging(bool value);
-    partial void OnflStatusChanged();
-    #endregion
-		
-		public ZonPartidasXTab()
-		{
-			this._ZonUmbralesXPartidas = new EntitySet<ZonUmbralesXPartida>(new Action<ZonUmbralesXPartida>(this.attach_ZonUmbralesXPartidas), new Action<ZonUmbralesXPartida>(this.detach_ZonUmbralesXPartidas));
-			this._ZonTab = default(EntityRef<ZonTab>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTabId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiTabId
-		{
-			get
-			{
-				return this._fiTabId;
-			}
-			set
-			{
-				if ((this._fiTabId != value))
-				{
-					if (this._ZonTab.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfiTabIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiTabId = value;
-					this.SendPropertyChanged("fiTabId");
-					this.OnfiTabIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPartidaId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int fiPartidaId
-		{
-			get
-			{
-				return this._fiPartidaId;
-			}
-			set
-			{
-				if ((this._fiPartidaId != value))
-				{
-					this.OnfiPartidaIdChanging(value);
-					this.SendPropertyChanging();
-					this._fiPartidaId = value;
-					this.SendPropertyChanged("fiPartidaId");
-					this.OnfiPartidaIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcDescripcion
-		{
-			get
-			{
-				return this._fcDescripcion;
-			}
-			set
-			{
-				if ((this._fcDescripcion != value))
-				{
-					this.OnfcDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._fcDescripcion = value;
-					this.SendPropertyChanged("fcDescripcion");
-					this.OnfcDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcExpresion
-		{
-			get
-			{
-				return this._fcExpresion;
-			}
-			set
-			{
-				if ((this._fcExpresion != value))
-				{
-					this.OnfcExpresionChanging(value);
-					this.SendPropertyChanging();
-					this._fcExpresion = value;
-					this.SendPropertyChanged("fcExpresion");
-					this.OnfcExpresionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
-		public int fiOrden
-		{
-			get
-			{
-				return this._fiOrden;
-			}
-			set
-			{
-				if ((this._fiOrden != value))
-				{
-					this.OnfiOrdenChanging(value);
-					this.SendPropertyChanging();
-					this._fiOrden = value;
-					this.SendPropertyChanged("fiOrden");
-					this.OnfiOrdenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flTieneUmbral", DbType="Bit NOT NULL")]
-		public bool flTieneUmbral
-		{
-			get
-			{
-				return this._flTieneUmbral;
-			}
-			set
-			{
-				if ((this._flTieneUmbral != value))
-				{
-					this.OnflTieneUmbralChanging(value);
-					this.SendPropertyChanging();
-					this._flTieneUmbral = value;
-					this.SendPropertyChanged("flTieneUmbral");
-					this.OnflTieneUmbralChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flStatus", DbType="Bit NOT NULL")]
-		public bool flStatus
-		{
-			get
-			{
-				return this._flStatus;
-			}
-			set
-			{
-				if ((this._flStatus != value))
-				{
-					this.OnflStatusChanging(value);
-					this.SendPropertyChanging();
-					this._flStatus = value;
-					this.SendPropertyChanged("flStatus");
-					this.OnflStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonPartidasXTab_ZonUmbralesXPartida", Storage="_ZonUmbralesXPartidas", ThisKey="fiTabId,fiPartidaId", OtherKey="fiTabId,fiPartidaId")]
-		public EntitySet<ZonUmbralesXPartida> ZonUmbralesXPartidas
-		{
-			get
-			{
-				return this._ZonUmbralesXPartidas;
-			}
-			set
-			{
-				this._ZonUmbralesXPartidas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonTab_ZonPartidasXTab", Storage="_ZonTab", ThisKey="fiTabId", OtherKey="fiTabId", IsForeignKey=true)]
-		public ZonTab ZonTab
-		{
-			get
-			{
-				return this._ZonTab.Entity;
-			}
-			set
-			{
-				ZonTab previousValue = this._ZonTab.Entity;
-				if (((previousValue != value) 
-							|| (this._ZonTab.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ZonTab.Entity = null;
-						previousValue.ZonPartidasXTabs.Remove(this);
-					}
-					this._ZonTab.Entity = value;
-					if ((value != null))
-					{
-						value.ZonPartidasXTabs.Add(this);
-						this._fiTabId = value.fiTabId;
-					}
-					else
-					{
-						this._fiTabId = default(int);
-					}
-					this.SendPropertyChanged("ZonTab");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ZonUmbralesXPartidas(ZonUmbralesXPartida entity)
+		private void attach_ZonNegocios(ZonNegocio entity)
 		{
 			this.SendPropertyChanging();
-			entity.ZonPartidasXTab = this;
+			entity.ZonTab = this;
 		}
 		
-		private void detach_ZonUmbralesXPartidas(ZonUmbralesXPartida entity)
+		private void detach_ZonNegocios(ZonNegocio entity)
 		{
 			this.SendPropertyChanging();
-			entity.ZonPartidasXTab = null;
+			entity.ZonTab = null;
 		}
 	}
 	
@@ -2589,6 +2364,713 @@ namespace BHermanos.Zonificacion.DataAccess
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonPartidasXTab")]
+	public partial class ZonPartidasXTab : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiTabId;
+		
+		private int _fiPartidaId;
+		
+		private byte _fiTipo;
+		
+		private string _fcDescripcion;
+		
+		private string _fcExpresion;
+		
+		private int _fiOrden;
+		
+		private bool _flTieneUmbral;
+		
+		private bool _flStatus;
+		
+		private EntitySet<ZonUmbralesXPartida> _ZonUmbralesXPartidas;
+		
+		private EntityRef<ZonTab> _ZonTab;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiTabIdChanging(int value);
+    partial void OnfiTabIdChanged();
+    partial void OnfiPartidaIdChanging(int value);
+    partial void OnfiPartidaIdChanged();
+    partial void OnfiTipoChanging(byte value);
+    partial void OnfiTipoChanged();
+    partial void OnfcDescripcionChanging(string value);
+    partial void OnfcDescripcionChanged();
+    partial void OnfcExpresionChanging(string value);
+    partial void OnfcExpresionChanged();
+    partial void OnfiOrdenChanging(int value);
+    partial void OnfiOrdenChanged();
+    partial void OnflTieneUmbralChanging(bool value);
+    partial void OnflTieneUmbralChanged();
+    partial void OnflStatusChanging(bool value);
+    partial void OnflStatusChanged();
+    #endregion
+		
+		public ZonPartidasXTab()
+		{
+			this._ZonUmbralesXPartidas = new EntitySet<ZonUmbralesXPartida>(new Action<ZonUmbralesXPartida>(this.attach_ZonUmbralesXPartidas), new Action<ZonUmbralesXPartida>(this.detach_ZonUmbralesXPartidas));
+			this._ZonTab = default(EntityRef<ZonTab>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTabId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiTabId
+		{
+			get
+			{
+				return this._fiTabId;
+			}
+			set
+			{
+				if ((this._fiTabId != value))
+				{
+					if (this._ZonTab.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiTabIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiTabId = value;
+					this.SendPropertyChanged("fiTabId");
+					this.OnfiTabIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPartidaId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiPartidaId
+		{
+			get
+			{
+				return this._fiPartidaId;
+			}
+			set
+			{
+				if ((this._fiPartidaId != value))
+				{
+					this.OnfiPartidaIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiPartidaId = value;
+					this.SendPropertyChanged("fiPartidaId");
+					this.OnfiPartidaIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTipo", DbType="TinyInt NOT NULL")]
+		public byte fiTipo
+		{
+			get
+			{
+				return this._fiTipo;
+			}
+			set
+			{
+				if ((this._fiTipo != value))
+				{
+					this.OnfiTipoChanging(value);
+					this.SendPropertyChanging();
+					this._fiTipo = value;
+					this.SendPropertyChanged("fiTipo");
+					this.OnfiTipoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this.OnfcDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fcDescripcion = value;
+					this.SendPropertyChanged("fcDescripcion");
+					this.OnfcDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcExpresion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcExpresion
+		{
+			get
+			{
+				return this._fcExpresion;
+			}
+			set
+			{
+				if ((this._fcExpresion != value))
+				{
+					this.OnfcExpresionChanging(value);
+					this.SendPropertyChanging();
+					this._fcExpresion = value;
+					this.SendPropertyChanged("fcExpresion");
+					this.OnfcExpresionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiOrden", DbType="Int NOT NULL")]
+		public int fiOrden
+		{
+			get
+			{
+				return this._fiOrden;
+			}
+			set
+			{
+				if ((this._fiOrden != value))
+				{
+					this.OnfiOrdenChanging(value);
+					this.SendPropertyChanging();
+					this._fiOrden = value;
+					this.SendPropertyChanged("fiOrden");
+					this.OnfiOrdenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flTieneUmbral", DbType="Bit NOT NULL")]
+		public bool flTieneUmbral
+		{
+			get
+			{
+				return this._flTieneUmbral;
+			}
+			set
+			{
+				if ((this._flTieneUmbral != value))
+				{
+					this.OnflTieneUmbralChanging(value);
+					this.SendPropertyChanging();
+					this._flTieneUmbral = value;
+					this.SendPropertyChanged("flTieneUmbral");
+					this.OnflTieneUmbralChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flStatus", DbType="Bit NOT NULL")]
+		public bool flStatus
+		{
+			get
+			{
+				return this._flStatus;
+			}
+			set
+			{
+				if ((this._flStatus != value))
+				{
+					this.OnflStatusChanging(value);
+					this.SendPropertyChanging();
+					this._flStatus = value;
+					this.SendPropertyChanged("flStatus");
+					this.OnflStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonPartidasXTab_ZonUmbralesXPartida", Storage="_ZonUmbralesXPartidas", ThisKey="fiTabId,fiPartidaId", OtherKey="fiTabId,fiPartidaId")]
+		public EntitySet<ZonUmbralesXPartida> ZonUmbralesXPartidas
+		{
+			get
+			{
+				return this._ZonUmbralesXPartidas;
+			}
+			set
+			{
+				this._ZonUmbralesXPartidas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonTab_ZonPartidasXTab", Storage="_ZonTab", ThisKey="fiTabId", OtherKey="fiTabId", IsForeignKey=true)]
+		public ZonTab ZonTab
+		{
+			get
+			{
+				return this._ZonTab.Entity;
+			}
+			set
+			{
+				ZonTab previousValue = this._ZonTab.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonTab.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonTab.Entity = null;
+						previousValue.ZonPartidasXTabs.Remove(this);
+					}
+					this._ZonTab.Entity = value;
+					if ((value != null))
+					{
+						value.ZonPartidasXTabs.Add(this);
+						this._fiTabId = value.fiTabId;
+					}
+					else
+					{
+						this._fiTabId = default(int);
+					}
+					this.SendPropertyChanged("ZonTab");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonUmbralesXPartidas(ZonUmbralesXPartida entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonPartidasXTab = this;
+		}
+		
+		private void detach_ZonUmbralesXPartidas(ZonUmbralesXPartida entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonPartidasXTab = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonNegocios")]
+	public partial class ZonNegocio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiNegocioId;
+		
+		private int _fiTabId;
+		
+		private string _fcDescripcion;
+		
+		private bool _flEstatus;
+		
+		private EntitySet<ZonDatosXNegocio> _ZonDatosXNegocios;
+		
+		private EntityRef<ZonTab> _ZonTab;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiNegocioIdChanging(int value);
+    partial void OnfiNegocioIdChanged();
+    partial void OnfiTabIdChanging(int value);
+    partial void OnfiTabIdChanged();
+    partial void OnfcDescripcionChanging(string value);
+    partial void OnfcDescripcionChanged();
+    partial void OnflEstatusChanging(bool value);
+    partial void OnflEstatusChanged();
+    #endregion
+		
+		public ZonNegocio()
+		{
+			this._ZonDatosXNegocios = new EntitySet<ZonDatosXNegocio>(new Action<ZonDatosXNegocio>(this.attach_ZonDatosXNegocios), new Action<ZonDatosXNegocio>(this.detach_ZonDatosXNegocios));
+			this._ZonTab = default(EntityRef<ZonTab>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiNegocioId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiNegocioId
+		{
+			get
+			{
+				return this._fiNegocioId;
+			}
+			set
+			{
+				if ((this._fiNegocioId != value))
+				{
+					this.OnfiNegocioIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiNegocioId = value;
+					this.SendPropertyChanged("fiNegocioId");
+					this.OnfiNegocioIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTabId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiTabId
+		{
+			get
+			{
+				return this._fiTabId;
+			}
+			set
+			{
+				if ((this._fiTabId != value))
+				{
+					if (this._ZonTab.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiTabIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiTabId = value;
+					this.SendPropertyChanged("fiTabId");
+					this.OnfiTabIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcDescripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcDescripcion
+		{
+			get
+			{
+				return this._fcDescripcion;
+			}
+			set
+			{
+				if ((this._fcDescripcion != value))
+				{
+					this.OnfcDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fcDescripcion = value;
+					this.SendPropertyChanged("fcDescripcion");
+					this.OnfcDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_flEstatus", DbType="Bit NOT NULL")]
+		public bool flEstatus
+		{
+			get
+			{
+				return this._flEstatus;
+			}
+			set
+			{
+				if ((this._flEstatus != value))
+				{
+					this.OnflEstatusChanging(value);
+					this.SendPropertyChanging();
+					this._flEstatus = value;
+					this.SendPropertyChanged("flEstatus");
+					this.OnflEstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonNegocio_ZonDatosXNegocio", Storage="_ZonDatosXNegocios", ThisKey="fiNegocioId,fiTabId", OtherKey="fiNegocioId,fiTabId")]
+		public EntitySet<ZonDatosXNegocio> ZonDatosXNegocios
+		{
+			get
+			{
+				return this._ZonDatosXNegocios;
+			}
+			set
+			{
+				this._ZonDatosXNegocios.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonTab_ZonNegocio", Storage="_ZonTab", ThisKey="fiTabId", OtherKey="fiTabId", IsForeignKey=true)]
+		public ZonTab ZonTab
+		{
+			get
+			{
+				return this._ZonTab.Entity;
+			}
+			set
+			{
+				ZonTab previousValue = this._ZonTab.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonTab.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonTab.Entity = null;
+						previousValue.ZonNegocios.Remove(this);
+					}
+					this._ZonTab.Entity = value;
+					if ((value != null))
+					{
+						value.ZonNegocios.Add(this);
+						this._fiTabId = value.fiTabId;
+					}
+					else
+					{
+						this._fiTabId = default(int);
+					}
+					this.SendPropertyChanged("ZonTab");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ZonDatosXNegocios(ZonDatosXNegocio entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonNegocio = this;
+		}
+		
+		private void detach_ZonDatosXNegocios(ZonDatosXNegocio entity)
+		{
+			this.SendPropertyChanging();
+			entity.ZonNegocio = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ZonDatosXNegocio")]
+	public partial class ZonDatosXNegocio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fiTabId;
+		
+		private int _fiNegocioId;
+		
+		private double _fiColoniaId;
+		
+		private System.DateTime _fdFecha;
+		
+		private double _fiValor;
+		
+		private EntityRef<ZonNegocio> _ZonNegocio;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfiTabIdChanging(int value);
+    partial void OnfiTabIdChanged();
+    partial void OnfiNegocioIdChanging(int value);
+    partial void OnfiNegocioIdChanged();
+    partial void OnfiColoniaIdChanging(double value);
+    partial void OnfiColoniaIdChanged();
+    partial void OnfdFechaChanging(System.DateTime value);
+    partial void OnfdFechaChanged();
+    partial void OnfiValorChanging(double value);
+    partial void OnfiValorChanged();
+    #endregion
+		
+		public ZonDatosXNegocio()
+		{
+			this._ZonNegocio = default(EntityRef<ZonNegocio>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTabId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiTabId
+		{
+			get
+			{
+				return this._fiTabId;
+			}
+			set
+			{
+				if ((this._fiTabId != value))
+				{
+					if (this._ZonNegocio.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiTabIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiTabId = value;
+					this.SendPropertyChanged("fiTabId");
+					this.OnfiTabIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiNegocioId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int fiNegocioId
+		{
+			get
+			{
+				return this._fiNegocioId;
+			}
+			set
+			{
+				if ((this._fiNegocioId != value))
+				{
+					if (this._ZonNegocio.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfiNegocioIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiNegocioId = value;
+					this.SendPropertyChanged("fiNegocioId");
+					this.OnfiNegocioIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiColoniaId", DbType="Float NOT NULL", IsPrimaryKey=true)]
+		public double fiColoniaId
+		{
+			get
+			{
+				return this._fiColoniaId;
+			}
+			set
+			{
+				if ((this._fiColoniaId != value))
+				{
+					this.OnfiColoniaIdChanging(value);
+					this.SendPropertyChanging();
+					this._fiColoniaId = value;
+					this.SendPropertyChanged("fiColoniaId");
+					this.OnfiColoniaIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fdFecha", DbType="Date NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime fdFecha
+		{
+			get
+			{
+				return this._fdFecha;
+			}
+			set
+			{
+				if ((this._fdFecha != value))
+				{
+					this.OnfdFechaChanging(value);
+					this.SendPropertyChanging();
+					this._fdFecha = value;
+					this.SendPropertyChanged("fdFecha");
+					this.OnfdFechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiValor", DbType="Float NOT NULL")]
+		public double fiValor
+		{
+			get
+			{
+				return this._fiValor;
+			}
+			set
+			{
+				if ((this._fiValor != value))
+				{
+					this.OnfiValorChanging(value);
+					this.SendPropertyChanging();
+					this._fiValor = value;
+					this.SendPropertyChanged("fiValor");
+					this.OnfiValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ZonNegocio_ZonDatosXNegocio", Storage="_ZonNegocio", ThisKey="fiNegocioId,fiTabId", OtherKey="fiNegocioId,fiTabId", IsForeignKey=true)]
+		public ZonNegocio ZonNegocio
+		{
+			get
+			{
+				return this._ZonNegocio.Entity;
+			}
+			set
+			{
+				ZonNegocio previousValue = this._ZonNegocio.Entity;
+				if (((previousValue != value) 
+							|| (this._ZonNegocio.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ZonNegocio.Entity = null;
+						previousValue.ZonDatosXNegocios.Remove(this);
+					}
+					this._ZonNegocio.Entity = value;
+					if ((value != null))
+					{
+						value.ZonDatosXNegocios.Add(this);
+						this._fiNegocioId = value.fiNegocioId;
+						this._fiTabId = value.fiTabId;
+					}
+					else
+					{
+						this._fiNegocioId = default(int);
+						this._fiTabId = default(int);
+					}
+					this.SendPropertyChanged("ZonNegocio");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	public partial class spConZonasResult
 	{
 		
@@ -2992,6 +3474,140 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._fiOrdenId != value))
 				{
 					this._fiOrdenId = value;
+				}
+			}
+		}
+	}
+	
+	public partial class spConPlazasResult
+	{
+		
+		private int _fiPlazaId;
+		
+		private string _fcColor;
+		
+		private string _fcNombre;
+		
+		private int _fiEstadoId;
+		
+		private int _fiMunicipioId;
+		
+		private double _fiColoniaId;
+		
+		private byte _fiTipo;
+		
+		public spConPlazasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPlazaId", DbType="Int NOT NULL")]
+		public int fiPlazaId
+		{
+			get
+			{
+				return this._fiPlazaId;
+			}
+			set
+			{
+				if ((this._fiPlazaId != value))
+				{
+					this._fiPlazaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcColor", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string fcColor
+		{
+			get
+			{
+				return this._fcColor;
+			}
+			set
+			{
+				if ((this._fcColor != value))
+				{
+					this._fcColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fcNombre
+		{
+			get
+			{
+				return this._fcNombre;
+			}
+			set
+			{
+				if ((this._fcNombre != value))
+				{
+					this._fcNombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
+		public int fiEstadoId
+		{
+			get
+			{
+				return this._fiEstadoId;
+			}
+			set
+			{
+				if ((this._fiEstadoId != value))
+				{
+					this._fiEstadoId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMunicipioId", DbType="Int NOT NULL")]
+		public int fiMunicipioId
+		{
+			get
+			{
+				return this._fiMunicipioId;
+			}
+			set
+			{
+				if ((this._fiMunicipioId != value))
+				{
+					this._fiMunicipioId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiColoniaId", DbType="Float NOT NULL")]
+		public double fiColoniaId
+		{
+			get
+			{
+				return this._fiColoniaId;
+			}
+			set
+			{
+				if ((this._fiColoniaId != value))
+				{
+					this._fiColoniaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTipo", DbType="TinyInt NOT NULL")]
+		public byte fiTipo
+		{
+			get
+			{
+				return this._fiTipo;
+			}
+			set
+			{
+				if ((this._fiTipo != value))
+				{
+					this._fiTipo = value;
 				}
 			}
 		}
@@ -3407,10 +4023,6 @@ namespace BHermanos.Zonificacion.DataAccess
 		private System.Nullable<double> _pro_ocup_c;
 		
 		private double _dist_tot;
-		
-		private double _dist_psibls;
-		
-		private double _vtas_tot;
 		
 		public spConColoniasResult()
 		{
@@ -6676,172 +7288,6 @@ namespace BHermanos.Zonificacion.DataAccess
 				if ((this._dist_tot != value))
 				{
 					this._dist_tot = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dist_psibls", DbType="Float NOT NULL")]
-		public double dist_psibls
-		{
-			get
-			{
-				return this._dist_psibls;
-			}
-			set
-			{
-				if ((this._dist_psibls != value))
-				{
-					this._dist_psibls = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vtas_tot", DbType="Float NOT NULL")]
-		public double vtas_tot
-		{
-			get
-			{
-				return this._vtas_tot;
-			}
-			set
-			{
-				if ((this._vtas_tot != value))
-				{
-					this._vtas_tot = value;
-				}
-			}
-		}
-	}
-	
-	public partial class spConPlazasResult
-	{
-		
-		private int _fiPlazaId;
-		
-		private string _fcColor;
-		
-		private string _fcNombre;
-		
-		private int _fiEstadoId;
-		
-		private int _fiMunicipioId;
-		
-		private double _fiColoniaId;
-		
-		private byte _fiTipo;
-		
-		public spConPlazasResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiPlazaId", DbType="Int NOT NULL")]
-		public int fiPlazaId
-		{
-			get
-			{
-				return this._fiPlazaId;
-			}
-			set
-			{
-				if ((this._fiPlazaId != value))
-				{
-					this._fiPlazaId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcColor", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string fcColor
-		{
-			get
-			{
-				return this._fcColor;
-			}
-			set
-			{
-				if ((this._fcColor != value))
-				{
-					this._fcColor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fcNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string fcNombre
-		{
-			get
-			{
-				return this._fcNombre;
-			}
-			set
-			{
-				if ((this._fcNombre != value))
-				{
-					this._fcNombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiEstadoId", DbType="Int NOT NULL")]
-		public int fiEstadoId
-		{
-			get
-			{
-				return this._fiEstadoId;
-			}
-			set
-			{
-				if ((this._fiEstadoId != value))
-				{
-					this._fiEstadoId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiMunicipioId", DbType="Int NOT NULL")]
-		public int fiMunicipioId
-		{
-			get
-			{
-				return this._fiMunicipioId;
-			}
-			set
-			{
-				if ((this._fiMunicipioId != value))
-				{
-					this._fiMunicipioId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiColoniaId", DbType="Float NOT NULL")]
-		public double fiColoniaId
-		{
-			get
-			{
-				return this._fiColoniaId;
-			}
-			set
-			{
-				if ((this._fiColoniaId != value))
-				{
-					this._fiColoniaId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fiTipo", DbType="TinyInt NOT NULL")]
-		public byte fiTipo
-		{
-			get
-			{
-				return this._fiTipo;
-			}
-			set
-			{
-				if ((this._fiTipo != value))
-				{
-					this._fiTipo = value;
 				}
 			}
 		}

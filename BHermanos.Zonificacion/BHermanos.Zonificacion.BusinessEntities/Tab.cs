@@ -17,6 +17,8 @@ namespace BHermanos.Zonificacion.BusinessEntities
 
         public List<Zona> ListaZonas { get; set; }
 
+        public List<DateTime> Fechas{ get; set; }
+
         #endregion
     }
 }
