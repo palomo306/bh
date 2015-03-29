@@ -14,5 +14,14 @@
     <script src="../Scripts/theme.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
-
+    <div id="ContentDiv">
+        <div id="HeaderDiv"></div>    
+        <div class="left-column">
+            <div id="MapDiv">Left Side Row 1</div>
+            <div id="TotalDiv">Left Side Row 2</div>
+        </div>
+        <div class="right-column" style="height:100%;">
+            <div id="InfoDiv">Right Side Row 1</div>      
+        </div>
+    </div>    
 </asp:Content>

@@ -9,7 +9,6 @@
 #wrapper {
     width: 100%;
     height:100%;
-    border: 1px solid black;
     overflow: hidden; /* will contain if #first is longer than #second */
 }
 
@@ -112,4 +111,43 @@ button, input, optgroup, select, textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.left-column, .right-column{
+  float:left;
+}
+
+.left-column {
+    width: 75%;
+    height:100%;
+}
+
+.right-column {
+    width: 25%;
+    height:100%;
+}
+
+#ContentDiv {
+    height:100%;
+    padding:2px;
+}
+
+#HeaderDiv {
+    height:50px;
+    padding:2px;
+}
+
+#InfoDiv {
+    height:100%;
+    padding:2px;
+}
+
+#TotalDiv {
+    height:25%;
+    padding:2px;
+}
+
+#MapDiv {
+    height:70%;
+    padding:2px;
 }
