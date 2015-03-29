@@ -22,6 +22,19 @@ namespace BHermanos.Zonificacion.BusinessEntities
 
         public List<Humbral> ListaHumbrales { get; set; }
 
+        public string ToJSon()
+        {
+            try
+            {
+                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @",""<Valor>k__BackingField"":""" + Valor.ToString() + @",""<Orden>k__BackingField"":""" + Orden.ToString() + @",""<TieneHumbral>k__BackingField"":""" + TieneHumbral.ToString() + @",""<Color>k__BackingField"":""" + Color + @",""<ListaHumbrales>k__BackingField"":""" + "[]" + @"}";
+                return jSon;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
     }   

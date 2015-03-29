@@ -47,16 +47,16 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                                 if (appId == 1)
                                 {
                                     if (rb != null)
-                                        dtResult.Rows[row][zno.Nombre] = string.Format("{0:0.00}", rb.Valor);
+                                        dtResult.Rows[row][zno.Nombre] = string.Format(rb.Formato, rb.Valor);
                                     else
-                                        dtResult.Rows[row][zno.Nombre] = "0.00";
+                                        dtResult.Rows[row][zno.Nombre] = "0";
                                 }
                                 else
                                 {
                                     if (rb != null)
-                                        dtResult.Rows[row][zno.Nombre] = string.Format("{0:0.00}", rb.Valor) + "|" + zno.Color;
+                                        dtResult.Rows[row][zno.Nombre] = string.Format(rb.Formato, rb.Valor) + "|" + zno.Color;
                                     else
-                                        dtResult.Rows[row][zno.Nombre] = "0.00" + "|" + zno.Color; ;
+                                        dtResult.Rows[row][zno.Nombre] = "0" + "|" + zno.Color; ;
                                 }
                                 row++;
                             }
@@ -108,9 +108,9 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                             {
                                 Rubro rb = gpoInBase.ListaRubros.Where(rIB => rIB.Id == rbo.Id).FirstOrDefault();
                                 if (rb != null)
-                                    dtResult.Rows[row][zno.Nombre] = string.Format("{0:0.00}", rb.Valor);
+                                    dtResult.Rows[row][zno.Nombre] = string.Format(rb.Formato, rb.Valor);
                                 else
-                                    dtResult.Rows[row][zno.Nombre] = "0.00";
+                                    dtResult.Rows[row][zno.Nombre] = "0";
                                 row++;
                             }
                         }
@@ -155,7 +155,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                             {
                                 Rubro rb = gpoInBase.ListaRubros.Where(rIB => rIB.Id == rbo.Id).FirstOrDefault();
                                 if (rb != null)
-                                    dtResult.Rows[row][zno.Nombre] = string.Format("{0:0.00}", rb.Valor);
+                                    dtResult.Rows[row][zno.Nombre] = string.Format(rb.Formato, rb.Valor);
                                 else
                                     dtResult.Rows[row][zno.Nombre] = "0.00";
                                 row++;
@@ -189,9 +189,9 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     Rubro rboLast = gpoLast.ListaRubros.Where(rbEL => rbEL.Id == rbo.Id).FirstOrDefault();
                     DataRow newRow = dtResult.NewRow();
                     newRow["Dato"] = rbo.Nombre;
-                    newRow["Agrupación"] = string.Format("{0:0.00}", rboExLast.Valor);
-                    newRow["Última Colonia"] = string.Format("{0:0.00}", rboLast.Valor);
-                    newRow["Total"] = string.Format("{0:0.00}", rbo.Valor);
+                    newRow["Agrupación"] = string.Format(rboExLast.Formato, rboExLast.Valor);
+                    newRow["Última Colonia"] = string.Format(rboLast.Formato, rboLast.Valor);
+                    newRow["Total"] = string.Format(rbo.Formato, rbo.Valor);
                     dtResult.Rows.Add(newRow);
                 }
             }
@@ -236,7 +236,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     Rubro rboLast = gpoLast.ListaRubros.Where(rbEL => rbEL.Id == rbo.Id).FirstOrDefault();
                     DataRow newRow = dtResult.NewRow();
                     newRow["Dato"] = rbo.Nombre;
-                    newRow["Total"] = string.Format("{0:0.00}", rbo.Valor);
+                    newRow["Total"] = string.Format(rbo.Formato, rbo.Valor);
                     dtResult.Rows.Add(newRow);
                 }
             }

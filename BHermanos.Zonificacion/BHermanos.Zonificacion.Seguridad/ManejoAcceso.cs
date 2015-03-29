@@ -58,7 +58,7 @@ namespace BHermanos.Zonificacion.Seguridad
                             foreach (ZonPermiso permiso in rol.ZonPermisos)
                             {
                                 ZonMenus menu = permiso.ZonMenus;
-                                if (menu.fiAplicacionId == aplicacionId)
+                                if (menu.fiAplicacionId == aplicacionId && menu.flEstatus == true)
                                 {
                                     newRol.ListMenus.Add(new Menu() { Id = menu.fiMenuId, Nombre = menu.fcDescripcion, Aplicacion = menu.fcAplicacion, Orden = menu.fiOrden, Dependencia = menu.fiDependeId, ListMenus = new List<Menu>() });
                                 }
