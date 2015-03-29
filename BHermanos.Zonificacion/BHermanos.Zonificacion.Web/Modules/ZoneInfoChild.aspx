@@ -15,10 +15,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
     <div id="ContentDiv">
-        <div id="HeaderDiv"></div>    
+        <div id="HeaderDiv">
+            
+        </div>    
         <div class="left-column">
             <div id="MapDiv">Left Side Row 1</div>
-            <div id="TotalDiv">Left Side Row 2</div>
+            <div id="TotalDiv">
+                <div class="row featured-boxes">
+					<div class="col-md-3">
+						<div class="featured-box featured-box-primary">
+							<div class="box-content">
+								<h4>Loved by Customers</h4>
+								<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
+							</div>
+						</div>
+					</div>                </div>
+            </div>
         </div>
         <div class="right-column" style="height:100%;">
             <div id="InfoDiv">Right Side Row 1</div>      
