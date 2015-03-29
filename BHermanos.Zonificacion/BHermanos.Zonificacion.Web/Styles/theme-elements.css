@@ -1338,17 +1338,17 @@ body.boxed .pricing-table .plan, body.boxed .pricing-table h3 {
 	border-radius: 8px;
 	border-top: 3px solid #33B8FF;
 	border-top-width: 4px;
-	padding: 30px 30px 10px 30px;
+	padding: 5px 5px 5px 5px;
 }
 
 .featured-box .learn-more {
 	display: block;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 /* Featured Boxes */
 .featured-boxes .featured-box {
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 	margin-top: 45px;
 }
 

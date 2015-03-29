@@ -475,19 +475,19 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
 
         private void LoadMapsByEdo(BE.Estado selEdo)
         {
-            LoadMap(selEdo.Id.ToString(), "Estado.shp", selEdo.Nombre, "NombreEsta", false, false, 0,false);
-            LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + selEdo.Nombre, "NombreMuni", false, false, 0,false);            
-            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + selEdo.Nombre, "Nombre", false, false, 60,true);
-            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + selEdo.Nombre, "Nombre", false, false, 60,true);
-            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + selEdo.Nombre, "Nombre", true, true, 0,false);            
-        }     
+            LoadMap(selEdo.Id.ToString(), "Estado.shp", "edo" + selEdo.Id.ToString(), "NombreEsta", false, false, 0, false);
+            LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + "edo" + selEdo.Id.ToString(), "NombreMuni", false, false, 0, false);
+            LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
+            LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
+            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + "edo" + selEdo.Id.ToString(), "Nombre", true, true, 255, false);
+        }
 
         private void RemoveMapsByEdo(BE.Estado selEdo)
         {
             List<int> indexToRemove = new List<int>();
             for (int i = 1; i < this.sfmMainMap.ShapeFileCount; i++)
             {
-                if (this.sfmMainMap[i].Name.EndsWith(selEdo.Nombre))
+                if (this.sfmMainMap[i].Name.EndsWith("edo" + selEdo.Id.ToString()))
                 {
                     indexToRemove.Add(i);
                 }
@@ -587,14 +587,28 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #endregion
 
         #region Limpieza y Seleccion de Datos
+        private void RemovePlazaShapes()
+        {
+            if (this.CurrentPlaza != null)
+            {
+                foreach (BE.Estado edo in this.CurrentPlaza.ListaEstados)
+                {
+                    RemoveMapsByEdo(edo);
+                }
+            }
+        }
+
+
+
         private void ClearForm()
         {
+
             IsUpdate = false;
             btnSaveZone.Text = "Guardar plaza";
             this.CurrentPlaza = new BE.Plaza();
             txtCurrentPlaza.Text = "Nueva plaza";
             txtCurrentPlaza.BackColor = Color.White;
-            ClearSelections();
+            ClearSelections();            
         }
 
         private void SelectEdoItem(BE.Estado selEdo, bool updateMap)
@@ -719,12 +733,15 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     this.CurrentPlaza = clickPlaza;
                     if (e.ColumnIndex == 1)
                     {
+                        //Se limpian los shapes del mapa
+                        RemovePlazaShapes();
                         //Se seleccionan los estados
                         foreach (BE.Estado edo in clickPlaza.ListaEstados)
                         {
                             SelectEdoItem(edo, true);
                         }
                         //Se seleccionan las colonias de la plaza
+                        LoadPlazaRenderSetting();
                         SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
                         //Se cambia el formato visual
                         txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
@@ -805,6 +822,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private void btnCanelZone_Click(object sender, EventArgs e)
         {
             ClearForm();
+            LoadPlazaRenderSetting();
             sfmMainMap.CtrlDown = false;
         }
         #endregion
