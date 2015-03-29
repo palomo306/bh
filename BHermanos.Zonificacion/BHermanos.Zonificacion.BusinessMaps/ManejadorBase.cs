@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
 using BHermanos.Zonificacion.BusinessEntities;
+using System.Globalization;
 
 namespace BHermanos.Zonificacion.BusinessMaps
 {
@@ -19,12 +20,15 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region Constructores
 
-        protected ManejadorBase() 
+        protected ManejadorBase()
         {
             try
             {
                 string connString = ConfigurationManager.AppSettings["ConexionZonificacion"].ToString();
+                int commandTimeOut = int.Parse(ConfigurationManager.AppSettings["CommandTimeOut"].ToString());
+                //this.oDataAccess = new DataAccessDataContext(connString, commandTimeOut);
                 this.oDataAccess = new DataAccessDataContext(connString);
+                this.oDataAccess.CommandTimeout = commandTimeOut;
             }
             catch (Exception ex)
             {
@@ -32,7 +36,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             }
         }
 
-        #endregion        
+        #endregion
 
         #region Metodos
 
@@ -42,60 +46,87 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 oDataAccess.Dispose();
         }
 
-        protected virtual double AsignaValor(String expresion, DataAccess.spConColoniasResult coloniasResult)
+        protected virtual double AsignaValor(String expresion, DataAccess.spConColoniasResult coloniasResult, byte tipo, DataAccess.ZonTab zonTab, DateTime fechaInicio, DateTime fechaFin, bool esBusquedaXFecha)
         {
             double valor = 0.0D;
-            string cadena = string.Empty;
-            if (coloniasResult != null)
+            try
             {
-
-                for (int i = 0; i < expresion.Length; i++)
+                string cadena = string.Empty;
+                if (coloniasResult != null)
                 {
-                    string caracter = expresion.Substring(i, 1);
-                    if (caracter == "|")
+
+                    for (int i = 0; i < expresion.Length; i++)
                     {
-                        int ini = i;
-                        int fin = expresion.IndexOf("|", i + 1);
-                        string subExpresion = expresion.Substring(ini + 1, fin - ini - 1);
-
-                        if (subExpresion.IndexOf("==") > 0)
+                        string caracter = expresion.Substring(i, 1);
+                        if (caracter == "|")
                         {
-                            string[] array = subExpresion.Replace("==", "=").Split("=".ToCharArray());
-                            object obj = this.BuscaValor(coloniasResult, array[0]);
-                            string val = string.Empty;
+                            int ini = i;
+                            int fin = expresion.IndexOf("|", i + 1);
+                            string subExpresion = expresion.Substring(ini + 1, fin - ini - 1);
 
-                            //if (obj.GetType() == typeof(string))
+                            if (subExpresion.IndexOf("==") > 0)
+                            {
+                                string[] array = subExpresion.Replace("==", "=").Split("=".ToCharArray());
+                                object obj = this.BuscaValor(coloniasResult, array[0]);
+                                string val = string.Empty;
+
+                                //if (obj.GetType() == typeof(string))
                                 val = (string)obj.ToString();
-                            //if (obj.GetType() == typeof(double))
+                                //if (obj.GetType() == typeof(double))
                                 //val = ((double)obj).ToString();
 
-                            if (val == array[1])
-                            {
-                                cadena += "1";
+                                if (val == array[1])
+                                {
+                                    cadena += "1";
+                                }
+                                else
+                                {
+                                    cadena += "0";
+                                }
                             }
                             else
                             {
-                                cadena += "0";
+                                object obj;
+                                if (tipo == 1)
+                                {
+                                    obj = this.BuscaValor(coloniasResult, subExpresion);
+                                }
+                                else
+                                {
+                                    DataAccess.ZonNegocio negocio = zonTab.ZonNegocios.Where(w => w.flEstatus == true && w.fiNegocioId == int.Parse(subExpresion)).FirstOrDefault();
+                                    if (negocio != null)
+                                    {
+                                        if (!esBusquedaXFecha)
+                                        {
+                                            fechaInicio = negocio.ZonDatosXNegocios.Where(w => w.fiNegocioId == negocio.fiNegocioId && w.fiColoniaId == coloniasResult.IdColonia).OrderByDescending(o => o.fdFecha).Select(d => DateTime.Parse(d.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX")))).Distinct().ToList<DateTime>().FirstOrDefault();
+                                            fechaFin = fechaInicio;
+                                        }
+                                        obj = negocio.ZonDatosXNegocios.Where(w => w.fiNegocioId == negocio.fiNegocioId && w.fiColoniaId == coloniasResult.IdColonia && DateTime.Parse(w.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX"))) >= fechaInicio && DateTime.Parse(w.fdFecha.ToString("dd-MM-yyyy", new CultureInfo("es-MX"))) <= fechaFin).Select(s => s.fiValor).Sum();
+                                    }
+                                    else {
+                                        obj = 0.0D;
+                                    }
+                                    
+                                }                            
+                                if (obj.GetType() == typeof(double))
+                                    cadena += (double)obj;
+                                else
+                                    cadena += 0.0D;
                             }
+                            i = fin;
                         }
                         else
                         {
-                            object obj = this.BuscaValor(coloniasResult, subExpresion);
-                            if (obj.GetType() == typeof(double))
-                                cadena += (double)obj;
-                            else
-                                cadena += 0.0D;
+                            cadena += caracter;
                         }
-                        i = fin;
                     }
-                    else
-                    {
-                        cadena += caracter;
-                    }
-                }
-                Evaluador e = new Evaluador(cadena);
-                valor = e.F();
+                    Evaluador e = new Evaluador(cadena);
+                    valor = e.F();
 
+                }
+            }
+            catch (Exception)
+            {
             }
             return valor;
         }
@@ -196,7 +227,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 throw ex;
             }
             return color;
-        }    
+        }
 
         protected virtual object BuscaValor(DataAccess.spConColoniasResult coloniasResult, string key)
         {
@@ -403,8 +434,8 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 case "PROM_OCUP": valor = (double)coloniasResult.prom_ocup; break;
                 case "PRO_OCUP_C": valor = (double)coloniasResult.pro_ocup_c; break;
                 case "DIST_TOT": valor = (double)coloniasResult.dist_tot; break;
-                case "DIST_PSIBLS": valor = (double)coloniasResult.dist_psibls; break;
-                case "VTAS_TOT": valor = (double)coloniasResult.vtas_tot; break;
+                //case "DIST_PSIBLS": valor = (double)coloniasResult.dist_psibls; break;
+                //case "VTAS_TOT": valor = (double)coloniasResult.vtas_tot; break;
             }
             return valor;
         }

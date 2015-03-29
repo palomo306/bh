@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
@@ -11,6 +13,11 @@ namespace BHermanos.Zonificacion.WebService
     {
         public static void Register(HttpConfiguration config)
         {
+
+            config.Formatters.Clear();
+
+            config.Formatters.Add(new XmlMediaTypeFormatter());            
+            config.Formatters.Add(new JsonMediaTypeFormatter());
 
             //Mapeo de Acceso
             config.MapHttpAttributeRoutes();
@@ -79,7 +86,7 @@ namespace BHermanos.Zonificacion.WebService
               name: "PostZona",
               routeTemplate: "WebService/{controller}/PostZona/{zonaId}",
               defaults: new { zonaId = RouteParameter.Optional }
-           );
+            );
 
             config.Routes.MapHttpRoute(
                name: "PutZona",
@@ -108,13 +115,13 @@ namespace BHermanos.Zonificacion.WebService
             config.Routes.MapHttpRoute(
                name: "PutGrupoRubros",
                routeTemplate: "WebService/{controller}/PutGrupoRubros"
-               );
+            );
 
             //Mapeo de Grupo de Tabs
             config.Routes.MapHttpRoute(
                name: "GetTab",
-               routeTemplate: "WebService/{controller}/GetTab/{tabId}/{estadoId}/{municipioId}",
-               defaults: new { tabId = RouteParameter.Optional, estadoId = RouteParameter.Optional, municipioId = RouteParameter.Optional }
+               routeTemplate: "WebService/{controller}/GetTab/{tabId}/{plazaId}/{fechaInicio}/{fechaFin}",
+               defaults: new { tabId = RouteParameter.Optional, plazaId = RouteParameter.Optional, fechaInicio = RouteParameter.Optional, fechaFin = RouteParameter.Optional }
             );
 
             //Mapeo de Grupo de Plazas
@@ -128,7 +135,7 @@ namespace BHermanos.Zonificacion.WebService
               name: "PostPlaza",
               routeTemplate: "WebService/{controller}/PostPlaza",
               defaults: null
-           );
+            );
 
             config.Routes.MapHttpRoute(
                name: "PutPlaza",
@@ -140,12 +147,26 @@ namespace BHermanos.Zonificacion.WebService
                 name: "DeletePlaza",
                 routeTemplate: "WebService/{controller}/DeletePlaza/{plazaId}"
             );
-            
+
             //Formato del response
             config.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
-            //config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
+            // Cambiar capitalización a las letras
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            // Ignorar valores nulos
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            // Cambiar formato de fecha
+            config.Formatters.JsonFormatter.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.MicrosoftDateFormat;
+            // Cambiar la cultura
+            config.Formatters.JsonFormatter.SerializerSettings.Culture = new CultureInfo("es-MX");
+            //Serializa 
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
+
+            //Formato del response
             config.Formatters.XmlFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
-            //config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            //Serializa 
+            config.Formatters.XmlFormatter.UseXmlSerializer = true;             
+            
+
         }
     }
 }

@@ -28,7 +28,10 @@ namespace BHermanos.Zonificacion.Seguridad
             try
             {
                 string connString = ConfigurationManager.AppSettings["ConexionZonificacion"].ToString();
-                oDataAccess = new DataAccessDataContext(connString);
+                int commandTimeOut = int.Parse(ConfigurationManager.AppSettings["CommandTimeOut"].ToString());
+                //this.oDataAccess = new DataAccessDataContext(connString, commandTimeOut);
+                this.oDataAccess = new DataAccessDataContext(connString);
+                this.oDataAccess.CommandTimeout = commandTimeOut;
             }
             catch (Exception ex)
             {

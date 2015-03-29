@@ -73,7 +73,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listacolonias;
         }
 
-        public List<Colonia> ObtenerColoniasXPartida(byte vistaId, int plazaId, int zonaId, double coloniaId, DataAccess.ZonTab zonTab)
+        public List<Colonia> ObtenerColoniasXPartida(byte vistaId, int plazaId, int zonaId, double coloniaId, DataAccess.ZonTab zonTab, DateTime fechaInicio, DateTime fechaFin, bool esBusquedaXFecha)
         {
             List<Colonia> listacolonias = new List<Colonia>();
             try
@@ -86,7 +86,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     colonia.Nombre = registro.Nombre;
                     colonia.Tipo = (byte)registro.IdTipo;
                     colonia.ListaGrupoRubros = new List<GrupoRubros>();
-                    colonia.ListaPartidas = this.ObtenerListaDePartidasDeColonia(3,plazaId, zonaId, coloniaId, registro, zonTab);
+                    colonia.ListaPartidas = this.ObtenerListaDePartidasDeColonia(3,plazaId, zonaId, coloniaId, registro, zonTab,fechaInicio,fechaFin,esBusquedaXFecha);
                     listacolonias.Add(colonia);
                 }
             }
@@ -144,7 +144,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     rubro.Estatus = true;
                     rubro.SignoAcumulado = reg.fcSignoAcumulado;
                     rubro.Formato = reg.fcFormato;
-                    rubro.Valor = this.AsignaValor(rubro.Expresion, coloniasResult);
+                    rubro.Valor = this.AsignaValor(rubro.Expresion, coloniasResult,1,null,DateTime.Now,DateTime.Now,false);
                     listaRubros.Add(rubro);
                 }
             }
@@ -157,12 +157,12 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaRubros;
         }
 
-        private List<Partida> ObtenerListaDePartidasDeColonia(int nivel, int plazaId, int zonaId, double coloniaId, DataAccess.spConColoniasResult coloniasResult, DataAccess.ZonTab zonTab)
+        private List<Partida> ObtenerListaDePartidasDeColonia(int nivel, int plazaId, int zonaId, double coloniaId, DataAccess.spConColoniasResult coloniasResult, DataAccess.ZonTab zonTab, DateTime fechaInicio, DateTime fechaFin, bool esBusquedaXFecha)
         {
             List<Partida> listaPartidas = new List<Partida>();
 
             try
-            {                
+            {
                 foreach (var zonPartidaXTab in zonTab.ZonPartidasXTabs)
                 {
                     Partida partida = new Partida();
@@ -170,10 +170,10 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     partida.Nombre = zonPartidaXTab.fcDescripcion;
                     partida.TieneHumbral = zonPartidaXTab.flTieneUmbral;
                     partida.Orden = zonPartidaXTab.fiOrden;
-                    partida.Valor = (double)this.AsignaValor(zonPartidaXTab.fcExpresion, coloniasResult);
+                    partida.Valor = (double)this.AsignaValor(zonPartidaXTab.fcExpresion, coloniasResult, zonPartidaXTab.fiTipo,zonTab,fechaInicio,fechaFin,esBusquedaXFecha);
                     partida.ListaHumbrales = this.ObtieneHumbrales(nivel, plazaId, zonaId, coloniaId, partida.Valor, zonPartidaXTab);
-                    partida.Color = this.ObtieneColor(partida.Valor,partida.ListaHumbrales);                    
-                    listaPartidas.Add(partida);                    
+                    partida.Color = this.ObtieneColor(partida.Valor, partida.ListaHumbrales);
+                    listaPartidas.Add(partida);
                 }
             }
             catch (Exception ex)

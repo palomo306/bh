@@ -61,6 +61,30 @@ namespace BHermanos.Zonificacion.WebService.Controllers
             return Ok(tabModel);
         }
 
+        public IHttpActionResult GetTab([FromUri]int tabId, [FromUri]int plazaId, [FromUri] DateTime fechaInicio, [FromUri] DateTime fechaFin)
+        {
+            TabModel tabModel = new TabModel()
+            {
+                Succes = false,
+                Mensaje = string.Empty,
+                ListaTabs = null
+            };
+
+            try
+            {
+                using (ManejadorTabs manejoTabs = new ManejadorTabs())
+                {
+                    tabModel.ListaTabs = manejoTabs.ObtenerTab(tabId, plazaId,fechaInicio,fechaFin);
+                    tabModel.Succes = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                tabModel.Mensaje = ex.Message;
+            }
+            return Ok(tabModel);
+        }
+
         #endregion
     }
 }
