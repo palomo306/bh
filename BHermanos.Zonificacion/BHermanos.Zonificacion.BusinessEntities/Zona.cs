@@ -230,15 +230,33 @@ namespace BHermanos.Zonificacion.BusinessEntities
             return jSon;
         }
 
+        private string ListaPartidasToJSon()
+        {
+            string jSon = string.Empty;
+            if (ListaPartidas == null || ListaPartidas.Count == 0)
+                return "[]";
+            else
+            {
+                string[] arrPartidasJson = new string[ListaPartidas.Count];
+                for (int i = 0; i < ListaPartidas.Count; i++)
+                {
+                    if (ListaPartidas[i].Id != 0)
+                        arrPartidasJson[i] = ListaPartidas[i].ToJSon();
+                }
+                jSon = "[" + string.Join(",", arrPartidasJson) + "]";
+            }
+            return jSon;
+        }
+
         public string ToJSon(bool includeCol)
         {
             try
             {
                 string jSon;
                 if (includeCol)
-                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() +  @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":" + ListaColoniasToJSon() + @",""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
+                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() + @",""<Color>k__BackingField"":""" + Color + @""",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":" + ListaColoniasToJSon() + @",""<ListaPartidas>k__BackingField"":" + "[]" + @",""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
                 else
-                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() +  @",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":" + Colonias + @",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":[],""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
+                    jSon = @"{""<Id>k__BackingField"":" + this.Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<PlazaId>k__BackingField"":" + PlazaId.ToString() + @",""<Color>k__BackingField"":""" + Color + @""",""<ListaSubzonas>k__BackingField"":" + ListaSubzonasToJSon() + @",""<ListaColonias>k__BackingField"":[],""<ListaPartidas>k__BackingField"":" + "[]" + @",""<Colonias>k__BackingField"":""" + string.Join("|", ListaColonias.Where(c => c.Id != 0).Select(c => c.Id.ToString()).Distinct().ToArray()) + @"""}";
                 return jSon;
             }
             catch (Exception ex)
