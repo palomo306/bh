@@ -40,11 +40,11 @@
     </Reference>
     <Reference Include="EGIS.Controls, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\EGIS.Controls.dll</HintPath>
+      <HintPath>Modules\DLL\EGIS.Controls.dll</HintPath>
     </Reference>
     <Reference Include="EGIS.ShapeFileLib, Version=4.5.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\EGIS.ShapeFileLib.dll</HintPath>
+      <HintPath>Modules\DLL\EGIS.ShapeFileLib.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

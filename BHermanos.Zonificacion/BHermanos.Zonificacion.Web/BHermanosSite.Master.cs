@@ -96,7 +96,7 @@ namespace BHermanos.Zonificacion.Web
                 outHtml += @"<div class=""toggle-content"">" + Environment.NewLine;
                 foreach (BE.Menu subMenu in menu.ListMenus)
                 {
-                    outHtml += @"<p class=""MenuOption"" onclick=""javascript:OpenMenu('" + menu.Aplicacion + @"');"">" + subMenu.Nombre + "</p>" + Environment.NewLine;
+                    outHtml += @"<p class=""MenuOption"" onclick=""javascript:OpenMenu('" + subMenu.Aplicacion + @"');"">" + subMenu.Nombre + "</p>" + Environment.NewLine;
                 }
                 outHtml += "</div>" + Environment.NewLine;
             }                

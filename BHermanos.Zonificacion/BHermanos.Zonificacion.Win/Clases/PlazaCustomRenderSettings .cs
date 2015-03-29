@@ -99,12 +99,13 @@ namespace RegionDemo.Clases
 
         public Color GetRecordSelectColor(int recordNumber)
         {
-            if (colorList != null)
+            if (colorList != null && colorList[recordNumber] != defaultSettings.FillColor)
             {
                 return colorList[recordNumber];
             }
             return defaultSettings.SelectFillColor;
         }
+        
 
         public string GetRecordToolTip(int recordNumber)
         {

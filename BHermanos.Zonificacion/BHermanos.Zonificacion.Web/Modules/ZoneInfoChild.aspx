@@ -29,7 +29,8 @@
 								<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
 							</div>
 						</div>
-					</div>                </div>
+					</div>
+                </div>
             </div>
         </div>
         <div class="right-column" style="height:100%;">
