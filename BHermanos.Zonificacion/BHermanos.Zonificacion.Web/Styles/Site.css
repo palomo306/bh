@@ -1,4 +1,4 @@
-﻿html, body, form, #bg, #bg table {
+﻿html, body, form {
     height:100%;
     width:100%;
     overflow:hidden;
@@ -6,37 +6,29 @@
     padding:0px;
 }
 
-#bg div {
-    height:200%;
-    left:-50%;
-    position:absolute;
-    top:-50%;
-    width:200%;    
+#wrapper {
+    width: 100%;
+    height:100%;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
 }
 
-#bg td {
-    text-align:center;
-    vertical-align:middle;
+#first {
+    width: 180px;
+    height:100%;
+    float:left; /* add this */
 }
 
-#bg img {
-    margin:0 auto;
-    min-height:50%;
-    min-width:50%;
+#second {
+    margin-right:0px;
+    height:100%;
+    overflow: hidden; /* if you don't want #second to wrap below #first */
 }
 
-.Content
-{
-    position:absolute;
-    top:0px;
-    left:0px;
-    margin:0px;
-    z-index:999;
-    border-collapse:collapse ;
-    border-spacing: 0px; 
-    width:100%;
+.MenuOption {
+     cursor:pointer;
+     border-bottom: 1px solid #0088CC;
 }
-
 
 .BackGroudPopUp
 {
@@ -48,171 +40,76 @@
     filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
-.ContentDiv
-{
-    border:1px solid black;     
+element.style {
 }
 
-.NormalText
-{
-    font-family:Arial;
+.btn-primary, .pagination > .active > a {
+    border-color: #0088cc !important;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0088cc;
+    border-color: #0088cc;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 5px 10px;
     font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
 }
 
-.HeaderText
-{
-    font-size: 13px;
-    font-weight:bold;
+.btn-primary {
+    color: #fff;
+    background-color: #ccc;
+    border-color: #bfbfbf;
 }
-
-.PopNewUser
-{
-    position:fixed;
-    top:50%;
-    margin-top: -140px;
-    left:50%;
-    margin-left: -160px;
-}
-
-.PopUpDelete
-{
-    position:fixed;
-    top:50%;
-    margin-top: -50px;
-    left:50%;
-    margin-left: -160px;
-}
-
-.PopUpDetail
-{
-    position:fixed;
-    top:50%;
-    margin-top: -125px;
-    left:50%;
-    margin-left: -300px;
-}
-
-.Title
-{
-    font-family: Arial;
-    font-weight: bold;
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
     font-size: 14px;
-    background-color: #666666;
-    color: #efefef;
-    padding: 4px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.BotonGde
-{
-    background-color:transparent;
-    cursor:pointer;
-    border:0px;
-    font-family:Arial;
-    font-weight:bold;
-    font-size:11px;
-    background-image: url('Images/FondoBotonGde.png');
-    width:125px;
-    height:20px;
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
-.Boton
-{
-    background-color:transparent;
-    cursor:pointer;
-    border:0px;
-    font-family:Arial;
-    font-weight:bold;
-    font-size:11px;
-    background-image: url('Images/FondoBoton.png');
-    width:100px;
-    height:20px;
+    button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        -webkit-appearance: button;
+        cursor: pointer;
+    }
+
+button, select {
+    text-transform: none;
 }
 
-.BotonMediano
-{
-    background-color:transparent;
-    cursor:pointer;
-    border:0px;
-    font-family:Arial;
-    font-weight:bold;
-    font-size:11px;
-    background-image: url('Images/FondoBotonMed.png');
-    width:74px;
-    height:20px;
+button {
+    overflow: visible;
 }
 
-.BotonChico
-{
-    background-color:transparent;
-    cursor:pointer;
-    border:0px;
-    font-family:Arial;
-    font-weight:bold;
-    font-size:11px;
-    background-image: url('Images/FondoBotonChico.png');
-    width:40px;
-    height:20px;
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
 }
 
-.Pointer
-{
-     cursor:pointer;    
-}
-
-.CellCenter {
-    font-family:Arial;
-    font-size: 12px;
-    text-align:center; 
-    display:inline;
-    vertical-align:middle;
-    margin-left:auto;
-    display:table-cell;
-}
-
-.CellLeft {
-    font-family:Arial;
-    font-size: 12px;
-    text-align:left; 
-    display:inline;
-    margin-left:auto;
-    display:table-cell;
-}
-
-.CellRight {
-    font-family:Arial;
-    font-size: 12px;
-    text-align:right; 
-    display:inline;
-    margin-left:auto;
-    display:table-cell;
-}
-
-.Grid {
-    font-family:Arial;
-    font-size: 11px;
-    text-align:left; 
-    display:inline;
-    margin-left:auto;
-    display:table-cell;
-}
-
-.CellCenterTitlePage {
-    text-align:center; 
-    display:table-cell;
-    vertical-align:middle;
-    font-family: Arial;
-    font-weight: bold;
-    font-size:18px;
-}
-
-.PaddingCell {
-    padding:3px 3px 3px 3px;
-}
-
-.Separator {
-    font-size:2px;
-}
-
-.TabContent {
-    padding:1px;
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }

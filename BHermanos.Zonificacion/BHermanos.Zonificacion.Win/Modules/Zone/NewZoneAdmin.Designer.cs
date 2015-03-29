@@ -202,6 +202,7 @@
             this.btnNSE.TabIndex = 5;
             this.btnNSE.Text = "NSE";
             this.btnNSE.UseVisualStyleBackColor = true;
+            this.btnNSE.Click += new System.EventHandler(this.btnNSE_Click);
             // 
             // btnViewAll
             // 
@@ -211,6 +212,7 @@
             this.btnViewAll.TabIndex = 4;
             this.btnViewAll.Text = "Ver Completo";
             this.btnViewAll.UseVisualStyleBackColor = true;
+            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
             // 
             // dgvReportZonas
             // 

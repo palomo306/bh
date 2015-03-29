@@ -22,11 +22,11 @@ namespace RegionDemo.Clases
         RenderSettings defaultSettings;
         #endregion
 
-        public ZonaSubzonasCustomRenderSettings(RenderSettings defaultSettings, BE.Zona Zona)
+        public ZonaSubzonasCustomRenderSettings(RenderSettings defaultSettings, BE.Zona Zona, BE.Plaza Plaza)
         {
             this.defaultSettings = defaultSettings;
             BuildColorList(defaultSettings, Zona);
-            BuildBorderColorList(defaultSettings, Zona);
+            BuildBorderColorList(defaultSettings, Zona, Plaza);
         }
 
         private void BuildColorList(RenderSettings defaultSettings, BE.Zona Zona)
@@ -68,7 +68,7 @@ namespace RegionDemo.Clases
             }
         }
 
-        private void BuildBorderColorList(RenderSettings defaultSettings, BE.Zona Zona)
+        private void BuildBorderColorList(RenderSettings defaultSettings, BE.Zona Zona, BE.Plaza Plaza)
         {
             try
             {                
@@ -96,6 +96,11 @@ namespace RegionDemo.Clases
                     if (existZona)
                     {
                         colorListOutLine.Add(new ColorRecord() { Color = Zona.RealColor, Record = n });
+                    }
+                    else
+                    {
+                        if (Plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                            colorListOutLine.Add(new ColorRecord() { Color = Plaza.RealColor, Record = n });
                     }
                 }
             }
