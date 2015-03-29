@@ -244,6 +244,7 @@
     <Content Include="Modules\MainZoneInfo.aspx" />
     <Content Include="Modules\ZoneInfo.aspx" />
     <Content Include="Modules\ZoneInfoChild.aspx" />
+    <Content Include="Modules\ZoneInfoMainChild.aspx" />
     <Content Include="Scripts\Generic.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
@@ -489,6 +490,13 @@
     </Compile>
     <Compile Include="Modules\ZoneInfoChild.aspx.designer.cs">
       <DependentUpon>ZoneInfoChild.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoMainChild.aspx.cs">
+      <DependentUpon>ZoneInfoMainChild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoMainChild.aspx.designer.cs">
+      <DependentUpon>ZoneInfoMainChild.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

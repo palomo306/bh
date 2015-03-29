@@ -1235,7 +1235,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             if (LevelUpdate == 1 || LevelUpdate == 2 || LevelUpdate == 3)
                 SetupZonaSubzonasCustomRenderSettings();
             else
-                LoadCurrentPlazaRenderSetting();                
+                LoadCurrentPlazaRenderSetting();
+            sfmMainMap.CtrlDown = false;
             sfmMainMap.Focus();
         }
 

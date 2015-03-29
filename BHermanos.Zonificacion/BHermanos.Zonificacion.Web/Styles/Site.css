@@ -127,6 +127,7 @@ button, input, optgroup, select, textarea {
     height:100%;
 }
 
+
 #ContentDiv {
     height:100%;
     padding:2px;
@@ -135,6 +136,11 @@ button, input, optgroup, select, textarea {
 #HeaderDiv {
     height:50px;
     padding:2px;
+}
+
+.ContentRight {
+    float: right;
+    margin-right: 10px;
 }
 
 #InfoDiv {
@@ -149,5 +155,10 @@ button, input, optgroup, select, textarea {
 
 #MapDiv {
     height:70%;
+    padding:2px;
+}
+
+#MapMainDiv {
+    height:95%;
     padding:2px;
 }

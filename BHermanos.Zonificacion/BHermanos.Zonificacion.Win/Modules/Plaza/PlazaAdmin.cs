@@ -824,6 +824,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             ClearForm();
             LoadPlazaRenderSetting();
             sfmMainMap.CtrlDown = false;
+            sfmMainMap.Focus();
         }
         #endregion
 

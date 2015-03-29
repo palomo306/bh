@@ -59,7 +59,7 @@ namespace BHermanos.Zonificacion.Web.Login
                     {
                         this.CurrentUser = objResponse.DatosUsuario;
                         if (this.CurrentUser.Estatus.ToString() == "1")
-                            Response.Redirect("~/Modules/ZoneInfoChild.aspx");
+                            Response.Redirect("~/Modules/ZoneInfoMainChild.aspx");
                         else if (this.CurrentUser.Estatus.ToString() == "2")
                             Response.Redirect("~/Login/ResetPassword.aspx");
                         else

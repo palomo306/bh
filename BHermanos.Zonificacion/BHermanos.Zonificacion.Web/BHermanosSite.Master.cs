@@ -58,7 +58,7 @@ namespace BHermanos.Zonificacion.Web
                 //Se cargan los tabs desde el servicio
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-                url += "Tab/GetTab/0/0?type=json";
+                url += "Tab/GetTab?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Timeout = 20000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
