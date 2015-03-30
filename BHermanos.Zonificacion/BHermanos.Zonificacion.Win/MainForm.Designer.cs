@@ -78,7 +78,7 @@
             this.printSetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBarToolStripMenuItem});
             this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
-            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.printSetupToolStripMenuItem.Text = "&Ver";
             // 
             // statusBarToolStripMenuItem
@@ -87,7 +87,7 @@
             this.statusBarToolStripMenuItem.CheckOnClick = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.statusBarToolStripMenuItem.Text = "Barra de Estado";
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
             // 

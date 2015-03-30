@@ -37,9 +37,26 @@ namespace BHermanos.Zonificacion.Win
         {
             ToolStripMenuItem visulSubMenu = (ToolStripMenuItem)sender;
             BE.Menu menu = (BE.Menu)visulSubMenu.Tag;
-            Form form = (Form)Activator.CreateInstance(Type.GetType(menu.Aplicacion));
-            form.MdiParent = this;
-            form.Show();
+            Form form = null;
+            
+            BackgroundWorker w = new BackgroundWorker();
+            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) => {
+                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+                form = (Form)Activator.CreateInstance(Type.GetType(menu.Aplicacion), toolStripStatusLabel);                
+            });
+
+            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) => {
+                form.StartPosition = FormStartPosition.CenterScreen;
+                form.MdiParent = this;
+                form.Show();
+                toolStripStatusLabel.Text = "Completado...";
+            });
+
+            w.ProgressChanged += new ProgressChangedEventHandler((object senderProgressChanged, ProgressChangedEventArgs eProgressChanged) => {
+                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+            });
+
+            w.RunWorkerAsync();
         }
 
         private void CreateMenus()
