@@ -199,7 +199,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
 
         private void PrintCurrentZona(BE.Zona zona)
         {
-            DataTable dtReporteZonas = ReportZonesConversor.ToZoneDataTable(zona);
+            DataTable dtReporteZonas = ReportZonesConversor.ToZoneDataTable(zona,false);
             dgZone.DataSource = dtReporteZonas;
             //Se fija la columna del nombre del rubro
             dgZone.Columns[0].Frozen = true;
@@ -551,7 +551,6 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 sfmMainMap.ZoomLevel = sfmMainMap.ZoomLevel;
             }
         }
-
 
         private void SetupZonaSubzonasCustomRenderSettings()
         {

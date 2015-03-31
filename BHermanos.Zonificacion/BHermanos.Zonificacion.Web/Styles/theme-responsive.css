@@ -147,7 +147,7 @@ Version: 		3.0.0
 	#header nav ul.nav-main .dropdown-submenu > a:after {
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
-		border-top: 5px solid #FFF;
+		    
 	}
 
 	#header nav ul.nav-main .dropdown-submenu:hover > a:after {

@@ -168,14 +168,25 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
         }
 
 
-        public static DataTable ToZoneDataTable(Zona zoneBase)
+        public static DataTable ToZoneDataTable(Zona zoneBase, bool isWeb)
         {
             //Se agrega la primera columna con valores
             DataTable dtResult = new DataTable();
-            dtResult.Columns.Add("Dato");
-            dtResult.Columns.Add("Agrupación", typeof(string));
-            dtResult.Columns.Add("Última Colonia", typeof(string));
-            dtResult.Columns.Add("Total", typeof(string));
+            string colDat = "Dato";
+            string colGroup = "Agrupación";
+            string colLastCol = "Última Colonia";
+            string colTotal = "Total";
+            if (isWeb)
+            {
+                colDat = "Dato";
+                colGroup = "Agrup.";
+                colLastCol = "Última";
+                colTotal = "Total";
+            }
+            dtResult.Columns.Add(colDat);
+            dtResult.Columns.Add(colGroup, typeof(string));
+            dtResult.Columns.Add(colLastCol, typeof(string));
+            dtResult.Columns.Add(colTotal, typeof(string));
             Colonia colBase = zoneBase.GetColoniaTotal();
             Colonia colExceptLast = zoneBase.GetColoniaExceptLast();
             Colonia colLast = zoneBase.GetColoniaLast();
@@ -188,10 +199,10 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     Rubro rboExLast = gpoExLast.ListaRubros.Where(rbEL => rbEL.Id == rbo.Id).FirstOrDefault();
                     Rubro rboLast = gpoLast.ListaRubros.Where(rbEL => rbEL.Id == rbo.Id).FirstOrDefault();
                     DataRow newRow = dtResult.NewRow();
-                    newRow["Dato"] = rbo.Nombre;
-                    newRow["Agrupación"] = string.Format(rboExLast.Formato, rboExLast.Valor);
-                    newRow["Última Colonia"] = string.Format(rboLast.Formato, rboLast.Valor);
-                    newRow["Total"] = string.Format(rbo.Formato, rbo.Valor);
+                    newRow[colDat] = rbo.Nombre;
+                    newRow[colGroup] = string.Format(rboExLast.Formato, rboExLast.Valor);
+                    newRow[colLastCol] = string.Format(rboLast.Formato, rboLast.Valor);
+                    newRow[colTotal] = string.Format(rbo.Formato, rbo.Valor);
                     dtResult.Rows.Add(newRow);
                 }
             }

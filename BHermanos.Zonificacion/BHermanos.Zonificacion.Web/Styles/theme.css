@@ -24,7 +24,6 @@ body {
 	background: -webkit-linear-gradient( #f6f6f6, white);
 	background: linear-gradient( #f6f6f6, white);
 	clear: both;
-	border-top: 5px solid #EDEDED;
 	height:100%;
 	padding: 5px 0px;
 }
@@ -866,10 +865,9 @@ body #header nav.mega-menu .mega-menu-signin ul.dropdown-menu li a, body #header
 
 /* Page Top */
 .page-top {
-	background-color: #171717;
+	background-color: #021052;
 	border-bottom: 5px solid #CCC;
 	border-top: 5px solid #384045;
-	margin-bottom: 35px;
 	min-height: 50px;
 	padding: 0;
 	padding: 20px 0;
@@ -892,7 +890,7 @@ body #header nav.mega-menu .mega-menu-signin ul.dropdown-menu li a, body #header
 	color: #FFF;
 	display: inline-block;
 	font-weight: 200;
-	margin: 0 0 -25px;
+	margin: 0 78px -25px;
 	min-height: 37px;
 	line-height: 46px;
 	padding: 0 0 17px;

@@ -6,7 +6,7 @@ using EGIS.ShapeFileLib;
 using System.Drawing;
 
 
-namespace BHermanos.Zonificacion.Web.Clases
+namespace BHermanos.Zonificacion.Web
 {
     public class ColorRecord
     {
@@ -22,11 +22,11 @@ namespace BHermanos.Zonificacion.Web.Clases
         RenderSettings defaultSettings;
         #endregion
 
-        public ZonaSubzonasCustomRenderSettings(RenderSettings defaultSettings, BE.Zona Zona)
+        public ZonaSubzonasCustomRenderSettings(RenderSettings defaultSettings, BE.Zona Zona, BE.Plaza Plaza)
         {
             this.defaultSettings = defaultSettings;
             BuildColorList(defaultSettings, Zona);
-            BuildBorderColorList(defaultSettings, Zona);
+            BuildBorderColorList(defaultSettings, Zona, Plaza);
         }
 
         private void BuildColorList(RenderSettings defaultSettings, BE.Zona Zona)
@@ -55,7 +55,7 @@ namespace BHermanos.Zonificacion.Web.Clases
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisan las subzonas
-                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
+                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Where(col => col.Id == colonia).Any()).FirstOrDefault();
                     if (zona != null)
                     {
                         colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
@@ -68,13 +68,11 @@ namespace BHermanos.Zonificacion.Web.Clases
             }
         }
 
-        private void BuildBorderColorList(RenderSettings defaultSettings, BE.Zona Zona) 
+        private void BuildBorderColorList(RenderSettings defaultSettings, BE.Zona Zona, BE.Plaza Plaza)
         {
             try
-            {
-                List<BE.Zona> ListZonas = Zona.ListaSubzonas;
-                colorList = new List<ColorRecord>();
-
+            {                
+                colorListOutLine = new List<ColorRecord>();
                 int numRecords = defaultSettings.DbfReader.DbfRecordHeader.RecordCount;
                 for (int n = 0; n < numRecords; ++n)
                 {
@@ -94,10 +92,15 @@ namespace BHermanos.Zonificacion.Web.Clases
 
                     //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                     //Se revisan las subzonas
-                    BE.Zona zona = ListZonas.Where(sub => sub.ListaColonias.Select(col => col.Id == colonia).Any()).FirstOrDefault();
-                    if (zona != null)
+                    bool existZona = Zona.ListaColonias.Where(col => col.Id == colonia).Any();
+                    if (existZona)
                     {
-                        colorList.Add(new ColorRecord() { Color = zona.RealColor, Record = n });
+                        colorListOutLine.Add(new ColorRecord() { Color = Zona.RealColor, Record = n });
+                    }
+                    else
+                    {
+                        if (Plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                            colorListOutLine.Add(new ColorRecord() { Color = Plaza.RealColor, Record = n });
                     }
                 }
             }
@@ -172,6 +175,10 @@ namespace BHermanos.Zonificacion.Web.Clases
             get { return false; }
         }
 
+        public float GetRecordOutlineWidth(int recordNumber)
+        {
+            return defaultSettings.PenWidthScale;
+        }
         #endregion
     }
 }

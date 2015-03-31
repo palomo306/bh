@@ -1,32 +1,6 @@
-<sfproject version="1.0">
-  <MapBackColor>Silver</MapBackColor>
-  <layers>
-    <shapefile>
-      <name>national_estatal.shp</name>
-      <path>Nacional/national_estatal</path>
-      <renderer>
-        <MinZoomLevel>-1</MinZoomLevel>
-        <MaxZoomLevel>-1</MaxZoomLevel>
-        <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-        <FieldName>Nombre</FieldName>
-        <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-        </Font>
-        <FontColor>Black</FontColor>
-        <FillColor>#F5EEE8</FillColor>
-        <OutlineColor>#969696</OutlineColor>
-        <PenWidthScale>0.0001350453</PenWidthScale>
-        <FillInterior>False</FillInterior>
-        <Selectable>False</Selectable>
-        <LineType>Outline</LineType>
-        <ShadowText>True</ShadowText>
-        <PointSize>5</PointSize>
-        <UseToolTip>True</UseToolTip>
-        <ToolTipFieldName>Nombre</ToolTipFieldName>
-      </renderer>
-    </shapefile>
     <shapefile>
       <name>Estado.shp</name>
-      <path>Estado</path>
+      <path>Estados/30/Estado</path>
       <renderer>
         <MinZoomLevel>-1</MinZoomLevel>
         <MaxZoomLevel>-1</MaxZoomLevel>
@@ -49,7 +23,7 @@
     </shapefile>
     <shapefile>
       <name>Colonias.shp</name>
-      <path>Colonias</path>
+      <path>Estados/30/Colonias</path>
       <renderer>
         <MinZoomLevel>-1</MinZoomLevel>
         <MaxZoomLevel>-1</MaxZoomLevel>
@@ -72,7 +46,7 @@
     </shapefile>
     <shapefile>
       <name>Carreteras.shp</name>
-      <path>Carreteras</path>
+      <path>Estados/30/Carreteras</path>
       <renderer>
         <MinZoomLevel>-1</MinZoomLevel>
         <MaxZoomLevel>-1</MaxZoomLevel>
@@ -95,7 +69,7 @@
     </shapefile>
     <shapefile>
       <name>Calles.shp</name>
-      <path>Calles</path>
+      <path>Estados/30/Calles</path>
       <renderer>
         <MinZoomLevel>-1</MinZoomLevel>
         <MaxZoomLevel>-1</MaxZoomLevel>
@@ -118,7 +92,7 @@
     </shapefile>
     <shapefile>
       <name>Municipios.shp</name>
-      <path>Municipios</path>
+      <path>Estados/30/Municipios</path>
       <renderer>
         <MinZoomLevel>-1</MinZoomLevel>
         <MaxZoomLevel>-1</MaxZoomLevel>
@@ -139,5 +113,3 @@
         <ToolTipFieldName>NombreMuni</ToolTipFieldName>
       </renderer>
     </shapefile>
-  </layers>
-</sfproject>
