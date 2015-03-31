@@ -38,6 +38,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         private BE.Zona CopyCurrentSubzone { get; set; }
         private int LevelUpdate { get; set; }
         private bool updateZoomLevel = true;
+        private ToolStripStatusLabel toolStripStatusLabel = null;
         #endregion
 
         #region Carga de Datos
@@ -740,9 +741,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         #endregion
 
         #region Constructor
-        public NewZoneAdmin()
+        public NewZoneAdmin(ref ToolStripStatusLabel toolStripStatusLabel)
         {
             InitializeComponent();
+            this.toolStripStatusLabel = toolStripStatusLabel;            
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             InitializeNewZone();

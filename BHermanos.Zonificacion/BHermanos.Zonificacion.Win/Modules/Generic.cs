@@ -12,9 +12,13 @@ namespace BHermanos.Zonificacion.Win.Modules
 {
     public partial class Generic : Form
     {
-        public Generic()
+        public ToolStripStatusLabel toolStripStatusLabel = null;
+
+        public Generic(ref ToolStripStatusLabel toolStripStatusLabel)
         {
+            this.toolStripStatusLabel = toolStripStatusLabel;            
             InitializeComponent();
         }
+        
     }
 }

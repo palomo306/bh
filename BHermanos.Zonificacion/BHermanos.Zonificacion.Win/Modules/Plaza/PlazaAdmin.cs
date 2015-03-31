@@ -32,6 +32,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private bool IsUpdate;
         private bool IsFirsTime;
         private bool updateZoomLevel;
+        private ToolStripStatusLabel toolStripStatusLabel = null;
         #endregion
 
         #region Carga y Manejo de Datos
@@ -646,9 +647,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #endregion
 
         #region Constructor
-        public PlazaAdmin()
+        public PlazaAdmin(ref ToolStripStatusLabel toolStripStatusLabel)
         {
             InitializeComponent();
+            this.toolStripStatusLabel = toolStripStatusLabel;            
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             ListMunicipios = new List<BE.Municipio>();
@@ -731,35 +733,46 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 {
                     ClearForm();
                     this.CurrentPlaza = clickPlaza;
-                    if (e.ColumnIndex == 1)
+
+                    BackgroundWorker w = new BackgroundWorker();
+                    w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                     {
-                        //Se limpian los shapes del mapa
-                        RemovePlazaShapes();
-                        //Se seleccionan los estados
-                        foreach (BE.Estado edo in clickPlaza.ListaEstados)
+                        toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+                    });
+                    w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+                    {
+                        if (e.ColumnIndex == 1)
                         {
-                            SelectEdoItem(edo, true);
+                            //Se limpian los shapes del mapa
+                            RemovePlazaShapes();
+                            //Se seleccionan los estados
+                            foreach (BE.Estado edo in clickPlaza.ListaEstados)
+                            {
+                                SelectEdoItem(edo, true);
+                            }
+                            //Se seleccionan las colonias de la plaza
+                            LoadPlazaRenderSetting();
+                            SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
+                            //Se cambia el formato visual
+                            txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
+                            txtCurrentPlaza.BackColor = this.CurrentPlaza.RealColor;
+                            btnSaveZone.Text = "Act. plaza";
+                            IsUpdate = true;
                         }
-                        //Se seleccionan las colonias de la plaza
-                        LoadPlazaRenderSetting();
-                        SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
-                        //Se cambia el formato visual
-                        txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
-                        txtCurrentPlaza.BackColor = this.CurrentPlaza.RealColor;
-                        btnSaveZone.Text = "Act. plaza";
-                        IsUpdate = true;
-                    }
-                    else if (e.ColumnIndex == 2)
-                    {
-                        if (MessageBox.Show("¿Está seguro que desea eliminar la plaza [" + clickPlaza.Nombre + "]?", "Confirmación de eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        else if (e.ColumnIndex == 2)
                         {
-                            DeletePlaza();
+                            if (MessageBox.Show("¿Está seguro que desea eliminar la plaza [" + clickPlaza.Nombre + "]?", "Confirmación de eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                DeletePlaza();
+                            }
                         }
-                    }
-                    else if (e.ColumnIndex == 3)
-                    {
-                        ZoomToPlaza(this.CurrentPlaza.ListaEstados);
-                    }
+                        else if (e.ColumnIndex == 3)
+                        {
+                            ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                        }
+                        toolStripStatusLabel.Text = "Completado...";
+                    });
+                    w.RunWorkerAsync();
                 }
             }
         }
