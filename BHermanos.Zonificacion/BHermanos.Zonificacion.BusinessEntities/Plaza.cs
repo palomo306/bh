@@ -58,6 +58,14 @@ namespace BHermanos.Zonificacion.BusinessEntities
                 return "Ver";
             }
         }
+
+        public string Nse
+        {
+            get
+            {
+                return "NSE";
+            }
+        }
         #endregion
 
         #region Métodos de Conversion

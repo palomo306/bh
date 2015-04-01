@@ -31,14 +31,24 @@ namespace BHermanos.Zonificacion.BusinessMaps
             List<Plaza> listaPlazas = new List<Plaza>();
             try
             {
-                var spPlazas = base.oDataAccess.spConPlazas(1, 0).ToList();
-                foreach (var reg in (from p in spPlazas select new { p.fcNombre, p.fiPlazaId, p.fcColor }).Distinct().ToList())
+                //var tblPlazas = oDataAccess.ZonPlazas.ToList<DataAccess.ZonPlaza>();
+                //foreach (DataAccess.ZonPlaza regPlaza in tblPlazas) {
+                //    Plaza plaza = new Plaza();
+                //    plaza.Id = regPlaza.fiPlazaId;
+                //    plaza.Nombre = regPlaza.fcNombre;
+                //    plaza.Color = regPlaza.fcColor;
+                //    plaza.ListaEstados = this.ObtenerEstadosXPlaza(regPlaza.fiPlazaId, spPlazas);
+                //    listaPlazas.Add(plaza);
+                //}
+                var spPlazas = base.oDataAccess.spConPlazas(1, 0).ToList<DataAccess.spConPlazasResult>();
+                var tblPlaza = spPlazas.Select(s => new { s.fiPlazaId,s.fcNombre, s.fcColor }).Distinct();
+                foreach (var reg in tblPlaza)
                 {
                     Plaza plaza = new Plaza();
                     plaza.Id = reg.fiPlazaId;
                     plaza.Nombre = reg.fcNombre;
                     plaza.Color = reg.fcColor;
-                    plaza.ListaEstados = this.ObtenerEstadosXPlaza(reg.fiPlazaId, spPlazas);                   
+                    plaza.ListaEstados = this.ObtenerEstadosXPlaza(reg.fiPlazaId, spPlazas);
                     listaPlazas.Add(plaza);
                 }
             }
@@ -118,12 +128,12 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region "Metodos privados"
 
-        private List<Estado> ObtenerEstadosXPlaza(int plazaId, List<spConPlazasResult> listaRegistros)
+        private List<Estado> ObtenerEstadosXPlaza(int plazaId, List<DataAccess.spConPlazasResult> listaRegistros)
         {
             List<Estado> lista = new List<Estado>();
             try
             {
-                var spPlazas = base.oDataAccess.spConPlazas(1, 0);
+                var spPlazas = listaRegistros.Where(w => w.fiPlazaId == plazaId).ToList<DataAccess.spConPlazasResult>();
                 foreach (int estadoId in (from li in listaRegistros where li.fiPlazaId == plazaId select li.fiEstadoId).Distinct().ToList())
                 {
                     Estado estado = new Estado();

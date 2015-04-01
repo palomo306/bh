@@ -48,7 +48,8 @@ namespace BHermanos.Zonificacion.Win
             w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) => {
                 form.StartPosition = FormStartPosition.CenterScreen;
                 form.MdiParent = this;
-                form.Show();
+                form.WindowState = FormWindowState.Maximized;
+                form.Show();                
                 toolStripStatusLabel.Text = "Completado...";
             });
 

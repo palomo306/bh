@@ -14,10 +14,10 @@ namespace BHermanos.Zonificacion.WebService
         public static void Register(HttpConfiguration config)
         {
 
-            config.Formatters.Clear();
+            //config.Formatters.Clear();
 
-            config.Formatters.Add(new XmlMediaTypeFormatter());            
-            config.Formatters.Add(new JsonMediaTypeFormatter());
+            //config.Formatters.Add(new XmlMediaTypeFormatter());            
+            //config.Formatters.Add(new JsonMediaTypeFormatter());
 
             //Mapeo de Acceso
             config.MapHttpAttributeRoutes();
@@ -148,25 +148,31 @@ namespace BHermanos.Zonificacion.WebService
                 routeTemplate: "WebService/{controller}/DeletePlaza/{plazaId}"
             );
 
+            ////Formato del response
+            //config.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
+            //// Cambiar capitalización a las letras
+            //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //// Ignorar valores nulos
+            //config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            //// Cambiar formato de fecha
+            //config.Formatters.JsonFormatter.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+            //// Cambiar formato de hora
+            //config.Formatters.JsonFormatter.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+            //// Cambiar la cultura
+            //config.Formatters.JsonFormatter.SerializerSettings.Culture = new CultureInfo("es-MX");
+            ////Serializa 
+            //config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
+
+            ////Formato del response
+            //config.Formatters.XmlFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
+            ////Serializa 
+            //config.Formatters.XmlFormatter.UseXmlSerializer = true;             
+
             //Formato del response
             config.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
-            // Cambiar capitalización a las letras
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            // Ignorar valores nulos
-            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            // Cambiar formato de fecha
-            config.Formatters.JsonFormatter.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.MicrosoftDateFormat;
-            // Cambiar la cultura
-            config.Formatters.JsonFormatter.SerializerSettings.Culture = new CultureInfo("es-MX");
-            //Serializa 
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
-
-            //Formato del response
+            //config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
             config.Formatters.XmlFormatter.MediaTypeMappings.Add(new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
-            //Serializa 
-            config.Formatters.XmlFormatter.UseXmlSerializer = true;             
-            
-
+            //config.Formatters.XmlFormatter.UseXmlSerializer = true;
         }
     }
 }

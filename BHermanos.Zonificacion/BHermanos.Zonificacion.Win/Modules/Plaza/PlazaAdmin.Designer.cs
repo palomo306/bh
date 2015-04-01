@@ -48,6 +48,7 @@
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NSE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlMap = new System.Windows.Forms.Panel();
             this.panelCtrlMap = new System.Windows.Forms.Panel();
             this.pbbZoomMax = new System.Windows.Forms.PictureBox();
@@ -210,7 +211,8 @@
             this.Editar,
             this.Delete,
             this.Ver,
-            this.Id});
+            this.Id,
+            this.NSE});
             this.dgPlazas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgPlazas.Location = new System.Drawing.Point(5, 5);
             this.dgPlazas.Margin = new System.Windows.Forms.Padding(10);
@@ -223,8 +225,8 @@
             // 
             // Plaza
             // 
+            this.Plaza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Plaza.DataPropertyName = "Nombre";
-            this.Plaza.Frozen = true;
             this.Plaza.HeaderText = "Plaza";
             this.Plaza.Name = "Plaza";
             this.Plaza.ReadOnly = true;
@@ -233,26 +235,29 @@
             // 
             this.Editar.DataPropertyName = "Editar";
             this.Editar.HeaderText = "";
+            this.Editar.MinimumWidth = 55;
             this.Editar.Name = "Editar";
             this.Editar.ReadOnly = true;
             this.Editar.Text = "Editar";
-            this.Editar.Width = 65;
+            this.Editar.Width = 55;
             // 
             // Delete
             // 
             this.Delete.DataPropertyName = "Eliminar";
             this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 55;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Text = "Eliminar";
-            this.Delete.Width = 65;
+            this.Delete.Width = 55;
             // 
             // Ver
             // 
             this.Ver.DataPropertyName = "Ver";
             this.Ver.HeaderText = "";
+            this.Ver.MinimumWidth = 40;
             this.Ver.Name = "Ver";
-            this.Ver.Width = 65;
+            this.Ver.Width = 40;
             // 
             // Id
             // 
@@ -261,6 +266,15 @@
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
+            // 
+            // NSE
+            // 
+            this.NSE.DataPropertyName = "Nse";
+            this.NSE.HeaderText = "";
+            this.NSE.MinimumWidth = 40;
+            this.NSE.Name = "NSE";
+            this.NSE.Text = "NSE";
+            this.NSE.Width = 40;
             // 
             // pnlMap
             // 
@@ -409,13 +423,14 @@
         private System.Windows.Forms.TextBox txtCurrentPlaza;
         private System.Windows.Forms.Label label2;
         private Clases.Controles.CheckComboBox ccbEstados;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbMunicipio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Plaza;
         private System.Windows.Forms.DataGridViewButtonColumn Editar;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.DataGridViewButtonColumn Ver;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbMunicipio;
+        private System.Windows.Forms.DataGridViewButtonColumn NSE;
 
     }
 }
