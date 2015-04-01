@@ -705,13 +705,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private void ccbEstados_CheckStateChanged(object sender, EventArgs e)
         {
             
-            BackgroundWorker w = new BackgroundWorker();
-            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
-            {
-                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-            });
-            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
-            {
+            //BackgroundWorker w = new BackgroundWorker();
+            //w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
+            //{
+            //    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+            //});
+            //w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+            //{
                 if (!IsFirsTime)
                 {
                     if (sender is CheckComboBoxItem)
@@ -730,9 +730,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                         }
                     }
                 }
-                toolStripStatusLabel.Text = "Completado...";
-            });
-            w.RunWorkerAsync();
+            //    toolStripStatusLabel.Text = "Completado...";
+            //});
+            //w.RunWorkerAsync();
         }
         #endregion
 
@@ -988,22 +988,22 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Seleccion del Municipio
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            BackgroundWorker w = new BackgroundWorker();
-            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
-            {
-                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-            });
-            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
-            {
+            //BackgroundWorker w = new BackgroundWorker();
+            //w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
+            //{
+            //    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+            //});
+            //w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+            //{
                 if (cmbMunicipio.SelectedItem != null)
                 {
                     BE.Municipio selMunicipio = (BE.Municipio)cmbMunicipio.SelectedItem;
                     ZoomToMunicipio(selMunicipio);
                     sfmMainMap.Focus();
                 }
-                toolStripStatusLabel.Text = "Completado...";
-            });
-            w.RunWorkerAsync();
+            //    toolStripStatusLabel.Text = "Completado...";
+            //});
+            //w.RunWorkerAsync();
         }
         #endregion
 
