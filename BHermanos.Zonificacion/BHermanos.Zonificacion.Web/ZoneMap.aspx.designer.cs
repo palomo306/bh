@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BHermanos.Zonificacion.Web.Modules {
+namespace BHermanos.Zonificacion.Web {
     
     
-    public partial class ZoneInfoChild {
+    public partial class ZoneMap {
         
         /// <summary>
-        /// dgZone control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgZone;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

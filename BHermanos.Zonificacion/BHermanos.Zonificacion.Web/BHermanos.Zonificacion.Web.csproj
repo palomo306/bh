@@ -432,6 +432,8 @@
     <Compile Include="Clases\Compressor.cs" />
     <Compile Include="Clases\MunicipioCustomRenderSettings.cs" />
     <Compile Include="Clases\Partidas\ColoniasPartidasCustomRenderSettings.cs" />
+    <Compile Include="Clases\PlazaCustomRenderSettings .cs" />
+    <Compile Include="Clases\SinglePlazaCustomRenderSettings .cs" />
     <Compile Include="Clases\ZonaCustomRenderSettings.cs" />
     <Compile Include="Clases\Partidas\ZonasPartidasCustomRenderSettings.cs" />
     <Compile Include="Clases\ZonaSubzonasCustomRenderSettings.cs" />
@@ -556,6 +558,7 @@
     <Content Include="img\slides\Thumbs.db" />
     <Content Include="img\team\Thumbs.db" />
     <Content Include="img\Thumbs.db" />
+    <Content Include="Maps\Main.egp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1121,12 +1121,13 @@ hr.light {
 
 /* Sort Source Wrapper */
 .sort-source-wrapper {
-	padding: 8px 0;
+	padding: 0px 0;
 	position: relative;
+    margin-right:-200px;
 }
 
 .sort-source-wrapper .nav {
-	margin: -100px 0 5px;
+	margin: -77px 0 0px;
 }
 
 .sort-source-wrapper .nav > li > a {
@@ -1319,11 +1320,10 @@ body.boxed .pricing-table .plan, body.boxed .pricing-table h3 {
 	margin-bottom: 20px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 20px;
 	min-height: 100px;
 	position: relative;
 	text-align: center;
-	z-index: 1;
+	z-index: 1;        
 }
 
 .featured-box h4 {
@@ -1338,7 +1338,8 @@ body.boxed .pricing-table .plan, body.boxed .pricing-table h3 {
 	border-radius: 8px;
 	border-top: 3px solid #33B8FF;
 	border-top-width: 4px;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;    
+    height:100%;
 }
 
 .featured-box .learn-more {
@@ -1348,8 +1349,7 @@ body.boxed .pricing-table .plan, body.boxed .pricing-table h3 {
 
 /* Featured Boxes */
 .featured-boxes .featured-box {
-	margin-bottom: 5px;
-	margin-top: 45px;
+	margin-bottom: 5px;	
 }
 
 .featured-boxes .featured-box.info-content {
@@ -1955,7 +1955,10 @@ blockquote.testimonial p {
 }
 
 .social-icons-containerInside {
-    float:right;
+    /*position:relative;
+    left:45%;*/
+    float:left;
+    margin:0 5px;
 }
 
 ul.social-icons {
@@ -2666,7 +2669,7 @@ ul.history li .featured-box {
 	text-align: left;
 	margin-left: 225px;
 	margin-bottom: 50px;
-	min-height: 115px;
+	min-height: 115px;    
 }
 
 ul.history li .featured-box .box-content {

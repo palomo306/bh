@@ -7,12 +7,37 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        function pageLoad() {
+            var manager = Sys.WebForms.PageRequestManager.getInstance();
+            manager.add_endRequest(endRequest);
+            manager.add_beginRequest(OnBeginRequest);
+        }
+
+        function OnBeginRequest(sender, args) {
+            FullScreenBackGround("divBack");
+            document.getElementById("divBack").style.display = "inline";
+        }
+
+        function endRequest(sender, args) {
+            document.getElementById("divBack").style.display = "none";
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>        
+        <asp:UpdateProgress runat="server" id="PageUpdateProgress" AssociatedUpdatePanelID="UpdatePanel1" DisplayAfter="100" style="z-index:1000; position: absolute;left: 49%;top: 49%;visibility:visible;vertical-align:middle;">
+            <ProgressTemplate>
+                <img src="../Images/AjaxIndicator.gif" />
+            </ProgressTemplate>
+        </asp:UpdateProgress>        
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
+                <div id="HeaderDiv">
+                    <asp:ContentPlaceHolder ID="contentHead" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
                 <div id="wrapper">
                     <div id="first">
                         <header id="header"> 
@@ -20,7 +45,6 @@
                                 <div class="social-icons-containerInside">
                                     <ul class="social-icons">
 						                <li class="Home"><a href="http://www.facebook.com/" target="_blank" title="Home">Home</a></li>
-						                <li class="User"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Usuario</a></li>
 					                </ul>
                                 </div>                                
                             </div>   
@@ -28,15 +52,14 @@
 							    <div id="mainMenu" runat="server" class="toogle toogle-accordion">
 								    
 							    </div>
-						    </div>                                                     
-                            hola
+						    </div>
                         </header>                        
                     </div>
                     <div id="second">
                         <asp:ContentPlaceHolder ID="content" runat="server">
                         </asp:ContentPlaceHolder>
                     </div>
-                </div>              
+                </div>     
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

@@ -344,7 +344,7 @@ namespace BHermanos.Zonificacion.Web.Modules
 
         private void PrintCurrentZona(BE.Zona zona)
         {
-            DataTable dtReporteZonas = ReportZonesConversor.ToZoneDataTable(zona);
+            DataTable dtReporteZonas = ReportZonesConversor.ToZoneDataTable(zona,true);
             dgZone.DataSource = dtReporteZonas;
             dgZone.DataBind();
             ////Se fija la columna del nombre del rubro
@@ -446,8 +446,8 @@ namespace BHermanos.Zonificacion.Web.Modules
             if (this.sfmMainMap.LayerCount == LayerCount)
             {
                 EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(LayerColonias);
-                ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone);
-                sf.RenderSettings.CustomRenderSettings = crsZ;
+                //ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone);
+                //sf.RenderSettings.CustomRenderSettings = crsZ;
                 sfmMainMap.Zoom = sfmMainMap.Zoom;
             }
         }
