@@ -4,6 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Site.css" rel="stylesheet" /> 
+    <link href="../Styles/jquery.alerts.css" rel="stylesheet" />
     <link href="../Styles/theme.css" rel="stylesheet" />
     <link href="../Styles/theme-elements.css" rel="stylesheet" />    
     <link href="../Vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -14,6 +15,9 @@
 			<link rel="stylesheet" href="css/ie.css">
 	<![endif]-->
     <script src="../Vendor/jquery.js"></script>	
+    <script src="../Vendor/jquery.stellar.js"></script>
+    <script src="../Scripts/jquery.ui.draggable.js"></script>
+    <script src="../Scripts/jquery.alerts.min.js"></script>
 	<script src="../Vendor/bootstrap/js/bootstrap.js"></script>
     <script src="../Scripts/theme.js"></script>
     <script src="../Scripts/Generic.js"></script>    
@@ -144,8 +148,8 @@
         </div>   
     </div>    
     <!-- End Full page background technique -->        
-    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:999;" />        
-    <div id="divDetail" class="PopUpDetail" style="width:600px; height:250px; display:none; z-index:1000;">
+    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:10000;" />        
+    <div id="divDetail" class="PopUpDetail" style="width:600px; height:250px; display:none; z-index:10001;">
         <table style="width:100%; height:100px; top:0px; left:0px; position:absolute;">
             <tr>
                 <td class="CellCenter" style="background-color:White;">

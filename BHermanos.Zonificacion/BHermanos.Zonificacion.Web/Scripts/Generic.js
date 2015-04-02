@@ -31,7 +31,8 @@ function OpenNewWindow() {
 function OpenDetailWindow() {
     FullScreenBackGround("divBack");
     document.getElementById("divBack").style.display = "inline";
-    $('#divDetail').show('slow');
+    $('#divDetail').style.display = "inline";
+    //$('#divDetail').show('slow');
 }
 
 
@@ -90,21 +91,21 @@ function SetSplitter() {
 
 function ResizeMap()
 {
-    var Width = $("#leftPane").width() + "px";
+    var Width = $("#MapMainDiv").width() + "px";
     var Height = document.body.clientHeight - 60;
-    document.getElementById("sfmMainMap").style.position = "relative";
-    document.getElementById("sfmMainMap").style.height = (Height) + "px";
-    document.getElementById("sfmMainMap").style.width = Width;
-    document.getElementById("sfmMainMap").style.left = "0px";
-    document.getElementById("sfmMainMap").style.top = "0px";
-    document.getElementById("sfmMainMap").children[0].style.height = (Height) + "px";
-    document.getElementById("sfmMainMap").children[0].style.width = Width;
-    document.getElementById("sfmMainMap").children[0].style.top = "0px";
-    document.getElementById("sfmMainMap").children[0].style.left = "0px";
-    document.getElementById("sfmMainMap_gisImage").style.height = (Height) + "px";
-    document.getElementById("sfmMainMap_gisImage").style.width = Width;
-    document.getElementById("sfmMainMap_gisep").style.height = (Height) + "px";
-    document.getElementById("sfmMainMap_gisep").style.width = Width;
+    document.getElementById("content_sfmMainMap").style.position = "relative";
+    document.getElementById("content_sfmMainMap").style.height = (Height) + "px";
+    document.getElementById("content_sfmMainMap").style.width = Width;
+    document.getElementById("content_sfmMainMap").style.left = "0px";
+    document.getElementById("content_sfmMainMap").style.top = "0px";
+    document.getElementById("content_sfmMainMap").children[0].style.height = (Height) + "px";
+    document.getElementById("content_sfmMainMap").children[0].style.width = Width;
+    document.getElementById("content_sfmMainMap").children[0].style.top = "0px";
+    document.getElementById("content_sfmMainMap").children[0].style.left = "0px";
+    document.getElementById("content_sfmMainMap_gisImage").style.height = (Height) + "px";
+    document.getElementById("content_sfmMainMap_gisImage").style.width = Width;
+    document.getElementById("content_sfmMainMap_gisep").style.height = (Height) + "px";
+    document.getElementById("content_sfmMainMap_gisep").style.width = Width;
     try {
         document.getElementById("tabRightPane_body").style.height = (Height - 30) + "px";
     }
@@ -119,11 +120,11 @@ function ActiveTabChanged(sender, e) {
     iframe.contentWindow.RefreshMap();
 }
 
-function SelectZone(zoneId, level) {
+function SelectZone(zoneId, level, zoneName, subZoneName, btnAction) {
     if (level == "0")
-        document.getElementById("hdnZonaId").value = zoneId;
+        document.getElementById(zoneName).value = zoneId;
     else
-        document.getElementById("hdnSubzonaId").value = zoneId;
-    document.getElementById("btnSelection").click();
+        document.getElementById(subZoneName).value = zoneId;
+    document.getElementById(btnAction).click();
 }
 /*---------------------------------------------------------------------------*/

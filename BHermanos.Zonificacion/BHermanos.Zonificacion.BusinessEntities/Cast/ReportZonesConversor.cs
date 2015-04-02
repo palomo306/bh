@@ -7,6 +7,12 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
 {
     public static class ReportZonesConversor
     {
+        #region Propiedades
+        public static string BtnName { get; set; }
+        public static string Hdn1Name { get; set; }
+        public static string Hdn2Name { get; set; }
+        #endregion
+
         public static DataTable ToGeneralDataTable(Zona prmZonaBase, List<Zona> lstZonas, int appId, int level)
         {
             //Se obtiene la colonia base
@@ -64,7 +70,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                                 dtResult.Rows[row][zno.Nombre] = "Editar";
                             else
                             {
-                                dtResult.Rows[row][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"');"" class=""BotonChico"" />|" + zno.Color;
+                                dtResult.Rows[row][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"','" +  Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />|" + zno.Color;
                             }
                         }
                     }
@@ -288,7 +294,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                         else
                             oNewRow[partida.Nombre] = partida.Valor;
                     }
-                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"');"" class=""BotonChico"" />";
+                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />";
                     dtResult.Rows.Add(oNewRow);
                 }
             }

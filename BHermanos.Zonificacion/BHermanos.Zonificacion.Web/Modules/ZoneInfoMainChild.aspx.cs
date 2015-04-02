@@ -338,9 +338,19 @@ namespace BHermanos.Zonificacion.Web.Modules
         private void PrintZonas(List<BE.Zona> lstZonas)
         {
             /*Carga y Formato del Grid Principal de Zonas*/
+            ReportZonesConversor.Hdn1Name = hdnZonaId.ClientID;
+            ReportZonesConversor.Hdn2Name = hdnSubzonaId.ClientID;
+            ReportZonesConversor.BtnName = btnSelection.ClientID;
             DataTable dtReporteZonas = ReportZonesConversor.ToGeneralDataTable(CurrentZone, lstZonas, 2, Convert.ToInt32(this.CurrentLevel));
             dgvReportZonas.DataSource = dtReporteZonas;
-            dgvReportZonas.DataBind();           
+            dgvReportZonas.DataBind();
+            btnAll.Visible = true;
+            btnNse.Visible = true;
+            if (lstZonas.Count == 0)
+            {
+                btnAll.Visible = false;
+                btnNse.Visible = false;
+            }
         }
 
         private void PrintCurrentZona(BE.Zona zona)
@@ -354,7 +364,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         #region Carga de la Página
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;
@@ -390,7 +400,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                 //Lista de control
                 List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                 //Se recorren los datos
-                int layerIndex = 5;
+                int layerIndex = 2;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
@@ -407,7 +417,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             int shapeCount = sfmMainMap.LayerCount;
             if (shapeCount > 1)
             {
-                int layerIndex = 5;
+                int layerIndex = 2;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
@@ -456,7 +466,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             {
                 bool isFirstShape = true;
                 //Se recorren los datos
-                int layerIndex = 5;
+                int layerIndex = 2;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
@@ -593,6 +603,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             }
             btnCancel.Visible = true;
             SetupZonaSubzonasCustomRenderSettings();
+            ZoomToPlaza(this.CurrentPlaza.ListaEstados);
         }
 
         protected void btnRefreshMap_Click(object sender, EventArgs e)

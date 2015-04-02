@@ -194,3 +194,12 @@ button, input, optgroup, select, textarea {
 .ContentLeftSide {
     width:100%;
 }
+
+.PopUpDetail {
+    position:absolute;
+    top:50%;
+    margin-top: -45px;
+    left:50%;
+    margin-left: -125px; 
+    z-index:1001;
+}
