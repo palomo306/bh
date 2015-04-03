@@ -191,11 +191,11 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="CellCenter">
-                                <asp:Button ID="btnPdf" runat="server" Text="PDF" CssClass="Boton" OnClick="btnPdf_Click" />
+                                <asp:Button ID="btnPdf" runat="server" Text="PDF" CssClass="btn btn-primary btn-sm" OnClick="btnPdf_Click" />
                                 &nbsp;
-                                <asp:Button ID="btnExcel" runat="server" Text="Excel" CssClass="Boton" OnClick="btnExcel_Click" />
+                                <asp:Button ID="btnExcel" runat="server" Text="Excel" CssClass="btn btn-primary btn-sm" OnClick="btnExcel_Click" />
                                 &nbsp;
-                                <input type="button" value="Salir" onclick="CloseDivDetail();" class="Boton" />
+                                <input type="button" value="Salir" onclick="CloseDivDetail();" class="btn btn-primary btn-sm" />
                             </td>
                         </tr>
                         <tr>

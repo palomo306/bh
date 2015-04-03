@@ -362,10 +362,67 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                 }
                 resultHtml += "</table>";
             }
+            else
+            {
+                resultHtml = "Sin datos disponibles";
+            }
             return resultHtml;
         }
 
+        public static string ToHtmlTotalesUmbrales(List<Zona> lstZonas)
+        {
+            string resultHtml = string.Empty;
+            if (lstZonas != null && lstZonas.Count > 0)
+            {
+                resultHtml = "<table>" + Environment.NewLine;
+                Zona zonaRef = lstZonas[0];    //Zona referencia (base)
+                foreach (Partida partida in zonaRef.ListaPartidas)
+                {
+                    if (partida.TieneHumbral)
+                    {
+                        resultHtml += @"<tr><td colspan=""2"" class=""HeaderText"">" + partida.Nombre + "</td></tr>" + Environment.NewLine;
+                        resultHtml += @"<tr><td colspan=""2"">&nbsp;</td></tr>" + Environment.NewLine;
+                        foreach (Humbral umb in partida.ListaHumbrales)
+                        {
+                            resultHtml += @"<tr><td>" + GetColorIndicator(umb.Color.Replace("#", "")) + @"</td><td class=""NormalText"">" + umb.Operador + " " + umb.Valor + "</td></tr>" + Environment.NewLine; ;
+                        }
+                    }
+                }
+                resultHtml += "</table>";
+            }
+            else
+            {
+                resultHtml = "Sin datos disponibles";
+            }
+            return resultHtml;
+        }
+
+
         public static string ToHtmlUmbrales(List<Colonia> lstColonias)
+        {
+            string resultHtml = string.Empty;
+            if (lstColonias.Count > 0)
+            {
+                resultHtml = "<table>" + Environment.NewLine;
+                Colonia colRef = lstColonias[0];    //Zona referencia (base)
+                foreach (Partida partida in colRef.ListaPartidas)
+                {
+                    if (partida.TieneHumbral)
+                    {
+                        resultHtml += @"<tr><td colspan=""2"" class=""HeaderText"">" + partida.Nombre + "</td></tr>" + Environment.NewLine;
+                        resultHtml += @"<tr><td colspan=""2"">&nbsp;</td></tr>" + Environment.NewLine;
+                        foreach (Humbral umb in partida.ListaHumbrales)
+                        {
+                            resultHtml += @"<tr><td>" + GetColorIndicator(umb.Color.Replace("#", "")) + @"</td><td class=""NormalText"">" + umb.Operador + " " + umb.Valor + "</td></tr>" + Environment.NewLine; ;
+                        }
+                    }
+                }
+                resultHtml += "</table>";
+            }
+            return resultHtml;
+        }
+
+        public static string ToHtmlTotalesUmbrales(List<Colonia> lstColonias)
         {
             string resultHtml = string.Empty;
             if (lstColonias.Count > 0)

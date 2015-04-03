@@ -44,7 +44,7 @@
                             <div class="social-icons-container">
                                 <div class="social-icons-containerInside">
                                     <ul class="social-icons">
-						                <li class="Home"><a href="http://www.facebook.com/" target="_blank" title="Home">Home</a></li>
+						                <li class="Home"><a href="ZoneInfoMainChild.aspx" title="Home">Home</a></li>
 					                </ul>
                                 </div>                                
                             </div>   

@@ -124,9 +124,19 @@ button, input, optgroup, select, textarea {
     height:100%;
 }
 
+.left-column2 {
+    width: 75%;
+    height:80%;
+}
+
 .right-column {
     width: 25%;
     height:100%;
+}
+
+.right-column2 {
+    width: 25%;
+    height:80%;
 }
 
 
@@ -149,6 +159,12 @@ button, input, optgroup, select, textarea {
     padding:2px;
 }
 
+#InfoDiv2 {
+    height:100%;
+    padding:2px;
+    border:1px solid Black;
+}
+
 #TotalDiv {
     height:25%;
     padding:2px;
@@ -163,6 +179,12 @@ button, input, optgroup, select, textarea {
     height:95%;
     padding:2px;
 }
+
+#MapMainDiv2 {
+    height:77%;
+    padding:2px;
+}
+
 
 .DropDown {
     padding:6px;
