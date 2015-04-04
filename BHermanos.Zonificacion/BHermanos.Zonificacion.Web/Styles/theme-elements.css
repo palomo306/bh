@@ -1320,7 +1320,6 @@ body.boxed .pricing-table .plan, body.boxed .pricing-table h3 {
 	margin-bottom: 20px;
 	margin-left: auto;
 	margin-right: auto;
-	min-height: 100px;
 	position: relative;
 	text-align: center;
 	z-index: 1;        

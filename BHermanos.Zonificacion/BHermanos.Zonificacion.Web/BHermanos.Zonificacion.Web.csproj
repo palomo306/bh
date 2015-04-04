@@ -240,6 +240,7 @@
     <Content Include="Login\ResetPassword.aspx" />
     <Content Include="MainForm.aspx" />
     <Content Include="Modules\Admin\Users.aspx" />
+    <Content Include="Modules\Admin\UsersChild.aspx" />
     <Content Include="Modules\Home.aspx" />
     <Content Include="Modules\MainZoneInfo.aspx" />
     <Content Include="Modules\ZoneInfo.aspx" />
@@ -464,6 +465,13 @@
     </Compile>
     <Compile Include="Modules\Admin\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UsersChild.aspx.cs">
+      <DependentUpon>UsersChild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UsersChild.aspx.designer.cs">
+      <DependentUpon>UsersChild.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

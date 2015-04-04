@@ -104,14 +104,14 @@
                     <div style="width:175px; float:left; margin:3px;">
                         <div class="featured-box featured-box-primary">    
                             <div class="scrolledGridView featured-box box-content">
-					            <h4>
+					            <h4 class="small">
                                     <asp:Label ID="lblTotalDesc" runat="server" Text="Label"></asp:Label>
 					            </h4>
 					            <p id="lblTotalQty" runat="server"></p>
 				            </div>
                         </div>
                     </div>
-                    <div id="divUmbrales" runat="server" style="width:200px; float:left; margin:3px;">           
+                    <div id="divUmbrales" runat="server">           
                         
                     </div>
                 </div>

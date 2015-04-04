@@ -110,7 +110,7 @@ namespace BHermanos.Zonificacion.Web.Clases
 
                             //double colonia = Convert.ToDouble(defaultSettings.DbfReader.GetField(n, 7).Replace("|", "").Trim());
                             //Se revisa si la colonia está en alguna zona (primero por estado / municipio)
-                            BE.Zona zona = ListZonas.Where(z => z.ListaColonias.Select(c => c.Id == colonia).Any()).FirstOrDefault();
+                            BE.Zona zona = ListZonas.Where(z => z.ListaColonias.Where(c => c.Id == colonia).Any()).FirstOrDefault();
                             if (zona != null)
                             {
                                 double valor = 0;

@@ -44,6 +44,23 @@ namespace BHermanos.Zonificacion.BusinessEntities
                 }
             }
         }
+
+        public string FechaQueryString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Text))
+                {
+
+                    return FechaDateTime.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    return "0";
+                }
+            }
+        }
+
         #endregion
 
         #region Métodos

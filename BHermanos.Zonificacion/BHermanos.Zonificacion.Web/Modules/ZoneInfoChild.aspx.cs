@@ -375,12 +375,12 @@ namespace BHermanos.Zonificacion.Web.Modules
                         List<Fecha> lstFechas = Fecha.GetFechas(tabs[0].Fechas);
                         lstFechas.Insert(0, new Fecha() { Text = "--Fecha--" });
                         ddlStartDate.DataSource = lstFechas;
-                        ddlStartDate.DataValueField = "FechaJson";
+                        ddlStartDate.DataValueField = "FechaQueryString";
                         ddlStartDate.DataTextField = "FechaText";
                         ddlStartDate.DataBind();
                         ddlStartDate.SelectedValue = "0";
                         ddlEndDate.DataSource = lstFechas;
-                        ddlEndDate.DataValueField = "FechaJson";
+                        ddlEndDate.DataValueField = "FechaQueryString";
                         ddlEndDate.DataTextField = "FechaText";
                         ddlEndDate.DataBind();
                         ddlEndDate.SelectedValue = "0";
@@ -423,6 +423,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                         lblNoDataMessage.Text = "Sin datos disponibles";
                         lblNoDataMessage.Visible = true;
                     }
+                    lblTotalDesc.Text = "Zonas";
+                    lblTotalQty.InnerText = this.ListZonas.Count.ToString();
                     umbralClass = ReportZonesConversor.ToHtmlUmbrales(this.ListZonas);
                     divUmbrales.InnerHtml = ReportZonesConversor.ToHtmlTotalesUmbrales(this.ListZonas);
                     lblColores.Text = umbralClass;
@@ -446,6 +448,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                         lblNoDataMessage.Text = "Sin datos disponibles";
                         lblNoDataMessage.Visible = true;
                     }
+                    lblTotalDesc.Text = "Subzonas";
+                    lblTotalQty.InnerText = this.CurrentZone.ListaSubzonas.Count.ToString();
                     umbralClass = ReportZonesConversor.ToHtmlUmbrales(this.CurrentZone.ListaSubzonas);
                     divUmbrales.InnerHtml = ReportZonesConversor.ToHtmlTotalesUmbrales(this.CurrentZone.ListaSubzonas);
                     lblColores.Text = umbralClass;
@@ -475,6 +479,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                             lblNoDataMessage.Text = "Sin datos disponibles";
                             lblNoDataMessage.Visible = true;
                         }
+                        lblTotalDesc.Text = "Colonias";
+                        lblTotalQty.InnerText = this.CurrentSubzone.ListaColonias.Count.ToString();
                         umbralClass = ReportZonesConversor.ToHtmlUmbrales(this.CurrentSubzone.ListaColonias);
                         divUmbrales.InnerHtml = ReportZonesConversor.ToHtmlTotalesUmbrales(this.CurrentSubzone.ListaColonias);
                         lblColores.Text = umbralClass;
@@ -494,12 +500,15 @@ namespace BHermanos.Zonificacion.Web.Modules
                         {
                             dgReportTab.DataSource = dtReporteColonias;
                             dgReportTab.DataBind();
+                            dgReportTab.Visible = true;
                         }
                         else
                         {
                             lblNoDataMessage.Text = "Sin datos disponibles";
                             lblNoDataMessage.Visible = true;
                         }
+                        lblTotalDesc.Text = "Colonias";
+                        lblTotalQty.InnerText = this.CurrentZone.ListaColonias.Count.ToString();
                         umbralClass = ReportZonesConversor.ToHtmlUmbrales(this.CurrentZone.ListaColonias);
                         divUmbrales.InnerHtml = ReportZonesConversor.ToHtmlTotalesUmbrales(this.CurrentZone.ListaColonias);
                         lblColores.Text = umbralClass;
@@ -510,6 +519,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                     }
                     break;
             }
+            if (this.CurrentPlaza != null && this.CurrentPlaza.ListaEstados != null)
+                ZoomToPlaza(this.CurrentPlaza.ListaEstados);
         }
 
         private void ClearData()
@@ -524,7 +535,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         #region Carga de la Página
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap2();", true);
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;
@@ -738,6 +749,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                             string button = HttpUtility.HtmlDecode(textParts[1]);
                             e.Row.Cells[i].Text = button;
                             e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Center;
+                            e.Row.BackColor = ColorConverter.GetColor(textParts[2]);
                         }
                     }
                 }

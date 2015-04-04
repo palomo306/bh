@@ -294,7 +294,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                         else
                             oNewRow[partida.Nombre] = partida.Valor;
                     }
-                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />";
+                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />|" + zn.Color;
                     dtResult.Rows.Add(oNewRow);
                 }
             }
@@ -374,29 +374,52 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             string resultHtml = string.Empty;
             if (lstZonas != null && lstZonas.Count > 0)
             {
-                resultHtml = "<table>" + Environment.NewLine;
-                Zona zonaRef = lstZonas[0];    //Zona referencia (base)
-                foreach (Partida partida in zonaRef.ListaPartidas)
+                List<Partida> lstPartidas = new List<Partida>();
+                foreach (Zona zona in lstZonas)
                 {
-                    if (partida.TieneHumbral)
+                    foreach (Partida partida in zona.ListaPartidas.OrderBy(po => po.Orden))
                     {
-                        resultHtml += @"<tr><td colspan=""2"" class=""HeaderText"">" + partida.Nombre + "</td></tr>" + Environment.NewLine;
-                        resultHtml += @"<tr><td colspan=""2"">&nbsp;</td></tr>" + Environment.NewLine;
-                        foreach (Humbral umb in partida.ListaHumbrales)
+                        Partida prt = lstPartidas.Where(p => p.Id == partida.Id).FirstOrDefault();
+                        if (prt != null)
                         {
-                            resultHtml += @"<tr><td>" + GetColorIndicator(umb.Color.Replace("#", "")) + @"</td><td class=""NormalText"">" + umb.Operador + " " + umb.Valor + "</td></tr>" + Environment.NewLine; ;
+                            prt.Valor += partida.Valor;
+                        }
+                        else
+                        {
+                            prt = new Partida() { Id = partida.Id, Nombre = partida.Nombre, Valor = partida.Valor };
+                            lstPartidas.Add(prt);
                         }
                     }
                 }
-                resultHtml += "</table>";
-            }
-            else
-            {
-                resultHtml = "Sin datos disponibles";
+                int partidaIndex = 1;
+                foreach (Partida partida in lstPartidas)
+                {
+                    //Se saca el nombre abreviado
+                    string nombre = partida.Nombre.Length > 16 ? partida.Nombre.Substring(0, 16) + "." : partida.Nombre;
+                    //Se calcula el estilo
+                    string style;
+                    if (partidaIndex % 3 == 0)
+                        style = "quartenary";
+                    else if (partidaIndex % 2 == 0)
+                        style = "tertiary";
+                    else
+                        style = "secundary";
+                    //Se establece el estilo
+                    resultHtml += @"<div style=""width:175px; float:left; margin:3px;"">" + Environment.NewLine;
+                    resultHtml += @"<div class=""featured-box featured-box-" + style + @""">" + Environment.NewLine;
+                    resultHtml += @"<div class=""scrolledGridView featured-box box-content"">" + Environment.NewLine;
+                    resultHtml += @"<h4  class=""small"">" + Environment.NewLine;
+                    resultHtml += nombre + Environment.NewLine;
+                    resultHtml += @"</h4>" + Environment.NewLine;
+                    resultHtml += @"<p>" + partida.Valor + "</p>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    partidaIndex++;
+                }
             }
             return resultHtml;
         }
-
 
         public static string ToHtmlUmbrales(List<Colonia> lstColonias)
         {
@@ -425,23 +448,51 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
         public static string ToHtmlTotalesUmbrales(List<Colonia> lstColonias)
         {
             string resultHtml = string.Empty;
-            if (lstColonias.Count > 0)
+            if (lstColonias != null && lstColonias.Count > 0)
             {
-                resultHtml = "<table>" + Environment.NewLine;
-                Colonia colRef = lstColonias[0];    //Zona referencia (base)
-                foreach (Partida partida in colRef.ListaPartidas)
+                List<Partida> lstPartidas = new List<Partida>();
+                foreach (Colonia col in lstColonias)
                 {
-                    if (partida.TieneHumbral)
+                    foreach (Partida partida in col.ListaPartidas.OrderBy(po => po.Orden))
                     {
-                        resultHtml += @"<tr><td colspan=""2"" class=""HeaderText"">" + partida.Nombre + "</td></tr>" + Environment.NewLine;
-                        resultHtml += @"<tr><td colspan=""2"">&nbsp;</td></tr>" + Environment.NewLine;
-                        foreach (Humbral umb in partida.ListaHumbrales)
+                        Partida prt = lstPartidas.Where(p => p.Id == partida.Id).FirstOrDefault();
+                        if (prt != null)
                         {
-                            resultHtml += @"<tr><td>" + GetColorIndicator(umb.Color.Replace("#", "")) + @"</td><td class=""NormalText"">" + umb.Operador + " " + umb.Valor + "</td></tr>" + Environment.NewLine; ;
+                            prt.Valor += partida.Valor;
+                        }
+                        else
+                        {
+                            prt = new Partida() { Id = partida.Id, Nombre = partida.Nombre, Valor = 0 };
+                            lstPartidas.Add(prt);
                         }
                     }
                 }
-                resultHtml += "</table>";
+                int partidaIndex = 1;
+                foreach (Partida partida in lstPartidas)
+                {
+                    //Se saca el nombre abreviado
+                    string nombre = partida.Nombre.Length > 16 ? partida.Nombre.Substring(0, 16) + "." : partida.Nombre;
+                    //Se calcula el estilo
+                    string style;
+                    if (partidaIndex % 3 == 0)
+                        style = "quartenary";
+                    else if (partidaIndex % 2 == 0)
+                        style = "tertiary";
+                    else
+                        style = "secundary";
+                    //Se establece el estilo
+                    resultHtml += @"<div style=""width:175px; float:left; margin:3px;"">" + Environment.NewLine;
+                    resultHtml += @"<div class=""featured-box featured-box-" + style + @""">" + Environment.NewLine;
+                    resultHtml += @"<div class=""scrolledGridView featured-box box-content"">" + Environment.NewLine;
+                    resultHtml += @"<h4 class=""small"">" + Environment.NewLine;
+                    resultHtml += nombre + Environment.NewLine;
+                    resultHtml += @"</h4>" + Environment.NewLine;
+                    resultHtml += @"<p>" + partida.Valor + "</p>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    resultHtml += @"</div>" + Environment.NewLine;
+                    partidaIndex++;
+                }
             }
             return resultHtml;
         }
