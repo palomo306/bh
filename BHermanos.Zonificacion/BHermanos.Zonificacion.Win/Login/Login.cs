@@ -40,9 +40,10 @@ namespace BHermanos.Zonificacion.Win.Login
                 {
                     string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
                     string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                    int connectTimeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                     url += "Acceso/GetAcceso/" + txtUser.Text + "/" + txtPassword.Text + "/" + appId + "?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                    request.Timeout = 20000;
+                    request.Timeout = connectTimeOut;
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     StreamReader streamReader = new StreamReader(response.GetResponseStream());
                     AccesoModel objResponse = JsonSerializer.Parse<AccesoModel>(streamReader.ReadToEnd());

@@ -5,7 +5,6 @@ using BHermanos.Zonificacion.Win.Clases.Controles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -33,6 +32,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         private bool IsFirsTime;
         private bool updateZoomLevel;
         private ToolStripStatusLabel toolStripStatusLabel = null;
+        private readonly string URL;
+        private readonly int ConnectTimeOut;
+        private readonly string AppId;
         #endregion
 
         #region Carga y Manejo de Datos
@@ -40,11 +42,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = this.AppId;
                 url += "Estado/GetEstado?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 EstadoModel objResponse = JsonSerializer.Parse<EstadoModel>(streamReader.ReadToEnd());
@@ -77,11 +79,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = this.AppId;
                 url += "Plaza/GetPlaza/1/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 PlazaModel objResponse = JsonSerializer.Parse<PlazaModel>(streamReader.ReadToEnd());
@@ -112,12 +114,12 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
                     toolStripStatusLabel.Text = "Guardando datos, por favor espere....";
-                    string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    string url = this.URL;
                     url += "Plaza/PostPlaza?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                     request.ContentType = "application/json; charset=utf-8";
                     request.Method = "POST";
-                    request.Timeout = 20000;
+                    request.Timeout = this.ConnectTimeOut;
                     using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string json = this.CurrentPlaza.ToJSon(false);
@@ -141,9 +143,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     {
                         MessageBox.Show("Ha ocurrido un error al guardar la plaza [" + objResponse.Mensaje + "].");
                     }
-                    toolStripStatusLabel.Text = "Completado...";
+                    toolStripStatusLabel.Text = "Status";
                 });
-                w.RunWorkerAsync();                                
+                w.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -158,13 +160,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 BackgroundWorker w = new BackgroundWorker();
                 w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-                    string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    toolStripStatusLabel.Text = "Borrando datos, por favor espere....";
+                    string url = this.URL;
                     url += "Plaza/DeletePlaza/" + this.CurrentPlaza.Id.ToString() + "?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                     request.ContentType = "application/json; charset=utf-8";
                     request.Method = "DELETE";
-                    request.Timeout = 20000;
+                    request.Timeout = this.ConnectTimeOut;
                     using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string json = this.CurrentPlaza.ToJSon(false);
@@ -190,9 +192,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     {
                         MessageBox.Show("Ha ocurrido un error al eliminar la plaza [" + objResponse.Mensaje + "].");
                     }
-                    toolStripStatusLabel.Text = "Completado...";
+                    toolStripStatusLabel.Text = "Status";
                 });
-                w.RunWorkerAsync();                
+                w.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -207,13 +209,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 BackgroundWorker w = new BackgroundWorker();
                 w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-                    string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    toolStripStatusLabel.Text = "Actualizando datos, por favor espere....";
+                    string url = this.URL;
                     url += "Plaza/PutPlaza?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                     request.ContentType = "application/json; charset=utf-8";
                     request.Method = "PUT";
-                    request.Timeout = 20000;
+                    request.Timeout = this.ConnectTimeOut;
                     using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string json = this.CurrentPlaza.ToJSon(false);
@@ -239,10 +241,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     {
                         MessageBox.Show("Ha ocurrido un error al guardar la plaza [" + objResponse.Mensaje + "].");
                     }
-                    toolStripStatusLabel.Text = "Completado...";
+                    toolStripStatusLabel.Text = "Status";
                 });
                 w.RunWorkerAsync();
-                
+
             }
             catch (Exception ex)
             {
@@ -256,11 +258,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             {
                 if (estdo != null)
                 {
-                    string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                    string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                    string url = this.URL;
+                    //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                     url += "Municipio/GetMunicipio/" + estdo.Id.ToString() + "?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                    request.Timeout = 20000;
+                    request.Timeout = this.ConnectTimeOut;
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     StreamReader streamReader = new StreamReader(response.GetResponseStream());
                     MunicipioModel objResponse = JsonSerializer.Parse<MunicipioModel>(streamReader.ReadToEnd());
@@ -645,7 +647,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             this.CurrentPlaza = new BE.Plaza();
             txtCurrentPlaza.Text = "Nueva plaza";
             txtCurrentPlaza.BackColor = Color.White;
-            ClearSelections();            
+            ClearSelections();
         }
 
         private void SelectEdoItem(BE.Estado selEdo, bool updateMap)
@@ -683,10 +685,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #endregion
 
         #region Constructor
-        public PlazaAdmin(ref ToolStripStatusLabel toolStripStatusLabel)
+        public PlazaAdmin(ref ToolStripStatusLabel toolStripStatusLabel, string url, int connectTimeOut, string appId)
         {
             InitializeComponent();
-            this.toolStripStatusLabel = toolStripStatusLabel;            
+            this.toolStripStatusLabel = toolStripStatusLabel;
+            this.URL = url;
+            this.ConnectTimeOut = connectTimeOut;
+            this.AppId = appId;
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             ListMunicipios = new List<BE.Municipio>();
@@ -704,35 +709,27 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Seleccion de los Estados
         private void ccbEstados_CheckStateChanged(object sender, EventArgs e)
         {
-            
-            //BackgroundWorker w = new BackgroundWorker();
-            //w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
-            //{
-            //    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-            //});
-            //w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
-            //{
-                if (!IsFirsTime)
+
+
+            if (!IsFirsTime)
+            {
+                if (sender is CheckComboBoxItem)
                 {
-                    if (sender is CheckComboBoxItem)
+                    CheckComboBoxItem item = (CheckComboBoxItem)sender;
+                    BE.Estado selEdo = (BE.Estado)item.Tag;
+                    if (item.CheckState)
                     {
-                        CheckComboBoxItem item = (CheckComboBoxItem)sender;
-                        BE.Estado selEdo = (BE.Estado)item.Tag;
-                        if (item.CheckState)
-                        {
-                            LoadMunicipios(selEdo);
-                            LoadMapsByEdo(selEdo);
-                        }
-                        else
-                        {
-                            RemoveMunicipios(selEdo);
-                            RemoveMapsByEdo(selEdo);
-                        }
+                        LoadMunicipios(selEdo);
+                        LoadMapsByEdo(selEdo);
+                    }
+                    else
+                    {
+                        RemoveMunicipios(selEdo);
+                        RemoveMapsByEdo(selEdo);
                     }
                 }
-            //    toolStripStatusLabel.Text = "Completado...";
-            //});
-            //w.RunWorkerAsync();
+            }
+
         }
         #endregion
 
@@ -780,50 +777,40 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 {
                     ClearForm();
                     this.CurrentPlaza = clickPlaza;
-
-                    BackgroundWorker w = new BackgroundWorker();
-                    w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
+                    if (e.ColumnIndex == 1)
                     {
-                        toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-                    });
-                    w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+                        //Se limpian los shapes del mapa
+                        RemovePlazaShapes();
+                        //Se seleccionan los estados
+                        foreach (BE.Estado edo in clickPlaza.ListaEstados)
+                        {
+                            SelectEdoItem(edo, true);
+                        }
+                        //Se seleccionan las colonias de la plaza
+                        LoadPlazaRenderSetting();
+                        SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
+                        //Se cambia el formato visual
+                        txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
+                        txtCurrentPlaza.BackColor = this.CurrentPlaza.RealColor;
+                        btnSaveZone.Text = "Act. plaza";
+                        IsUpdate = true;
+                    }
+                    else if (e.ColumnIndex == 2)
                     {
-                        if (e.ColumnIndex == 1)
+                        if (MessageBox.Show("¿Está seguro que desea eliminar la plaza [" + clickPlaza.Nombre + "]?", "Confirmación de eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            //Se limpian los shapes del mapa
-                            RemovePlazaShapes();
-                            //Se seleccionan los estados
-                            foreach (BE.Estado edo in clickPlaza.ListaEstados)
-                            {
-                                SelectEdoItem(edo, true);
-                            }
-                            //Se seleccionan las colonias de la plaza
-                            LoadPlazaRenderSetting();
-                            SelectItemsByPlaza(this.CurrentPlaza.ListaEstados);
-                            //Se cambia el formato visual
-                            txtCurrentPlaza.Text = this.CurrentPlaza.Nombre;
-                            txtCurrentPlaza.BackColor = this.CurrentPlaza.RealColor;
-                            btnSaveZone.Text = "Act. plaza";
-                            IsUpdate = true;
+                            DeletePlaza();
                         }
-                        else if (e.ColumnIndex == 2)
-                        {
-                            if (MessageBox.Show("¿Está seguro que desea eliminar la plaza [" + clickPlaza.Nombre + "]?", "Confirmación de eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            {
-                                DeletePlaza();
-                            }
-                        }
-                        else if (e.ColumnIndex == 3)
-                        {
-                            ZoomToPlaza(this.CurrentPlaza.ListaEstados);
-                        }
-                        else if (e.ColumnIndex == 5) { 
-                            //Aqui va lo del NSE
-                            //Se debe mnadar a trar el WS de colonias por  plaza id                            
-                        }
-                        toolStripStatusLabel.Text = "Completado...";
-                    });
-                    w.RunWorkerAsync();
+                    }
+                    else if (e.ColumnIndex == 3)
+                    {
+                        ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                    }
+                    else if (e.ColumnIndex == 5)
+                    {
+                        //Aqui va lo del NSE
+                        //Se debe mnadar a trar el WS de colonias por  plaza id                            
+                    }
                 }
             }
         }
@@ -836,7 +823,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                 BE.Plaza rowPlaza = ListPlazas.Where(p => p.Id == idPlaza).FirstOrDefault();
                 if (rowPlaza != null)
                 {
-                    fila.Cells[0].Style.BackColor = rowPlaza.RealColor;
+                    for (int i = 1; i < dgPlazas.ColumnCount; i++)
+                    {
+                        fila.Cells[i].Style.BackColor = rowPlaza.RealColor;
+                    }
                 }
             }
         }
@@ -845,7 +835,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
         #region Actualización de la Información
         private void btnSaveZone_Click(object sender, EventArgs e)
         {
-            
+
 
             if (this.CurrentPlaza.ListaEstados.Count > 0)
             {
@@ -887,20 +877,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
 
         private void btnCanelZone_Click(object sender, EventArgs e)
         {
-            BackgroundWorker w = new BackgroundWorker();
-            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
-            {
-                toolStripStatusLabel.Text = "Limpiando datos, por favor espere....";                              
-            });
-            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
-            {
-                ClearForm();
-                LoadPlazaRenderSetting();
-                sfmMainMap.CtrlDown = false;
-                sfmMainMap.Focus();
-                toolStripStatusLabel.Text = "Completado...";
-            });
-            w.RunWorkerAsync();
+            ClearForm();
+            LoadPlazaRenderSetting();
+            sfmMainMap.CtrlDown = false;
+            sfmMainMap.Focus();
         }
         #endregion
 
@@ -987,26 +967,16 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
 
         #region Seleccion del Municipio
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
-        {            
-            //BackgroundWorker w = new BackgroundWorker();
-            //w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
-            //{
-            //    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-            //});
-            //w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
-            //{
-                if (cmbMunicipio.SelectedItem != null)
-                {
-                    BE.Municipio selMunicipio = (BE.Municipio)cmbMunicipio.SelectedItem;
-                    ZoomToMunicipio(selMunicipio);
-                    sfmMainMap.Focus();
-                }
-            //    toolStripStatusLabel.Text = "Completado...";
-            //});
-            //w.RunWorkerAsync();
+        {
+            if (cmbMunicipio.SelectedItem != null)
+            {
+                BE.Municipio selMunicipio = (BE.Municipio)cmbMunicipio.SelectedItem;
+                ZoomToMunicipio(selMunicipio);
+                sfmMainMap.Focus();
+            }
         }
         #endregion
 
-        
+
     }
 }
