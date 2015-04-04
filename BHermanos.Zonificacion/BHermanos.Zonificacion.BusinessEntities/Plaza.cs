@@ -59,11 +59,11 @@ namespace BHermanos.Zonificacion.BusinessEntities
             }
         }
 
-        public string Nse
+        public string VerCol
         {
             get
             {
-                return "NSE";
+                return "Colonias";
             }
         }
         #endregion

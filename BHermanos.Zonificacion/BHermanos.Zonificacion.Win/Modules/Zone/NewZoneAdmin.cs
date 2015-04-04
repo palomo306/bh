@@ -5,7 +5,6 @@ using BHermanos.Zonificacion.Win.Clases.Controles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -39,6 +38,9 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         private int LevelUpdate { get; set; }
         private bool updateZoomLevel = true;
         private ToolStripStatusLabel toolStripStatusLabel = null;
+        private readonly string URL;
+        private readonly int ConnectTimeOut;
+        private readonly string AppId;
         #endregion
 
         #region Carga de Datos
@@ -46,11 +48,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Plaza/GetPlaza/1/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 PlazaModel objResponse = JsonSerializer.Parse<PlazaModel>(streamReader.ReadToEnd());
@@ -78,11 +80,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/0/0/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
@@ -115,11 +117,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/0/0/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
@@ -151,11 +153,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/2/" + this.CurrentPlaza.Id.ToString() + "/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
@@ -218,11 +220,11 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+                string url = this.URL;
+                //string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Colonia/GetColonia/2/" + this.CurrentPlaza.Id.ToString() + "/" + colId + "?type=json";  
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = this.ConnectTimeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ColoniaModel objResponse = JsonSerializer.Parse<ColoniaModel>(streamReader.ReadToEnd());
@@ -253,37 +255,50 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/PostZona?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "POST";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentZone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Guardando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/PostZona?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "POST";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentZone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    PrintZonas(this.ListZonas);
-                    ClearSelectedRecords();
-                    InitializeNewZone();
-                    PrintCurrentZona(this.CurrentZone);
-                    LoadCurrentPlazaRenderSetting();
-                    MessageBox.Show("Se ha almacenado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel)eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        PrintZonas(this.ListZonas);
+                        ClearSelectedRecords();
+                        InitializeNewZone();
+                        PrintCurrentZona(this.CurrentZone);
+                        LoadCurrentPlazaRenderSetting();
+                        sfmMainMap.CtrlDown = false;
+                        MessageBox.Show("Se ha almacenado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -295,37 +310,51 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/DeleteZona/1/" + this.CurrentPlaza.Id.ToString() + "/" + this.CurrentZone.Id.ToString() + "?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "DELETE";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentZone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Borrando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/DeleteZona/1/" + this.CurrentPlaza.Id.ToString() + "/" + this.CurrentZone.Id.ToString() + "?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "DELETE";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentZone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    PrintZonas(this.ListZonas);
-                    ClearSelectedRecords();
-                    InitializeNewZone();
-                    PrintCurrentZona(this.CurrentZone);
-                    LoadCurrentPlazaRenderSetting();
-                    MessageBox.Show("Se ha eliminado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al eliminar la zona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel) eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        PrintZonas(this.ListZonas);
+                        ClearSelectedRecords();
+                        InitializeNewZone();
+                        PrintCurrentZona(this.CurrentZone);
+                        LoadCurrentPlazaRenderSetting();
+                        sfmMainMap.CtrlDown = false;
+                        SetUpdateLevel(0);
+                        MessageBox.Show("Se ha eliminado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al eliminar la zona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -337,37 +366,51 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/PutZona/1?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "PUT";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentZone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Actualizando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/PutZona/1?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "PUT";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentZone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    PrintZonas(this.ListZonas);
-                    ClearSelectedRecords();
-                    InitializeNewZone();
-                    PrintCurrentZona(this.CurrentZone);
-                    LoadCurrentPlazaRenderSetting();
-                    MessageBox.Show("Se ha almacenado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel)eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        PrintZonas(this.ListZonas);
+                        ClearSelectedRecords();
+                        InitializeNewZone();
+                        PrintCurrentZona(this.CurrentZone);
+                        LoadCurrentPlazaRenderSetting();
+                        sfmMainMap.CtrlDown = false;
+                        SetUpdateLevel(0);
+                        MessageBox.Show("Se ha almacenado correctamente la zona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -379,39 +422,53 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/PostZona/" + this.CurrentZone.Id.ToString() + "?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "POST";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentSubzone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Guardando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/PostZona/" + this.CurrentZone.Id.ToString() + "?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "POST";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentSubzone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
-                    this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
-                    ClearSelectedRecords();
-                    SelectShapesZona(this.CurrentZone);
-                    PrintZonas(this.CurrentZone.ListaSubzonas);
-                    InitializeNewSubzone();
-                    PrintCurrentZona(this.CurrentSubzone);
-                    MessageBox.Show("Se ha almacenado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel)eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
+                        this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
+                        ClearSelectedRecords();
+                        SelectShapesZona(this.CurrentZone);
+                        PrintZonas(this.CurrentZone.ListaSubzonas);
+                        InitializeNewSubzone();
+                        PrintCurrentZona(this.CurrentSubzone);
+                        sfmMainMap.CtrlDown = false;
+                        SetUpdateLevel(1);
+                        MessageBox.Show("Se ha almacenado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -423,39 +480,53 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/PutZona/2?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "PUT";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentSubzone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Actualizando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/PutZona/2?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "PUT";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentSubzone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
-                    this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
-                    ClearSelectedRecords();
-                    SelectShapesZona(this.CurrentZone);
-                    PrintZonas(this.CurrentZone.ListaSubzonas);
-                    InitializeNewSubzone();
-                    PrintCurrentZona(this.CurrentSubzone);
-                    MessageBox.Show("Se ha almacenado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel)eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
+                        this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
+                        ClearSelectedRecords();
+                        SelectShapesZona(this.CurrentZone);
+                        PrintZonas(this.CurrentZone.ListaSubzonas);
+                        InitializeNewSubzone();
+                        PrintCurrentZona(this.CurrentSubzone);
+                        sfmMainMap.CtrlDown = false;
+                        SetUpdateLevel(1);
+                        MessageBox.Show("Se ha almacenado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al guardar la zona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -467,39 +538,53 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             try
             {
-                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
-                url += "Zona/DeleteZona/2/" + this.CurrentPlaza.Id.ToString() + "/" + this.CurrentSubzone.Id.ToString() + "?type=json";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.ContentType = "application/json; charset=utf-8";
-                request.Method = "DELETE";
-                request.Timeout = 20000;
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
                 {
-                    string json = this.CurrentZone.ToJSon(false);
-                    streamWriter.Write(json);
-                    streamWriter.Flush();
-                }
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
-                //Se recarga la informacion de usuarios
-                if (objResponse.Succes)
+                    toolStripStatusLabel.Text = "Borrando datos, por favor espere....";
+                    string url = this.URL;
+                    url += "Zona/DeleteZona/2/" + this.CurrentPlaza.Id.ToString() + "/" + this.CurrentSubzone.Id.ToString() + "?type=json";
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Method = "DELETE";
+                    request.Timeout = this.ConnectTimeOut;
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string json = this.CurrentZone.ToJSon(false);
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                    }
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
+                    eDoWork.Result = objResponse;
+                });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
                 {
-                    BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    LoadZonas();
-                    this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
-                    this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
-                    ClearSelectedRecords();
-                    SelectShapesZona(this.CurrentZone);
-                    PrintZonas(this.CurrentZone.ListaSubzonas);
-                    InitializeNewSubzone();
-                    PrintCurrentZona(this.CurrentSubzone);
-                    MessageBox.Show("Se ha eliminado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ha ocurrido un error al eliminar la subzona [" + objResponse.Mensaje + "].");
-                }
+                    ZonaModel objResponse = (ZonaModel)eRunWorkerCompleted.Result;
+                    //Se recarga la informacion de usuarios
+                    if (objResponse.Succes)
+                    {
+                        BE.Plaza selPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        LoadZonas();
+                        this.CurrentZone = this.ListZonas.Where(z => z.Id == this.CurrentZone.Id).FirstOrDefault();
+                        this.CopyCurrentZone = (BE.Zona)this.CurrentZone;
+                        ClearSelectedRecords();
+                        SelectShapesZona(this.CurrentZone);
+                        PrintZonas(this.CurrentZone.ListaSubzonas);
+                        InitializeNewSubzone();
+                        PrintCurrentZona(this.CurrentSubzone);                        
+                        sfmMainMap.CtrlDown = false;
+                        SetUpdateLevel(1);
+                        MessageBox.Show("Se ha eliminado correctamente la subzona.", "Operación existosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al eliminar la subzona [" + objResponse.Mensaje + "].");
+                    }
+                    toolStripStatusLabel.Text = "Status";
+                });
+                w.RunWorkerAsync();                                
             }
             catch (Exception ex)
             {
@@ -741,10 +826,13 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         #endregion
 
         #region Constructor
-        public NewZoneAdmin(ref ToolStripStatusLabel toolStripStatusLabel)
+        public NewZoneAdmin(ref ToolStripStatusLabel toolStripStatusLabel, string url, int connectTimeOut, string appId)
         {
             InitializeComponent();
-            this.toolStripStatusLabel = toolStripStatusLabel;            
+            this.toolStripStatusLabel = toolStripStatusLabel;
+            this.URL = url;
+            this.ConnectTimeOut = connectTimeOut;
+            this.AppId = appId;
             IsFirsTime = true;
             LocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             InitializeNewZone();
@@ -920,43 +1008,53 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         #region Selección de las Plazas
         private void cmbPlazas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!IsFirsTime)
+            BackgroundWorker w = new BackgroundWorker();
+            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
             {
-                if (cmbPlazas.SelectedItem != null)
+                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+            });
+            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+            {
+                if (!IsFirsTime)
                 {
-                    //Se limpian las selecciones actuales
-                    ClearSelectedRecords();
-                    BE.Plaza auxPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
-                    if (this.CurrentPlaza != null && auxPlaza != this.CurrentPlaza)
+                    if (cmbPlazas.SelectedItem != null)
                     {
-                        //Se remueven los shapes de la Plaza Seleccionada
-                        RemovePlazaShapes();
+                        //Se limpian las selecciones actuales
+                        ClearSelectedRecords();
+                        BE.Plaza auxPlaza = (BE.Plaza)cmbPlazas.SelectedItem;
+                        if (this.CurrentPlaza != null && auxPlaza != this.CurrentPlaza)
+                        {
+                            //Se remueven los shapes de la Plaza Seleccionada
+                            RemovePlazaShapes();
+                        }
+                        //Se cargan los Shapes de la Plaza Actual
+                        this.CurrentPlaza = auxPlaza;
+                        LoadPlazaShapes();
+                        ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                        //Se cargan las zonas relacionadas con la plaza
+                        LoadZonas();
+                        LoadCurrentPlazaRenderSetting();
+                        PrintZonas(this.ListZonas);
+                        InitializeNewZone();
+                        PrintCurrentZona(this.CurrentZone);
+                        SetUpdateLevel(0);
+                        sfmMainMap.CtrlDown = false;
+                        sfmMainMap.Focus();
                     }
-                    //Se cargan los Shapes de la Plaza Actual
-                    this.CurrentPlaza = auxPlaza;
-                    LoadPlazaShapes();
-                    ZoomToPlaza(this.CurrentPlaza.ListaEstados);
-                    //Se cargan las zonas relacionadas con la plaza
-                    LoadZonas();
-                    LoadCurrentPlazaRenderSetting();
-                    PrintZonas(this.ListZonas);
-                    InitializeNewZone();
-                    PrintCurrentZona(this.CurrentZone);
-                    SetUpdateLevel(0);
-                    sfmMainMap.CtrlDown = false;
-                    sfmMainMap.Focus();
+                    else
+                    {
+                        ClearSelectedRecords();
+                        RemovePlazaShapes();
+                        InitializeNewZone();
+                        PrintCurrentZona(this.CurrentZone);
+                        LoadZonas();
+                        PrintZonas(this.ListZonas);
+                        SetUpdateLevel(-1);
+                    }
                 }
-                else
-                {
-                    ClearSelectedRecords();
-                    RemovePlazaShapes();
-                    InitializeNewZone();
-                    PrintCurrentZona(this.CurrentZone);
-                    LoadZonas();
-                    PrintZonas(this.ListZonas);
-                    SetUpdateLevel(-1);
-                }
-            }            
+                toolStripStatusLabel.Text = "Status";
+            });
+            w.RunWorkerAsync();                        
         }
         #endregion
 
@@ -1114,25 +1212,37 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     for (int i = 1; i < dgvReportZonas.Columns.Count; i++)
                     {
                         DataGridViewButtonCell newDataGridViewButtonCell = new DataGridViewButtonCell();
-                        newDataGridViewButtonCell.Style.BackColor = SystemColors.Control;
-                        newDataGridViewButtonCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        fila.Cells[i] = newDataGridViewButtonCell;
-                    }
-                }
-                else
-                {
-                    for (int i = 1; i < dgvReportZonas.Columns.Count; i++)
-                    {
                         string zoneName = dgvReportZonas.Columns[i].Name.ToLower();
                         List<BE.Zona> lstCurrentZonas = ListZonasReport;
                         BE.Zona zona = lstCurrentZonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
                         if (zona != null)
                         {
-                            fila.Cells[i].Style.BackColor = zona.RealColor;
+                            newDataGridViewButtonCell.Style.BackColor = zona.RealColor;
                         }
+                        else
+                        {
+                            newDataGridViewButtonCell.Style.BackColor = SystemColors.Control;
+                        }                                                                        
+                        newDataGridViewButtonCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        newDataGridViewButtonCell.Style.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);                        
+                        fila.Cells[i] = newDataGridViewButtonCell;
                     }
-
                 }
+                //else
+                //{
+                //    for (int i = 1; i < dgvReportZonas.Columns.Count; i++)
+                //    {                        
+                //        string zoneName = dgvReportZonas.Columns[i].Name.ToLower();
+                //        List<BE.Zona> lstCurrentZonas = ListZonasReport;
+                //        BE.Zona zona = lstCurrentZonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
+                //        if (zona != null)
+                //        {
+                //            fila.Cells[i].Style.
+                //            //fila.Cells[i].Style.BackColor = zona.RealColor;
+                //        }
+                //    }
+
+                //}
             }
         }
 
@@ -1143,49 +1253,52 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                 if (e.RowIndex == dgvReportZonas.Rows.Count - 1)
                 {
                     string zoneName = dgvReportZonas.Columns[e.ColumnIndex].Name.ToLower();
-                    switch (LevelUpdate)
+                    if (zoneName != "dato")
                     {
-                        case 0:
-                            this.CurrentZone = this.ListZonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
-                            this.CopyCurrentZone = (BE.Zona)this.CurrentZone.Clone();
-                            if (this.CurrentZone == null)
-                            {
-                                MessageBox.Show("Ha ocurrido un error al extraer los datos de la zona [La zona no se ha encontrado para el estado y municipio seleccionado]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                ClearSelectedRecords();
-                                PrintCurrentZona(this.CurrentZone);
-                                SelectShapesZona(this.CurrentZone);
-                                btnSaveZone.Text = "Actualizar Zona";
-                                btnDelete.Text = "Eliminar Zona";
-                                PrintZonas(this.CurrentZone.ListaSubzonas);
-                                SetUpdateLevel(1);
-                                SetupZonaSubzonasCustomRenderSettings();
-                                sfmMainMap.Focus();
-                            }
-                            break;
-                        case 1:
-                            this.CurrentSubzone = this.CurrentZone.ListaSubzonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
-                            this.CopyCurrentSubzone = this.CurrentSubzone;
-                            if (this.CurrentSubzone == null)
-                            {
-                                MessageBox.Show("Ha ocurrido un error al extraer los datos de la subzona [La subzona no se ha encontrado para la zona seleccionada]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                ClearSelectedRecords();
-                                SelectShapesZona(this.CurrentSubzone);
-                                txtCurrentSubzona.Text = this.CurrentSubzone.Nombre;
-                                txtCurrentSubzona.BackColor = this.CurrentSubzone.RealColor;
-                                btnSaveZone.Text = "Act. Subzona";
-                                btnDelete.Text = "Elim. Subzona";
-                                PrintCurrentZona(this.CurrentSubzone);
-                                PrintZonas(new List<BE.Zona>());
-                                SetUpdateLevel(3);
-                                sfmMainMap.Focus();
-                            }
-                            break;
+                        switch (LevelUpdate)
+                        {
+                            case 0:
+                                this.CurrentZone = this.ListZonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
+                                if (this.CurrentZone == null)
+                                {
+                                    MessageBox.Show("Ha ocurrido un error al extraer los datos de la zona [La zona no se ha encontrado para el estado y municipio seleccionado]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                else
+                                {
+                                    this.CopyCurrentZone = (BE.Zona)this.CurrentZone.Clone();
+                                    ClearSelectedRecords();
+                                    PrintCurrentZona(this.CurrentZone);
+                                    SelectShapesZona(this.CurrentZone);
+                                    btnSaveZone.Text = "Actualizar Zona";
+                                    btnDelete.Text = "Eliminar Zona";
+                                    PrintZonas(this.CurrentZone.ListaSubzonas);
+                                    SetUpdateLevel(1);
+                                    SetupZonaSubzonasCustomRenderSettings();
+                                    sfmMainMap.Focus();
+                                }
+                                break;
+                            case 1:
+                                this.CurrentSubzone = this.CurrentZone.ListaSubzonas.Where(z => z.Nombre.ToLower() == zoneName).FirstOrDefault();
+                                this.CopyCurrentSubzone = this.CurrentSubzone;
+                                if (this.CurrentSubzone == null)
+                                {
+                                    MessageBox.Show("Ha ocurrido un error al extraer los datos de la subzona [La subzona no se ha encontrado para la zona seleccionada]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                else
+                                {
+                                    ClearSelectedRecords();
+                                    SelectShapesZona(this.CurrentSubzone);
+                                    txtCurrentSubzona.Text = this.CurrentSubzone.Nombre;
+                                    txtCurrentSubzona.BackColor = this.CurrentSubzone.RealColor;
+                                    btnSaveZone.Text = "Act. Subzona";
+                                    btnDelete.Text = "Elim. Subzona";
+                                    PrintCurrentZona(this.CurrentSubzone);
+                                    PrintZonas(new List<BE.Zona>());
+                                    SetUpdateLevel(3);
+                                    sfmMainMap.Focus();
+                                }
+                                break;
+                        }
                     }
                 }
             }
@@ -1259,8 +1372,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentZone.PlazaId = this.CurrentPlaza.Id;
                             this.CurrentZone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentZone.Color = oWindowZoneName.Color;
-                            SaveZona();
-                            sfmMainMap.CtrlDown = false;
+                            SaveZona();                            
                         }
                     }
                     else
@@ -1282,9 +1394,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         {
                             this.CurrentZone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentZone.Color = oWindowZoneName.Color;
-                            UpdateZona();
-                            sfmMainMap.CtrlDown = false;
-                            SetUpdateLevel(0);
+                            UpdateZona();                            
                         }
                     }
                     else
@@ -1305,9 +1415,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             this.CurrentSubzone.PlazaId = this.CurrentPlaza.Id;
                             this.CurrentSubzone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentSubzone.Color = oWindowZoneName.Color;
-                            SaveSubzona();
-                            sfmMainMap.CtrlDown = false;
-                            SetUpdateLevel(1);
+                            SaveSubzona();                            
                         }
                     }
                     else
@@ -1329,9 +1437,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         {
                             this.CurrentSubzone.Nombre = oWindowZoneName.Nombre;
                             this.CurrentSubzone.Color = oWindowZoneName.Color;
-                            UpdateSubzona();
-                            sfmMainMap.CtrlDown = false;
-                            SetUpdateLevel(1);
+                            UpdateSubzona();                            
                         }
                     }
                     else
@@ -1447,9 +1553,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     {
                         if (this.CurrentZone != null)
                         {
-                            DeleteZona();
-                            sfmMainMap.CtrlDown = false;
-                            SetUpdateLevel(0);
+                            DeleteZona();                          
                         }
                         else
                         {
@@ -1460,9 +1564,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                     {
                         if (this.CurrentSubzone != null)
                         {
-                            DeleteSubzona();
-                            sfmMainMap.CtrlDown = false;
-                            SetUpdateLevel(1);
+                            DeleteSubzona();                            
                         }
                         else
                         {

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BHermanos.Zonificacion.Win.Clases;
+using System.Configuration;
 
 namespace BHermanos.Zonificacion.Win
 {
@@ -35,29 +36,37 @@ namespace BHermanos.Zonificacion.Win
 
         void visualMenu_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem visulSubMenu = (ToolStripMenuItem)sender;
-            BE.Menu menu = (BE.Menu)visulSubMenu.Tag;
-            Form form = null;
-            
-            BackgroundWorker w = new BackgroundWorker();
-            w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) => {
-                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-                form = (Form)Activator.CreateInstance(Type.GetType(menu.Aplicacion), toolStripStatusLabel);                
-            });
+            try
+            {
+                ToolStripMenuItem visulSubMenu = (ToolStripMenuItem)sender;
+                BE.Menu menu = (BE.Menu)visulSubMenu.Tag;
+                Form form = null;
+                string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int connectTimeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
+                string appId = ConfigurationManager.AppSettings["AppId"].ToString();
 
-            w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) => {
-                form.StartPosition = FormStartPosition.CenterScreen;
-                form.MdiParent = this;
-                form.WindowState = FormWindowState.Maximized;
-                form.Show();                
-                toolStripStatusLabel.Text = "Completado...";
-            });
+                BackgroundWorker w = new BackgroundWorker();
+                w.DoWork += new DoWorkEventHandler((object senderDoWork, DoWorkEventArgs eDoWork) =>
+                {
+                    toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
+                    form = (Form)Activator.CreateInstance(Type.GetType(menu.Aplicacion), toolStripStatusLabel,url,connectTimeOut,appId);
+                });
 
-            w.ProgressChanged += new ProgressChangedEventHandler((object senderProgressChanged, ProgressChangedEventArgs eProgressChanged) => {
-                toolStripStatusLabel.Text = "Cargando datos, por favor espere....";
-            });
+                w.RunWorkerCompleted += new RunWorkerCompletedEventHandler((object senderRunWorkerCompleted, RunWorkerCompletedEventArgs eRunWorkerCompleted) =>
+                {
+                    form.StartPosition = FormStartPosition.CenterScreen;
+                    form.MdiParent = this;
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    toolStripStatusLabel.Text = "Status";
+                });
 
-            w.RunWorkerAsync();
+                w.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al extraer al cargar la forma [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CreateMenus()
