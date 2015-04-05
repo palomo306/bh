@@ -538,10 +538,6 @@
     <Content Include="Maps\Nacional\national_estatal.shx" />
     <Content Include="Maps\Estados\30\30.egp" />
     <Content Include="Maps\Nacional\national_estatal.egp" />
-    <Content Include="Maps\Estados\30\Nacional\national_estatal.dbf" />
-    <Content Include="Maps\Estados\30\Nacional\national_estatal.prj" />
-    <Content Include="Maps\Estados\30\Nacional\national_estatal.shp" />
-    <Content Include="Maps\Estados\30\Nacional\national_estatal.shx" />
     <Content Include="BHermanosSite.Master" />
     <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -567,6 +563,27 @@
     <Content Include="img\team\Thumbs.db" />
     <Content Include="img\Thumbs.db" />
     <Content Include="Maps\Main.egp" />
+    <Content Include="Maps\Estados\16\16.egp" />
+    <Content Include="Maps\Estados\16\Calles.dbf" />
+    <Content Include="Maps\Estados\16\Calles.prj" />
+    <Content Include="Maps\Estados\16\Calles.shp" />
+    <Content Include="Maps\Estados\16\Calles.shx" />
+    <Content Include="Maps\Estados\16\Carreteras.dbf" />
+    <Content Include="Maps\Estados\16\Carreteras.prj" />
+    <Content Include="Maps\Estados\16\Carreteras.shp" />
+    <Content Include="Maps\Estados\16\Carreteras.shx" />
+    <Content Include="Maps\Estados\16\Colonias.dbf" />
+    <Content Include="Maps\Estados\16\Colonias.prj" />
+    <Content Include="Maps\Estados\16\Colonias.shp" />
+    <Content Include="Maps\Estados\16\Colonias.shx" />
+    <Content Include="Maps\Estados\16\Estado.dbf" />
+    <Content Include="Maps\Estados\16\Estado.prj" />
+    <Content Include="Maps\Estados\16\Estado.shp" />
+    <Content Include="Maps\Estados\16\Estado.shx" />
+    <Content Include="Maps\Estados\16\Municipios.dbf" />
+    <Content Include="Maps\Estados\16\Municipios.prj" />
+    <Content Include="Maps\Estados\16\Municipios.shp" />
+    <Content Include="Maps\Estados\16\Municipios.shx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
