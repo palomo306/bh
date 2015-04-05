@@ -47,7 +47,7 @@ function CloseDivNewEdit() {
 function OpenDeleteWindow() {
     FullScreenBackGround("divBack");
     document.getElementById("divBack").style.display = "inline";
-    $('#divDelete').draggable().show('slow');
+    $('#divDelete').show('slow');
 }
 
 function CloseDeleteWindow() {
@@ -59,7 +59,7 @@ function CloseDeleteWindow() {
 function OpenPasswordWindow() {
     FullScreenBackGround("divBack");
     document.getElementById("divBack").style.display = "inline";
-    $('#divPassword').draggable().show('slow');
+    $('#divPassword').show('slow');
 }
 
 function ClosePasswordWindow() {
