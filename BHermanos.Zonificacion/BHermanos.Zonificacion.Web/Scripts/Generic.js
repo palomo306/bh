@@ -28,8 +28,7 @@ function OpenNewWindow() {
 function OpenDetailWindow() {
     FullScreenBackGround("divBack");
     document.getElementById("divBack").style.display = "inline";
-    $('#divDetail').style.display = "inline";
-    //$('#divDetail').show('slow');
+    $('#divDetail').show('slow');
 }
 
 

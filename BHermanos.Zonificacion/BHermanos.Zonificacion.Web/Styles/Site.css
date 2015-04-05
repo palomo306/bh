@@ -220,10 +220,9 @@ button, input, optgroup, select, textarea {
 .PopUpDetail {
     position:absolute;
     top:50%;
-    margin-top: -45px;
+    margin-top: -125px;
     left:50%;
-    margin-left: -125px; 
-    z-index:1001;
+    margin-left: -300px;     
 }
 
 

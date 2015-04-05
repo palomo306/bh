@@ -14,6 +14,7 @@
     <!--[if IE]>
 			<link rel="stylesheet" href="css/ie.css">
 	<![endif]-->
+    <script src="../Scripts/jquery-1.4.1.js"></script>
     <script src="../Vendor/jquery.js"></script>	
     <script src="../Vendor/jquery.stellar.js"></script>
     <script src="../Scripts/jquery.ui.draggable.js"></script>
@@ -149,8 +150,8 @@
         </div>   
     </div>    
     <!-- End Full page background technique -->        
-    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:10000;" />        
-    <div id="divDetail" class="PopUpDetail" style="width:600px; height:250px; display:none; z-index:10001;">
+    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:999;" />        
+    <div id="divDetail" class="PopUpDetail" style="width:600px; height:250px; display:none; z-index:1000;">
         <table style="width:100%; height:100px; top:0px; left:0px; position:absolute;">
             <tr>
                 <td class="CellCenter" style="background-color:White;">
