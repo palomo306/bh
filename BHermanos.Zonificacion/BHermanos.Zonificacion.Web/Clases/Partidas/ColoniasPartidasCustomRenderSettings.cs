@@ -124,6 +124,7 @@ namespace BHermanos.Zonificacion.Web.Clases
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Trace.WriteLine("Error: " + ex.Message);
             }
         }
 

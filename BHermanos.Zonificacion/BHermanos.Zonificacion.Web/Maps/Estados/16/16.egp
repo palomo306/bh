@@ -55,7 +55,7 @@
     <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
     </Font>
     <FontColor>Black</FontColor>
-    <FillColor alpha="200">#FFFFFF</FillColor>
+    <FillColor >#FFFFFF</FillColor>
     <OutlineColor>#969696</OutlineColor>
     <PenWidthScale>0.0001350453</PenWidthScale>
     <FillInterior>True</FillInterior>
@@ -78,7 +78,7 @@
     <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
     </Font>
     <FontColor>Black</FontColor>
-    <FillColor alpha="200">#FFFFFF</FillColor>
+    <FillColor >#FFFFFF</FillColor>
     <OutlineColor>#969696</OutlineColor>
     <PenWidthScale>0.0001350453</PenWidthScale>
     <FillInterior>True</FillInterior>

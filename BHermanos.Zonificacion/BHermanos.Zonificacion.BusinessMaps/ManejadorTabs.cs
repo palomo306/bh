@@ -231,16 +231,20 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 }
                 if (listaSubZonas.Count > 0 )
                 {
-                    Zona zona = new Zona();
-                    zona.Id = zonaId;
-                    zona.PlazaId = plazaId;                    
-                    zona.Nombre = "Sin-Clasificar";
-                    zona.Color = "#FFFFFF";
-                    zona.Colonias = string.Empty;
-                    zona.ListaSubzonas = new List<Zona>();
-                    zona.ListaColonias = this.ObtenerColoniasXZona(2,plazaId, zonaId, zonTab);
-                    zona.ListaPartidas = this.ObtieneListaPartidas(2, plazaId, zonaId, zonTab, zona.ListaColonias);
-                    listaSubZonas.Add(zona);
+                    List<Colonia> listCol = this.ObtenerColoniasXZona(2, plazaId, zonaId, zonTab);
+                    if (listCol != null && listCol.Count > 0)
+                    {
+                        Zona zona = new Zona();
+                        zona.Id = zonaId;
+                        zona.PlazaId = plazaId;
+                        zona.Nombre = "Sin-Clasificar";
+                        zona.Color = "#EFEFEF";
+                        zona.Colonias = string.Empty;
+                        zona.ListaSubzonas = new List<Zona>();
+                        zona.ListaColonias = listCol;
+                        zona.ListaPartidas = this.ObtieneListaPartidas(2, plazaId, zonaId, zonTab, zona.ListaColonias);
+                        listaSubZonas.Add(zona);
+                    }
                 }
             }
             catch (Exception ex)
