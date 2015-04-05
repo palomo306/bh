@@ -70,7 +70,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                                 dtResult.Rows[row][zno.Nombre] = "Editar";
                             else
                             {
-                                dtResult.Rows[row][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"','" +  Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />|" + zno.Color;
+                                dtResult.Rows[row][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""btn btn-primary btn-sm"" />|" + zno.Color;
                             }
                         }
                     }
@@ -294,7 +294,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                         else
                             oNewRow[partida.Nombre] = partida.Valor;
                     }
-                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""BotonChico"" />|" + zn.Color;
+                    oNewRow["Ver"] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zn.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""btn btn-primary btn-sm"" />|" + zn.Color;
                     dtResult.Rows.Add(oNewRow);
                 }
             }
