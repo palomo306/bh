@@ -238,8 +238,11 @@ namespace BHermanos.Zonificacion.Web.Modules
                     ViewState["CurrentLevel"] = ValueArrayCompressed;
                 else
                     ViewState.Add("CurrentLevel", ValueArrayCompressed);
-            }
+            }            
         }
+
+        private readonly int LayerIndex = 5;
+
         #endregion
 
         #region Carga de Datos
@@ -410,7 +413,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                 //Lista de control
                 List<BE.Colonia> lstSelColonias = new List<BE.Colonia>();
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = this.LayerIndex;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
@@ -427,7 +430,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             int shapeCount = sfmMainMap.LayerCount;
             if (shapeCount > 1)
             {
-                int layerIndex = 2;
+                int layerIndex = this.LayerIndex;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
@@ -476,7 +479,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             {
                 bool isFirstShape = true;
                 //Se recorren los datos
-                int layerIndex = 2;
+                int layerIndex = this.LayerIndex;
                 while (layerIndex < shapeCount)
                 {
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);

@@ -82,19 +82,19 @@ margin-top:-4px;background:transparent url(images/panehc.gif) 50% -10px;
 
 #rightTopPane2 {
     height:50%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;    
 }
 
 #rightBottonPane2 {
     height:42%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
 #rightMiddlePane2 {
     height:10%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
@@ -103,32 +103,32 @@ margin-top:-4px;background:transparent url(images/panehc.gif) 50% -10px;
 
 #rightTopPane {
     height:42%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
 #rightBottonPane {
     height:42%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
 #rightMiddlePane {
     height:7%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
 
 #rightTopPane3 {
     height:50%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 
 #rightBottonPane2 {
     height:34%;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:5px;
 }
 

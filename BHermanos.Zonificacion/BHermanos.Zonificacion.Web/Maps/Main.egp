@@ -12,7 +12,7 @@
         <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
         </Font>
         <FontColor>Black</FontColor>
-        <FillColor>#EFEFEF</FillColor>
+        <FillColor>#FFFFFF</FillColor>
         <OutlineColor>#969696</OutlineColor>
         <PenWidthScale>0.0001350453</PenWidthScale>
         <FillInterior>True</FillInterior>

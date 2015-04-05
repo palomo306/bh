@@ -1,115 +1,115 @@
-      <shapefile>
-        <name>Estado.shp</name>
-        <path>Estados/16/Estado</path>
-        <renderer>
-          <MinZoomLevel>-1</MinZoomLevel>
-          <MaxZoomLevel>-1</MaxZoomLevel>
-          <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-          <FieldName>NombreEsta</FieldName>
-          <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-          </Font>
-          <FontColor>Black</FontColor>
-          <FillColor>#F5EEE8</FillColor>
-          <OutlineColor>#969696</OutlineColor>
-          <PenWidthScale>0.0001350453</PenWidthScale>
-          <FillInterior>False</FillInterior>
-          <Selectable>False</Selectable>
-          <LineType>Outline</LineType>
-          <ShadowText>True</ShadowText>
-          <PointSize>5</PointSize>
-          <UseToolTip>True</UseToolTip>
-          <ToolTipFieldName>NombreEsta</ToolTipFieldName>
-        </renderer>
-      </shapefile>
-      <shapefile>
-        <name>Colonias.shp</name>
-        <path>Estados/16/Colonias</path>
-        <renderer>
-          <MinZoomLevel>-1</MinZoomLevel>
-          <MaxZoomLevel>-1</MaxZoomLevel>
-          <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-          <FieldName>Nombre</FieldName>
-          <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-          </Font>
-          <FontColor>Black</FontColor>
-          <FillColor>#EFEFEF</FillColor>
-          <OutlineColor>#969696</OutlineColor>
-          <PenWidthScale>0.0001350453</PenWidthScale>
-          <FillInterior>True</FillInterior>
-          <Selectable>True</Selectable>
-          <LineType>Outline</LineType>
-          <ShadowText>True</ShadowText>
-          <PointSize>5</PointSize>
-          <UseToolTip>False</UseToolTip>
-          <ToolTipFieldName>Nombre</ToolTipFieldName>
-        </renderer>
-      </shapefile>
-      <shapefile>
-        <name>Carreteras.shp</name>
-        <path>Estados/16/Carreteras</path>
-        <renderer>
-          <MinZoomLevel>-1</MinZoomLevel>
-          <MaxZoomLevel>-1</MaxZoomLevel>
-          <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-          <FieldName>Nombre</FieldName>
-          <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-          </Font>
-          <FontColor>Black</FontColor>
-          <FillColor>#F5EEE8</FillColor>
-          <OutlineColor>#969696</OutlineColor>
-          <PenWidthScale>0.0001350453</PenWidthScale>
-          <FillInterior>False</FillInterior>
-          <Selectable>False</Selectable>
-          <LineType>Outline</LineType>
-          <ShadowText>True</ShadowText>
-          <PointSize>5</PointSize>
-          <UseToolTip>False</UseToolTip>
-          <ToolTipFieldName>Nombre</ToolTipFieldName>
-        </renderer>
-      </shapefile>
-      <shapefile>
-        <name>Calles.shp</name>
-        <path>Estados/16/Calles</path>
-        <renderer>
-          <MinZoomLevel>-1</MinZoomLevel>
-          <MaxZoomLevel>-1</MaxZoomLevel>
-          <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-          <FieldName>Nombre</FieldName>
-          <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-          </Font>
-          <FontColor>Black</FontColor>
-          <FillColor>#F5EEE8</FillColor>
-          <OutlineColor>#969696</OutlineColor>
-          <PenWidthScale>0.0001350453</PenWidthScale>
-          <FillInterior>False</FillInterior>
-          <Selectable>False</Selectable>
-          <LineType>Outline</LineType>
-          <ShadowText>True</ShadowText>
-          <PointSize>5</PointSize>
-          <UseToolTip>False</UseToolTip>
-          <ToolTipFieldName>Nombre</ToolTipFieldName>
-        </renderer>
-      </shapefile>
-      <shapefile>
-        <name>Municipios.shp</name>
-        <path>Estados/16/Municipios</path>
-        <renderer>
-          <MinZoomLevel>-1</MinZoomLevel>
-          <MaxZoomLevel>-1</MaxZoomLevel>
-          <MinRenderLabelZoom>-1</MinRenderLabelZoom>
-          <FieldName>NombreMuni</FieldName>
-          <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
-          </Font>
-          <FontColor>Black</FontColor>
-          <FillColor>#F5EEE8</FillColor>
-          <OutlineColor>#969696</OutlineColor>
-          <PenWidthScale>0.0005350453</PenWidthScale>
-          <FillInterior>False</FillInterior>
-          <Selectable>False</Selectable>
-          <LineType>Outline</LineType>
-          <ShadowText>True</ShadowText>
-          <PointSize>5</PointSize>
-          <UseToolTip>False</UseToolTip>
-          <ToolTipFieldName>NombreMuni</ToolTipFieldName>
-        </renderer>
-      </shapefile>
+<shapefile>
+  <name>Estado.shp</name>
+  <path>Estados/16/Estado</path>
+  <renderer>
+    <MinZoomLevel>-1</MinZoomLevel>
+    <MaxZoomLevel>-1</MaxZoomLevel>
+    <MinRenderLabelZoom>-1</MinRenderLabelZoom>
+    <FieldName>NombreEsta</FieldName>
+    <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
+    </Font>
+    <FontColor>Black</FontColor>
+    <FillColor>#FFFFFF</FillColor>
+    <OutlineColor>#969696</OutlineColor>
+    <PenWidthScale>0.0001350453</PenWidthScale>
+    <FillInterior>False</FillInterior>
+    <Selectable>False</Selectable>
+    <LineType>Outline</LineType>
+    <ShadowText>True</ShadowText>
+    <PointSize>5</PointSize>
+    <UseToolTip>True</UseToolTip>
+    <ToolTipFieldName>NombreEsta</ToolTipFieldName>
+  </renderer>
+</shapefile>
+<shapefile>
+  <name>Municipios.shp</name>
+  <path>Estados/16/Municipios</path>
+  <renderer>
+    <MinZoomLevel>-1</MinZoomLevel>
+    <MaxZoomLevel>-1</MaxZoomLevel>
+    <MinRenderLabelZoom>-1</MinRenderLabelZoom>
+    <FieldName>NombreMuni</FieldName>
+    <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
+    </Font>
+    <FontColor>Black</FontColor>
+    <FillColor>#FFFFFF</FillColor>
+    <OutlineColor>#969696</OutlineColor>
+    <PenWidthScale>0.0005350453</PenWidthScale>
+    <FillInterior>False</FillInterior>
+    <Selectable>False</Selectable>
+    <LineType>Outline</LineType>
+    <ShadowText>True</ShadowText>
+    <PointSize>5</PointSize>
+    <UseToolTip>False</UseToolTip>
+    <ToolTipFieldName>NombreMuni</ToolTipFieldName>
+  </renderer>
+</shapefile>
+<shapefile>
+  <name>Carreteras.shp</name>
+  <path>Estados/16/Carreteras</path>
+  <renderer>
+    <MinZoomLevel>-1</MinZoomLevel>
+    <MaxZoomLevel>-1</MaxZoomLevel>
+    <MinRenderLabelZoom>-1</MinRenderLabelZoom>
+    <FieldName>Nombre</FieldName>
+    <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
+    </Font>
+    <FontColor>Black</FontColor>
+    <FillColor alpha="200">#FFFFFF</FillColor>
+    <OutlineColor>#969696</OutlineColor>
+    <PenWidthScale>0.0001350453</PenWidthScale>
+    <FillInterior>True</FillInterior>
+    <Selectable>False</Selectable>
+    <LineType>Outline</LineType>
+    <ShadowText>True</ShadowText>
+    <PointSize>5</PointSize>
+    <UseToolTip>False</UseToolTip>
+    <ToolTipFieldName>Nombre</ToolTipFieldName>
+  </renderer>
+</shapefile>
+<shapefile>
+  <name>Calles.shp</name>
+  <path>Estados/16/Calles</path>
+  <renderer>
+    <MinZoomLevel>-1</MinZoomLevel>
+    <MaxZoomLevel>-1</MaxZoomLevel>
+    <MinRenderLabelZoom>-1</MinRenderLabelZoom>
+    <FieldName>Nombre</FieldName>
+    <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
+    </Font>
+    <FontColor>Black</FontColor>
+    <FillColor alpha="200">#FFFFFF</FillColor>
+    <OutlineColor>#969696</OutlineColor>
+    <PenWidthScale>0.0001350453</PenWidthScale>
+    <FillInterior>True</FillInterior>
+    <Selectable>False</Selectable>
+    <LineType>Outline</LineType>
+    <ShadowText>True</ShadowText>
+    <PointSize>5</PointSize>
+    <UseToolTip>False</UseToolTip>
+    <ToolTipFieldName>Nombre</ToolTipFieldName>
+  </renderer>
+</shapefile>
+<shapefile>
+  <name>Colonias.shp</name>
+  <path>Estados/16/Colonias</path>
+  <renderer>
+    <MinZoomLevel>-1</MinZoomLevel>
+    <MaxZoomLevel>-1</MaxZoomLevel>
+    <MinRenderLabelZoom>-1</MinRenderLabelZoom>
+    <FieldName>Nombre</FieldName>
+    <Font Size="12" Name="Microsoft Sans Serif" Style="Regular">
+    </Font>
+    <FontColor>Black</FontColor>
+    <FillColor>#FFFFFF</FillColor>
+    <OutlineColor>#969696</OutlineColor>
+    <PenWidthScale>0.0001350453</PenWidthScale>
+    <FillInterior>True</FillInterior>
+    <Selectable>True</Selectable>
+    <LineType>Outline</LineType>
+    <ShadowText>True</ShadowText>
+    <PointSize>5</PointSize>
+    <UseToolTip>False</UseToolTip>
+    <ToolTipFieldName>Nombre</ToolTipFieldName>
+  </renderer>
+</shapefile>
