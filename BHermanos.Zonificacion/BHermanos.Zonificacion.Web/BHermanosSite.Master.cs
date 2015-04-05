@@ -73,7 +73,7 @@ namespace BHermanos.Zonificacion.Web
                         newTab.Id = i;
                         newTab.Nombre = tb.Nombre;
                         newTab.Orden = i;
-                        newTab.Aplicacion = "ZoneInfoChild.aspx?tabId=" + tb.Id.ToString();
+                        newTab.Aplicacion = "/Modules/ZoneInfoChild.aspx?tabId=" + tb.Id.ToString();
                         tabsMenu.ListMenus.Add(newTab);
                     }
                 }

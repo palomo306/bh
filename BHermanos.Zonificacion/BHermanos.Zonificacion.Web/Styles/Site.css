@@ -222,7 +222,8 @@ button, input, optgroup, select, textarea {
     top:50%;
     margin-top: -125px;
     left:50%;
-    margin-left: -300px;     
+    margin-left: -300px; 
+    z-index:1001;   
 }
 
 
