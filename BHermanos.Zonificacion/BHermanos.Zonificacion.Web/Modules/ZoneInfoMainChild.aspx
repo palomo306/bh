@@ -82,7 +82,11 @@
     <div id="ContentDiv">        
         <div class="left-column">
             <div id="MapMainDiv">
-                <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px"/> 
+                <div class="featured-box featured-box-primary">    
+                    <div class="scrolledGridView featured-box box-content">
+                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px"/> 
+                    </div>
+                </div>
             </div>
         </div>
         <div class="right-column" style="height:100%;">

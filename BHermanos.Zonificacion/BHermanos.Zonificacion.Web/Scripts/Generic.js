@@ -87,8 +87,8 @@ function SetSplitter() {
 
 function ResizeMap()
 {
-    var Width = $("#MapMainDiv").width() + "px";
-    var Height = document.body.clientHeight - 60;
+    var Width = ($("#MapMainDiv").width() - 14) + "px";
+    var Height = $("#MapMainDiv").height();    
     document.getElementById("content_sfmMainMap").style.position = "relative";
     document.getElementById("content_sfmMainMap").style.height = (Height) + "px";
     document.getElementById("content_sfmMainMap").style.width = Width;
