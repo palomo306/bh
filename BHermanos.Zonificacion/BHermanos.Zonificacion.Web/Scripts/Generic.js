@@ -112,7 +112,7 @@ function ResizeMap()
 
 function ResizeMap2()
 {
-    var Width = $("#MapMainDiv2").width() + "px";
+    var Width = ($("#MapMainDiv2").width() - 14) + "px";
     var Height = $("#MapMainDiv2").height();
     document.getElementById("content_sfmMainMap").style.position = "relative";
     document.getElementById("content_sfmMainMap").style.height = (Height) + "px";

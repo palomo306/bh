@@ -97,9 +97,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
     <div id="ContentDiv">
         <div class="left-column">
-            <div id="MapMainDiv2">
-                <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px"/> 
-            </div>      
+            <div id="MapMainDiv2" class="row featured-boxes">
+                <div class="featured-box featured-box-primary">    
+                    <div class="scrolledGridView featured-box box-content">
+                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px"/> 
+                    </div>
+                </div>
+            </div>
             <div id="TotalDiv">
                 <div id="InfoDivTotales" class="row featured-boxes">
                     <div style="width:175px; float:left; margin:3px;">
