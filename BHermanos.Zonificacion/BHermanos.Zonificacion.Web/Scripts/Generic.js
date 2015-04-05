@@ -22,10 +22,7 @@ function ShowMessage(title, text) {
 function OpenNewWindow() {
     FullScreenBackGround("divBack");
     document.getElementById("divBack").style.display = "inline";
-    $('#divNewEdit').draggable({       
-        scroll: 'true',
-        refreshPositions: true
-    }).show('slow');
+    $('#divNewEdit').show('slow');
 }
 
 function OpenDetailWindow() {

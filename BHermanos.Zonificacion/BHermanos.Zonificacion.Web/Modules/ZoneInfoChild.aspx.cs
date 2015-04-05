@@ -308,11 +308,13 @@ namespace BHermanos.Zonificacion.Web.Modules
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las plazas [" + objResponse.Mensaje + "]');", true);
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + ex.Message + "]');", true);
             }
         }
@@ -341,16 +343,19 @@ namespace BHermanos.Zonificacion.Web.Modules
                     }
                     else
                     {
+                        hdnShowBackGroup.Value = "not";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [Hay más de un Tab para el Id --> " + TabId + "]');", true);
                     }
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje.Replace("'", "") + "]');", true);
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + ex.Message.Replace("'", "") + "]');", true);
             }
         }
@@ -388,16 +393,19 @@ namespace BHermanos.Zonificacion.Web.Modules
                     }
                     else
                     {
+                        hdnShowBackGroup.Value = "not";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [Hay más de un Tab para el Id --> " + TabId + "]');", true);
                     }
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje.Replace("'", "") + "]');", true);
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + ex.Message.Replace("'", "") + "]');", true);
             }
         }
@@ -536,6 +544,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap2();", true);
+            hdnShowBackGroup.Value = "close";
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;

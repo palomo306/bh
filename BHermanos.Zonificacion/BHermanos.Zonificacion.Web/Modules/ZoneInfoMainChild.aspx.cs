@@ -267,11 +267,13 @@ namespace BHermanos.Zonificacion.Web.Modules
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las plazas [" + objResponse.Mensaje + "]');", true);
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + ex.Message + "]');", true);
             }
         }
@@ -294,11 +296,13 @@ namespace BHermanos.Zonificacion.Web.Modules
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje + "]');", true);                    
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + ex.Message + "]');", true);
             }
         }
@@ -322,15 +326,20 @@ namespace BHermanos.Zonificacion.Web.Modules
                         this.CurrentZone = objResponse.ListaZonas.ToList()[0];
                     }
                     else
+                    {
+                        hdnShowBackGroup.Value = "not";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al generar una zona nueva [Se obtuvo más de un dato]');", true);
+                    }
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al generar una zona nueva [" + objResponse.Mensaje + "]');", true);
                 }
             }
             catch (Exception ex)
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al generar una zona nueva [" + ex.Message + "]');", true);
             }
         }
@@ -365,6 +374,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
+            hdnShowBackGroup.Value = "cloase";
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;
@@ -665,15 +675,18 @@ namespace BHermanos.Zonificacion.Web.Modules
                     spanTitleDetail.InnerText = "Información General por Zona";
                     gvDetail.DataSource = dtInformationAll;
                     gvDetail.DataBind();
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenDetailWindow();", true);
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Validación de datos','No hay Zona para el estado y municipio seleccionado.');", true);
                 }
             }
             else
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Validación de datos','Por favor seleccione un estado y municipio.');", true);
             }
         }
@@ -688,15 +701,18 @@ namespace BHermanos.Zonificacion.Web.Modules
                     spanTitleDetail.InnerText = "Información Socioeconómica por Zona";
                     gvDetail.DataSource = dtInformationAll;
                     gvDetail.DataBind();
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenDetailWindow();", true);
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Validación de datos','No hay Zona para el estado y municipio seleccionado.');", true);
                 }
             }
             else
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Validación de datos','Por favor seleccione un estado y municipio.');", true);
             }
         }

@@ -225,3 +225,44 @@ button, input, optgroup, select, textarea {
     margin-left: -125px; 
     z-index:1001;
 }
+
+
+.PopNewUser {
+    position:absolute;
+    top:50%;
+    margin-top: -60px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.PopUpDelete {
+    position:absolute;
+    top:50%;
+    margin-top: -50px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.PopUpDelete {
+    position:absolute;
+    top:50%;
+    margin-top: -50px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.Title {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #666666;
+    color: #efefef;
+    padding: 4px;
+}
+
+.Pointer {
+    cursor:pointer;
+}

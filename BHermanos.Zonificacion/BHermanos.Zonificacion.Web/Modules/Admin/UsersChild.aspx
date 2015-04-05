@@ -11,6 +11,7 @@
     <!--[if IE]>
 			<link rel="stylesheet" href="css/ie.css">
 	<![endif]-->
+    <script src="../../Scripts/jquery-1.4.1.js"></script>
     <script src="../../Vendor/jquery.js"></script>	
     <script src="../../Vendor/jquery.stellar.js"></script>
     <script src="../../Scripts/jquery.ui.draggable.js"></script>
@@ -24,7 +25,7 @@
         <section class="page-top">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12">                        
 						<h2>
                             Administración de Usuarios
 						</h2>
@@ -39,6 +40,7 @@
                         <table style="float:right;" border="0">
                             <tr>
                                 <td>
+                                    <asp:HiddenField ID="hdnShowBackGroup" runat="server" ClientIDMode="Static" />
                                     <asp:Button ID="btnNew" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="BotonGde" />
                                 </td>                            
                             </tr>                            

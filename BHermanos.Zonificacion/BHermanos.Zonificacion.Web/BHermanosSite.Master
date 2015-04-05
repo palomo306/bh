@@ -20,7 +20,8 @@
         }
 
         function endRequest(sender, args) {
-            document.getElementById("divBack").style.display = "none";
+            if (document.getElementById("hdnShowBackGroup").value == "close")
+                document.getElementById("divBack").style.display = "none";
         }
     </script>
 </head>
@@ -55,7 +56,7 @@
 						    </div>
                         </header>                        
                     </div>
-                    <div id="second">
+                    <div id="second">                        
                         <asp:ContentPlaceHolder ID="content" runat="server">
                         </asp:ContentPlaceHolder>
                     </div>

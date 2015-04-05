@@ -49,6 +49,15 @@ namespace BHermanos.Zonificacion.Web.Modules {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden hdnSubzonaId;
         
         /// <summary>
+        /// hdnShowBackGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnShowBackGroup;
+        
+        /// <summary>
         /// ddlPlazas control.
         /// </summary>
         /// <remarks>

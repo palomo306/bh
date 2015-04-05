@@ -79,6 +79,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
             }
             else
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
             }
         }
@@ -101,6 +102,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
             }
             else
             {
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
             }
         }
@@ -135,6 +137,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();", true);
+            hdnShowBackGroup.Value = "close";
             ValidaUser();
             if (!Page.IsPostBack)
             {
@@ -196,6 +199,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
         #region Nuevo Usuario
         protected void btnNew_Click(object sender, EventArgs e)
         {
+            hdnShowBackGroup.Value = "not";
             spanTitle.InnerText = "Nuevo Usuario";
             foreach (ListItem item in cblRoles.Items)
             {
@@ -251,6 +255,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                     }
                     else
                     {
+                        hdnShowBackGroup.Value = "not";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
                     }
                 }
@@ -280,6 +285,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                     }
                     else
                     {
+                        hdnShowBackGroup.Value = "not";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
                     }
                 }
@@ -324,6 +330,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
                 }
             }
@@ -361,10 +368,12 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 {
                     this.ListUsuarios = objResponse.ListaUsuarios.ToList();
                     PrintUsers();
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Reseteo de contraseña','Se ha restablecido correctamente el password del usuario [" + hdnPassword.Value + "].');", true);
                 }
                 else
                 {
+                    hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al carga los datos de usuarios desde el servidor [" + objResponse.Mensaje + "].');", true);
                 }
             }

@@ -13,6 +13,15 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin {
     public partial class UsersChild {
         
         /// <summary>
+        /// hdnShowBackGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnShowBackGroup;
+        
+        /// <summary>
         /// btnNew control.
         /// </summary>
         /// <remarks>

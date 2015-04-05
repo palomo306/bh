@@ -12,7 +12,6 @@ function InitializeScreen()
 			this.initialized = true;
 
 			this.build();
-			this.events();
 
 		},
 

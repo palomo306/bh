@@ -71,6 +71,7 @@
                                 <td class="SeparateCell">
                                     <input id="hdnZonaId" type="hidden" runat="server" />
                                     <input id="hdnSubzonaId" type="hidden" runat="server" />                                            
+                                    <asp:HiddenField ID="hdnShowBackGroup" runat="server" ClientIDMode="Static" />
                                     <asp:DropDownList ID="ddlPlazas" runat="server" Width="250px" CssClass="DropDown" OnSelectedIndexChanged="ddlPlazas_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>                                    
                                 </td>
                                 <td class="SeparateCell">
