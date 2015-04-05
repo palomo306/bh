@@ -173,6 +173,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                     else
                         item.Selected = false;
                 }
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenNewWindow();", true);
             }
             else if (e.CommandName == "ChangeStatus")
@@ -184,6 +185,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                     lblDelete.Text = "¿Está seguro que desea desactivar al usuario [" + e.Item.Cells[1].Text + "]?";
                 else
                     lblDelete.Text = "¿Está seguro que desea reactivar al usuario [" + e.Item.Cells[1].Text + "]?";
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenDeleteWindow();", true);
             }
             else if (e.CommandName == "ResetPassword")
@@ -191,6 +193,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 hdnPassword.Value = e.Item.Cells[0].Text;
                 spanPassword.InnerText = "Reseteo de Contraseña";
                 lblPassword.Text = "¿Está seguro que desea resetear la contraseña del usuario [" + e.Item.Cells[1].Text + "]?";
+                hdnShowBackGroup.Value = "not";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenPasswordWindow();", true);
             }
         }

@@ -41,7 +41,7 @@
                             <tr>
                                 <td>
                                     <asp:HiddenField ID="hdnShowBackGroup" runat="server" ClientIDMode="Static" />
-                                    <asp:Button ID="btnNew" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="BotonGde" />
+                                    <asp:Button ID="btnNew" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="btn btn-primary btn-sm" />
                                 </td>                            
                             </tr>                            
                         </table>                                                    				
@@ -53,7 +53,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" runat="server">
     <div id="ContentDiv">
-        <table>
+        <table style="width:100%;">
             <tr>
                 <td class="CellCenter">
                     <table id="tableNoData" runat="server">
@@ -63,42 +63,48 @@
                             </td>
                         </tr>
                     </table>
-                    <div style="margin-left: auto; margin-right: auto; width:375px;">
-                        <asp:DataGrid ID="dgUsers" runat="server" AutoGenerateColumns="False" 
-                            CellPadding="2" ForeColor="#333333" AllowPaging="True" OnItemCommand="dgUsers_ItemCommand" OnPageIndexChanged="dgUsers_PageIndexChanged">
-                            <AlternatingItemStyle BackColor="White" />
-                            <Columns>
-                                <asp:BoundColumn HeaderText="Id" DataField="Usr" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell"></asp:BoundColumn>
-                                <asp:BoundColumn HeaderText="Nombre" DataField="Nombre" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell"></asp:BoundColumn>
-                                <asp:BoundColumn HeaderText="Correo" DataField="Mail" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell">
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                </asp:BoundColumn>
-                                <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgEdit" runat="server" CommandName="Edit" 
-                                            ImageUrl="~/Images/Edit.png" Enabled='<%# Convert.ToString(Eval("Estatus")) == "0" ? false : true %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateColumn>
-                                <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgStatus" runat="server" CommandName="ChangeStatus" CommandArgument='<%# Convert.ToString(Eval("Estatus")) %>'
-                                                ImageUrl='<%# Convert.ToString(Eval("Estatus")) == "0" ? "~/Images/StatusDown.png" : "~/Images/StatusUp.png" %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateColumn>
-                                <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgPassword" runat="server" CommandName="ResetPassword" 
-                                            ImageUrl="~/Images/Password.png" Enabled='<%# Convert.ToString(Eval("Estatus")) == "0" ? false : true %>' />
-                                    </ItemTemplate>
-                                </asp:TemplateColumn>
-                            </Columns>
-                            <EditItemStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" CssClass="HeaderText" />
-                            <ItemStyle BackColor="#EFF3FB" CssClass="NormalText" />
-                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" Mode="NumericPages" />
-                            <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                        </asp:DataGrid>
+                    <div style="width:100%;">
+                        <table style="width:100%">
+                            <tr>
+                                <td class="CellCenter">
+                                    <asp:DataGrid ID="dgUsers" runat="server" AutoGenerateColumns="False" 
+                                        CellPadding="2" ForeColor="#333333" AllowPaging="True" OnItemCommand="dgUsers_ItemCommand" OnPageIndexChanged="dgUsers_PageIndexChanged">
+                                        <AlternatingItemStyle BackColor="White" />
+                                        <Columns>
+                                            <asp:BoundColumn HeaderText="Id" DataField="Usr" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell"></asp:BoundColumn>
+                                            <asp:BoundColumn HeaderText="Nombre" DataField="Nombre" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell"></asp:BoundColumn>
+                                            <asp:BoundColumn HeaderText="Correo" DataField="Mail" ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="PaddingCell">
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                            </asp:BoundColumn>
+                                            <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" runat="server" CommandName="Edit" 
+                                                        ImageUrl="~/Images/Edit.png" Enabled='<%# Convert.ToString(Eval("Estatus")) == "0" ? false : true %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateColumn>
+                                            <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgStatus" runat="server" CommandName="ChangeStatus" CommandArgument='<%# Convert.ToString(Eval("Estatus")) %>'
+                                                            ImageUrl='<%# Convert.ToString(Eval("Estatus")) == "0" ? "~/Images/StatusDown.png" : "~/Images/StatusUp.png" %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateColumn>
+                                            <asp:TemplateColumn HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="PaddingCell">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgPassword" runat="server" CommandName="ResetPassword" 
+                                                        ImageUrl="~/Images/Password.png" Enabled='<%# Convert.ToString(Eval("Estatus")) == "0" ? false : true %>' />
+                                                </ItemTemplate>
+                                            </asp:TemplateColumn>
+                                        </Columns>
+                                        <EditItemStyle BackColor="#2461BF" />
+                                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" CssClass="HeaderText" />
+                                        <ItemStyle BackColor="#EFF3FB" CssClass="NormalText" />
+                                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" Mode="NumericPages" />
+                                        <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                    </asp:DataGrid>
+                                </td>
+                            </tr>
+                        </table>                        
                     </div>                        
                 </td>
             </tr>
@@ -167,9 +173,9 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="CellCenter">                                        
-                                <asp:Button ID="btnSave" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnSave_Click" />
+                                <asp:Button ID="btnSave" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnSave_Click" />
                                 &nbsp;
-                                <input type="button" value="Cancelar" onclick="CloseDivNewEdit();" class="Boton" />                                        
+                                <input type="button" value="Cancelar" onclick="CloseDivNewEdit();" class="btn btn-primary btn-sm" />                                        
                             </td>
                         </tr>
                         <tr>
@@ -210,9 +216,9 @@
                             <td colspan="2" class="CellCenter">
                                 <input id="hdnDelete" type="hidden" runat="server" />                                        
                                 <input id="hdnDeleteType" type="hidden" runat="server" />                                        
-                                <asp:Button ID="btnDelete" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnDelete_Click" />
+                                <asp:Button ID="btnDelete" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnDelete_Click" />
                                 &nbsp;
-                                <input type="button" value="Cancelar" onclick="CloseDeleteWindow();" class="Boton" />
+                                <input type="button" value="Cancelar" onclick="CloseDeleteWindow();" class="btn btn-primary btn-sm" />
                             </td>
                         </tr>
                         <tr>
@@ -233,7 +239,7 @@
                                 <div>
                                     <span id="spanPassword" runat="server" style="float:left">Eliminación de usuario</span>
                                     <div id="divTitlePassword" style="float:right" class="CloseDiv">
-                                        <img src="../../Images/Close.png" width="16" class="Pointer" onclick="CloseDeleteWindow();" alt="Cerrar Ventana" />
+                                        <img src="../../Images/Close.png" width="16" class="Pointer" onclick="ClosePasswordWindow();" alt="Cerrar Ventana" />
                                     </div>  
                                 </div>                                      
                             </td>
@@ -252,9 +258,9 @@
                         <tr>
                             <td colspan="2" class="CellCenter">
                                 <input id="hdnPassword" type="hidden" runat="server" />                                        
-                                <asp:Button ID="btnPassword" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnPassword_Click" />
+                                <asp:Button ID="btnPassword" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnPassword_Click" />
                                 &nbsp;
-                                <input type="button" value="Cancelar" onclick="ClosePasswordWindow();" class="Boton" />
+                                <input type="button" value="Cancelar" onclick="ClosePasswordWindow();" class="btn btn-primary btn-sm" />
                             </td>
                         </tr>
                         <tr>

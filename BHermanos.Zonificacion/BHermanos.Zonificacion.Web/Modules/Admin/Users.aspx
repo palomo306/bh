@@ -33,7 +33,7 @@
                      </tr>
                      <tr>
                          <td class="CellCenter">
-                             <asp:Button ID="btnNew" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="BotonGde" />
+                             <asp:Button ID="btnNew" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="btn btn-primary btn-sm" />
                          </td>
                      </tr>
                      <tr>
@@ -92,7 +92,7 @@
                      </tr>
                      <tr>
                          <td class="CellCenter">
-                             <asp:Button ID="btnNew2" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="BotonGde" />
+                             <asp:Button ID="btnNew2" runat="server" Text="Nuevo Usuario" onclick="btnNew_Click" CssClass="btn btn-primary btn-sm" />
                          </td>
                      </tr>
                      <tr>
@@ -162,9 +162,9 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="CellCenter">                                        
-                                            <asp:Button ID="btnSave" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnSave_Click" />
+                                            <asp:Button ID="btnSave" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnSave_Click" />
                                             &nbsp;
-                                            <input type="button" value="Cancelar" onclick="CloseDivNewEdit();" class="Boton" />                                        
+                                            <input type="button" value="Cancelar" onclick="CloseDivNewEdit();" class="btn btn-primary btn-sm" />                                        
                                         </td>
                                     </tr>
                                     <tr>
@@ -205,9 +205,9 @@
                                         <td colspan="2" class="CellCenter">
                                             <input id="hdnDelete" type="hidden" runat="server" />                                        
                                             <input id="hdnDeleteType" type="hidden" runat="server" />                                        
-                                            <asp:Button ID="btnDelete" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnDelete_Click" />
+                                            <asp:Button ID="btnDelete" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnDelete_Click" />
                                             &nbsp;
-                                            <input type="button" value="Cancelar" onclick="CloseDeleteWindow();" class="Boton" />
+                                            <input type="button" value="Cancelar" onclick="CloseDeleteWindow();" class="btn btn-primary btn-sm" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -247,9 +247,9 @@
                                     <tr>
                                         <td colspan="2" class="CellCenter">
                                             <input id="hdnPassword" type="hidden" runat="server" />                                        
-                                            <asp:Button ID="btnPassword" runat="server" Text="Aceptar" CssClass="Boton" OnClick="btnPassword_Click" />
+                                            <asp:Button ID="btnPassword" runat="server" Text="Aceptar" CssClass="btn btn-primary btn-sm" OnClick="btnPassword_Click" />
                                             &nbsp;
-                                            <input type="button" value="Cancelar" onclick="ClosePasswordWindow();" class="Boton" />
+                                            <input type="button" value="Cancelar" onclick="ClosePasswordWindow();" class="btn btn-primary btn-sm" />
                                         </td>
                                     </tr>
                                     <tr>

@@ -267,3 +267,12 @@ button, input, optgroup, select, textarea {
 .Pointer {
     cursor:pointer;
 }
+
+.Separator {
+    height:2px;
+    font-size:2px;
+}
+
+.CellCenter {
+    text-align: center;
+}
