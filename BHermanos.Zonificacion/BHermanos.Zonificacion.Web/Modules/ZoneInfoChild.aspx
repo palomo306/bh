@@ -130,16 +130,16 @@
                             <asp:Label ID="lblNoDataMessage" runat="server"></asp:Label>
                             <asp:GridView ID="dgReportTab" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="Grid" OnRowDataBound="dgReportTab_RowDataBound" Width="100%">
                                 <AlternatingRowStyle BackColor="White" />
-                                <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" />
-                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                                <EditRowStyle BackColor="#2461BF" CssClass="CellText" />
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" CssClass="CellText" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small"  CssClass="CellText"/>
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" CssClass="CellText" />
+                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" CssClass="CellText" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" CssClass="CellText" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" CssClass="CellText" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" CssClass="CellText" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" CssClass="CellText" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" CssClass="CellText" />
                             </asp:GridView>
                         </div>        
                                

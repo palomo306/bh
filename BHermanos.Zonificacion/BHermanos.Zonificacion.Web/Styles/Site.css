@@ -276,3 +276,11 @@ button, input, optgroup, select, textarea {
 .CellCenter {
     text-align: center;
 }
+
+.CellButton {
+    padding:2px;
+}
+
+.CellText {
+    font-family:sans-serif;
+}

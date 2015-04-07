@@ -748,6 +748,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                     for (int i = 1; i < e.Row.Cells.Count; i++)
                     {
                         string value = e.Row.Cells[i].Text.ToString();
+                        e.Row.Cells[i].CssClass = "CellText";
                         if (value.StartsWith("|||"))
                         {
                             e.Row.Cells[i].Text = value.Replace("|||", "");
@@ -760,7 +761,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                             string button = HttpUtility.HtmlDecode(textParts[1]);
                             e.Row.Cells[i].Text = button;
                             e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Center;
-                            e.Row.BackColor = ColorConverter.GetColor(textParts[2]);
+                            e.Row.Cells[i].CssClass = "CellButton";
+                            e.Row.Cells[i].BackColor = ColorConverter.GetColor(textParts[2]);
                         }
                     }
                 }
@@ -866,7 +868,5 @@ namespace BHermanos.Zonificacion.Web.Modules
             PrintCurrentInfo();
         }
         #endregion
-
-
     }
 }

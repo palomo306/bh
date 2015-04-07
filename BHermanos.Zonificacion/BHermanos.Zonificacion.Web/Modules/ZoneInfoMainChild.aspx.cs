@@ -64,6 +64,36 @@ namespace BHermanos.Zonificacion.Web.Modules
             }
         }
 
+
+        private DataTable DataTableDetail
+        {
+            get
+            {
+                if (ViewState["TableDetail"] != null)
+                {
+                    ObjectStateFormatter _formatter = new ObjectStateFormatter();
+                    string vsString = ViewState["TableDetail"].ToString();
+                    byte[] bytes = Convert.FromBase64String(vsString);
+                    bytes = Compressor.Decompress(bytes);
+                    return (DataTable)_formatter.Deserialize(Convert.ToBase64String(bytes));
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                ObjectStateFormatter _formatter = new ObjectStateFormatter();
+                MemoryStream ms = new MemoryStream();
+                _formatter.Serialize(ms, value);
+                byte[] ValueArray = ms.ToArray();
+                string ValueArrayCompressed = Convert.ToBase64String(Compressor.Compress(ValueArray));
+                if (ViewState["TableDetail"] != null)
+                    ViewState["TableDetail"] = ValueArrayCompressed;
+                else
+                    ViewState.Add("TableDetail", ValueArrayCompressed);
+            }
+        }
+
         private List<BE.Zona> ListZonas
         {
             get
@@ -377,7 +407,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
-            hdnShowBackGroup.Value = "cloase";
+            hdnShowBackGroup.Value = "cloase";            
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;
@@ -535,9 +565,9 @@ namespace BHermanos.Zonificacion.Web.Modules
                 if (e.Row.Cells.Count > 1)
                 {
                     string value = e.Row.Cells[1].Text.ToString();
-
                     for (int i = 1; i < e.Row.Cells.Count; i++)
                     {
+                        e.Row.Cells[i].CssClass = "CellText";
                         string[] textParts = e.Row.Cells[i].Text.Split('|');
                         if (value.StartsWith("Editar"))
                         {
@@ -557,6 +587,20 @@ namespace BHermanos.Zonificacion.Web.Modules
                         }
                     }
 
+                }
+            }
+        }
+
+        protected void dgZone_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells.Count > 1)
+                {
+                    for (int i = 1; i < e.Row.Cells.Count; i++)
+                    {
+                        e.Row.Cells[i].CssClass = "CellText";
+                    }
                 }
             }
         }
@@ -674,9 +718,9 @@ namespace BHermanos.Zonificacion.Web.Modules
             {
                 if (ListZonas.Count > 0)
                 {
-                    DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableAll(CurrentZone, ListZonas);
+                    this.DataTableDetail = ReportZonesConversor.ToGeneralDataTableAll(CurrentZone, ListZonas);
                     spanTitleDetail.InnerText = "Información General por Zona";
-                    gvDetail.DataSource = dtInformationAll;
+                    gvDetail.DataSource = this.DataTableDetail;
                     gvDetail.DataBind();
                     hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenDetailWindow();", true);
@@ -700,9 +744,9 @@ namespace BHermanos.Zonificacion.Web.Modules
             {
                 if (ListZonas.Count > 0)
                 {
-                    DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableNse(CurrentZone, ListZonas);
+                    this.DataTableDetail = ReportZonesConversor.ToGeneralDataTableNse(CurrentZone, ListZonas);
                     spanTitleDetail.InnerText = "Información Socioeconómica por Zona";
-                    gvDetail.DataSource = dtInformationAll;
+                    gvDetail.DataSource = this.DataTableDetail;
                     gvDetail.DataBind();
                     hdnShowBackGroup.Value = "not";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenDetailWindow();", true);
@@ -904,8 +948,8 @@ namespace BHermanos.Zonificacion.Web.Modules
             //Se extraen los parametros
             string plaza = ddlPlazas.SelectedItem.Text;
             string fecha = DateTime.Now.ToString("ddMMyyyyHHmmsss");
-            string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha);
-            DataTable dt = (DataTable)gvDetail.DataSource;
+            string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha + ".pdf");
+            DataTable dt = this.DataTableDetail;
             //Se genera el reporte
             ExportToPdf(dt, path, plaza);
             //Se descarga mediante el response
@@ -917,14 +961,16 @@ namespace BHermanos.Zonificacion.Web.Modules
             //Se extraen los parametros
             string plaza = ddlPlazas.SelectedItem.Text;
             string fecha = DateTime.Now.ToString("ddMMyyyyHHmmsss");
-            string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha);
-            DataTable dt = (DataTable)gvDetail.DataSource;
+            string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha + ".xlsx");
+            DataTable dt = this.DataTableDetail;
             //Se genera el reporte
             ExportToExcel(dt, path, plaza);
             //Se descarga mediante el response
             Response.TransmitFile(path);
         }
         #endregion
+
+
 
         #endregion
     }

@@ -94,18 +94,18 @@
                 <div id="rightTopPane" class="featured-box featured-box-primary">    
                     <div class="scrolledGridView featured-box box-content">
 					    <div>
-                            <asp:GridView ID="dgZone" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="Grid">
-                                <AlternatingRowStyle BackColor="White" />
-                                <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" />
-                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <asp:GridView ID="dgZone" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="Grid" OnRowDataBound="dgZone_RowDataBound">
+                                <AlternatingRowStyle BackColor="White" CssClass="CellText" />
+                                <EditRowStyle BackColor="#2461BF" CssClass="CellText" />
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" CssClass="CellText" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" CssClass="CellText" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" CssClass="CellText" />
+                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" CssClass="CellText" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" CssClass="CellText" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" CssClass="CellText" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" CssClass="CellText" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" CssClass="CellText" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" CssClass="CellText" />
                             </asp:GridView>
                         </div>                
 					</div>
@@ -125,17 +125,17 @@
                      <div class="scrolledGridView featured-box box-content">
 					    <div>
                             <asp:GridView ID="dgvReportZonas" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="Grid" OnRowDataBound="dgvReportZonas_RowDataBound">
-                                <AlternatingRowStyle BackColor="White" />
-                                <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" />
-                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                <SortedAscendingHeaderStyle BackColor="#6D95E1" Font-Size="X-Small" />
-                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                                <AlternatingRowStyle BackColor="White" CssClass="CellText" />
+                                <EditRowStyle BackColor="#2461BF" CssClass="CellText" />
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" CssClass="CellText" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" CssClass="CellText" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" CssClass="CellText" />
+                                <RowStyle BackColor="#EFF3FB" Font-Size="XX-Small" CssClass="CellText" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" CssClass="CellText" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" CssClass="CellText" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" Font-Size="X-Small" CssClass="CellText" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" CssClass="CellText" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" CssClass="CellText" />
                             </asp:GridView>
                         </div>
                     </div>
@@ -152,9 +152,7 @@
                 </div>
             </div>       
         </div>   
-    </div>    
-    <!-- End Full page background technique -->        
-    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:999;" />        
+    </div>     
     <div id="divDetail" class="PopUpDetail" style="width:600px; height:250px; display:none; z-index:1000;">
         <table style="width:100%; height:100px; top:0px; left:0px; position:absolute;">
             <tr>
@@ -211,5 +209,6 @@
                 </td>
             </tr>
         </table>   
-    </div>   
+    </div>  
+    <div id="divBack" class="BackGroudPopUp" style="display:none; z-index:999;" />         
 </asp:Content>
