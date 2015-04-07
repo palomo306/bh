@@ -407,6 +407,8 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
+            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnPdf);
+            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnExcel);
             hdnShowBackGroup.Value = "cloase";            
             if (!Page.IsPostBack)
             {
