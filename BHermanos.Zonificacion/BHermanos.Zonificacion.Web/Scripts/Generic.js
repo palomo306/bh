@@ -153,4 +153,8 @@ function OpenMenu(url) {
     window.open(url,"_self");
 }
 
+function OpenUrlNewWindow(url) {
+    window.open(url, "_blank");
+}
+
 /*---------------------------------------------------------------------------*/

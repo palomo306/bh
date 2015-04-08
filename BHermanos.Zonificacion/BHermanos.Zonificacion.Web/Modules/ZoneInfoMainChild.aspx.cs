@@ -407,8 +407,8 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
-            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnPdf);
-            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnExcel);
+            //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnPdf);
+            //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnExcel);
             hdnShowBackGroup.Value = "cloase";            
             if (!Page.IsPostBack)
             {
@@ -950,12 +950,12 @@ namespace BHermanos.Zonificacion.Web.Modules
             //Se extraen los parametros
             string plaza = ddlPlazas.SelectedItem.Text;
             string fecha = DateTime.Now.ToString("ddMMyyyyHHmmsss");
+            string urlPath = "/Files/Pdf/Report_" + plaza + "_" + fecha + ".xlsx";
             string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha + ".pdf");
             DataTable dt = this.DataTableDetail;
             //Se genera el reporte
             ExportToPdf(dt, path, plaza);
-            //Se descarga mediante el response
-            Response.TransmitFile(path);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenUrlNewWindow('" + urlPath + "')", true);
         }
 
         protected void btnExcel_Click(object sender, EventArgs e)
@@ -963,12 +963,12 @@ namespace BHermanos.Zonificacion.Web.Modules
             //Se extraen los parametros
             string plaza = ddlPlazas.SelectedItem.Text;
             string fecha = DateTime.Now.ToString("ddMMyyyyHHmmsss");
-            string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha + ".xlsx");
+            string urlPath = "/Files/Excel/Report_" + plaza + "_" + fecha + ".xlsx";
+            string path = Server.MapPath("~/Files/Excel/Report_" + plaza + "_" + fecha + ".xlsx");
             DataTable dt = this.DataTableDetail;
             //Se genera el reporte
             ExportToExcel(dt, path, plaza);
-            //Se descarga mediante el response
-            Response.TransmitFile(path);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "OpenUrlNewWindow('" + urlPath + "')", true);
         }
         #endregion
 
