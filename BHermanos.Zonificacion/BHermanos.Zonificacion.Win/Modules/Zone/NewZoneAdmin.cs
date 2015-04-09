@@ -1250,7 +1250,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         {
             if (e.ColumnIndex >= 0)
             {
-                if (e.RowIndex == dgvReportZonas.Rows.Count - 1)
+                if (e.RowIndex == 0)
                 {
                     string zoneName = dgvReportZonas.Columns[e.ColumnIndex].Name.ToLower();
                     if (zoneName != "dato")

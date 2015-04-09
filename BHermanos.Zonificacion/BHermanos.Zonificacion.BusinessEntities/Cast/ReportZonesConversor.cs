@@ -20,6 +20,9 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             //Se agrega la primera columna con valores
             DataTable dtResult = new DataTable();
             dtResult.Columns.Add("Dato");
+            //Se agrega la fila para los botones
+            DataRow newRowBotones = dtResult.NewRow();
+            dtResult.Rows.Add(newRowBotones);
             foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
             {
                 foreach (Rubro rbo in gpo.ListaRubros.Where(r => r.Main))
@@ -31,13 +34,10 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             }
             if (lstZonas != null && lstZonas.Count > 0)
             {
-                //Se agrega la fila para los botones
-                DataRow newRowBotones = dtResult.NewRow();
-                dtResult.Rows.Add(newRowBotones);
                 //Se colocan los datos de cada zona para cada rubro
                 foreach (Zona zno in lstZonas)
                 {
-                    int row = 0;
+                    int row = 1;
                     //Se agrega la columna con la zona
                     dtResult.Columns.Add(zno.Nombre, typeof(string));
                     //Se agregan los rubros para esta zona
@@ -67,10 +67,10 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                                 row++;
                             }
                             if (appId == 1)
-                                dtResult.Rows[row][zno.Nombre] = "Editar";
+                                dtResult.Rows[0][zno.Nombre] = "Editar";
                             else
                             {
-                                dtResult.Rows[row][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""btn btn-primary btn-sm"" />|" + zno.Color;
+                                dtResult.Rows[0][zno.Nombre] = @"Editar|<input type=""button"" value=""Ver"" onclick=""SelectZone('" + zno.Id.ToString() + @"','" + level + @"','" + Hdn1Name + "','" + Hdn2Name + "','" + BtnName + @"');"" class=""btn btn-primary btn-sm"" />|" + zno.Color;
                             }
                         }
                     }
@@ -304,7 +304,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
         public static DataTable ToListPartidas(List<Colonia> lstColonias)
         {
             DataTable dtResult = new DataTable();
-            if ( lstColonias.Count > 0)
+            if (lstColonias.Count > 0)
             {
                 //Se revisa el nivel
                 string columnDato = "Colonia";
@@ -315,7 +315,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                 foreach (Partida partida in zonaRef.ListaPartidas)
                 {
                     dtResult.Columns.Add(partida.Nombre);
-                }                
+                }
                 //Se insertan los datos
                 foreach (Colonia col in lstColonias)
                 {

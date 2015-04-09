@@ -327,7 +327,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             sf.RenderSettings.IsSelectable = isSelectable;
             sf.RenderSettings.FillInterior = fillInterior;
             sf.RenderSettings.FillColor = Color.FromArgb(transparency, sf.RenderSettings.FillColor);
-            sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
+            //sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
             if (!transparencyBorder)
                 sf.RenderSettings.OutlineColor = sf.RenderSettings.OutlineColor;
             else
@@ -518,7 +518,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
             LoadMap(selEdo.Id.ToString(), "Municipios.shp", "Municipios" + "edo" + selEdo.Id.ToString(), "NombreMuni", false, false, 0, false);
             LoadMap(selEdo.Id.ToString(), "Carreteras.shp", "Carreteras" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
             LoadMap(selEdo.Id.ToString(), "Calles.shp", "Calles" + "edo" + selEdo.Id.ToString(), "Nombre", false, false, 60, true);
-            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + "edo" + selEdo.Id.ToString(), "Nombre", true, true, 255, false);
+            LoadMap(selEdo.Id.ToString(), "Colonias.shp", "Colonias" + "edo" + selEdo.Id.ToString(), "Nombre", true, true, 0, false);
         }
 
         private void RemoveMapsByEdo(BE.Estado selEdo)
