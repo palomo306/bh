@@ -578,13 +578,14 @@ namespace BHermanos.Zonificacion.Web.Modules
                             e.Row.Cells[i].Text = button;
                             e.Row.Cells[i].BackColor = ColorConverter.GetColor(color);
                             e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Center;
+                            e.Row.Cells[i].CssClass = "CellButton";
                         }
                         else
                         {
                             string valor = textParts[0];
                             string color = textParts[1];
                             e.Row.Cells[i].Text = valor;
-                            e.Row.Cells[i].BackColor = ColorConverter.GetColor(color);
+                            //e.Row.Cells[i].BackColor = ColorConverter.GetColor(color);
                             e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Right;
                         }
                     }
@@ -950,7 +951,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             //Se extraen los parametros
             string plaza = ddlPlazas.SelectedItem.Text;
             string fecha = DateTime.Now.ToString("ddMMyyyyHHmmsss");
-            string urlPath = "/Files/Pdf/Report_" + plaza + "_" + fecha + ".xlsx";
+            string urlPath = "/Files/Pdf/Report_" + plaza + "_" + fecha + ".pdf";
             string path = Server.MapPath("~/Files/Pdf/Report_" + plaza + "_" + fecha + ".pdf");
             DataTable dt = this.DataTableDetail;
             //Se genera el reporte

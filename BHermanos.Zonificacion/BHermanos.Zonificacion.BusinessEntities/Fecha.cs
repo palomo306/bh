@@ -52,7 +52,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
                 if (string.IsNullOrEmpty(Text))
                 {
 
-                    return FechaDateTime.ToString("dd-MM-yyyy");
+                    return FechaDateTime.ToString("MM-dd-yyyy");
                 }
                 else
                 {
