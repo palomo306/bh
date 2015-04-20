@@ -808,10 +808,52 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
                     }
                     else if (e.ColumnIndex == 5)
                     {
+                        DetalleXColonia(clickPlaza);
                         //Aqui va lo del NSE
                         //Se debe mnadar a trar el WS de colonias por  plaza id                            
                     }
                 }
+            }
+        }
+
+        private void DetalleXColonia(BE.Plaza plaza)
+        {
+            try
+            {                
+                List<BE.Colonia> listaColonias = new List<BE.Colonia>();
+                foreach (BE.Estado estado in plaza.ListaEstados)
+                {
+                    foreach (BE.Municipio municipio in estado.ListaMunicipios)
+                    {
+                        foreach (BE.Colonia colonia in municipio.ListaColonias)
+                        {
+                            colonia.EstadoId = estado.Id;
+                            colonia.MunicipioId = municipio.Id;
+                            listaColonias.Add(colonia);
+                        }
+                    }
+                }
+                if (listaColonias.Count > 0)
+                    {
+
+                        DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableAll(listaColonias);
+                        DetailViewPlaza oWindowDetail = new DetailViewPlaza();
+                        //oWindowDetail.Data = dtInformationAll;
+                        //oWindowDetail.Plaza = ((BE.Plaza)cmbPlazas.SelectedItem).Nombre;
+                        //oWindowDetail.LoadData();
+                        //oWindowDetail.Title = "Información General por Zona";
+                        oWindowDetail.ShowDialog();
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existen colonias para esta plaza", "Selección de Datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al extraer los datos [" + ex.Message + "]", "Error de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -196,10 +196,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Estado/GetEstado?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 EstadoModel objResponse = JsonSerializer.Parse<EstadoModel>(streamReader.ReadToEnd());
@@ -228,10 +229,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Municipio/GetMunicipio/" + edoId + "?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 MunicipioModel objResponse = JsonSerializer.Parse<MunicipioModel>(streamReader.ReadToEnd());
@@ -261,10 +263,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/2/" + edoId + "/" + munId + "/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
@@ -288,10 +291,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/0/0/0/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());

@@ -48,10 +48,11 @@ namespace BHermanos.Zonificacion.Web.Login
                 if (!string.IsNullOrEmpty(username.Value.Trim()) && !string.IsNullOrEmpty(password.Value.Trim()))
                 {
                     string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                     string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                     url += "Acceso/GetAcceso/" + username.Value + "/" + password.Value + "/" + appId + "?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                    request.Timeout = 20000;
+                    request.Timeout = timeOut;
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     StreamReader streamReader = new StreamReader(response.GetResponseStream());
                     AccesoModel objResponse = JsonSerializer.Parse<AccesoModel>(streamReader.ReadToEnd());

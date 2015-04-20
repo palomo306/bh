@@ -281,10 +281,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Plaza/GetPlaza/1/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 PlazaModel objResponse = JsonSerializer.Parse<PlazaModel>(streamReader.ReadToEnd());
@@ -316,10 +317,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/2/" + plazaId + "/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());
@@ -345,10 +347,11 @@ namespace BHermanos.Zonificacion.Web.Modules
             try
             {
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Zona/GetZona/0/0/0?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 ZonaModel objResponse = JsonSerializer.Parse<ZonaModel>(streamReader.ReadToEnd());

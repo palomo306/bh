@@ -66,10 +66,11 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
         private void LoadUsuarios()
         {
             string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+            int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
             string appId = ConfigurationManager.AppSettings["AppId"].ToString();
             url += "Usuario/GetUsuario?type=json";
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Timeout = 20000;
+            request.Timeout = timeOut;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader streamReader = new StreamReader(response.GetResponseStream());
             UsuarioModel objResponse = JsonSerializer.Parse<UsuarioModel>(streamReader.ReadToEnd());
@@ -88,9 +89,10 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
         {
             List<BE.Rol> lstRoles;
             string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+            int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
             url += "Rol/GetRol?type=json";
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Timeout = 20000;
+            request.Timeout = timeOut;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader streamReader = new StreamReader(response.GetResponseStream());
             RolModel objResponse = JsonSerializer.Parse<RolModel>(streamReader.ReadToEnd());
@@ -236,11 +238,12 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 {
                     //Se reliza la operacion
                     string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                     url += "Usuario/PutUsuario/3?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                     request.ContentType = "application/json; charset=utf-8";
                     request.Method = "PUT";
-                    request.Timeout = 20000;
+                    request.Timeout = timeOut;
                     using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string json = @"{""<Usr>k__BackingField"":""" + txtId.Text + @""",""<Nombre>k__BackingField"":""" + txtNombre.Text + @""",""<Mail>k__BackingField"":""" + txtCorreo.Text + @""",""<Password>k__BackingField"":"""",""<Estatus>k__BackingField"":1,""<UserRoles>k__BackingField"":" + GetRolesJsonString() + "}";
@@ -266,11 +269,12 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 {
                     //Se reliza la operacion
                     string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                    int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                     url += "Usuario/PostUsuario?type=json";
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                     request.ContentType = "application/json; charset=utf-8";
                     request.Method = "POST";
-                    request.Timeout = 20000;
+                    request.Timeout = timeOut;
                     using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string json = @"{""<Usr>k__BackingField"":""" + txtId.Text + @""",""<Nombre>k__BackingField"":""" + txtNombre.Text + @""",""<Mail>k__BackingField"":""" + txtCorreo.Text + @""",""<Password>k__BackingField"":"""",""<Estatus>k__BackingField"":1,""<UserRoles>k__BackingField"":" + GetRolesJsonString() + "}";
@@ -308,6 +312,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 //Se deshabilita al usuario
                 //Se reliza la operacion
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 if (hdnDeleteType.Value != "0")
                     url += "Usuario/PutUsuario/2?type=json";
                 else
@@ -315,7 +320,7 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "PUT";
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
                     string json = @"{""<Usr>k__BackingField"":""" + hdnDelete.Value + @""",""<Nombre>k__BackingField"":""" + txtNombre.Text + @""",""<Mail>k__BackingField"":""" + txtCorreo.Text + @""",""<Password>k__BackingField"":"""",""<Estatus>k__BackingField"":1,""<UserRoles>k__BackingField"":null}";
@@ -352,11 +357,12 @@ namespace BHermanos.Zonificacion.Web.Modules.Admin
                 //Se deshabilita al usuario
                 //Se reliza la operacion
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 url += "Usuario/PutUsuario/1?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "PUT";
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
                     string json = @"{""<Usr>k__BackingField"":""" + hdnPassword.Value + @""",""<Nombre>k__BackingField"":""" + txtNombre.Text + @""",""<Mail>k__BackingField"":""" + txtCorreo.Text + @""",""<Password>k__BackingField"":"""",""<Estatus>k__BackingField"":1,""<UserRoles>k__BackingField"":null}";

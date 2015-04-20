@@ -57,10 +57,11 @@ namespace BHermanos.Zonificacion.Web
                 BE.Menu tabsMenu = new BE.Menu() { Id = 0, Nombre = "Vistas", Orden = 100, Aplicacion = "", ListMenus = new List<BE.Menu>() };
                 //Se cargan los tabs desde el servicio
                 string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                 string appId = ConfigurationManager.AppSettings["AppId"].ToString();
                 url += "Tab/GetTab?type=json";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Timeout = 20000;
+                request.Timeout = timeOut;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 TabModel objResponse = JsonSerializer.Parse<TabModel>(streamReader.ReadToEnd());

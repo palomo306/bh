@@ -126,6 +126,45 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             return dtResult;
         }
 
+        public static DataTable ToGeneralDataTableAll(List<Colonia> colonias)
+        {            
+            //Se agrega la primera columna con valores
+            DataTable dtResult = new DataTable();
+            dtResult.Columns.Add("Dato");
+            foreach (GrupoRubros gpo in colonias[0].ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            {
+                foreach (Rubro rbo in gpo.ListaRubros)
+                {
+                    DataRow newRow = dtResult.NewRow();
+                    newRow["Dato"] = rbo.Nombre;
+                    dtResult.Rows.Add(newRow);
+                }
+            }            
+            //Se colocan los datos de cada colonia para cada rubro
+            int column = 1;
+            foreach (Colonia colonia in colonias)
+            {
+                int row = 0;
+                //Se agrega la columna con la colonia
+                dtResult.Columns.Add(column.ToString() + "-" + colonia.Nombre, typeof(string));
+                //Se agregan los rubros para esta colonia                
+                foreach (GrupoRubros gpo in colonia.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+                {
+                    foreach (Rubro rbo in gpo.ListaRubros.Where(r => r.Main))
+                    {                        
+                        if (rbo != null)
+                            dtResult.Rows[row][column.ToString() + "-" + colonia.Nombre] = string.Format(rbo.Formato, rbo.Valor);
+                        else
+                            dtResult.Rows[row][column.ToString() + "-" + colonia.Nombre] = "0";
+                        row++;
+                    }
+
+                }
+                column++;
+            }            
+            return dtResult;
+        }
+
         public static DataTable ToGeneralDataTableNse(Zona prmZonaBase, List<Zona> lstZonas)
         {
             //Se obtiene la colonia base

@@ -175,14 +175,18 @@ namespace BHermanos.Zonificacion.BusinessMaps
             List<Colonia> lista = new List<Colonia>();
             try
             {
-                foreach (var c in listaRegistros.Where(p => p.fiEstadoId == estadoId && p.fiPlazaId == plazaId && p.fiMunicipioId == municipioId).ToList())
+                using (ManejadorColonias manejadorColonias = new ManejadorColonias())
                 {
-                    Colonia colonia = new Colonia();
-                    colonia.Id = c.fiColoniaId;
-                    colonia.Tipo = c.fiTipo;
-                    colonia.ListaGrupoRubros = new List<GrupoRubros>();
-                    colonia.ListaPartidas = new List<Partida>();
-                    lista.Add(colonia);
+                    lista = manejadorColonias.ObtenerColonias(1, plazaId, 0);
+                    //foreach (var c in listaRegistros.Where(p => p.fiEstadoId == estadoId && p.fiPlazaId == plazaId && p.fiMunicipioId == municipioId).ToList())
+                    //{
+                    //    Colonia colonia = new Colonia();
+                    //    colonia.Id = c.fiColoniaId;
+                    //    colonia.Tipo = c.fiTipo;
+                    //    colonia.ListaGrupoRubros = newmanejadorColonias.
+                    //    colonia.ListaPartidas = new List<Partida>();
+                    //    lista.Add(colonia);
+                    //}                    
                 }
                 return lista;
             }

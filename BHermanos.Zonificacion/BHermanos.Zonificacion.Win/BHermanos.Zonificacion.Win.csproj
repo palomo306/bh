@@ -116,6 +116,12 @@
     <Compile Include="Modules\Plaza\Modal\CreatePlaza.Designer.cs">
       <DependentUpon>CreatePlaza.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Plaza\Modal\DetailViewPlaza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Plaza\Modal\DetailViewPlaza.Designer.cs">
+      <DependentUpon>DetailViewPlaza.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Plaza\PlazaAdmin.cs">
       <SubType>Form</SubType>
     </Compile>

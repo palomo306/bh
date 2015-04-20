@@ -63,11 +63,12 @@ namespace BHermanos.Zonificacion.Web.Login
                     {
                         //Se reliza la operacion
                         string url = ConfigurationManager.AppSettings["UrlServiceBase"].ToString();
+                        int timeOut = int.Parse(ConfigurationManager.AppSettings["ConnectTimeOut"].ToString());
                         url += "Usuario/PutUsuario/4?type=json";
                         HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                         request.ContentType = "application/json; charset=utf-8";
                         request.Method = "PUT";
-                        request.Timeout = 20000;
+                        request.Timeout = timeOut;
                         using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                         {
                             string json = @"{""<Usr>k__BackingField"":""" + CurrentUser.Usr + @""",""<Nombre>k__BackingField"":""" + CurrentUser.Nombre + @""",""<Mail>k__BackingField"":""" + CurrentUser.Mail + @""",""<Password>k__BackingField"":""" + password.Value + @""",""<Estatus>k__BackingField"":1,""<UserRoles>k__BackingField"":null}";
