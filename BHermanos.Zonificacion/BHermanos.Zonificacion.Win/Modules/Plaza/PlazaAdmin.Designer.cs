@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlazaAdmin));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlazaAdmin));
             this.pnlHead = new System.Windows.Forms.Panel();
             this.pnlHeadFields = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +47,12 @@
             this.btnCanelZone = new System.Windows.Forms.Button();
             this.btnSaveZone = new System.Windows.Forms.Button();
             this.dgPlazas = new System.Windows.Forms.DataGridView();
+            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VerCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlMap = new System.Windows.Forms.Panel();
             this.panelCtrlMap = new System.Windows.Forms.Panel();
             this.pbbZoomMax = new System.Windows.Forms.PictureBox();
@@ -54,12 +60,6 @@
             this.pbbZoomMin = new System.Windows.Forms.PictureBox();
             this.trbZoom = new System.Windows.Forms.TrackBar();
             this.sfmMainMap = new EGIS.Controls.SFMap();
-            this.Plaza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Ver = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VerCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlHead.SuspendLayout();
             this.pnlHeadFields.SuspendLayout();
             this.pnlInfo.SuspendLayout();
@@ -227,6 +227,71 @@
             this.dgPlazas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPlazas_CellClick);
             this.dgPlazas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgPlazas_DataBindingComplete);
             // 
+            // Plaza
+            // 
+            this.Plaza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Plaza.DataPropertyName = "Nombre";
+            this.Plaza.HeaderText = "Plaza";
+            this.Plaza.Name = "Plaza";
+            this.Plaza.ReadOnly = true;
+            // 
+            // Editar
+            // 
+            this.Editar.DataPropertyName = "Editar";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(1);
+            this.Editar.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Editar.HeaderText = "";
+            this.Editar.MinimumWidth = 55;
+            this.Editar.Name = "Editar";
+            this.Editar.ReadOnly = true;
+            this.Editar.Text = "Editar";
+            this.Editar.Width = 55;
+            // 
+            // Delete
+            // 
+            this.Delete.DataPropertyName = "Eliminar";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.Delete.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Delete.HeaderText = "";
+            this.Delete.MinimumWidth = 55;
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Eliminar";
+            this.Delete.Width = 55;
+            // 
+            // Ver
+            // 
+            this.Ver.DataPropertyName = "Ver";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
+            this.Ver.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Ver.HeaderText = "";
+            this.Ver.MinimumWidth = 55;
+            this.Ver.Name = "Ver";
+            this.Ver.Width = 55;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // VerCol
+            // 
+            this.VerCol.DataPropertyName = "VerCol";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
+            this.VerCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.VerCol.HeaderText = "";
+            this.VerCol.MinimumWidth = 55;
+            this.VerCol.Name = "VerCol";
+            this.VerCol.Text = "Colonias";
+            this.VerCol.Width = 55;
+            // 
             // pnlMap
             // 
             this.pnlMap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -324,71 +389,6 @@
             this.sfmMainMap.ZoomLevelChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_ZoomLevelChanged);
             this.sfmMainMap.SelectedRecordsChanged += new System.EventHandler<System.EventArgs>(this.sfmMainMap_SelectedRecordsChanged);
             this.sfmMainMap.OnControlKeyChange += new System.EventHandler(this.sfmMainMap_OnControlKeyChange);
-            // 
-            // Plaza
-            // 
-            this.Plaza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Plaza.DataPropertyName = "Nombre";
-            this.Plaza.HeaderText = "Plaza";
-            this.Plaza.Name = "Plaza";
-            this.Plaza.ReadOnly = true;
-            // 
-            // Editar
-            // 
-            this.Editar.DataPropertyName = "Editar";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(1);
-            this.Editar.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Editar.HeaderText = "";
-            this.Editar.MinimumWidth = 55;
-            this.Editar.Name = "Editar";
-            this.Editar.ReadOnly = true;
-            this.Editar.Text = "Editar";
-            this.Editar.Width = 55;
-            // 
-            // Delete
-            // 
-            this.Delete.DataPropertyName = "Eliminar";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-            this.Delete.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Delete.HeaderText = "";
-            this.Delete.MinimumWidth = 55;
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Text = "Eliminar";
-            this.Delete.Width = 55;
-            // 
-            // Ver
-            // 
-            this.Ver.DataPropertyName = "Ver";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
-            this.Ver.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Ver.HeaderText = "";
-            this.Ver.MinimumWidth = 55;
-            this.Ver.Name = "Ver";
-            this.Ver.Width = 55;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // VerCol
-            // 
-            this.VerCol.DataPropertyName = "VerCol";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
-            this.VerCol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.VerCol.HeaderText = "";
-            this.VerCol.MinimumWidth = 55;
-            this.VerCol.Name = "VerCol";
-            this.VerCol.Text = "Colonias";
-            this.VerCol.Width = 55;
             // 
             // PlazaAdmin
             // 

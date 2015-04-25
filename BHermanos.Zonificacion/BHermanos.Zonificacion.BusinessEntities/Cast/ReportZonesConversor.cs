@@ -23,7 +23,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             //Se agrega la fila para los botones
             DataRow newRowBotones = dtResult.NewRow();
             dtResult.Rows.Add(newRowBotones);
-            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Id == 1))
             {
                 foreach (Rubro rbo in gpo.ListaRubros.Where(r => r.Main))
                 {
@@ -42,7 +42,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     dtResult.Columns.Add(zno.Nombre, typeof(string));
                     //Se agregan los rubros para esta zona
                     Colonia colZnBase = zno.GetColoniaTotal();
-                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Id == 1))
                     {
                         GrupoRubros gpoInBase = colZnBase.ListaGrupoRubros.Where(gIB => gIB.Id == gpo.Id).FirstOrDefault();
                         if (gpoInBase != null)
@@ -86,7 +86,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             //Se agrega la primera columna con valores
             DataTable dtResult = new DataTable();
             dtResult.Columns.Add("Dato");
-            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Id == 1))
             {
                 foreach (Rubro rbo in gpo.ListaRubros)
                 {
@@ -105,7 +105,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     dtResult.Columns.Add(zno.Nombre, typeof(string));
                     //Se agregan los rubros para esta zona
                     Colonia colZnBase = zno.GetColoniaTotal();
-                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Id == 1))
                     {
                         GrupoRubros gpoInBase = colZnBase.ListaGrupoRubros.Where(gIB => gIB.Id == gpo.Id).FirstOrDefault();
                         if (gpoInBase != null)
@@ -131,7 +131,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             //Se agrega la primera columna con valores
             DataTable dtResult = new DataTable();
             dtResult.Columns.Add("Dato");
-            foreach (GrupoRubros gpo in colonias[0].ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            foreach (GrupoRubros gpo in colonias[0].ListaGrupoRubros.Where(g => g.Id == 2))
             {
                 foreach (Rubro rbo in gpo.ListaRubros)
                 {
@@ -148,7 +148,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                 //Se agrega la columna con la colonia
                 dtResult.Columns.Add(column.ToString() + "-" + colonia.Nombre, typeof(string));
                 //Se agregan los rubros para esta colonia                
-                foreach (GrupoRubros gpo in colonia.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+                foreach (GrupoRubros gpo in colonia.ListaGrupoRubros.Where(g => g.Id == 2))
                 {
                     foreach (Rubro rbo in gpo.ListaRubros.Where(r => r.Main))
                     {                        
@@ -172,7 +172,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             //Se agrega la primera columna con valores
             DataTable dtResult = new DataTable();
             dtResult.Columns.Add("Dato");
-            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "nse"))
+            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Id == 2))
             {
                 foreach (Rubro rbo in gpo.ListaRubros)
                 {
@@ -191,7 +191,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
                     dtResult.Columns.Add(zno.Nombre, typeof(string));
                     //Se agregan los rubros para esta zona
                     Colonia colZnBase = zno.GetColoniaTotal();
-                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "nse"))
+                    foreach (GrupoRubros gpo in colZnBase.ListaGrupoRubros.Where(g => g.Id == 2))
                     {
                         GrupoRubros gpoInBase = colZnBase.ListaGrupoRubros.Where(gIB => gIB.Id == gpo.Id).FirstOrDefault();
                         if (gpoInBase != null)
@@ -235,7 +235,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             Colonia colBase = zoneBase.GetColoniaTotal();
             Colonia colExceptLast = zoneBase.GetColoniaExceptLast();
             Colonia colLast = zoneBase.GetColoniaLast();
-            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Id == 1))
             {
                 GrupoRubros gpoExLast = colExceptLast.ListaGrupoRubros.Where(gpEL => gpEL.Id == gpo.Id).FirstOrDefault();
                 GrupoRubros gpoLast = colLast.ListaGrupoRubros.Where(gpEL => gpEL.Id == gpo.Id).FirstOrDefault();
@@ -282,7 +282,7 @@ namespace BHermanos.Zonificacion.BusinessEntities.Cast
             Colonia colBase = zoneBase.GetColoniaTotal();
             Colonia colExceptLast = zoneBase.GetColoniaExceptLast();
             Colonia colLast = zoneBase.GetColoniaLast();
-            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Nombre.ToLower() == "general"))
+            foreach (GrupoRubros gpo in colBase.ListaGrupoRubros.Where(g => g.Id == 1))
             {
                 GrupoRubros gpoExLast = colExceptLast.ListaGrupoRubros.Where(gpEL => gpEL.Id == gpo.Id).FirstOrDefault();
                 GrupoRubros gpoLast = colLast.ListaGrupoRubros.Where(gpEL => gpEL.Id == gpo.Id).FirstOrDefault();

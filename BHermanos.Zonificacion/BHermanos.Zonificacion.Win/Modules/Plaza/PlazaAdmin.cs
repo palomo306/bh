@@ -838,10 +838,10 @@ namespace BHermanos.Zonificacion.Win.Modules.Plaza
 
                         DataTable dtInformationAll = ReportZonesConversor.ToGeneralDataTableAll(listaColonias);
                         DetailViewPlaza oWindowDetail = new DetailViewPlaza();
-                        //oWindowDetail.Data = dtInformationAll;
-                        //oWindowDetail.Plaza = ((BE.Plaza)cmbPlazas.SelectedItem).Nombre;
-                        //oWindowDetail.LoadData();
-                        //oWindowDetail.Title = "Información General por Zona";
+                        oWindowDetail.Data = dtInformationAll;
+                        oWindowDetail.Plaza = plaza.Nombre;
+                        oWindowDetail.LoadData();
+                        oWindowDetail.Title = "Información General por Plaza";
                         oWindowDetail.ShowDialog();
                         
                     }

@@ -172,6 +172,9 @@
     <EmbeddedResource Include="Modules\Plaza\Modal\CreatePlaza.resx">
       <DependentUpon>CreatePlaza.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Plaza\Modal\DetailViewPlaza.resx">
+      <DependentUpon>DetailViewPlaza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Plaza\PlazaAdmin.resx">
       <DependentUpon>PlazaAdmin.cs</DependentUpon>
     </EmbeddedResource>
