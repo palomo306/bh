@@ -769,7 +769,7 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
             }
         }
 
-        private void ZoomToPlaza(List<BE.Estado> estados)
+        private void ZoomToPlaza(BE.Plaza plaza)
         {
             int shapeCount = sfmMainMap.ShapeFileCount;
             if (shapeCount > 1)
@@ -799,24 +799,25 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             colString = rTipo[i].Trim() + colString;
                         }
                         //Se revisa si la colonia existe en la plaza
-                        BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
-                        if (currEstado != null)
+                        //BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
+                        //if (currEstado != null)
+                        //{
+                        //    BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
+                        //    if (currMuni != null)
+                        //    {
+                        //BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                        BE.Colonia currCol = plaza.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                        if (currCol != null)
                         {
-                            BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
-                            if (currMuni != null)
-                            {
-                                BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
-                                if (currCol != null)
-                                {
 
-                                    ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
-                                    sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
-                                    isFirstShape = false;
+                            ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                            sfmMainMap.SetZoomAndCentre(3500, puntos[0][0]);
+                            isFirstShape = false;
 
-                                    break;
-                                }
-                            }
+                            break;
                         }
+                        //    }
+                        //}
                     }
                     layerIndex += 5;
                 }
@@ -882,7 +883,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                             }
                             coldId = Convert.ToDouble(colString);
                             //Se revisa si se han seleccionado colonias fuera de la plaza actual
-                            if (ExistInPlaza(estadoId, municipioId, coldId))
+                            //if (ExistInPlaza(estadoId, municipioId, coldId))
+                            if (ExistInPlaza(coldId))
                             {
                                 if (ExistInZona(estadoId, municipioId, coldId))
                                 {
@@ -966,20 +968,22 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
         }
 
 
-        private bool ExistInPlaza(int edoId, int munId, double colId)
+        //private bool ExistInPlaza(int edoId, int munId, double colId)
+            private bool ExistInPlaza(double colId)
         {
             bool result = false;
-            foreach (BE.Estado edo in this.CurrentPlaza.ListaEstados)
-            {
-                foreach (BE.Municipio mun in edo.ListaMunicipios)
-                {
-                    foreach (BE.Colonia col in mun.ListaColonias)
+            //foreach (BE.Estado edo in this.CurrentPlaza.ListaEstados)
+            //{
+            //    foreach (BE.Municipio mun in edo.ListaMunicipios)
+            //    {
+            foreach (BE.Colonia col in this.CurrentPlaza.ListaColonias)
                     {
-                        if (edo.Id == edoId && mun.Id == munId && col.Id == colId)
+                        //if (edo.Id == edoId && mun.Id == munId && col.Id == colId)
+                        if (col.Id == colId)
                             return true;
                     }
-                }
-            }
+            //    }
+            //}
             return result;
         }
 
@@ -1030,7 +1034,8 @@ namespace BHermanos.Zonificacion.Win.Modules.Zone
                         //Se cargan los Shapes de la Plaza Actual
                         this.CurrentPlaza = auxPlaza;
                         LoadPlazaShapes();
-                        ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                        //ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                        ZoomToPlaza(this.CurrentPlaza);
                         //Se cargan las zonas relacionadas con la plaza
                         LoadZonas();
                         LoadCurrentPlazaRenderSetting();

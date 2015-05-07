@@ -16,6 +16,10 @@ namespace BHermanos.Zonificacion.BusinessEntities
         public string Colonias { get; set; }
         
         public List<Estado> ListaEstados{ get; set; }
+
+        public List<Colonia> ListaColonias { get; set; }
+
+
         #endregion
 
         #region Propiedades Dinámicas
@@ -89,26 +93,43 @@ namespace BHermanos.Zonificacion.BusinessEntities
         private string GetColoniasIds()
         {
             List<string> colIds = new List<string>();
-            foreach (Estado edo in this.ListaEstados)
-            {
-                foreach (Municipio mun in edo.ListaMunicipios)
-                {
-                    foreach (Colonia col in mun.ListaColonias)
+            //foreach (Estado edo in this.ListaEstados)
+            //{
+            //    foreach (Municipio mun in edo.ListaMunicipios)
+            //    {
+                    foreach (Colonia col in this.ListaColonias)
                     {
                         colIds.Add(col.Id.ToString());
                     }
-                }
-            }
+            //    }
+            //}
             return string.Join("|", colIds);
+        }
+
+        private string GetListaColoniasToJson()
+        {
+            string jSon = string.Empty;
+            if (ListaColonias == null || ListaColonias.Count == 0)
+                return "[]";
+            else
+            {
+                string[] arrColoniasJson = new string[ListaColonias.Count];
+                for (int i = 0; i < ListaColonias.Count; i++)
+                {
+                    arrColoniasJson[i] = ListaColonias[i].ToJSon();
+                }
+                jSon = "[" + string.Join(",", arrColoniasJson) + "]";
+            }
+            return jSon;
         }
 
         public string ToJSon(bool includeTree)
         {
             try
             {
-                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":""" + GetColoniasIds() + @""",""<ListaEstados>k__BackingField"":" + "[]" + @"}";
+                string jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":""" + GetColoniasIds() + @""",""<ListaEstados>k__BackingField"":" + "[]" + @",""<ListaColonias>k__BackingField"":" + "[]" + @"}";
                 if (includeTree)
-                    jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":""" + GetColoniasIds() + @""",""<ListaEstados>k__BackingField"":" + GetListaEstadosToJson() + @"}";
+                    jSon = @"{""<Id>k__BackingField"":" + Id.ToString() + @",""<Nombre>k__BackingField"":""" + Nombre + @""",""<Color>k__BackingField"":""" + Color + @""",""<Colonias>k__BackingField"":""" + GetColoniasIds() + @""",""<ListaEstados>k__BackingField"":" + GetListaEstadosToJson() + @",""<ListaColonias>k__BackingField"":" + GetListaColoniasToJson() + @"}";
                 return jSon;
             }
             catch (Exception ex)
@@ -122,6 +143,7 @@ namespace BHermanos.Zonificacion.BusinessEntities
         public Plaza()
         {
             this.ListaEstados = new List<Estado>();
+            this.ListaColonias = new List<Colonia>();
         }
         #endregion
     }

@@ -43,7 +43,8 @@ namespace BHermanos.Zonificacion.Web
                 }
                 double colonia = Convert.ToDouble(colString);
                 //Se busca la colonia en alguna plaza
-                if (plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                //if (plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                if (plaza.ListaColonias.Where(lc => lc.Id == colonia).Any())
                     colorList.Add(new ColorRecord() { Color = plaza.RealColor, Record = n });
                 //Se busca si la colonia existe en alguna zona
                 BE.Zona zone = lstZonas.Where(lz => lz.ListaColonias.Where(c => c.Id == colonia).Any()).FirstOrDefault();

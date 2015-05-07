@@ -49,6 +49,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     plaza.Nombre = reg.fcNombre;
                     plaza.Color = reg.fcColor;
                     plaza.ListaEstados = this.ObtenerEstadosXPlaza(reg.fiPlazaId, spPlazas);
+                    plaza.ListaColonias = this.ObtenerColoniasGenericasXPlaza(reg.fiPlazaId, spPlazas);
                     listaPlazas.Add(plaza);
                 }
             }
@@ -58,6 +59,32 @@ namespace BHermanos.Zonificacion.BusinessMaps
             }
             return listaPlazas;
         }
+
+        //public List<Plaza> ObtenerPlazasSinColonias()
+        //{
+        //    List<Plaza> listaPlazas = new List<Plaza>();
+        //    try
+        //    {               
+        //        var spPlazas = base.oDataAccess.spConPlazas(1, 0).ToList<DataAccess.spConPlazasResult>();
+        //        var tblPlaza = spPlazas.Select(s => new { s.fiPlazaId, s.fcNombre, s.fcColor }).Distinct();
+        //        foreach (var reg in tblPlaza)
+        //        {
+        //            Plaza plaza = new Plaza();
+        //            plaza.Id = reg.fiPlazaId;
+        //            plaza.Nombre = reg.fcNombre;
+        //            plaza.Color = reg.fcColor;                    
+        //            plaza.ListaEstados = this.ObtenerEstadosXPlaza(reg.fiPlazaId, spPlazas);
+        //            plaza.ListaColonias = new List<Colonia>();
+        //            listaPlazas.Add(plaza);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return listaPlazas;
+        //}
+
 
         public List<Plaza> ObtenerPlaza(int plazaId)
         {
@@ -72,6 +99,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     plaza.Nombre = reg.fcNombre;
                     plaza.Color = reg.fcColor;
                     plaza.ListaEstados = this.ObtenerEstadosXPlaza(reg.fiPlazaId, spPlazas);
+                    plaza.ListaColonias = this.ObtenerColoniasXPlaza(reg.fiPlazaId, spPlazas);
                     listaPlazas.Add(plaza);
                 }
             }
@@ -130,10 +158,10 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         private List<Estado> ObtenerEstadosXPlaza(int plazaId, List<DataAccess.spConPlazasResult> listaRegistros)
         {
-            List<Estado> lista = new List<Estado>();
+            List<Estado> lista = new List<Estado>();            
             try
             {
-                var spPlazas = listaRegistros.Where(w => w.fiPlazaId == plazaId).ToList<DataAccess.spConPlazasResult>();
+                var spPlazas = listaRegistros.Where(w => w.fiPlazaId == plazaId).ToList<DataAccess.spConPlazasResult>();                
                 foreach (int estadoId in (from li in listaRegistros where li.fiPlazaId == plazaId select li.fiEstadoId).Distinct().ToList())
                 {
                     Estado estado = new Estado();
@@ -158,7 +186,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
                 {
                     Municipio municipio = new Municipio();
                     municipio.Id = m;
-                    municipio.ListaColonias = this.ObtenerColoniasXPlaza(plazaId, estadoId, m, listaRegistros);
+                    //municipio.ListaColonias = colonias;
                     lista.Add(municipio);
                 }
                 return lista;
@@ -170,7 +198,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             }
         }
 
-        private List<Colonia> ObtenerColoniasXPlaza(int plazaId, int estadoId, int municipioId, List<spConPlazasResult> listaRegistros)
+        private List<Colonia> ObtenerColoniasXPlaza(int plazaId, List<spConPlazasResult> listaRegistros)
         {
             List<Colonia> lista = new List<Colonia>();
             try
@@ -188,6 +216,31 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     //    lista.Add(colonia);
                     //}                    
                 }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                return lista;
+                throw ex;
+            }
+        }
+
+        private List<Colonia> ObtenerColoniasGenericasXPlaza(int plazaId, List<spConPlazasResult> listaRegistros)
+        {
+            List<Colonia> lista = new List<Colonia>();
+            try
+            {
+
+                foreach (var c in listaRegistros.Where(p => p.fiPlazaId == plazaId ).ToList())
+                {
+                    Colonia colonia = new Colonia();
+                    colonia.Id = c.fiColoniaId;
+                    colonia.Tipo = c.fiTipo;
+                    colonia.ListaGrupoRubros = new List<GrupoRubros>();
+                    colonia.ListaPartidas = new List<Partida>();
+                    lista.Add(colonia);
+                }                    
+                
                 return lista;
             }
             catch (Exception ex)

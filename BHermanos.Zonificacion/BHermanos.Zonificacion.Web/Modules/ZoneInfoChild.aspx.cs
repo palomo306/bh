@@ -533,7 +533,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                     break;
             }
             if (this.CurrentPlaza != null && this.CurrentPlaza.ListaEstados != null)
-                ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                //ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                ZoomToPlaza(this.CurrentPlaza);
         }
 
         private void ClearData()
@@ -661,7 +662,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             }
         }
 
-        private void ZoomToPlaza(List<BE.Estado> estados)
+        private void ZoomToPlaza(BE.Plaza plaza)
         {
             int shapeCount = sfmMainMap.LayerCount;
             if (shapeCount > 1)
@@ -691,13 +692,13 @@ namespace BHermanos.Zonificacion.Web.Modules
                             colString = rTipo[i].Trim() + colString;
                         }
                         //Se revisa si la colonia existe en la plaza
-                        BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
-                        if (currEstado != null)
-                        {
-                            BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
-                            if (currMuni != null)
-                            {
-                                BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                        //BE.Estado currEstado = estados.Where(est => est.Id.ToString() == rEdos[i]).FirstOrDefault();
+                        //if (currEstado != null)
+                        //{
+                        //    BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
+                        //    if (currMuni != null)
+                        //    {
+                                BE.Colonia currCol = plaza.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
                                 if (currCol != null && isFirstShape)
                                 {
                                     ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
@@ -706,8 +707,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                                     isFirstShape = false;
                                     break;
                                 }
-                            }
-                        }
+                        //    }
+                        //}
                     }
                     layerIndex += 5;
                 }
@@ -781,7 +782,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                 //Se carga la nueva plaza
                 this.CurrentPlaza = this.ListPlazas.Where(pl => pl.Id.ToString() == ddlPlazas.SelectedValue).FirstOrDefault();
                 LoadPlazaShapes();
-                ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                //ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                ZoomToPlaza(this.CurrentPlaza);
                 //Se cargan las zonas relacionadas con la plaza
                 string stDate = ddlStartDate.SelectedValue;
                 string edDate = ddlEndDate.SelectedValue;

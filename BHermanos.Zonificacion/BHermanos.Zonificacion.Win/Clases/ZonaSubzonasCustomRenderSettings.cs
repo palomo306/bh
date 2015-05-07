@@ -99,7 +99,8 @@ namespace RegionDemo.Clases
                     }
                     else
                     {
-                        if (Plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                        //if (Plaza.ListaEstados.Where(le => le.ListaMunicipios.Where(lm => lm.ListaColonias.Where(lc => lc.Id == colonia).Any()).Any()).Any())
+                        if (Plaza.ListaColonias.Where(lc => lc.Id == colonia).Any())
                             colorListOutLine.Add(new ColorRecord() { Color = Plaza.RealColor, Record = n });
                     }
                 }

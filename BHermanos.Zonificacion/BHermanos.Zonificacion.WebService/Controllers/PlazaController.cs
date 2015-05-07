@@ -29,7 +29,7 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                 {
                     switch (vistaId)
                     {
-                        case 1:
+                        case 1:                        
                             plazaModel.ListaPlazas = manejadorPlazas.ObtenerPlazas();
                             plazaModel.Succes = true;
                             break;
@@ -37,6 +37,10 @@ namespace BHermanos.Zonificacion.WebService.Controllers
                             plazaModel.ListaPlazas = manejadorPlazas.ObtenerPlaza(plazaId);
                             plazaModel.Succes = true;
                             break;
+                        //case 3:
+                        //    plazaModel.ListaPlazas = manejadorPlazas.ObtenerPlazasSinColonias();
+                        //    plazaModel.Succes = true;
+                        //    break;
                         default:
                             new ApplicationException("El id de la vista no existe");
                             break;

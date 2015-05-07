@@ -47,13 +47,14 @@ namespace BHermanos.Zonificacion.Web
                 BE.Plaza plazaWithColony = null;
                 foreach (BE.Plaza pl in plEstado)
                 {
-                    List<BE.Estado> plEstados = pl.ListaEstados.Where(es => es.ListaMunicipios.Where(mun => mun.Id == municipio).Any()).ToList();
-                    foreach (BE.Estado es in plEstados)
-                    {
-                        existColony = es.ListaMunicipios.Where(mun => mun.ListaColonias.Where(col => col.Id == colonia).Any()).Any();
-                        if (existColony)
-                            break;
-                    }
+                //    List<BE.Estado> plEstados = pl.ListaEstados.Where(es => es.ListaMunicipios.Where(mun => mun.Id == municipio).Any()).ToList();
+                //    foreach (BE.Estado es in plEstados)
+                //    {
+                        //existColony = es.ListaMunicipios.Where(mun => mun.ListaColonias.Where(col => col.Id == colonia).Any()).Any();
+                        existColony = pl.ListaColonias.Where(col => col.Id == colonia).Any();
+                        //if (existColony)
+                        //    break;
+                    //}
                     if (existColony)
                     {
                         plazaWithColony = pl;
