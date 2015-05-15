@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.75, 16.125" name="DataAccess">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.75, 45.125" name="DataAccess">
   <DataContextMoniker Name="/DataAccessDataContext" />
   <nestedChildShapes>
     <classShape Id="aa8e83b4-4758-4485-bf5e-fb1bf6fb96c7" absoluteBounds="0.875, 1.375, 2, 1.3862939453125009">
@@ -74,7 +74,7 @@
         <elementListCompartment Id="fe062f4d-33e8-468c-8dcb-76f6a899f95c" absoluteBounds="3.515, 1.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 5.04890055338542); (6.25 : 5.04890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 5.6819482421875); (5.50291666696469 : 5.6819482421875 : JumpStart); (5.66958333363136 : 5.6819482421875 : JumpEnd); (6.25 : 5.6819482421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonPartidasXTab/ZonPartidasXTab_ZonUmbralesXPartida" />
       <nodes>
         <classShapeMoniker Id="9540bd64-f640-4891-9411-6510a6162954" />
@@ -88,35 +88,35 @@
         <classShapeMoniker Id="8b3be027-702a-46fb-80cc-27afd78fdc56" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.49999999973923 : 11.375); (5.875 : 10.9999999997392); (5.875 : 8.97199625651042); (6.25 : 8.97199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 11.375); (5.875 : 11); (7.25 : 11); (7.25 : 9.56899251302083)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonRole/ZonRole_ZonPermiso" />
       <nodes>
         <classShapeMoniker Id="576a9357-0024-46d0-9e73-41d8078e091b" />
         <classShapeMoniker Id="299cfe67-472c-4bbf-ba5b-2f8d9bed811d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 8.61099812843526); (6.25 : 8.61099812843526)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 9.23484537760417); (6.25 : 9.23484537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonMenus/ZonMenus_ZonPermiso" />
       <nodes>
         <classShapeMoniker Id="5d36f60c-ba9d-4422-9390-82ca8bbab32e" />
         <classShapeMoniker Id="299cfe67-472c-4bbf-ba5b-2f8d9bed811d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 12.0032487563304); (6.25 : 12.0032487563304)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 12.0032487565104); (6.25 : 12.0032487565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonRole/ZonRole_ZonPerfile" />
       <nodes>
         <classShapeMoniker Id="576a9357-0024-46d0-9e73-41d8078e091b" />
         <classShapeMoniker Id="955f6ab3-35ca-4af5-af73-354fc3a4566f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 15.0104484049479); (7.25 : 15.0104484049479); (7.25 : 12.5689925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 15.0104484049479); (7.25 : 15.0104484049479); (7.25 : 12.5689925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonUsuario/ZonUsuario_ZonPerfile" />
       <nodes>
         <classShapeMoniker Id="7d773b23-d3e0-45a8-ad4a-289cc842e7b3" />
         <classShapeMoniker Id="955f6ab3-35ca-4af5-af73-354fc3a4566f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.97199625651042); (3.5 : 8.97199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 8.97199625651042); (3.5 : 8.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataAccessDataContext/ZonAplicacione/ZonAplicacione_ZonMenus" />
       <nodes>
         <classShapeMoniker Id="38770fe4-efcd-4f88-8be3-662b47fabb2c" />
@@ -148,6 +148,38 @@
       <nodes>
         <classShapeMoniker Id="b1e90032-cdf2-4b84-897b-4d1e6f72d2c8" />
         <classShapeMoniker Id="98fd6d34-e46e-4e30-9565-75bc7b6eb4fd" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="70271240-2637-4aca-be33-daf848049e01" absoluteBounds="3.75, 6.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DataAccessDataContext/ZonZona" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d0b3b92-df84-4b4c-8aa2-b7778566bf20" absoluteBounds="3.765, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="80eb3c21-2ea9-417f-bcda-a2b7c2a4c46d" absoluteBounds="3.625, 3.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataAccessDataContext/ZonColoniasXZona" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bf76dc7e-ce5e-424c-a9f3-f0c1a6805996" absoluteBounds="3.64, 3.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.58625000029802 : 6.875); (5.58625000029802 : 5.07859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataAccessDataContext/ZonZona/ZonZona_ZonColoniasXZona" />
+      <nodes>
+        <classShapeMoniker Id="70271240-2637-4aca-be33-daf848049e01" />
+        <classShapeMoniker Id="80eb3c21-2ea9-417f-bcda-a2b7c2a4c46d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3b8b8d25-7c67-42e4-84f1-86a45a20fbfc" absoluteBounds="3.5, 3.25, 2, 41.577293294270831">
+      <DataClassMoniker Name="/DataAccessDataContext/ZonColoniasLocalidade" />
+      <nestedChildShapes>
+        <elementListCompartment Id="308cafe1-57b0-4b48-9eda-41e43c16e0f8" absoluteBounds="3.515, 3.71, 1.9700000000000002, 41.017293294270829" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.5 : 3.25); (4.5 : 3); (4.625 : 3); (4.625 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataAccessDataContext/ZonColoniasLocalidade/ZonColoniasLocalidade_ZonColoniasXZona" />
+      <nodes>
+        <classShapeMoniker Id="3b8b8d25-7c67-42e4-84f1-86a45a20fbfc" />
+        <classShapeMoniker Id="80eb3c21-2ea9-417f-bcda-a2b7c2a4c46d" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
