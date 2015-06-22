@@ -36,38 +36,16 @@ namespace BHermanos.Zonificacion.BusinessMaps
             try
             {
                 var spConColonias = base.oDataAccess.spConColonias(vistaId, plazaId, coloniaId);
-                List<DataAccess.ZonGrupoRubro> gr = oDataAccess.ZonGrupoRubros.ToList<DataAccess.ZonGrupoRubro>();
                 foreach (var registro in spConColonias)
                 {
                     Colonia colonia = new Colonia();
                     colonia.Id = (double)registro.IdColonia;
                     colonia.Nombre = registro.Nombre;
                     colonia.Tipo = (byte)registro.IdTipo;
-                    colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(registro,gr);
+                    colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(registro);
                     colonia.ListaPartidas = new List<Partida>();
                     listacolonias.Add(colonia);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return listacolonias;
-        }
-
-        public List<Colonia> ObtenerColonias(DataAccess.ZonColoniasLocalidade zonColoniasLocalidade, System.Data.Linq.Table<DataAccess.ZonGrupoRubro> zonGrupoRubro)
-        {
-            List<Colonia> listacolonias = new List<Colonia>();
-            try
-            {           
-                Colonia colonia = new Colonia();
-                colonia.Id = (double)zonColoniasLocalidade.idColonia;
-                colonia.Nombre = zonColoniasLocalidade.Nombre;
-                colonia.Tipo = (byte)zonColoniasLocalidade.IdTipo;
-                colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(zonColoniasLocalidade, zonGrupoRubro);
-                colonia.ListaPartidas = new List<Partida>();
-                listacolonias.Add(colonia);
-
             }
             catch (Exception ex)
             {
@@ -81,30 +59,10 @@ namespace BHermanos.Zonificacion.BusinessMaps
             List<Colonia> listacolonias = new List<Colonia>();
             try
             {
-                List<DataAccess.ZonGrupoRubro> gr = oDataAccess.ZonGrupoRubros.ToList<DataAccess.ZonGrupoRubro>();
                 Colonia colonia = new Colonia();
                 colonia.Id = 0;
                 colonia.Nombre = "Vacía";
-                colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(coloniasResult,gr);
-                colonia.ListaPartidas = new List<Partida>();
-                listacolonias.Add(colonia);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return listacolonias;
-        }
-
-        public List<Colonia> ObtenerColoniaVacia(System.Data.Linq.Table<DataAccess.ZonGrupoRubro> zonGrupoRubro)
-        {
-            List<Colonia> listacolonias = new List<Colonia>();
-            try
-            {                
-                Colonia colonia = new Colonia();
-                colonia.Id = 0;
-                colonia.Nombre = "Vacía";
-                colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(null, zonGrupoRubro);
+                colonia.ListaGrupoRubros = this.ObtenerListaGrupoRubros(coloniasResult);
                 colonia.ListaPartidas = new List<Partida>();
                 listacolonias.Add(colonia);
             }
@@ -120,7 +78,7 @@ namespace BHermanos.Zonificacion.BusinessMaps
             List<Colonia> listacolonias = new List<Colonia>();
             try
             {
-                var spConColonias = base.oDataAccess.spConColonias(vistaId, plazaId, coloniaId);                
+                var spConColonias = base.oDataAccess.spConColonias(vistaId, plazaId, coloniaId);
                 foreach (var registro in spConColonias)
                 {
                     Colonia colonia = new Colonia();
@@ -143,20 +101,19 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #region Metodos privados
 
-        private List<GrupoRubros> ObtenerListaGrupoRubros(DataAccess.spConColoniasResult coloniasResult, List<DataAccess.ZonGrupoRubro> gr)
+        private List<GrupoRubros> ObtenerListaGrupoRubros(DataAccess.spConColoniasResult coloniasResult)
         {
             List<GrupoRubros> listaGrupoRubros = new List<GrupoRubros>();
 
             try
             {
-                //var spConGrupoRubros = base.oDataAccess.spConGrupoRubros();
-                //var ru = oDataAccess.ZonGrupoRubros;
-                foreach (var reg in gr)
+                var spConGrupoRubros = base.oDataAccess.spConGrupoRubros();
+                foreach (var reg in spConGrupoRubros)
                 {
                     GrupoRubros grupoRubros = new GrupoRubros();
                     grupoRubros.Id = reg.fiGrupoId;
                     grupoRubros.Nombre = reg.fcNombre;
-                    grupoRubros.ListaRubros = this.ObtenerListaRubros(reg.fiGrupoId, coloniasResult,reg.ZonRubros.ToList<DataAccess.ZonRubro>());
+                    grupoRubros.ListaRubros = this.ObtenerListaRubros(reg.fiGrupoId, coloniasResult);
                     listaGrupoRubros.Add(grupoRubros);
                 }
             }
@@ -169,39 +126,14 @@ namespace BHermanos.Zonificacion.BusinessMaps
             return listaGrupoRubros;
         }
 
-        private List<GrupoRubros> ObtenerListaGrupoRubros(DataAccess.ZonColoniasLocalidade zonColoniasLocalidade, System.Data.Linq.Table<DataAccess.ZonGrupoRubro> zonGrupoRubro)
-        {
-            List<GrupoRubros> listaGrupoRubros = new List<GrupoRubros>();
-
-            try
-            {
-                foreach (var reg in zonGrupoRubro)
-                {
-                    GrupoRubros grupoRubros = new GrupoRubros();
-                    grupoRubros.Id = reg.fiGrupoId;
-                    grupoRubros.Nombre = reg.fcNombre;
-                    grupoRubros.ListaRubros = this.ObtenerListaRubros(zonColoniasLocalidade,reg.ZonRubros);
-                    listaGrupoRubros.Add(grupoRubros);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-            return listaGrupoRubros;
-        }
-
-        private List<Rubro> ObtenerListaRubros(int grupoId, DataAccess.spConColoniasResult coloniasResult, List<DataAccess.ZonRubro> lr)
+        private List<Rubro> ObtenerListaRubros(int grupoId, DataAccess.spConColoniasResult coloniasResult)
         {
             List<Rubro> listaRubros = new List<Rubro>();
 
             try
             {
-                //var spConRubrosXGrupo = base.oDataAccess.spConRubrosXGrupo(grupoId);
-                //var gr = oDataAccess.ZonRubros.Where(w => w.fiGrupoId == grupoId);
-                foreach (var reg in lr)
+                var spConRubrosXGrupo = base.oDataAccess.spConRubrosXGrupo(grupoId);
+                foreach (var reg in spConRubrosXGrupo)
                 {
                     Rubro rubro = new Rubro();
                     rubro.Id = reg.fiRubroId;
@@ -213,36 +145,6 @@ namespace BHermanos.Zonificacion.BusinessMaps
                     rubro.SignoAcumulado = reg.fcSignoAcumulado;
                     rubro.Formato = reg.fcFormato;
                     rubro.Valor = this.AsignaValor(rubro.Expresion, coloniasResult,1,null,DateTime.Now,DateTime.Now,false);
-                    listaRubros.Add(rubro);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-            return listaRubros;
-        }
-
-        private List<Rubro> ObtenerListaRubros(DataAccess.ZonColoniasLocalidade zonColoniasLocalidade, System.Data.Linq.EntitySet<DataAccess.ZonRubro> zonRubro)
-        {
-            List<Rubro> listaRubros = new List<Rubro>();
-
-            try
-            {              
-                foreach (var reg in zonRubro)
-                {
-                    Rubro rubro = new Rubro();
-                    rubro.Id = reg.fiRubroId;
-                    rubro.Nombre = reg.fcDescripcion;
-                    rubro.Expresion = reg.fcExpresion;
-                    rubro.Orden = reg.fiOrden;
-                    rubro.Main = reg.flMain;
-                    rubro.Estatus = true;
-                    rubro.SignoAcumulado = reg.fcSignoAcumulado;
-                    rubro.Formato = reg.fcFormato;
-                    rubro.Valor = this.AsignaValor(rubro.Expresion, zonColoniasLocalidade, 1, null, DateTime.Now, DateTime.Now, false);
                     listaRubros.Add(rubro);
                 }
             }
@@ -284,7 +186,5 @@ namespace BHermanos.Zonificacion.BusinessMaps
 
         #endregion
 
-
-        
     }
 }

@@ -413,6 +413,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
             //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnPdf);
             //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnExcel);
+            //this.MapPanControl1.SetMap(this.sfmMainMap);
             hdnShowBackGroup.Value = "cloase";            
             if (!Page.IsPostBack)
             {
@@ -495,7 +496,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                 try
                 {
                     //Se trata de sobreescribir el archivo dEGP para la plaza
-                    string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
+                    //string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
+                    string urlMap = "~/Maps/MapDinamic.egp";
                     string plazaFilePath = Server.MapPath(urlMap);
                     File.WriteAllText(plazaFilePath, xmlMainContent);
                     sfmMainMap.ProjectName = urlMap;
@@ -639,6 +641,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                 LoadZonas("0");
                 PrintZonas(this.ListZonas);
             }
+            //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "DoPostBack", "__doPostBack(sender, e)", true);
         }
         #endregion
 
