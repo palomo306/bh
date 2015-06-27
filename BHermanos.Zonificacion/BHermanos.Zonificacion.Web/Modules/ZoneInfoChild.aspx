@@ -100,7 +100,7 @@
             <div id="MapMainDiv2" class="row featured-boxes">
                 <div class="featured-box featured-box-primary">    
                     <div class="scrolledGridView featured-box box-content">
-                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px" ProjectName="~/Maps/MapDinamic.egp" /> 
+                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px" ProjectName="" /> 
                     </div>
                 </div>
             </div>

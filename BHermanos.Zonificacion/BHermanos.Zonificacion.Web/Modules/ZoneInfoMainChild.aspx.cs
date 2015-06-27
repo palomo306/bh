@@ -268,7 +268,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                     ViewState["CurrentLevel"] = ValueArrayCompressed;
                 else
                     ViewState.Add("CurrentLevel", ValueArrayCompressed);
-            }            
+            }
         }
 
         private readonly int LayerIndex = 5;
@@ -332,7 +332,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                 else
                 {
                     hdnShowBackGroup.Value = "not";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje + "]');", true);                    
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "ShowMessage('Error de datos','Ha ocurrido un error al extraer las zonas [" + objResponse.Mensaje + "]');", true);
                 }
             }
             catch (Exception ex)
@@ -381,7 +381,6 @@ namespace BHermanos.Zonificacion.Web.Modules
         }
 
         private void PrintZonas(List<BE.Zona> lstZonas)
-        
         {
             /*Carga y Formato del Grid Principal de Zonas*/
             ReportZonesConversor.Hdn1Name = hdnZonaId.ClientID;
@@ -411,10 +410,9 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap();", true);
-            //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnPdf);
-            //ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(btnExcel);
-            //this.MapPanControl1.SetMap(this.sfmMainMap);
-            hdnShowBackGroup.Value = "cloase";            
+            string argument = Request["__EVENTARGUMENT"];
+
+            hdnShowBackGroup.Value = "cloase";
             if (!Page.IsPostBack)
             {
                 cellZonaHead.Visible = false;
@@ -429,6 +427,19 @@ namespace BHermanos.Zonificacion.Web.Modules
                 LoadZonas("0");
                 PrintZonas(this.ListZonas);
                 LoadMainMap();
+            }
+
+            if (argument == "notInfo")
+            {
+                //Se carga la nueva plaza
+                this.CurrentPlaza = this.ListPlazas.Where(pl => pl.Id.ToString() == ddlPlazas.SelectedValue).FirstOrDefault();
+                LoadPlazaShapes();
+                ZoomToPlaza(this.CurrentPlaza);
+                //Se cargan las zonas relacionadas con la plaza                
+                LoadCurrentPlazaRenderSetting();
+                PrintZonas(this.ListZonas);
+                //InitializeNewZone();
+                PrintCurrentZona(this.CurrentZone);
             }
         }
         #endregion
@@ -473,7 +484,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                     EGIS.ShapeFileLib.ShapeFile sf = this.sfmMainMap.GetLayer(layerIndex);
                     ZonaSubzonasCustomRenderSettings crsZ = new ZonaSubzonasCustomRenderSettings(sf.RenderSettings, this.CurrentZone, this.CurrentPlaza);
                     sf.RenderSettings.CustomRenderSettings = null;
-                    sf.RenderSettings.CustomRenderSettings = crsZ;                    
+                    sf.RenderSettings.CustomRenderSettings = crsZ;
                     layerIndex += 5;
                 }
                 sfmMainMap.Zoom = sfmMainMap.Zoom;
@@ -484,7 +495,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         {
             if (this.CurrentPlaza != null)
             {
-                string mainFilePath=Server.MapPath("~/Maps/Main.egp");
+                string mainFilePath = Server.MapPath("~/Maps/Main.egp");
                 string xmlMainContent = File.ReadAllText(mainFilePath);
                 string xmlEdosContent = string.Empty;
                 foreach (BE.Estado edo in this.CurrentPlaza.ListaEstados)
@@ -507,7 +518,7 @@ namespace BHermanos.Zonificacion.Web.Modules
                 {
 
                 }
-            }            
+            }
         }
 
         private void ZoomToPlaza(BE.Plaza plaza)
@@ -562,6 +573,10 @@ namespace BHermanos.Zonificacion.Web.Modules
                     layerIndex += 5;
                 }
                 sfmMainMap.Zoom = sfmMainMap.Zoom;
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "__doPostBack(\'" + sfmMainMap.ClientID + "\',\'notInfo\');", true);
             }
         }
         #endregion
@@ -635,7 +650,7 @@ namespace BHermanos.Zonificacion.Web.Modules
             }
             else
             {
-                LoadMainMap();                
+                LoadMainMap();
                 InitializeNewZone();
                 PrintCurrentZona(this.CurrentZone);
                 LoadZonas("0");
@@ -678,7 +693,7 @@ namespace BHermanos.Zonificacion.Web.Modules
 
         protected void btnRefreshMap_Click(object sender, EventArgs e)
         {
-            if ( ddlPlazas.SelectedValue != "0" )
+            if (ddlPlazas.SelectedValue != "0")
             {
                 if (CurrentLevel == "0") //De municipio (todas las zonas) a zona
                 {
@@ -727,7 +742,7 @@ namespace BHermanos.Zonificacion.Web.Modules
         #region Detalles
         protected void btnAll_Click(object sender, EventArgs e)
         {
-            if ( ddlPlazas.SelectedValue != "0")
+            if (ddlPlazas.SelectedValue != "0")
             {
                 if (ListZonas.Count > 0)
                 {
@@ -753,7 +768,7 @@ namespace BHermanos.Zonificacion.Web.Modules
 
         protected void btnNse_Click(object sender, EventArgs e)
         {
-            if ( ddlPlazas.SelectedValue != "0")
+            if (ddlPlazas.SelectedValue != "0")
             {
                 if (ListZonas.Count > 0)
                 {

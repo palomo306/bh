@@ -550,6 +550,8 @@ namespace BHermanos.Zonificacion.Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "InitializeScreen();ResizeMap2();", true);
+            string argument = Request["__EVENTARGUMENT"];
+
             hdnShowBackGroup.Value = "close";            
             if (!Page.IsPostBack)
             {
@@ -565,6 +567,40 @@ namespace BHermanos.Zonificacion.Web.Modules
                 LoadMainMap();
                 PrintCurrentInfo();
             }
+
+            if (argument == "notInfo")
+            {
+                if (ddlPlazas.SelectedValue != "0" && ddlStartDate.SelectedValue != "0" && ddlEndDate.SelectedValue != "0")
+                {
+
+                    //Se carga la nueva plaza
+                    this.CurrentPlaza = this.ListPlazas.Where(pl => pl.Id.ToString() == ddlPlazas.SelectedValue).FirstOrDefault();
+                    LoadPlazaShapes();
+                    //ZoomToPlaza(this.CurrentPlaza.ListaEstados);
+                    ZoomToPlaza(this.CurrentPlaza);
+                    //Se cargan las zonas relacionadas con la plaza
+                    //string stDate = ddlStartDate.SelectedValue;
+                    //string edDate = ddlEndDate.SelectedValue;
+                    //DateTime start = Fecha.GetDateTime(ddlStartDate.SelectedItem.Text);
+                    //DateTime end = Fecha.GetDateTime(ddlEndDate.SelectedItem.Text);
+                    //if (start > end)
+                    //{
+                    //    stDate = ddlEndDate.SelectedValue;
+                    //    edDate = ddlStartDate.SelectedValue;
+                    //}
+                    //LoadZonasTab(this.CurrentPlaza.Id.ToString(), stDate, edDate);
+                    LoadCurrentPlazaRenderSetting();
+                    PrintCurrentInfo();
+                    //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "DoPostBack", "__doPostBack(sender, e)", true);
+                }
+                else
+                {
+                    LoadMainMap();
+                    LoadZonasTab("0", "0", "0");
+                    PrintCurrentInfo();
+                }
+            }
+
         }
         #endregion
 
@@ -649,8 +685,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                 try
                 {
                     //Se trata de sobreescribir el archivo dEGP para la plaza
-                    //string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
-                    string urlMap = "~/Maps/MapDinamic.egp";
+                    string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
+                    //string urlMap = "~/Maps/MapDinamic.egp";
                     string plazaFilePath = Server.MapPath(urlMap);
                     File.WriteAllText(plazaFilePath, xmlMainContent);
                     sfmMainMap.ProjectName = urlMap;
@@ -714,6 +750,10 @@ namespace BHermanos.Zonificacion.Web.Modules
                     layerIndex += 5;
                 }
                 sfmMainMap.Zoom = sfmMainMap.Zoom;
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "__doPostBack(\'" + sfmMainMap.ClientID + "\',\'notInfo\');", true);
             }
         }
 
