@@ -1,0 +1,643 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BHermanos.Zonificacion.Web</RootNamespace>
+    <AssemblyName>BHermanos.Zonificacion.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\AjaxControlToolkit.Binary.NET40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxMin, Version=4.97.4951.28478, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="EGIS.ShapeFileLib, Version=4.3.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EGIS.ShapeFileLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EGIS.Web.Controls, Version=4.3.0.0, Culture=neutral, PublicKeyToken=05b98c869b5ffe6a, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EGIS.Web.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BHermanos.Zonificacion.Win\DLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\AjaxControlToolkit.dll" />
+    <Content Include="DLL\AjaxMin.dll" />
+    <Content Include="DLL\EGIS.ShapeFileLib.dll" />
+    <Content Include="DLL\EGIS.Web.Controls.dll" />
+    <Content Include="DLL\geomutil_lib.dll" />
+    <Content Include="DLL\geomutil_libx64.dll" />
+    <Content Include="DLL\itextsharp.dll" />
+    <Content Include="Images\AjaxIndicator.gif" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\BHermanosLogo.png" />
+    <Content Include="Images\Close.png" />
+    <Content Include="Images\Edit.png" />
+    <Content Include="Images\LoginBig.png" />
+    <Content Include="Images\Password.png" />
+    <Content Include="Images\PasswordReset.png" />
+    <Content Include="Images\StartImage.png" />
+    <Content Include="Images\StatusDown.png" />
+    <Content Include="Images\StatusUp.png" />
+    <Content Include="Images\TopMenu\Buzon.png" />
+    <Content Include="Images\TopMenu\Exit.png" />
+    <Content Include="Images\TopMenu\Home.png" />
+    <Content Include="Images\TopMenu\UserInfo.png" />
+    <Content Include="img\apple-touch-icon-precomposed.png" />
+    <Content Include="img\arrows-dark.png" />
+    <Content Include="img\arrows.png" />
+    <Content Include="img\avatar-2.jpg" />
+    <Content Include="img\avatar-3.jpg" />
+    <Content Include="img\avatar-4.jpg" />
+    <Content Include="img\avatar.jpg" />
+    <Content Include="img\blog\blog-image-1.jpg" />
+    <Content Include="img\blog\blog-image-2.jpg" />
+    <Content Include="img\blog\blog-image-3.jpg" />
+    <Content Include="img\blog\blog-medium-image-1.jpg" />
+    <Content Include="img\blog\blog-medium-image-2.jpg" />
+    <Content Include="img\blog\blog-medium-image-3.jpg" />
+    <Content Include="img\blog\blog-thumb-1.jpg" />
+    <Content Include="img\blog\blog-thumb-2.jpg" />
+    <Content Include="img\blog\blog-thumb-3.jpg" />
+    <Content Include="img\clients\client-1.jpg" />
+    <Content Include="img\custom-header-bg.jpg" />
+    <Content Include="img\custom-header.png" />
+    <Content Include="img\device.png" />
+    <Content Include="img\favicon.ico" />
+    <Content Include="img\history-thumb-dark.png" />
+    <Content Include="img\history-thumb.png" />
+    <Content Include="img\holder.png" />
+    <Content Include="img\home-concept-dark.png" />
+    <Content Include="img\home-concept-icons-dark.png" />
+    <Content Include="img\home-concept-icons.png" />
+    <Content Include="img\home-concept-item-1.png" />
+    <Content Include="img\home-concept-item-2.png" />
+    <Content Include="img\home-concept-item-3.png" />
+    <Content Include="img\home-concept-item-dark.png" />
+    <Content Include="img\home-concept-item.png" />
+    <Content Include="img\home-concept-shadow.png" />
+    <Content Include="img\home-concept.png" />
+    <Content Include="img\icons\icon-user-16.png" />
+    <Content Include="img\icons\icon-user-24.png" />
+    <Content Include="img\icons\icon-user-48.png" />
+    <Content Include="img\list-primary.png" />
+    <Content Include="img\logo-dark.png" />
+    <Content Include="img\logo-default.png" />
+    <Content Include="img\logo-footer-small.png" />
+    <Content Include="img\logo-footer.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logos\logo-1.png" />
+    <Content Include="img\logos\logo-2.png" />
+    <Content Include="img\logos\logo-3.png" />
+    <Content Include="img\logos\logo-4.png" />
+    <Content Include="img\logos\logo-5.png" />
+    <Content Include="img\logos\logo-6.png" />
+    <Content Include="img\map-bottom-dark.png" />
+    <Content Include="img\map-bottom.png" />
+    <Content Include="img\map-top-dark.png" />
+    <Content Include="img\map-top.png" />
+    <Content Include="img\office-1.jpg" />
+    <Content Include="img\office-2.jpg" />
+    <Content Include="img\office-3.jpg" />
+    <Content Include="img\office-4.jpg" />
+    <Content Include="img\parallax-transparent.jpg" />
+    <Content Include="img\parallax.jpg" />
+    <Content Include="img\patterns\az_subtle.png" />
+    <Content Include="img\patterns\blizzard.png" />
+    <Content Include="img\patterns\bright_squares.png" />
+    <Content Include="img\patterns\denim.png" />
+    <Content Include="img\patterns\fancy_deboss.png" />
+    <Content Include="img\patterns\gray_jean.png" />
+    <Content Include="img\patterns\honey_im_subtle.png" />
+    <Content Include="img\patterns\linedpaper.png" />
+    <Content Include="img\patterns\linen.png" />
+    <Content Include="img\patterns\pw_maze_white.png" />
+    <Content Include="img\patterns\random_grey_variations.png" />
+    <Content Include="img\patterns\skin_side_up.png" />
+    <Content Include="img\patterns\stitched_wool.png" />
+    <Content Include="img\patterns\straws.png" />
+    <Content Include="img\patterns\subtle_grunge.png" />
+    <Content Include="img\patterns\textured_stripes.png" />
+    <Content Include="img\patterns\wild_oliva.png" />
+    <Content Include="img\patterns\worn_dots.png" />
+    <Content Include="img\pin.png" />
+    <Content Include="img\products\product-1.jpg" />
+    <Content Include="img\products\product-10.jpg" />
+    <Content Include="img\products\product-11.jpg" />
+    <Content Include="img\products\product-12.jpg" />
+    <Content Include="img\products\product-13.jpg" />
+    <Content Include="img\products\product-2.jpg" />
+    <Content Include="img\products\product-3.jpg" />
+    <Content Include="img\products\product-4.jpg" />
+    <Content Include="img\products\product-5.jpg" />
+    <Content Include="img\products\product-6.jpg" />
+    <Content Include="img\products\product-7-2.jpg" />
+    <Content Include="img\products\product-7-3.jpg" />
+    <Content Include="img\products\product-7.jpg" />
+    <Content Include="img\products\product-8.jpg" />
+    <Content Include="img\products\product-9.jpg" />
+    <Content Include="img\projects\project-1.jpg" />
+    <Content Include="img\projects\project-2.jpg" />
+    <Content Include="img\projects\project-3.jpg" />
+    <Content Include="img\projects\project-4.jpg" />
+    <Content Include="img\projects\project-5.jpg" />
+    <Content Include="img\projects\project-6.jpg" />
+    <Content Include="img\projects\project-7.jpg" />
+    <Content Include="img\projects\project-home-1.jpg" />
+    <Content Include="img\projects\project-home-2.jpg" />
+    <Content Include="img\projects\project-home-3.jpg" />
+    <Content Include="img\projects\project-thumb.jpg" />
+    <Content Include="img\projects\project.jpg" />
+    <Content Include="img\slides\gray-clouds.jpg" />
+    <Content Include="img\slides\men-in-black.jpg" />
+    <Content Include="img\slides\mobile-device.png" />
+    <Content Include="img\slides\slide-1.jpg" />
+    <Content Include="img\slides\slide-2.jpg" />
+    <Content Include="img\slides\slide-bg-full.jpg" />
+    <Content Include="img\slides\slide-bg-light.jpg" />
+    <Content Include="img\slides\slide-bg.jpg" />
+    <Content Include="img\slides\slide-concept-2-1.png" />
+    <Content Include="img\slides\slide-concept-2-2.png" />
+    <Content Include="img\slides\slide-concept-2-3.png" />
+    <Content Include="img\slides\slide-concept-2-4.png" />
+    <Content Include="img\slides\slide-concept-2-5.png" />
+    <Content Include="img\slides\slide-concept-draft.png" />
+    <Content Include="img\slides\slide-concept.png" />
+    <Content Include="img\slides\slide-light-1.jpg" />
+    <Content Include="img\slides\slide-title-border-light.png" />
+    <Content Include="img\slides\slide-title-border.png" />
+    <Content Include="img\social-sprites.png" />
+    <Content Include="img\system.jpg" />
+    <Content Include="img\team\team-1.jpg" />
+    <Content Include="img\team\team-2.jpg" />
+    <Content Include="img\team\team-3.jpg" />
+    <Content Include="img\team\team-4.jpg" />
+    <Content Include="img\team\team-5.jpg" />
+    <Content Include="img\team\team-6.jpg" />
+    <Content Include="img\team\team-7.jpg" />
+    <Content Include="img\team\team-8.jpg" />
+    <Content Include="img\team\team-9.jpg" />
+    <Content Include="Login\Login.aspx" />
+    <Content Include="Login\ResetPassword.aspx" />
+    <Content Include="MainForm.aspx" />
+    <Content Include="Modules\Admin\Users.aspx" />
+    <Content Include="Modules\Admin\UsersChild.aspx" />
+    <Content Include="Modules\Home.aspx" />
+    <Content Include="Modules\MainZoneInfo.aspx" />
+    <Content Include="Modules\ZoneInfo.aspx" />
+    <Content Include="Modules\ZoneInfoChild.aspx" />
+    <Content Include="Modules\ZoneInfoMainChild.aspx" />
+    <Content Include="Scripts\Generic.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.alerts.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Hover.js" />
+    <Content Include="Scripts\Reset.js" />
+    <Content Include="Scripts\MenuMake.js" />
+    <Content Include="Scripts\Menu.js" />
+    <Content Include="Scripts\Login.js" />
+    <Content Include="Scripts\Splitter.js" />
+    <Content Include="Scripts\theme.js" />
+    <Content Include="Scripts\theme.plugins.js" />
+    <Content Include="Styles\ie.css" />
+    <Content Include="Styles\images\Try1.png" />
+    <Content Include="Styles\skins\default.css" />
+    <Content Include="Styles\theme-animate.css" />
+    <Content Include="Styles\theme-blog.css" />
+    <Content Include="Styles\theme-responsive.css" />
+    <Content Include="Styles\theme-shop.css" />
+    <Content Include="Vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Vendor\circle-flip-slideshow\css\component.css" />
+    <Content Include="Vendor\circle-flip-slideshow\js\jquery.flipshow.js" />
+    <Content Include="Vendor\circle-flip-slideshow\README.txt" />
+    <Content Include="Vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Vendor\isotope\jquery.isotope.css" />
+    <Content Include="Vendor\isotope\jquery.isotope.js" />
+    <Content Include="Vendor\jflickrfeed\jflickrfeed.js" />
+    <Content Include="Vendor\jquery.appear.js" />
+    <Content Include="Vendor\jquery.cookie.js" />
+    <Content Include="Vendor\jquery.easing.js" />
+    <Content Include="Vendor\jquery.gmap.js" />
+    <Content Include="Vendor\jquery.js" />
+    <Content Include="Vendor\jquery.knob.js" />
+    <Content Include="Vendor\jquery.stellar.js" />
+    <Content Include="Vendor\jquery.validate.js" />
+    <Content Include="Vendor\magnific-popup\magnific-popup.css" />
+    <Content Include="Vendor\magnific-popup\magnific-popup.js" />
+    <Content Include="Vendor\mediaelement\background.png" />
+    <Content Include="Vendor\mediaelement\bigplay.png" />
+    <Content Include="Vendor\mediaelement\bigplay.svg" />
+    <Content Include="Vendor\mediaelement\controls-ted.png" />
+    <Content Include="Vendor\mediaelement\controls-wmp-bg.png" />
+    <Content Include="Vendor\mediaelement\controls-wmp.png" />
+    <Content Include="Vendor\mediaelement\controls.png" />
+    <Content Include="Vendor\mediaelement\controls.svg" />
+    <Content Include="Vendor\mediaelement\flashmediaelement-cdn.swf" />
+    <Content Include="Vendor\mediaelement\flashmediaelement.swf" />
+    <Content Include="Vendor\mediaelement\jquery.js" />
+    <Content Include="Vendor\mediaelement\loading.gif" />
+    <Content Include="Vendor\mediaelement\mediaelement-and-player.js" />
+    <Content Include="Vendor\mediaelement\mediaelement-and-player.min.js" />
+    <Content Include="Vendor\mediaelement\mediaelement.js" />
+    <Content Include="Vendor\mediaelement\mediaelement.min.js" />
+    <Content Include="Vendor\mediaelement\mediaelementplayer.css" />
+    <Content Include="Vendor\mediaelement\mediaelementplayer.js" />
+    <Content Include="Vendor\mediaelement\mediaelementplayer.min.css" />
+    <Content Include="Vendor\mediaelement\mediaelementplayer.min.js" />
+    <Content Include="Vendor\mediaelement\mejs-skins.css" />
+    <Content Include="Vendor\mediaelement\silverlightmediaelement.xap" />
+    <Content Include="Vendor\modernizr.js" />
+    <Content Include="Vendor\nivo-slider\jquery.nivo.slider.js" />
+    <Content Include="Vendor\nivo-slider\nivo-slider.css" />
+    <Content Include="Vendor\nivo-slider\themes\bar\arrows.png" />
+    <Content Include="Vendor\nivo-slider\themes\bar\bar.css" />
+    <Content Include="Vendor\nivo-slider\themes\bar\bullets.png" />
+    <Content Include="Vendor\nivo-slider\themes\bar\loading.gif" />
+    <Content Include="Vendor\nivo-slider\themes\dark\arrows.png" />
+    <Content Include="Vendor\nivo-slider\themes\dark\bullets.png" />
+    <Content Include="Vendor\nivo-slider\themes\dark\dark.css" />
+    <Content Include="Vendor\nivo-slider\themes\dark\loading.gif" />
+    <Content Include="Vendor\nivo-slider\themes\default\arrows.png" />
+    <Content Include="Vendor\nivo-slider\themes\default\bullets.png" />
+    <Content Include="Vendor\nivo-slider\themes\default\default.css" />
+    <Content Include="Vendor\nivo-slider\themes\default\loading.gif" />
+    <Content Include="Vendor\nivo-slider\themes\light\arrows.png" />
+    <Content Include="Vendor\nivo-slider\themes\light\bullets.png" />
+    <Content Include="Vendor\nivo-slider\themes\light\light.css" />
+    <Content Include="Vendor\nivo-slider\themes\light\loading.gif" />
+    <Content Include="Vendor\owl-carousel\AjaxLoader.gif" />
+    <Content Include="Vendor\owl-carousel\grabbing.png" />
+    <Content Include="Vendor\owl-carousel\owl.carousel.css" />
+    <Content Include="Vendor\owl-carousel\owl.carousel.js" />
+    <Content Include="Vendor\owl-carousel\owl.theme.css" />
+    <Content Include="Vendor\owl-carousel\owl.transitions.css" />
+    <Content Include="Vendor\respond.js" />
+    <Content Include="Vendor\rs-plugin\assets\arrowleft.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrowright.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_large_left.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_large_right.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_left.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_left2.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_right.png" />
+    <Content Include="Vendor\rs-plugin\assets\arrow_right2.png" />
+    <Content Include="Vendor\rs-plugin\assets\black50.png" />
+    <Content Include="Vendor\rs-plugin\assets\boxed_bgtile.png" />
+    <Content Include="Vendor\rs-plugin\assets\bullet.png" />
+    <Content Include="Vendor\rs-plugin\assets\bullets.png" />
+    <Content Include="Vendor\rs-plugin\assets\bullets2.png" />
+    <Content Include="Vendor\rs-plugin\assets\bullet_boxed.png" />
+    <Content Include="Vendor\rs-plugin\assets\coloredbg.png" />
+    <Content Include="Vendor\rs-plugin\assets\grain.png" />
+    <Content Include="Vendor\rs-plugin\assets\gridtile.png" />
+    <Content Include="Vendor\rs-plugin\assets\gridtile_3x3.png" />
+    <Content Include="Vendor\rs-plugin\assets\gridtile_3x3_white.png" />
+    <Content Include="Vendor\rs-plugin\assets\gridtile_white.png" />
+    <Content Include="Vendor\rs-plugin\assets\large_left.png" />
+    <Content Include="Vendor\rs-plugin\assets\large_right.png" />
+    <Content Include="Vendor\rs-plugin\assets\loader.gif" />
+    <Content Include="Vendor\rs-plugin\assets\loader2.gif" />
+    <Content Include="Vendor\rs-plugin\assets\navigdots.png" />
+    <Content Include="Vendor\rs-plugin\assets\navigdots_bgtile.png" />
+    <Content Include="Vendor\rs-plugin\assets\shadow1.png" />
+    <Content Include="Vendor\rs-plugin\assets\shadow2.png" />
+    <Content Include="Vendor\rs-plugin\assets\shadow3.png" />
+    <Content Include="Vendor\rs-plugin\assets\small_left.png" />
+    <Content Include="Vendor\rs-plugin\assets\small_left_boxed.png" />
+    <Content Include="Vendor\rs-plugin\assets\small_right.png" />
+    <Content Include="Vendor\rs-plugin\assets\small_right_boxed.png" />
+    <Content Include="Vendor\rs-plugin\assets\timer.png" />
+    <Content Include="Vendor\rs-plugin\assets\timerdot.png" />
+    <Content Include="Vendor\rs-plugin\assets\transparent.jpg" />
+    <Content Include="Vendor\rs-plugin\assets\white50.png" />
+    <Content Include="Vendor\rs-plugin\css\settings-ie8.css" />
+    <Content Include="Vendor\rs-plugin\css\settings.css" />
+    <Content Include="Vendor\rs-plugin\font\revicons.svg" />
+    <Content Include="Vendor\rs-plugin\images\decor_inside.png" />
+    <Content Include="Vendor\rs-plugin\images\decor_inside_white.png" />
+    <Content Include="Vendor\rs-plugin\images\decor_testimonial.png" />
+    <Content Include="Vendor\rs-plugin\images\gradient\g30.png" />
+    <Content Include="Vendor\rs-plugin\images\gradient\g40.png" />
+    <Content Include="Vendor\rs-plugin\js\jquery.themepunch.plugins.min.js" />
+    <Content Include="Vendor\rs-plugin\js\jquery.themepunch.revolution.js" />
+    <Content Include="Vendor\rs-plugin\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Vendor\twitterjs\twitter.js" />
+    <Content Include="StartPage.html" />
+    <Content Include="Styles\images\._help.gif" />
+    <Content Include="Styles\images\._important.gif" />
+    <Content Include="Styles\images\._info.gif" />
+    <Content Include="Styles\images\._title.gif" />
+    <Content Include="Styles\images\bg-btn.png" />
+    <Content Include="Styles\images\close.png" />
+    <Content Include="Styles\images\FondoBoton.png" />
+    <Content Include="Styles\images\FondoBotonChico.png" />
+    <Content Include="Styles\images\FondoBotonGde.png" />
+    <Content Include="Styles\images\FondoBotonMed.png" />
+    <Content Include="Styles\images\footer.png" />
+    <Content Include="Styles\images\form-bg.png" />
+    <Content Include="Styles\images\header.png" />
+    <Content Include="Styles\images\help.gif" />
+    <Content Include="Styles\images\important.gif" />
+    <Content Include="Styles\images\info.gif" />
+    <Content Include="Styles\images\list-primary.png" />
+    <Content Include="Styles\images\lock.png" />
+    <Content Include="Styles\images\paneh.gif" />
+    <Content Include="Styles\images\panehc.gif" />
+    <Content Include="Styles\images\panev.gif" />
+    <Content Include="Styles\images\panevc.gif" />
+    <Content Include="Styles\images\reset.png" />
+    <Content Include="Styles\images\social-sprites.png" />
+    <Content Include="Styles\images\title.gif" />
+    <Content Include="Styles\jquery.alerts.css" />
+    <Content Include="Styles\Splitter.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\Login.css" />
+    <Content Include="Styles\Menu.css" />
+    <Content Include="Styles\theme-elements.css" />
+    <Content Include="Styles\theme.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BHermanosSite.Master.cs">
+      <DependentUpon>BHermanosSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BHermanosSite.Master.designer.cs">
+      <DependentUpon>BHermanosSite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\Compressor.cs" />
+    <Compile Include="Clases\MunicipioCustomRenderSettings.cs" />
+    <Compile Include="Clases\Partidas\ColoniasPartidasCustomRenderSettings.cs" />
+    <Compile Include="Clases\PlazaCustomRenderSettings .cs" />
+    <Compile Include="Clases\SinglePlazaCustomRenderSettings .cs" />
+    <Compile Include="Clases\ZonaCustomRenderSettings.cs" />
+    <Compile Include="Clases\Partidas\ZonasPartidasCustomRenderSettings.cs" />
+    <Compile Include="Clases\ZonaSubzonasCustomRenderSettings.cs" />
+    <Compile Include="Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.aspx.cs">
+      <DependentUpon>MainForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainForm.aspx.designer.cs">
+      <DependentUpon>MainForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UsersChild.aspx.cs">
+      <DependentUpon>UsersChild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UsersChild.aspx.designer.cs">
+      <DependentUpon>UsersChild.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MainZoneInfo.aspx.cs">
+      <DependentUpon>MainZoneInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\MainZoneInfo.aspx.designer.cs">
+      <DependentUpon>MainZoneInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ZoneInfo.aspx.cs">
+      <DependentUpon>ZoneInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ZoneInfo.aspx.designer.cs">
+      <DependentUpon>ZoneInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoChild.aspx.cs">
+      <DependentUpon>ZoneInfoChild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoChild.aspx.designer.cs">
+      <DependentUpon>ZoneInfoChild.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoMainChild.aspx.cs">
+      <DependentUpon>ZoneInfoMainChild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ZoneInfoMainChild.aspx.designer.cs">
+      <DependentUpon>ZoneInfoMainChild.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.draggable.js" />
+    <Content Include="Maps\Estados\30\Calles.dbf" />
+    <Content Include="Maps\Estados\30\Calles.prj" />
+    <Content Include="Maps\Estados\30\Calles.shp" />
+    <Content Include="Maps\Estados\30\Calles.shx" />
+    <Content Include="Maps\Estados\30\Carreteras.dbf" />
+    <Content Include="Maps\Estados\30\Carreteras.prj" />
+    <Content Include="Maps\Estados\30\Carreteras.shp" />
+    <Content Include="Maps\Estados\30\Carreteras.shx" />
+    <Content Include="Maps\Estados\30\Colonias.dbf" />
+    <Content Include="Maps\Estados\30\Colonias.prj" />
+    <Content Include="Maps\Estados\30\Colonias.shp" />
+    <Content Include="Maps\Estados\30\Colonias.shx" />
+    <Content Include="Maps\Estados\30\Estado.dbf" />
+    <Content Include="Maps\Estados\30\Estado.prj" />
+    <Content Include="Maps\Estados\30\Estado.shp" />
+    <Content Include="Maps\Estados\30\Estado.shx" />
+    <Content Include="Maps\Estados\30\Municipios.dbf" />
+    <Content Include="Maps\Estados\30\Municipios.prj" />
+    <Content Include="Maps\Estados\30\Municipios.shp" />
+    <Content Include="Maps\Estados\30\Municipios.shx" />
+    <Content Include="Maps\Nacional\national_estatal.dbf" />
+    <Content Include="Maps\Nacional\national_estatal.prj" />
+    <Content Include="Maps\Nacional\national_estatal.shp" />
+    <Content Include="Maps\Nacional\national_estatal.shx" />
+    <Content Include="Maps\Estados\30\30.egp" />
+    <Content Include="Maps\Nacional\national_estatal.egp" />
+    <Content Include="BHermanosSite.Master" />
+    <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Vendor\mediaelement\Thumbs.db" />
+    <Content Include="Vendor\nivo-slider\themes\light\Thumbs.db" />
+    <Content Include="Vendor\owl-carousel\Thumbs.db" />
+    <Content Include="Vendor\rs-plugin\assets\arrows.psd" />
+    <Content Include="Vendor\rs-plugin\assets\bullets.psd" />
+    <Content Include="Vendor\rs-plugin\assets\small_arrows.psd" />
+    <Content Include="Vendor\rs-plugin\font\revicons.eot" />
+    <Content Include="Vendor\rs-plugin\font\revicons.ttf" />
+    <Content Include="Vendor\rs-plugin\font\revicons.woff" />
+    <Content Include="img\blog\Thumbs.db" />
+    <Content Include="img\clients\Thumbs.db" />
+    <Content Include="img\icons\Thumbs.db" />
+    <Content Include="img\logos\Thumbs.db" />
+    <Content Include="img\patterns\Thumbs.db" />
+    <Content Include="img\products\Thumbs.db" />
+    <Content Include="img\projects\Thumbs.db" />
+    <Content Include="img\slides\Thumbs.db" />
+    <Content Include="img\team\Thumbs.db" />
+    <Content Include="img\Thumbs.db" />
+    <Content Include="Maps\Main.egp" />
+    <Content Include="Maps\Estados\16\16.egp" />
+    <Content Include="Maps\Estados\16\Calles.dbf" />
+    <Content Include="Maps\Estados\16\Calles.prj" />
+    <Content Include="Maps\Estados\16\Calles.shp" />
+    <Content Include="Maps\Estados\16\Calles.shx" />
+    <Content Include="Maps\Estados\16\Carreteras.dbf" />
+    <Content Include="Maps\Estados\16\Carreteras.prj" />
+    <Content Include="Maps\Estados\16\Carreteras.shp" />
+    <Content Include="Maps\Estados\16\Carreteras.shx" />
+    <Content Include="Maps\Estados\16\Colonias.dbf" />
+    <Content Include="Maps\Estados\16\Colonias.prj" />
+    <Content Include="Maps\Estados\16\Colonias.shp" />
+    <Content Include="Maps\Estados\16\Colonias.shx" />
+    <Content Include="Maps\Estados\16\Estado.dbf" />
+    <Content Include="Maps\Estados\16\Estado.prj" />
+    <Content Include="Maps\Estados\16\Estado.shp" />
+    <Content Include="Maps\Estados\16\Estado.shx" />
+    <Content Include="Maps\Estados\16\Municipios.dbf" />
+    <Content Include="Maps\Estados\16\Municipios.prj" />
+    <Content Include="Maps\Estados\16\Municipios.shp" />
+    <Content Include="Maps\Estados\16\Municipios.shx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BHermanos.Zonificacion.BusinessEntities\BHermanos.Zonificacion.BusinessEntities.csproj">
+      <Project>{a69dc953-23ea-4ba0-9ccc-8b246de69d70}</Project>
+      <Name>BHermanos.Zonificacion.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BHermanos.Zonificacion.WebService\BHermanos.Zonificacion.WebService.csproj">
+      <Project>{5dd4a0bd-2e29-4c72-a28b-3fb090b1372b}</Project>
+      <Name>BHermanos.Zonificacion.WebService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\Excel\" />
+    <Folder Include="Files\Pdf\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2996</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2996/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

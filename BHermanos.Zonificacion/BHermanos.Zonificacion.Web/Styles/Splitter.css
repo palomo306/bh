@@ -1,0 +1,177 @@
+﻿html, body, form{
+    height:100%;
+    width:100%;     
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+#headContainer {/* Main splitter element */
+    height:8%;
+    width:100%;
+    margin:0;
+    padding:0;
+    margin-bottom:5px;
+    text-align:right;
+}
+
+
+#splitterContainer {/* Main splitter element */
+    height:92%;width:100%;margin:0;padding:0;
+}
+
+#UpdatePanel1 {
+    height:100%;
+}
+
+#leftPane{
+    float:left;
+    width:74%;
+    height:100%;
+    border-top:solid 1px #9cbdff;
+    background:#c4dcfb;
+    overflow: auto;
+}
+
+#rightPane{	/*Contains toolbar and horizontal splitter*/
+    float:right;
+    width:25%;
+    height:100%;
+    background:#f4f4f4;
+}
+#rightSplitterContainer{/*horizontal splitter*/	
+    width:100%;
+    background:#FFFFFF;
+    border-top:solid 1px #9cbdff;
+} 
+
+/* Splitbar styles; these are the default class names and required styles */
+.splitbarV {
+float:left;width:6px;height:100%;
+line-height:0px;font-size:0px;
+border-left:solid 1px #9cbdff;border-right:solid 1px #9cbdff;
+background:#cbe1fb url(images/panev.gif) 0% 50%;
+}
+.splitbarH {
+height:6px;text-align:left;line-height:0px;font-size:0px;
+border-top:solid 1px #9cbdff;border-bottom:solid 1px #9cbdff;
+background:#cbe1fb url(images/paneh.gif) 50% 0%;
+}
+
+.splitbuttonV{
+margin-top:-41px;margin-left:-4px;top:50%;position:relative;
+height:83px;width:10px;
+background:transparent url(images/panevc.gif) 10px 50%;
+}
+.splitbuttonV.invert{
+margin-left:0px;background:transparent url(images/panevc.gif) 0px 50%;
+}
+.splitbuttonH{
+margin-left:-41px;left:50%;position:relative;
+height:10px !important;width:83px;
+background:transparent url(images/panehc.gif) 50% 0px;
+}
+.splitbuttonH.invert{
+margin-top:-4px;background:transparent url(images/panehc.gif) 50% -10px;
+}
+.splitbarV.working,.splitbarH.working,.splitbuttonV.working,.splitbuttonH.working{
+ -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;
+}
+
+
+
+#rightTopPane2 {
+    height:50%;
+    overflow-y:hidden;
+    padding:5px;    
+}
+
+#rightBottonPane2 {
+    height:42%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+#rightMiddlePane2 {
+    height:10%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+
+
+
+#rightTopPane {
+    height:42%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+#rightBottonPane {
+    height:42%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+#rightMiddlePane {
+    height:7%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+
+#rightTopPane3 {
+    height:50%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+#rightBottonPane2 {
+    height:34%;
+    overflow-y:hidden;
+    padding:5px;
+}
+
+
+
+#rightExtBottonPane {
+    height:7%;
+    overflow-y:auto;
+    padding:5px;
+}
+
+  .scrolledGridView
+    {
+        overflow-x: auto; 
+        text-align: left;
+        width: 100%; /* i.e. too small for all the columns */
+    }
+
+    .pinned
+    {
+        position: fixed; /* i.e. not scrolled */
+        background-color: White; /* prevent the scrolled columns showing through */
+        z-index: 100; /* keep the pinned on top of the scrollables */
+    }
+    .scrolled
+    {
+        position: relative;
+        left: 180px; /* i.e. col1 Width + col2 width */
+        overflow: hidden;
+        white-space: nowrap;        
+    }
+    .col1
+    {
+        left: 0px;
+        width: 150px;
+    }    
+
+#sfmMainMap{
+   box-sizing: border-box;
+   width: 100%;
+   padding: 50px;
+}
+
+.Invisible {
+    visibility:hidden;      
+}

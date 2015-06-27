@@ -1,0 +1,286 @@
+﻿html, body, form {
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    margin:0px;
+    padding:0px;
+    font-family:Arial;
+}
+
+#wrapper {
+    width: 100%;
+    height:85%;    
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+#first {
+    width: 180px;
+    height:100%;
+    float:left; /* add this */
+    
+}
+
+#second {
+    margin-right:0px;
+    height:100%;
+    overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+
+.MenuOption {
+     cursor:pointer;
+     border-bottom: 1px solid #0088CC;
+}
+
+.BackGroudPopUp
+{
+    position:fixed;
+    background-color:Black;    
+    top:0px;
+    left:0px;
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+element.style {
+}
+
+.btn-primary, .pagination > .active > a {
+    border-color: #0088cc !important;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0088cc;
+    border-color: #0088cc;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #ccc;
+    border-color: #bfbfbf;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+    button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        -webkit-appearance: button;
+        cursor: pointer;
+    }
+
+button, select {
+    text-transform: none;
+}
+
+button {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.left-column, .right-column{
+  float:left;
+}
+
+.left-column {
+    width: 75%;
+    height:100%;
+}
+
+.left-column2 {
+    width: 75%;
+    height:80%;
+}
+
+.right-column {
+    width: 25%;
+    height:100%;
+}
+
+.right-column2 {
+    width: 25%;
+    height:80%;
+}
+
+
+#ContentDiv {
+    height:100%;
+    padding:2px;
+}
+
+#HeaderDiv {
+    height:15%;
+}
+
+.ContentRight {
+    float: right;
+    margin: 10px;
+}
+
+#InfoDiv {
+    height:100%;
+    padding:2px;
+}
+
+#InfoDiv2 {
+    height:100%;
+    padding:2px;
+    border:1px solid Black;
+}
+
+#TotalDiv {
+    height:18%;    
+    vertical-align: bottom;
+    padding-top:17px;
+}
+
+#MapDiv {
+    height:70%;
+    padding:2px;
+}
+
+#MapMainDiv {
+    height:95%;
+    padding:2px;
+}
+
+#MapMainDiv2 {
+    height:82%;
+    padding:2px;
+}
+
+
+.DropDown {
+    padding:6px;
+    margin:0px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    color:#444;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    font-family:Arial;
+}
+
+.SeparateCell {
+    padding:4px;
+    padding-bottom:1px;
+    padding-top:1px;
+}
+
+
+.ContentLeftSide {
+    width:100%;
+}
+
+.PopUpDetail {
+    position:absolute;
+    top:50%;
+    margin-top: -125px;
+    left:50%;
+    margin-left: -300px; 
+    z-index:1001;   
+}
+
+
+.PopNewUser {
+    position:absolute;
+    top:50%;
+    margin-top: -60px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.PopUpDelete {
+    position:absolute;
+    top:50%;
+    margin-top: -50px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.PopUpDelete {
+    position:absolute;
+    top:50%;
+    margin-top: -50px;
+    left:50%;
+    margin-left: -160px; 
+    z-index:1001;
+}
+
+.Title {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #666666;
+    color: #efefef;
+    padding: 4px;
+}
+
+.Pointer {
+    cursor:pointer;
+}
+
+.Separator {
+    height:2px;
+    font-size:2px;
+}
+
+.CellCenter {
+    text-align: center;
+}
+
+.CellButton {
+    padding:4px;
+}
+
+.CellText {
+    font-family:sans-serif;
+}

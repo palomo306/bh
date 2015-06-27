@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BHermanos" Class="DataAccessDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local);Initial Catalog=BHermanos;Persist Security Info=True;User ID=usrZonificacion" SettingsObjectName="BHermanos.Zonificacion.DataAccess.Properties.Settings" SettingsPropertyName="BHermanosConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ZonTabs" Member="ZonTabs">
+    <Type Name="ZonTab">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonTab_ZonPartidasXTab" Member="ZonPartidasXTabs" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonPartidasXTab" />
+      <Association Name="ZonTab_ZonNegocio" Member="ZonNegocios" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonNegocio" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonUmbralesXPartida" Member="ZonUmbralesXPartidas">
+    <Type Name="ZonUmbralesXPartida">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiPartidaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiZonaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiNivel" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiConsecutivo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcColor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcOperador" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiValor" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonPartidasXTab_ZonUmbralesXPartida" Member="ZonPartidasXTab" ThisKey="fiTabId,fiPartidaId" OtherKey="fiTabId,fiPartidaId" Type="ZonPartidasXTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonRubros" Member="ZonRubros">
+    <Type Name="ZonRubro">
+      <Column Name="fiGrupoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcFormato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="ZonGrupoRubro_ZonRubro" Member="ZonGrupoRubro" ThisKey="fiGrupoId" OtherKey="fiGrupoId" Type="ZonGrupoRubro" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonGrupoRubros" Member="ZonGrupoRubros">
+    <Type Name="ZonGrupoRubro">
+      <Column Name="fiGrupoId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonGrupoRubro_ZonRubro" Member="ZonRubros" ThisKey="fiGrupoId" OtherKey="fiGrupoId" Type="ZonRubro" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonUsuarios" Member="ZonUsuarios">
+    <Type Name="ZonUsuario">
+      <Column Name="fcUsuario" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fvPassword" Type="System.Data.Linq.Binary" DbType="VarBinary(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcMail" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiEstatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ZonUsuario_ZonPerfile" Member="ZonPerfiles" ThisKey="fcUsuario" OtherKey="fcUsuario" Type="ZonPerfile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonRoles" Member="ZonRoles">
+    <Type Name="ZonRole">
+      <Column Name="fiRolId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonRole_ZonPermiso" Member="ZonPermisos" ThisKey="fiRolId" OtherKey="fiRoldId" Type="ZonPermiso" />
+      <Association Name="ZonRole_ZonPerfile" Member="ZonPerfiles" ThisKey="fiRolId" OtherKey="fiRolId" Type="ZonPerfile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPermisos" Member="ZonPermisos">
+    <Type Name="ZonPermiso">
+      <Column Name="fiMenuId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRoldId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ZonRole_ZonPermiso" Member="ZonRole" ThisKey="fiRoldId" OtherKey="fiRolId" Type="ZonRole" IsForeignKey="true" />
+      <Association Name="ZonMenus_ZonPermiso" Member="ZonMenus" ThisKey="fiMenuId" OtherKey="fiMenuId" Type="ZonMenus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPerfiles" Member="ZonPerfiles">
+    <Type Name="ZonPerfile">
+      <Column Name="fcUsuario" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiRolId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ZonRole_ZonPerfile" Member="ZonRole" ThisKey="fiRolId" OtherKey="fiRolId" Type="ZonRole" IsForeignKey="true" />
+      <Association Name="ZonUsuario_ZonPerfile" Member="ZonUsuario" ThisKey="fcUsuario" OtherKey="fcUsuario" Type="ZonUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonAplicaciones" Member="ZonAplicaciones">
+    <Type Name="ZonAplicacione">
+      <Column Name="fiAplicacionId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ZonAplicacione_ZonMenus" Member="ZonMenus" ThisKey="fiAplicacionId" OtherKey="fiAplicacionId" Type="ZonMenus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonMenus" Member="ZonMenus">
+    <Type Name="ZonMenus">
+      <Column Name="fiMenuId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiDependeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcAplicacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="fiAplicacionId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ZonMenus_ZonPermiso" Member="ZonPermisos" ThisKey="fiMenuId" OtherKey="fiMenuId" Type="ZonPermiso" />
+      <Association Name="ZonAplicacione_ZonMenus" Member="ZonAplicacione" ThisKey="fiAplicacionId" OtherKey="fiAplicacionId" Type="ZonAplicacione" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonPartidasXTab" Member="ZonPartidasXTabs">
+    <Type Name="ZonPartidasXTab">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiPartidaId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="flTieneUmbral" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="flStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonPartidasXTab_ZonUmbralesXPartida" Member="ZonUmbralesXPartidas" ThisKey="fiTabId,fiPartidaId" OtherKey="fiTabId,fiPartidaId" Type="ZonUmbralesXPartida" />
+      <Association Name="ZonTab_ZonPartidasXTab" Member="ZonTab" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonNegocios" Member="ZonNegocios">
+    <Type Name="ZonNegocio">
+      <Column Name="fiNegocioId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flEstatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ZonNegocio_ZonDatosXNegocio" Member="ZonDatosXNegocios" ThisKey="fiNegocioId,fiTabId" OtherKey="fiNegocioId,fiTabId" Type="ZonDatosXNegocio" />
+      <Association Name="ZonTab_ZonNegocio" Member="ZonTab" ThisKey="fiTabId" OtherKey="fiTabId" Type="ZonTab" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ZonDatosXNegocio" Member="ZonDatosXNegocios">
+    <Type Name="ZonDatosXNegocio">
+      <Column Name="fiTabId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiNegocioId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fdFecha" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fiValor" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="ZonNegocio_ZonDatosXNegocio" Member="ZonNegocio" ThisKey="fiNegocioId,fiTabId" OtherKey="fiNegocioId,fiTabId" Type="ZonNegocio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.spUpdZona" Method="spUpdZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spUpdSubZona" Method="spUpdSubZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spUpdPlaza" Method="spUpdPlaza">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsZona" Method="spInsZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsSubZona" Method="spInsSubZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsPlaza" Method="spInsPlaza">
+    <Parameter Name="pcNombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pcColor" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="pcColonias" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsColoniasXZona" Method="spInsColoniasXZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piColoniaId" Type="System.Double" DbType="Float" />
+    <Parameter Name="piOrden" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spInsColoniasXPlaza" Method="spInsColoniasXPlaza">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piColoniaId" Type="System.Double" DbType="Float" />
+    <Parameter Name="piTipo" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piOrden" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDelZona" Method="spDelZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDelSubZona" Method="spDelSubZona">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDelPlaza" Method="spDelPlaza">
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spConZonas" Method="spConZonas">
+    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConZonasResult">
+      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiZonaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fcColor" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConRubrosXGrupo" Method="spConRubrosXGrupo">
+    <Parameter Name="piGrupoId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConRubrosXGrupoResult">
+      <Column Name="fiRubroId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcDescripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="flMain" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fcExpresion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="fcSignoAcumulado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="fcFormato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fiOrden" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConMunicipios" Method="spConMunicipios">
+    <Parameter Name="piEstadoId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConMunicipiosResult">
+      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConGrupoRubros" Method="spConGrupoRubros">
+    <ElementType Name="spConGrupoRubrosResult">
+      <Column Name="fiGrupoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConEstados" Method="spConEstados">
+    <ElementType Name="spConEstadosResult">
+      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConColoniasXZona" Method="spConColoniasXZona">
+    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piZonaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConColoniasXZonaResult">
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="fiOrdenId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConPlazas" Method="spConPlazas">
+    <Parameter Name="piVista" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spConPlazasResult">
+      <Column Name="fiPlazaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fcColor" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fcNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fiEstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiMunicipioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fiColoniaId" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="fiTipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spConColonias" Method="spConColonias">
+    <Parameter Name="piVistaId" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="piPlazaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piColoniaId" Type="System.Double" DbType="Float" />
+    <ElementType Name="spConColoniasResult">
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMunicipio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdColonia" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="IdTipo" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="NSE_Predo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ab" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="cmas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="c" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="cmenos" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="dmas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="d" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="e" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="nc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pobtot" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pobmas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pobfem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_0a2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_0a2_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_0a2_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_5ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_5ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_5ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3a5" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3a5_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_3a5_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_6a11" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_6a11_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_6a11_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_8a14" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_8a14_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_8a14_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12a14" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12a14_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_12a14_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15a17" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15a17_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15a17_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18a24" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18a24_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_18a24_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_15a49_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_60ymas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_60ymas_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p_60ymas_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="rel_h_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pob0_14" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pob15_64" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pob65_mas" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacent_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacent_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacoe" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacoe_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pnacoe_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pres2005" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pres2005_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pres2005_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="presoe05" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="presoe05_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="presoe05_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3ym_hli" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3ym_hli_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3ym_hli_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hlinhe" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hlinhe_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hlinhe_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hli_he" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hli_he_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3hli_he_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p5_hli" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p5_hli_nhe" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p5_hli_he" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="phog_ind" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pcon_lim" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_mot" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_vis" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_leng" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_aud" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_mot2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_men" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pclim_men2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="psin_lim" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3a5_noa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3a5_noa_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p3a5_noa_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p6a11_noa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p6a11_noam" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p6a11_noaf" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12a14noa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12a14noam" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12a14noaf" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15a17a" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15a17a_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15a17a_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18a24a" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18a24a_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18a24a_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p8a14an" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p8a14an_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p8a14an_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_an" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_an_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_an_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_se" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_se_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15ym_se_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_in" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_inm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_inf" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_co" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_com" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15pri_cof" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_in" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_inm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_inf" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_co" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_com" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p15sec_cof" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18ym_pb" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18ym_pb_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p18ym_pb_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pea" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pea_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pea_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pe_inac" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pe_inac_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pe_inac_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pocupada" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pocupada_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pocupada_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="psinder" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pdesocup" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pdesocup_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pdesocup_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pder_ss" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pder_imss" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pder_iste" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pder_istee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pder_segp" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12ym_solt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12ym_casa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="p12ym_sepa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pcatolica" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pncatolica" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="potras_rel" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="psin_relig" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tothog" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="hogjef_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="hogjef_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pobhog" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="phogjef_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="phogjef_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vivtot" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tvivhab" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tvivpar" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vivpar_hab" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tvivparhab" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vivpar_des" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vivpar_ut" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ocupvivpar" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_pisodt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_pisoti" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_1dor" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_2ymasd" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_1cuart" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_2cuart" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_3ymasc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_c_elec" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_s_elec" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_aguadv" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_aguafv" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_excsa" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_drenaj" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_nodren" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_c_serv" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_snbien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_radio" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_tv" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_refri" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_lavad" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_autom" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_pc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_telef" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_cel" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="vph_inter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="graproes" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="graproes_m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="graproes_f" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="prom_ocup" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pro_ocup_c" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="dist_tot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

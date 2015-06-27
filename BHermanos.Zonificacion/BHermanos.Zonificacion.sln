@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.Web", "BHermanos.Zonificacion.Web\BHermanos.Zonificacion.Web.csproj", "{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.Seguridad", "BHermanos.Zonificacion.Seguridad\BHermanos.Zonificacion.Seguridad.csproj", "{5E77A773-8C73-4F2E-8003-56A2F026C924}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seguridad", "Seguridad", "{38D18C88-A993-4E8B-939D-8E3DEF6DE004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.Win", "BHermanos.Zonificacion.Win\BHermanos.Zonificacion.Win.csproj", "{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AF73B3E2-C815-49D5-99FF-009ABE809E82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.DataAccess", "BHermanos.Zonificacion.DataAccess\BHermanos.Zonificacion.DataAccess.csproj", "{BF6B9924-8936-4FB3-909D-BCF37A89BB94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessMaps", "BusinessMaps", "{1D83732F-DF05-4CAB-94FE-644C0FD794AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.BusinessMaps", "BHermanos.Zonificacion.BusinessMaps\BHermanos.Zonificacion.BusinessMaps.csproj", "{9040232A-6EDB-4E81-888D-9B250A453B20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.WebService", "BHermanos.Zonificacion.WebService\BHermanos.Zonificacion.WebService.csproj", "{5DD4A0BD-2E29-4C72-A28B-3FB090B1372B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessEntities", "BusinessEntities", "{DE9FFEA0-8D81-42BE-B165-AAFBD6360B7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHermanos.Zonificacion.BusinessEntities", "BHermanos.Zonificacion.BusinessEntities\BHermanos.Zonificacion.BusinessEntities.csproj", "{A69DC953-23EA-4BA0-9CCC-8B246DE69D70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F82AF5-AD54-4AE9-BEC1-A88F02E98413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E77A773-8C73-4F2E-8003-56A2F026C924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E77A773-8C73-4F2E-8003-56A2F026C924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E77A773-8C73-4F2E-8003-56A2F026C924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E77A773-8C73-4F2E-8003-56A2F026C924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA7480C-4701-4931-BA9F-35BD9EE2AC49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF6B9924-8936-4FB3-909D-BCF37A89BB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6B9924-8936-4FB3-909D-BCF37A89BB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6B9924-8936-4FB3-909D-BCF37A89BB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6B9924-8936-4FB3-909D-BCF37A89BB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9040232A-6EDB-4E81-888D-9B250A453B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9040232A-6EDB-4E81-888D-9B250A453B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9040232A-6EDB-4E81-888D-9B250A453B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9040232A-6EDB-4E81-888D-9B250A453B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD4A0BD-2E29-4C72-A28B-3FB090B1372B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD4A0BD-2E29-4C72-A28B-3FB090B1372B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD4A0BD-2E29-4C72-A28B-3FB090B1372B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD4A0BD-2E29-4C72-A28B-3FB090B1372B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69DC953-23EA-4BA0-9CCC-8B246DE69D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69DC953-23EA-4BA0-9CCC-8B246DE69D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69DC953-23EA-4BA0-9CCC-8B246DE69D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69DC953-23EA-4BA0-9CCC-8B246DE69D70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E77A773-8C73-4F2E-8003-56A2F026C924} = {38D18C88-A993-4E8B-939D-8E3DEF6DE004}
+		{BF6B9924-8936-4FB3-909D-BCF37A89BB94} = {AF73B3E2-C815-49D5-99FF-009ABE809E82}
+		{9040232A-6EDB-4E81-888D-9B250A453B20} = {1D83732F-DF05-4CAB-94FE-644C0FD794AC}
+		{A69DC953-23EA-4BA0-9CCC-8B246DE69D70} = {DE9FFEA0-8D81-42BE-B165-AAFBD6360B7A}
+	EndGlobalSection
+EndGlobal
