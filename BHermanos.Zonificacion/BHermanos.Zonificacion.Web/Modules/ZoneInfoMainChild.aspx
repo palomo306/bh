@@ -84,7 +84,7 @@
             <div id="MapMainDiv">
                 <div class="featured-box featured-box-primary">    
                     <div class="scrolledGridView featured-box box-content">
-                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px" ProjectName="~/Maps/MapDinamic.egp" /> 
+                        <cc1:sfmap ID="sfmMainMap" runat="server" CacheOnClient="false" Width="450px" Height="200px"  /> 
                         <!--<cc1:MapPanControl ID="MapPanControl1" runat="server" style="z-index: 100; text-align: center; position:absolute;left:20px;top:200px" />                          -->
                     </div>
                 </div>

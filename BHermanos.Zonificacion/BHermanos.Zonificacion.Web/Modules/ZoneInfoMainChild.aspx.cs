@@ -496,8 +496,8 @@ namespace BHermanos.Zonificacion.Web.Modules
                 try
                 {
                     //Se trata de sobreescribir el archivo dEGP para la plaza
-                    //string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
-                    string urlMap = "~/Maps/MapDinamic.egp";
+                    string urlMap = "~/Maps/" + this.CurrentPlaza.Id.ToString() + ".egp";
+                    //string urlMap = "~/Maps/MapDinamic.egp";
                     string plazaFilePath = Server.MapPath(urlMap);
                     File.WriteAllText(plazaFilePath, xmlMainContent);
                     sfmMainMap.ProjectName = urlMap;
@@ -546,16 +546,16 @@ namespace BHermanos.Zonificacion.Web.Modules
                         //    BE.Municipio currMuni = currEstado.ListaMunicipios.Where(mun => mun.Id.ToString() == rMun[i]).FirstOrDefault();
                         //    if (currMuni != null)
                         //    {
-                                //BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
+                        //BE.Colonia currCol = currMuni.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
                         BE.Colonia currCol = plaza.ListaColonias.Where(col => col.Id.ToString() == colString).FirstOrDefault();
-                                if (currCol != null && isFirstShape)
-                                {
-                                    ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
-                                    sfmMainMap.CenterPoint = puntos[0][0];
-                                    sfmMainMap.Zoom = 3500;
-                                    isFirstShape = false;
-                                    break;
-                                }
+                        if (currCol != null && isFirstShape)
+                        {
+                            ReadOnlyCollection<EGIS.ShapeFileLib.PointD[]> puntos = sf.GetShapeDataD(i);
+                            sfmMainMap.CenterPoint = puntos[0][0];
+                            sfmMainMap.Zoom = 3000;
+                            isFirstShape = false;
+                            break;
+                        }
                         //    }
                         //}
                     }
